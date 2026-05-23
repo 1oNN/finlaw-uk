@@ -1,0 +1,13 @@
+version: "3.8"
+services:
+  neo4j:
+    image: neo4j:5.20
+    container_name: finlaw-neo4j
+    ports: ["7474:7474", "7687:7687"]
+    environment:
+      NEO4J_AUTH: neo4j/finlaw
+      NEO4J_dbms_security_auth__minimum__password__length: 6
+      NEO4J_ACCEPT_LICENSE_AGREEMENT: "yes"
+    volumes:
+      - ./neo4j-data:/data
+      - ./neo4j-import:/import

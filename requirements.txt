@@ -1,0 +1,47 @@
+# Core web framework
+flask>=3.0
+flask-cors>=4.0
+werkzeug>=3.0
+
+# Retrieval (sparse — Stage 0)
+neo4j>=5.18
+rank-bm25>=0.2
+requests>=2.31
+
+# Retrieval (dense — Stage 1)
+sentence-transformers>=2.7
+faiss-cpu>=1.7
+
+# Ingestion (Stage 2 — legislation.gov.uk XML + clause-level chunking)
+lxml>=5.0
+langchain-text-splitters>=0.0.1
+
+# Evaluation (Stage 5 — real RAGAS via local Mistral judge)
+ragas>=0.1
+datasets>=2.14
+langchain-core>=0.1
+langchain-community>=0.0.20
+# torch and transformers come transitively via sentence-transformers; they
+# only need to be installed explicitly if you opt into the HF-judge mode
+# (backend.llm.hf_client). Default RAGAS path uses Ollama as the judge.
+# accelerate>=0.27  # uncomment if using HF judge with device_map='auto'
+
+# Document parsing (chat upload + ingestion)
+PyPDF2>=3.0
+pdfminer.six>=20231228
+pdfplumber>=0.10
+python-docx>=1.1
+openpyxl>=3.1
+python-pptx>=0.6
+pandas>=2.0
+
+# Evaluation (lexical metrics — current baseline)
+numpy>=1.24
+matplotlib>=3.7
+rouge>=1.0
+# Optional: bert-score (large download, only needed for semantic eval)
+# bert-score>=0.3
+
+# Dev + tooling
+python-dotenv>=1.0
+pytest>=7.0

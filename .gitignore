@@ -1,0 +1,60 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+.eggs/
+
+# Virtualenv
+.venv/
+venv/
+env/
+
+# Environment
+.env
+.env.local
+
+# Generated / cached artefacts
+data/cache/
+data/raw/
+data/eval_results/*.csv
+!data/eval_results/eval_results_legacy.csv
+
+# User-uploaded data
+uploads/
+backend/uploads/
+
+# Neo4j data
+backend/neo4j-data/
+backend/neo4j-import/
+neo4j-data/
+neo4j-import/
+
+# Misc local dirs
+backend/_tmp/
+backend/offload/
+_tmp/
+offload/
+
+# Legacy thesis eval outputs (preserve locally; don't auto-stage)
+backend/results_full/
+
+# Build/archive artefacts
+*.zip
+*.tar.gz
+*.tar
+build/
+dist/
+
+# Node
+node_modules/
+frontend/build/
+
+# Editor / OS
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo

@@ -1,0 +1,485 @@
+https://www.prarulebook.co.uk/pra-rules/actuaries/22-06-2025
+https://www.prarulebook.co.uk/pra-rules/auditors	No wkhtmltopdf executable found: "b''"
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+https://www.prarulebook.co.uk/pra-rules/benchmarking-of-internal-approaches	No wkhtmltopdf executable found: "b''"
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+https://www.prarulebook.co.uk/pra-rules/capital-buffers	No wkhtmltopdf executable found: "b''"
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+https://www.prarulebook.co.uk/pra-rules/conditions-governing-business	No wkhtmltopdf executable found: "b''"
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+https://www.prarulebook.co.uk/pra-rules/counterparty-credit-risk-crr	'charmap' codec can't encode character '\u03b1' in position 142275: character maps to <undefined>
+https://www.prarulebook.co.uk/pra-rules/crr-firms	No wkhtmltopdf executable found: "b''"
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+https://www.prarulebook.co.uk/pra-rules/depositor-protection	No wkhtmltopdf executable found: "b''"
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+https://www.prarulebook.co.uk/pra-rules/fees	No wkhtmltopdf executable found: "b''"
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+https://www.prarulebook.co.uk/pra-rules/financial-conglomerates	No wkhtmltopdf executable found: "b''"
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+https://www.prarulebook.co.uk/pra-rules/friendly-society---asset-valuation	No wkhtmltopdf executable found: "b''"
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+https://www.prarulebook.co.uk/pra-rules/friendly-society---reporting	direct PDF error: payload not recognised as PDF
+https://www.prarulebook.co.uk/pra-rules/friendly-society---reporting	No wkhtmltopdf executable found: "b''"
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+https://www.prarulebook.co.uk/pra-rules/friendly-society-liability-valuation	No wkhtmltopdf executable found: "b''"
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+https://www.prarulebook.co.uk/pra-rules/fscs-management-expenses-levy-limit-and-base-costs	No wkhtmltopdf executable found: "b''"
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+https://www.prarulebook.co.uk/pra-rules/group-risk-systems	No wkhtmltopdf executable found: "b''"
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+https://www.prarulebook.co.uk/pra-rules/group-supervision	No wkhtmltopdf executable found: "b''"
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+https://www.prarulebook.co.uk/pra-rules/groups	No wkhtmltopdf executable found: "b''"
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+https://www.prarulebook.co.uk/pra-rules/insurance-company---reporting	direct PDF error: payload not recognised as PDF
+https://www.prarulebook.co.uk/pra-rules/insurance-company---reporting	'charmap' codec can't encode character '\u221a' in position 441016: character maps to <undefined>
+https://www.prarulebook.co.uk/pra-rules/insurance-company-mathematical-reserves	No wkhtmltopdf executable found: "b''"
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+https://www.prarulebook.co.uk/pra-rules/insurance-company-overall-resources-and-valuation	No wkhtmltopdf executable found: "b''"
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+https://www.prarulebook.co.uk/pra-rules/insurers-in-financial-difficulties-notification-of-affected-persons	No wkhtmltopdf executable found: "b''"
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+https://www.prarulebook.co.uk/pra-rules/internal-liquidity-adequacy-assessment	No wkhtmltopdf executable found: "b''"
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+https://www.prarulebook.co.uk/pra-rules/interpretation	No wkhtmltopdf executable found: "b''"
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+https://www.prarulebook.co.uk/pra-rules/investments	No wkhtmltopdf executable found: "b''"
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+https://www.prarulebook.co.uk/pra-rules/leverage-ratio-crr	No wkhtmltopdf executable found: "b''"
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+https://www.prarulebook.co.uk/pra-rules/liquidity-coverage-ratio-crr	No wkhtmltopdf executable found: "b''"
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+https://www.prarulebook.co.uk/pra-rules/liquidity-coverage-requirement---uk-designated-investment-firms	No wkhtmltopdf executable found: "b''"
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+https://www.prarulebook.co.uk/pra-rules/liquidity-crr	No wkhtmltopdf executable found: "b''"
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+https://www.prarulebook.co.uk/pra-rules/management-expenses-in-respect-of-relevant-schemes	No wkhtmltopdf executable found: "b''"
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+https://www.prarulebook.co.uk/pra-rules/matching-adjustment	No wkhtmltopdf executable found: "b''"
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+https://www.prarulebook.co.uk/pra-rules/non-authorised-persons	No wkhtmltopdf executable found: "b''"
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+https://www.prarulebook.co.uk/pra-rules/non-crr-firms	No wkhtmltopdf executable found: "b''"
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+https://www.prarulebook.co.uk/pra-rules/non-sii-firms	No wkhtmltopdf executable found: "b''"
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+https://www.prarulebook.co.uk/pra-rules/operational-continuity	No wkhtmltopdf executable found: "b''"
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+https://www.prarulebook.co.uk/pra-rules/own-funds	No wkhtmltopdf executable found: "b''"
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+https://www.prarulebook.co.uk/pra-rules/own-funds-and-eligible-liabilities-crr	'charmap' codec can't encode character '\u2264' in position 170607: character maps to <undefined>
+https://www.prarulebook.co.uk/pra-rules/permissions-and-waivers	No wkhtmltopdf executable found: "b''"
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+https://www.prarulebook.co.uk/pra-rules/policyholder-protection	No wkhtmltopdf executable found: "b''"
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+https://www.prarulebook.co.uk/pra-rules/public-disclosure	No wkhtmltopdf executable found: "b''"
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+https://www.prarulebook.co.uk/pra-rules/reporting	No wkhtmltopdf executable found: "b''"
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+https://www.prarulebook.co.uk/pra-rules/reporting-pillar-2	No wkhtmltopdf executable found: "b''"
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+https://www.prarulebook.co.uk/pra-rules/ring-fenced-bodies	No wkhtmltopdf executable found: "b''"
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+https://www.prarulebook.co.uk/pra-rules/run-off-operations-non_directive-insurers	No wkhtmltopdf executable found: "b''"
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+https://www.prarulebook.co.uk/pra-rules/run-off-operations-solvency-ii	No wkhtmltopdf executable found: "b''"
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+https://www.prarulebook.co.uk/pra-rules/auditors	No wkhtmltopdf executable found: "b''"
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+https://www.prarulebook.co.uk/pra-rules/benchmarking-of-internal-approaches	No wkhtmltopdf executable found: "b''"
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+https://www.prarulebook.co.uk/pra-rules/capital-buffers	No wkhtmltopdf executable found: "b''"
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+https://www.prarulebook.co.uk/pra-rules/conditions-governing-business	No wkhtmltopdf executable found: "b''"
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+https://www.prarulebook.co.uk/pra-rules/counterparty-credit-risk-crr	'charmap' codec can't encode character '\u03b1' in position 142274: character maps to <undefined>
+https://www.prarulebook.co.uk/pra-rules/crr-firms	No wkhtmltopdf executable found: "b''"
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+https://www.prarulebook.co.uk/pra-rules/depositor-protection	No wkhtmltopdf executable found: "b''"
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+https://www.prarulebook.co.uk/pra-rules/fees	No wkhtmltopdf executable found: "b''"
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+https://www.prarulebook.co.uk/pra-rules/financial-conglomerates	No wkhtmltopdf executable found: "b''"
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+https://www.prarulebook.co.uk/pra-rules/friendly-society---asset-valuation	No wkhtmltopdf executable found: "b''"
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+https://www.prarulebook.co.uk/pra-rules/friendly-society---reporting	direct PDF error: payload not recognised as PDF
+https://www.prarulebook.co.uk/pra-rules/friendly-society---reporting	No wkhtmltopdf executable found: "b''"
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+https://www.prarulebook.co.uk/pra-rules/friendly-society-liability-valuation	No wkhtmltopdf executable found: "b''"
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+https://www.prarulebook.co.uk/pra-rules/fscs-management-expenses-levy-limit-and-base-costs	No wkhtmltopdf executable found: "b''"
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+https://www.prarulebook.co.uk/pra-rules/group-risk-systems	No wkhtmltopdf executable found: "b''"
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+https://www.prarulebook.co.uk/pra-rules/group-supervision	No wkhtmltopdf executable found: "b''"
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+https://www.prarulebook.co.uk/pra-rules/groups	No wkhtmltopdf executable found: "b''"
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+https://www.prarulebook.co.uk/pra-rules/insurance-company---reporting	direct PDF error: payload not recognised as PDF
+https://www.prarulebook.co.uk/pra-rules/insurance-company---reporting	'charmap' codec can't encode character '\u221a' in position 441016: character maps to <undefined>
+https://www.prarulebook.co.uk/pra-rules/insurance-company-mathematical-reserves	No wkhtmltopdf executable found: "b''"
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+https://www.prarulebook.co.uk/pra-rules/insurance-company-overall-resources-and-valuation	No wkhtmltopdf executable found: "b''"
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+https://www.prarulebook.co.uk/pra-rules/insurers-in-financial-difficulties-notification-of-affected-persons	No wkhtmltopdf executable found: "b''"
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+https://www.prarulebook.co.uk/pra-rules/internal-liquidity-adequacy-assessment	No wkhtmltopdf executable found: "b''"
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+https://www.prarulebook.co.uk/pra-rules/interpretation	No wkhtmltopdf executable found: "b''"
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+https://www.prarulebook.co.uk/pra-rules/investments	No wkhtmltopdf executable found: "b''"
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+https://www.prarulebook.co.uk/pra-rules/leverage-ratio-crr	No wkhtmltopdf executable found: "b''"
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+https://www.prarulebook.co.uk/pra-rules/liquidity-coverage-ratio-crr	No wkhtmltopdf executable found: "b''"
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+https://www.prarulebook.co.uk/pra-rules/liquidity-coverage-requirement---uk-designated-investment-firms	No wkhtmltopdf executable found: "b''"
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+https://www.prarulebook.co.uk/pra-rules/liquidity-crr	No wkhtmltopdf executable found: "b''"
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+https://www.prarulebook.co.uk/pra-rules/management-expenses-in-respect-of-relevant-schemes	No wkhtmltopdf executable found: "b''"
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+https://www.prarulebook.co.uk/pra-rules/matching-adjustment	No wkhtmltopdf executable found: "b''"
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+https://www.prarulebook.co.uk/pra-rules/non-authorised-persons	No wkhtmltopdf executable found: "b''"
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+https://www.prarulebook.co.uk/pra-rules/non-crr-firms	No wkhtmltopdf executable found: "b''"
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+https://www.prarulebook.co.uk/pra-rules/non-sii-firms	No wkhtmltopdf executable found: "b''"
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+https://www.prarulebook.co.uk/pra-rules/operational-continuity	No wkhtmltopdf executable found: "b''"
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+https://www.prarulebook.co.uk/pra-rules/own-funds	No wkhtmltopdf executable found: "b''"
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+https://www.prarulebook.co.uk/pra-rules/own-funds-and-eligible-liabilities-crr	'charmap' codec can't encode character '\u2264' in position 170605: character maps to <undefined>
+https://www.prarulebook.co.uk/pra-rules/permissions-and-waivers	No wkhtmltopdf executable found: "b''"
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+https://www.prarulebook.co.uk/pra-rules/policyholder-protection	No wkhtmltopdf executable found: "b''"
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+https://www.prarulebook.co.uk/pra-rules/public-disclosure	No wkhtmltopdf executable found: "b''"
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+https://www.prarulebook.co.uk/pra-rules/reporting	No wkhtmltopdf executable found: "b''"
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+https://www.prarulebook.co.uk/pra-rules/reporting-pillar-2	No wkhtmltopdf executable found: "b''"
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+https://www.prarulebook.co.uk/pra-rules/ring-fenced-bodies	No wkhtmltopdf executable found: "b''"
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+https://www.prarulebook.co.uk/pra-rules/run-off-operations-non_directive-insurers	No wkhtmltopdf executable found: "b''"
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+https://www.prarulebook.co.uk/pra-rules/run-off-operations-solvency-ii	No wkhtmltopdf executable found: "b''"
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+https://www.prarulebook.co.uk/pra-rules/sii-firms	No wkhtmltopdf executable found: "b''"
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+https://www.prarulebook.co.uk/pra-rules/solvency-capital-requirement---general-provisions	No wkhtmltopdf executable found: "b''"
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+https://www.prarulebook.co.uk/pra-rules/solvency-capital-requirement---internal-models	direct PDF error: payload not recognised as PDF
+https://www.prarulebook.co.uk/pra-rules/solvency-capital-requirement---internal-models	'charmap' codec can't encode character '\u03c9' in position 370768: character maps to <undefined>
+https://www.prarulebook.co.uk/pra-rules/solvency-capital-requirement---undertaking-specific-parameters	'charmap' codec can't encode character '\u2032' in position 224073: character maps to <undefined>
+https://www.prarulebook.co.uk/pra-rules/surplus-funds	No wkhtmltopdf executable found: "b''"
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+https://www.prarulebook.co.uk/pra-rules/technical-provisions	'charmap' codec can't encode character '\u03bb' in position 94535: character maps to <undefined>
+https://www.prarulebook.co.uk/pra-rules/technical-provisions-further-requirements	No wkhtmltopdf executable found: "b''"
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+https://www.prarulebook.co.uk/pra-rules/undertakings-in-difficulty	No wkhtmltopdf executable found: "b''"
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+https://www.prarulebook.co.uk/pra-rules/valuation	No wkhtmltopdf executable found: "b''"
+If this file exists please check that this process can read it or you can pass path to it manually in method call, check README. Otherwise please install wkhtmltopdf - https://github.com/JazzCore/python-pdfkit/wiki/Installing-wkhtmltopdf
+https://www.prarulebook.co.uk/pra-rules/auditors	wkhtmltopdf reported an error:
+Exit with code 1 due to network error: ProtocolUnknownError
+
+https://www.prarulebook.co.uk/pra-rules/benchmarking-of-internal-approaches	wkhtmltopdf reported an error:
+Exit with code 1 due to network error: ProtocolUnknownError
+
+https://www.prarulebook.co.uk/pra-rules/capital-buffers	wkhtmltopdf reported an error:
+Exit with code 1 due to network error: ProtocolUnknownError
+
+https://www.prarulebook.co.uk/pra-rules/conditions-governing-business	wkhtmltopdf reported an error:
+Exit with code 1 due to network error: ProtocolUnknownError
+
+https://www.prarulebook.co.uk/pra-rules/counterparty-credit-risk-crr	wkhtmltopdf reported an error:
+Exit with code 1 due to network error: ProtocolUnknownError
+
+https://www.prarulebook.co.uk/pra-rules/crr-firms	wkhtmltopdf reported an error:
+Exit with code 1 due to network error: ProtocolUnknownError
+
+https://www.prarulebook.co.uk/pra-rules/depositor-protection	wkhtmltopdf reported an error:
+Exit with code 1 due to network error: ProtocolUnknownError
+
+https://www.prarulebook.co.uk/pra-rules/fees	wkhtmltopdf reported an error:
+Exit with code 1 due to network error: ProtocolUnknownError
+
+https://www.prarulebook.co.uk/pra-rules/financial-conglomerates	wkhtmltopdf reported an error:
+Exit with code 1 due to network error: ProtocolUnknownError
+
+https://www.prarulebook.co.uk/pra-rules/friendly-society---asset-valuation	wkhtmltopdf reported an error:
+Exit with code 1 due to network error: ProtocolUnknownError
+
+https://www.prarulebook.co.uk/pra-rules/friendly-society---reporting	direct: not a PDF payload
+https://www.prarulebook.co.uk/pra-rules/friendly-society---reporting	wkhtmltopdf reported an error:
+Exit with code 1 due to network error: ProtocolUnknownError
+
+https://www.prarulebook.co.uk/pra-rules/friendly-society-liability-valuation	wkhtmltopdf reported an error:
+Exit with code 1 due to network error: ProtocolUnknownError
+
+https://www.prarulebook.co.uk/pra-rules/fscs-management-expenses-levy-limit-and-base-costs	wkhtmltopdf reported an error:
+Exit with code 1 due to network error: ProtocolUnknownError
+
+https://www.prarulebook.co.uk/pra-rules/group-risk-systems	wkhtmltopdf reported an error:
+Exit with code 1 due to network error: ProtocolUnknownError
+
+https://www.prarulebook.co.uk/pra-rules/group-supervision	wkhtmltopdf reported an error:
+Exit with code 1 due to network error: ProtocolUnknownError
+
+https://www.prarulebook.co.uk/pra-rules/groups	wkhtmltopdf reported an error:
+Exit with code 1 due to network error: ProtocolUnknownError
+
+https://www.prarulebook.co.uk/pra-rules/insurance-company---reporting	direct: not a PDF payload
+https://www.prarulebook.co.uk/pra-rules/insurance-company---reporting	wkhtmltopdf reported an error:
+Exit with code 1 due to network error: ProtocolUnknownError
+
+https://www.prarulebook.co.uk/pra-rules/insurance-company-mathematical-reserves	wkhtmltopdf reported an error:
+Exit with code 1 due to network error: ProtocolUnknownError
+
+https://www.prarulebook.co.uk/pra-rules/insurance-company-overall-resources-and-valuation	wkhtmltopdf reported an error:
+Exit with code 1 due to network error: ProtocolUnknownError
+
+https://www.prarulebook.co.uk/pra-rules/insurers-in-financial-difficulties-notification-of-affected-persons	wkhtmltopdf reported an error:
+Exit with code 1 due to network error: ProtocolUnknownError
+
+https://www.prarulebook.co.uk/pra-rules/internal-liquidity-adequacy-assessment	wkhtmltopdf reported an error:
+Exit with code 1 due to network error: ProtocolUnknownError
+
+https://www.prarulebook.co.uk/pra-rules/interpretation	wkhtmltopdf reported an error:
+Exit with code 1 due to network error: ProtocolUnknownError
+
+https://www.prarulebook.co.uk/pra-rules/investments	wkhtmltopdf reported an error:
+Exit with code 1 due to network error: ProtocolUnknownError
+
+https://www.prarulebook.co.uk/pra-rules/leverage-ratio-crr	wkhtmltopdf reported an error:
+Exit with code 1 due to network error: ProtocolUnknownError
+
+https://www.prarulebook.co.uk/pra-rules/actuaries#0aa6c254deb344c780bae7e0be4d2ca9
+https://www.prarulebook.co.uk/pra-rules/actuaries#3218c9b3f6f849389af56ab7c515c4e8
+https://www.prarulebook.co.uk/pra-rules/actuaries#3816ec8c65a447b7b2f6f260f0c3166a
+https://www.prarulebook.co.uk/pra-rules/actuaries#6733cf30f0564acb9dd34bbe00c6bc4c
+https://www.prarulebook.co.uk/pra-rules/actuaries#7cd06efd79d8465780b08193d70c5ede
+https://www.prarulebook.co.uk/pra-rules/actuaries#992c3e931b3e411cb75e873452cd283a
+https://www.prarulebook.co.uk/pra-rules/allocation-of-responsibilities
+https://www.prarulebook.co.uk/pra-rules/allocation-of-responsibilities#058c31e4d64c48968c06b48a4b022714
+https://www.prarulebook.co.uk/pra-rules/allocation-of-responsibilities#07ea43062d0541c4a68411c81f29c60b
+https://www.prarulebook.co.uk/pra-rules/allocation-of-responsibilities#266d16364ab844e4b971888dce281977
+https://www.prarulebook.co.uk/pra-rules/allocation-of-responsibilities#3b4248b59f1140cf9631a4f141079f18
+https://www.prarulebook.co.uk/pra-rules/allocation-of-responsibilities#4988e97338544830957a228cac166eeb
+https://www.prarulebook.co.uk/pra-rules/allocation-of-responsibilities#58790113109149018f2381fec11f140c
+https://www.prarulebook.co.uk/pra-rules/allocation-of-responsibilities#7973fe76b1f04d32818226a6c6e43291
+https://www.prarulebook.co.uk/pra-rules/allocation-of-responsibilities#8f14a399b76547e89d61eff5cfbe3c02
+https://www.prarulebook.co.uk/pra-rules/allocation-of-responsibilities#9f11c90e79ac4572860bd4480152c44b
+https://www.prarulebook.co.uk/pra-rules/allocation-of-responsibilities#a79d1bf2b7e34619b5e95a200a46daeb
+https://www.prarulebook.co.uk/pra-rules/allocation-of-responsibilities#c33f5ea2f2494a40877edb9034aaab54
+https://www.prarulebook.co.uk/pra-rules/allocation-of-responsibilities#c746d28f12384168992a2d19cc930f31
+https://www.prarulebook.co.uk/pra-rules/allocation-of-responsibilities#f126c421496f4c398ac384ffcfd4a383
+https://www.prarulebook.co.uk/pra-rules/auditors
+https://www.prarulebook.co.uk/pra-rules/auditors#1827180d803944d982ce4d121142e81f
+https://www.prarulebook.co.uk/pra-rules/auditors#2f5323ca0d594623b9d0673b38472a99
+https://www.prarulebook.co.uk/pra-rules/auditors#3b40ef7f9941402383aa2f696ae93577
+https://www.prarulebook.co.uk/pra-rules/auditors#6456217f07704f61b528df19657e1f79
+https://www.prarulebook.co.uk/pra-rules/auditors#6df75613a36348959f5c2b9aaa505ba2
+https://www.prarulebook.co.uk/pra-rules/auditors#78934303529c41f084f26e7947e1463d
+https://www.prarulebook.co.uk/pra-rules/auditors#85c8d948104f4b3e982b1623a858ad5e
+https://www.prarulebook.co.uk/pra-rules/auditors#95e8c36fb49241cf89a247390d4e9a95
+https://www.prarulebook.co.uk/pra-rules/benchmarking-of-internal-approaches
+https://www.prarulebook.co.uk/pra-rules/capital-buffers
+https://www.prarulebook.co.uk/pra-rules/capital-buffers#489ba7f89819470e8f4d1e3c4f630141
+https://www.prarulebook.co.uk/pra-rules/capital-buffers#97ed7c7917674305b2c9e70da3204276
+https://www.prarulebook.co.uk/pra-rules/capital-buffers#b08ae04eaefe4f2d992ed52746a396bd
+https://www.prarulebook.co.uk/pra-rules/capital-buffers#c856087c2cca4d808e6f424a7234b415
+https://www.prarulebook.co.uk/pra-rules/certification#2055307212bd44c7906411081040b335
+https://www.prarulebook.co.uk/pra-rules/certification#4004e9bf25644a3c98160b704fee54dd
+https://www.prarulebook.co.uk/pra-rules/certification#6f8a644f053542ea81b9580c55542241
+https://www.prarulebook.co.uk/pra-rules/composites
+https://www.prarulebook.co.uk/pra-rules/composites#0463e6e537ed40629c79c9dc4484971c
+https://www.prarulebook.co.uk/pra-rules/composites#11b20d1c830146b69a8329d276966b2a
+https://www.prarulebook.co.uk/pra-rules/composites#34b9de04c72d490ab49b18c8469b4299
+https://www.prarulebook.co.uk/pra-rules/composites#3aacdf6dea0a4ee689eb631e7532f9f4
+https://www.prarulebook.co.uk/pra-rules/composites#46ee4210d93e401bbd73cdafebe4fa98
+https://www.prarulebook.co.uk/pra-rules/composites#48571a634e94406cb7d7b65d9856e48c
+https://www.prarulebook.co.uk/pra-rules/composites#4bdb91d1cee947e3822437e7a62db9a5
+https://www.prarulebook.co.uk/pra-rules/composites#6bdc4807ebc541e0b67987d9516650bf
+https://www.prarulebook.co.uk/pra-rules/composites#88082a04108547a588e98c32c06e6425
+https://www.prarulebook.co.uk/pra-rules/composites#a3d782cd0b904ae29c86c7978000d574
+https://www.prarulebook.co.uk/pra-rules/composites#d4572dada17e484a8164fc191d7b6b12
+https://www.prarulebook.co.uk/pra-rules/composites#d62fd60354154c9b878cc278f85b2e12
+https://www.prarulebook.co.uk/pra-rules/composites#e6c29436d3ee4dc4aa17df2f4a65d7c2
+https://www.prarulebook.co.uk/pra-rules/composites#eee1662e335643d39943ed9aab7aa2e0
+https://www.prarulebook.co.uk/pra-rules/conditions-governing-business
+https://www.prarulebook.co.uk/pra-rules/conditions-governing-business#01665ebb4e044fd8a1bd9394e6e201bf
+https://www.prarulebook.co.uk/pra-rules/conditions-governing-business#05c92a74785f4a55b562dbcde7bf9f76
+https://www.prarulebook.co.uk/pra-rules/conditions-governing-business#07b1d65beca1487db850924168f813e4
+https://www.prarulebook.co.uk/pra-rules/conditions-governing-business#0e9d664d484b4f7da3cface1cc25220b
+https://www.prarulebook.co.uk/pra-rules/conditions-governing-business#0f3243670ba04ba78d2efd270d08a885
+https://www.prarulebook.co.uk/pra-rules/conditions-governing-business#0f51660f70504021ab6f192a0c5c0f0b
+https://www.prarulebook.co.uk/pra-rules/conditions-governing-business#17d43b83ffcf4fdf887ebc9cc1fdb7db
+https://www.prarulebook.co.uk/pra-rules/conditions-governing-business#1c1807871ee949baa8f3a050fc063d20
+https://www.prarulebook.co.uk/pra-rules/conditions-governing-business#208b11e2ca3048708a0e73a8c8f6aae6
+https://www.prarulebook.co.uk/pra-rules/conditions-governing-business#23a9e8c347234432bc1d3dde877fca8b
+https://www.prarulebook.co.uk/pra-rules/conditions-governing-business#24c1002b52e7463eb39b53d5688eaf19
+https://www.prarulebook.co.uk/pra-rules/conditions-governing-business#2b14e351b998427ba4348c7f0b6d7c49
+https://www.prarulebook.co.uk/pra-rules/conditions-governing-business#35e9f8b02693491bb311684c5ce557eb
+https://www.prarulebook.co.uk/pra-rules/conditions-governing-business#37da4e0dbda14d61b64591129aebb5b9
+https://www.prarulebook.co.uk/pra-rules/conditions-governing-business#38c73ae08d7b4b429f33885bdd1b2acb
+https://www.prarulebook.co.uk/pra-rules/conditions-governing-business#3e0ed0caa3184bf8bd9adc0242c38e07
+https://www.prarulebook.co.uk/pra-rules/conditions-governing-business#3e3c18066ad2422d9a6e6c3cf9807624
+https://www.prarulebook.co.uk/pra-rules/conditions-governing-business#3f1d54c449e04cfda8e480218e3a257d
+https://www.prarulebook.co.uk/pra-rules/conditions-governing-business#3f3b74e351184b3689df2a5243404147
+https://www.prarulebook.co.uk/pra-rules/conditions-governing-business#41fb2d3479f24f639e11b691f3b6b271
+https://www.prarulebook.co.uk/pra-rules/conditions-governing-business#4716eac006674b139048eb1bcb60d4c5
+https://www.prarulebook.co.uk/pra-rules/conditions-governing-business#4b7521b38b7f49e081cde5c0459bd8f1
+https://www.prarulebook.co.uk/pra-rules/conditions-governing-business#4dcbcdde91b14445887e124d8198a96c
+https://www.prarulebook.co.uk/pra-rules/conditions-governing-business#4e083a15512140a2a1367ec227f72b3c
+https://www.prarulebook.co.uk/pra-rules/conditions-governing-business#4ef4352da7054da0be3c2680953c097a
+https://www.prarulebook.co.uk/pra-rules/conditions-governing-business#574fd43b4e0c4c79931da330ba32b0dc
+https://www.prarulebook.co.uk/pra-rules/conditions-governing-business#5b4f9b15fc4d469ca3d01890b1946b0a
+https://www.prarulebook.co.uk/pra-rules/conditions-governing-business#5c7b1dc27b2d4b27867a79f60b15d7de
+https://www.prarulebook.co.uk/pra-rules/conditions-governing-business#5e2fea63998d4bb096871860b187a8e6
+https://www.prarulebook.co.uk/pra-rules/conditions-governing-business#63d2820f25ef4c839c1b146a981dd722
+https://www.prarulebook.co.uk/pra-rules/conditions-governing-business#65ad26c1fb954ff58eeeb02cde39d4f6
+https://www.prarulebook.co.uk/pra-rules/conditions-governing-business#69385057d66144a0bf050b2cbd77ff4f
+https://www.prarulebook.co.uk/pra-rules/conditions-governing-business#6a1bcbf96eb4445a9af97d8e9f11613e
+https://www.prarulebook.co.uk/pra-rules/conditions-governing-business#7309233fb5f54382b36d03628c8e451c
+https://www.prarulebook.co.uk/pra-rules/conditions-governing-business#73c8c58e1d8843858d048ba7be5be7fb
+https://www.prarulebook.co.uk/pra-rules/conditions-governing-business#799b47f36c6c4383b5e26d3f02309daa
+https://www.prarulebook.co.uk/pra-rules/conditions-governing-business#7aa776ca69e2462db6d8f84be535ed02
+https://www.prarulebook.co.uk/pra-rules/conditions-governing-business#7e9e2f5e6eeb492bb8e5091b54c09489
+https://www.prarulebook.co.uk/pra-rules/conditions-governing-business#7f3496783933485ca14a360aba5bb5b7
+https://www.prarulebook.co.uk/pra-rules/conditions-governing-business#80228578454a4e848e56888ab0fdd100
+https://www.prarulebook.co.uk/pra-rules/conditions-governing-business#82ab3cad0409407784ca29b4f9292722
+https://www.prarulebook.co.uk/pra-rules/conditions-governing-business#839b41b0b1654232bd881e8955b1bb27
+https://www.prarulebook.co.uk/pra-rules/conditions-governing-business#8dff44a2abf549fb976f6c59aed65c41
+https://www.prarulebook.co.uk/pra-rules/conditions-governing-business#91894dbd1cc2481e99c24febb464e5c9
+https://www.prarulebook.co.uk/pra-rules/conditions-governing-business#98ca4d60a837411d9c5cf777750c5820
+https://www.prarulebook.co.uk/pra-rules/conditions-governing-business#9b6be57d34de4e4d807e762e5283976b
+https://www.prarulebook.co.uk/pra-rules/conditions-governing-business#9ff9cad696034cb0838435d80a642006
+https://www.prarulebook.co.uk/pra-rules/conditions-governing-business#a04659ea4e6e4bddb5ec15a6c93f8f38
+https://www.prarulebook.co.uk/pra-rules/conditions-governing-business#a6eb1337334e4c0896e7424b354b4429
+https://www.prarulebook.co.uk/pra-rules/conditions-governing-business#a71ad19d6fdd4a659cc8baa6dd930c29
+https://www.prarulebook.co.uk/pra-rules/conditions-governing-business#a85adf5c010a444f956276215a5c4aad
+https://www.prarulebook.co.uk/pra-rules/conditions-governing-business#a8824868755a478393214ae41545392d
+https://www.prarulebook.co.uk/pra-rules/conditions-governing-business#ab549caa347749f7889b2898236408de
+https://www.prarulebook.co.uk/pra-rules/conditions-governing-business#b15b8c49f20248138340e8402d0fd5ff
+https://www.prarulebook.co.uk/pra-rules/conditions-governing-business#b9842d145415448da74f5936e17477d8
+https://www.prarulebook.co.uk/pra-rules/conditions-governing-business#ba8c8d47de144e7198f25185f9f395cb
+https://www.prarulebook.co.uk/pra-rules/conditions-governing-business#cd4f0ef7591b44a7833c22eefde03f3a
+https://www.prarulebook.co.uk/pra-rules/conditions-governing-business#d076f737643043249658e06e58c09110
+https://www.prarulebook.co.uk/pra-rules/conditions-governing-business#d951248150de4c36be0e00144764aa2b
+https://www.prarulebook.co.uk/pra-rules/conditions-governing-business#e01fc75b78e64ca28981b43ffdb06ce7
+https://www.prarulebook.co.uk/pra-rules/conditions-governing-business#e869302313bb42c59a63681ac950d10c
+https://www.prarulebook.co.uk/pra-rules/conditions-governing-business#e88e96ca5b13471fbd3285638c565760
+https://www.prarulebook.co.uk/pra-rules/conditions-governing-business#ecf7c860701a48a082e2ac16b3701d82
+https://www.prarulebook.co.uk/pra-rules/conditions-governing-business#ee00362e4ff74a77ab4ab66e2a6065cc
+https://www.prarulebook.co.uk/pra-rules/conditions-governing-business#f0974bf00748415e922ba203d6a6a0f7
+https://www.prarulebook.co.uk/pra-rules/conditions-governing-business#f17bfb175ecb4d2d9d68d00fa89dafce
+https://www.prarulebook.co.uk/pra-rules/conduct-rules#44164990c8874802bee6a9d70289e779
+https://www.prarulebook.co.uk/pra-rules/conduct-rules#5ad723607dbf430caa934461741e2a1c
+https://www.prarulebook.co.uk/pra-rules/conduct-rules#81e911d6d2a34228a519bb684e01107f
+https://www.prarulebook.co.uk/pra-rules/conduct-rules#b6d1dd59bf614ff986342d49d317ca8e
+https://www.prarulebook.co.uk/pra-rules/conduct-rules#e49509a0167e4d67861fedff886a7428
+https://www.prarulebook.co.uk/pra-rules/counterparty-credit-risk-crr
+https://www.prarulebook.co.uk/pra-rules/counterparty-credit-risk-crr#07d32967cb154587beb7a705bda305ea
+https://www.prarulebook.co.uk/pra-rules/counterparty-credit-risk-crr#08a633ee6c994e02a8d5fc4302789cef
+https://www.prarulebook.co.uk/pra-rules/counterparty-credit-risk-crr#0e4a79d33acb4616b4426ded22d76315
+https://www.prarulebook.co.uk/pra-rules/counterparty-credit-risk-crr#1118d758822e46e799788950d655127d
+https://www.prarulebook.co.uk/pra-rules/counterparty-credit-risk-crr#12d375cd72184f6ba7ffd8d354a3ab45
+https://www.prarulebook.co.uk/pra-rules/counterparty-credit-risk-crr#1bc7909948a24504b9b50f73c004b411
+https://www.prarulebook.co.uk/pra-rules/counterparty-credit-risk-crr#1cadfc1be5bb4460b6c5b32b0373e763
+https://www.prarulebook.co.uk/pra-rules/counterparty-credit-risk-crr#1fa3c24989d14e2e87d72a867fc6dd77
+https://www.prarulebook.co.uk/pra-rules/counterparty-credit-risk-crr#2c5eb12daed64161be6d4c0a91021989
+https://www.prarulebook.co.uk/pra-rules/counterparty-credit-risk-crr#2e5c52460205460cb6242cb692dd2432
+https://www.prarulebook.co.uk/pra-rules/counterparty-credit-risk-crr#2f1e8c3a9381447cba921e8176bc4729
+https://www.prarulebook.co.uk/pra-rules/counterparty-credit-risk-crr#2f7535426b804a8a9b5aee93a5bcb740
+https://www.prarulebook.co.uk/pra-rules/counterparty-credit-risk-crr#2fcc864bd8a5498aac87b4f1b625bcb0
+https://www.prarulebook.co.uk/pra-rules/counterparty-credit-risk-crr#32e6aa97e3cf4e8ba22c9a03a3a5a56f
+https://www.prarulebook.co.uk/pra-rules/counterparty-credit-risk-crr#355eefe264a0446a9b4ee844ee936e10
+https://www.prarulebook.co.uk/pra-rules/counterparty-credit-risk-crr#37c772d2a49946a6bf5b339ab5aed385
+https://www.prarulebook.co.uk/pra-rules/counterparty-credit-risk-crr#40569a83fa9c4404bdce301025c820f1
+https://www.prarulebook.co.uk/pra-rules/counterparty-credit-risk-crr#43f0e04255af455faa67a018f6514c09
+https://www.prarulebook.co.uk/pra-rules/counterparty-credit-risk-crr#4d1fff8d395546bf81bffaa72f873b27
+https://www.prarulebook.co.uk/pra-rules/counterparty-credit-risk-crr#50456287d3d54b9c97ad0ed6b7881c9c
+https://www.prarulebook.co.uk/pra-rules/counterparty-credit-risk-crr#5265c07b64a84e3da26a3ad69f41a68c
+https://www.prarulebook.co.uk/pra-rules/counterparty-credit-risk-crr#55026af8f03241f5a33f68e63f6b3cde
+https://www.prarulebook.co.uk/pra-rules/counterparty-credit-risk-crr#56e3e451af0943d0aad8fb5ea489129a
+https://www.prarulebook.co.uk/pra-rules/counterparty-credit-risk-crr#5774863d941f4caf9183ea7e9755e66a
+https://www.prarulebook.co.uk/pra-rules/counterparty-credit-risk-crr#57d99c5a7d4c4fe180b698fb18f35cdf
+https://www.prarulebook.co.uk/pra-rules/counterparty-credit-risk-crr#5f18db34340148c395033494c5e1a10b
+https://www.prarulebook.co.uk/pra-rules/counterparty-credit-risk-crr#60965a9b0c5248449247b18380959799
+https://www.prarulebook.co.uk/pra-rules/counterparty-credit-risk-crr#675d57c54dc54259a40613ad3d6f9de0
+https://www.prarulebook.co.uk/pra-rules/counterparty-credit-risk-crr#69fff6292f85404d937993d4634027b7
+https://www.prarulebook.co.uk/pra-rules/counterparty-credit-risk-crr#6ad40023f93f44bc82d5b9deb1a4b4de
+https://www.prarulebook.co.uk/pra-rules/counterparty-credit-risk-crr#6b5e87bd9ac84820b3eec4855d1a998c
+https://www.prarulebook.co.uk/pra-rules/counterparty-credit-risk-crr#71620fec84a84df1bdcb65e459481788
+https://www.prarulebook.co.uk/pra-rules/counterparty-credit-risk-crr#7ab95b2429a64dc091cd6e62bf276fc8
+https://www.prarulebook.co.uk/pra-rules/counterparty-credit-risk-crr#7dd4c44ef7d34b0d826e2913f35be387
+https://www.prarulebook.co.uk/pra-rules/counterparty-credit-risk-crr#81268fab17c34ddf92da8abc8b72318b
+https://www.prarulebook.co.uk/pra-rules/counterparty-credit-risk-crr#838392ca06964a4196723e4199f27372
+https://www.prarulebook.co.uk/pra-rules/counterparty-credit-risk-crr#838a8b23c4fc4e5dbfbef7faad59131a
+https://www.prarulebook.co.uk/pra-rules/counterparty-credit-risk-crr#86fb5197b704439993516fe5f8859a9f
+https://www.prarulebook.co.uk/pra-rules/counterparty-credit-risk-crr#8da240d4e0d84468bedcf8ded82c9fa3
+https://www.prarulebook.co.uk/pra-rules/counterparty-credit-risk-crr#8e74dd30413640ef894023827febc9cc
+https://www.prarulebook.co.uk/pra-rules/counterparty-credit-risk-crr#91bf59a36dc346d4903a96fa5cb7a47e
+https://www.prarulebook.co.uk/pra-rules/counterparty-credit-risk-crr#91facde2decc40d1a434e36576bde7e7
+https://www.prarulebook.co.uk/pra-rules/counterparty-credit-risk-crr#93d9af4ca8264709aaa004040c14c624
+https://www.prarulebook.co.uk/pra-rules/counterparty-credit-risk-crr#943caf6f79f5475997ec88e5d1ff1386
+https://www.prarulebook.co.uk/pra-rules/counterparty-credit-risk-crr#956953e9e80540ce951dbf7aba0ca45b
+https://www.prarulebook.co.uk/pra-rules/counterparty-credit-risk-crr#95e1925b31fb41dd83ccb6144fa0660f
+https://www.prarulebook.co.uk/pra-rules/counterparty-credit-risk-crr#96f32db7a8264e4ab71323db93869caa
+https://www.prarulebook.co.uk/pra-rules/counterparty-credit-risk-crr#9a9e3e02296c4c07ad1e6577010c1a64
+https://www.prarulebook.co.uk/pra-rules/counterparty-credit-risk-crr#9b02301f1af4488497627ae6b205f89a
+https://www.prarulebook.co.uk/pra-rules/counterparty-credit-risk-crr#9e5d7aca2d044add9622eed08d499bfc
+https://www.prarulebook.co.uk/pra-rules/counterparty-credit-risk-crr#a06d11059d624f089b40666d2afb20b2
+https://www.prarulebook.co.uk/pra-rules/counterparty-credit-risk-crr#a11ed1f52de647a7ba22110c5a87782f
+https://www.prarulebook.co.uk/pra-rules/counterparty-credit-risk-crr#a29458df135c476295f2a46a7d4254ea
+https://www.prarulebook.co.uk/pra-rules/counterparty-credit-risk-crr#a584864228b54a5faa8b433b1317e5f1
+https://www.prarulebook.co.uk/pra-rules/counterparty-credit-risk-crr#a662b42d2a854fbfa34b9909a0bef4b8
+https://www.prarulebook.co.uk/pra-rules/counterparty-credit-risk-crr#a9efdeae3c6d47acaff947dffa869b78
+https://www.prarulebook.co.uk/pra-rules/counterparty-credit-risk-crr#ae68ce6314a54af48c60859503c54b4a
+https://www.prarulebook.co.uk/pra-rules/counterparty-credit-risk-crr#b19dd4dfacef4abe93eb45776e8e93a8
+https://www.prarulebook.co.uk/pra-rules/counterparty-credit-risk-crr#b3439b02be5b41eda6c28ce563c6c084
+https://www.prarulebook.co.uk/pra-rules/counterparty-credit-risk-crr#b7bc033c835d4d898c4515a6827f33db
+https://www.prarulebook.co.uk/pra-rules/counterparty-credit-risk-crr#bd30796691634d3f8e634800e59b71a0
+https://www.prarulebook.co.uk/pra-rules/counterparty-credit-risk-crr#bdffb56e896b47a489591363621b8a1d
+https://www.prarulebook.co.uk/pra-rules/counterparty-credit-risk-crr#bf4a6909b2074ae38fe411c629710de1
+https://www.prarulebook.co.uk/pra-rules/counterparty-credit-risk-crr#bfceda6c3de944958ef47b2b711ac82a
+https://www.prarulebook.co.uk/pra-rules/counterparty-credit-risk-crr#c11985960b8143aa9ee167b8b4ecd081
+https://www.prarulebook.co.uk/pra-rules/counterparty-credit-risk-crr#c34e11c5d40e45339ab386526c187402
+https://www.prarulebook.co.uk/pra-rules/counterparty-credit-risk-crr#c552bdb8a0114f14ae97476d66968685
+https://www.prarulebook.co.uk/pra-rules/counterparty-credit-risk-crr#c6076125bf4b48a8a5cd4045654c9131
+https://www.prarulebook.co.uk/pra-rules/counterparty-credit-risk-crr#c6fab44b6aba4ae186e5c820e8f8a1ad
+https://www.prarulebook.co.uk/pra-rules/counterparty-credit-risk-crr#cba19733d9714009a4e1abf64c0b2db0
+https://www.prarulebook.co.uk/pra-rules/counterparty-credit-risk-crr#d433e9bfcf144e57a49f4be0cbf87ad1
+https://www.prarulebook.co.uk/pra-rules/counterparty-credit-risk-crr#d956c46bd6d144dbbf91b6847d22d27a
+https://www.prarulebook.co.uk/pra-rules/counterparty-credit-risk-crr#db1bb4377fde4806b647efab87c1da89
+https://www.prarulebook.co.uk/pra-rules/counterparty-credit-risk-crr#ecfc5934c4f147d59c1ada850554febe
+https://www.prarulebook.co.uk/pra-rules/counterparty-credit-risk-crr#ef9c972a7c824398ae18ade627bc3750
+https://www.prarulebook.co.uk/pra-rules/counterparty-credit-risk-crr#efe93cd3965b4dee883a88606fa883b9
+https://www.prarulebook.co.uk/pra-rules/counterparty-credit-risk-crr#f015e9c7d2b44d4e8a00008f71ef6b8a
+https://www.prarulebook.co.uk/pra-rules/counterparty-credit-risk-crr#f8f2ff46b3d24c4a958e17b6d26725a5
+https://www.prarulebook.co.uk/pra-rules/counterparty-credit-risk-crr#f9bf9f0913f14e40b37352c7891ea5b2
+https://www.prarulebook.co.uk/pra-rules/counterparty-credit-risk-crr#f9f78c44d03c4d2a8cb06aedc388db50
+https://www.prarulebook.co.uk/pra-rules/counterparty-credit-risk-crr#fc557cb956f34bceb2347d1517939e7f
+https://www.prarulebook.co.uk/pra-rules/counterparty-credit-risk-crr#fd098279617c42858098956876244282
+https://www.prarulebook.co.uk/pra-rules/counterparty-credit-risk-crr#ff1c722bbe6d4575b0b50691cf731b33
+https://www.prarulebook.co.uk/pra-rules/crr-firms
+https://www.prarulebook.co.uk/pra-rules/depositor-protection
+https://www.prarulebook.co.uk/pra-rules/depositor-protection#01b9cecb028d47fe92052c31674135c5
+https://www.prarulebook.co.uk/pra-rules/depositor-protection#051e4ff7f45e44ef9b26d35f8528f89b
+https://www.prarulebook.co.uk/pra-rules/depositor-protection#055a4b0b2b4d4a5aac85d093ebc0fe5a
+https://www.prarulebook.co.uk/pra-rules/depositor-protection#05d95794c8834aaf9e397d3960e59c2b
+https://www.prarulebook.co.uk/pra-rules/depositor-protection#07a2c6f77fd246de8a68220fa811cf74
+https://www.prarulebook.co.uk/pra-rules/depositor-protection#08ccafafcd3f4c94b090f5871162a029
+https://www.prarulebook.co.uk/pra-rules/depositor-protection#093ae973b207491993be8cecde20a5c0
+https://www.prarulebook.co.uk/pra-rules/depositor-protection#135d92e26eeb4120a16eba10701b4d8f
+https://www.prarulebook.co.uk/pra-rules/depositor-protection#17ac6cc75470476fadeb95ef457c975d
+https://www.prarulebook.co.uk/pra-rules/depositor-protection#1d1df03779134a2e883127b71055e756
+https://www.prarulebook.co.uk/pra-rules/depositor-protection#1f1f8ea6274c4525ad552087eec115e3
+https://www.prarulebook.co.uk/pra-rules/depositor-protection#200b1cf27c184689a689b14697b0057a
+https://www.prarulebook.co.uk/pra-rules/depositor-protection#24b34cc3552c4aa2a415e174164a5219
