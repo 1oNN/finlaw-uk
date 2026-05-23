@@ -73,26 +73,43 @@ def _get_dense():
 
 
 def _hybrid_search(query: str, k: int) -> List[Tuple[str, str]]:
-    """BM25 + dense → RRF. Returns (key, snippet) pairs."""
-    over_k = max(k * 2, 10)
-    bm25_hits = sparse.search_bm25(query, k=over_k)
-    bm25_keys = [key for key, _ in bm25_hits]
+    """BM25 + dense → RRF. Returns (key, snippet) pairs.
 
-    dense = _get_dense()
+    Fusion strategy is controlled by `RAG_FUSION_MODE`:
+        'rrf'   (default) — Reciprocal Rank Fusion over both sources
+        'dense'           — dense-only (skip BM25)
+        'bm25'            — bm25-only (skip dense)
+    The env var is read per-call so the ablation harness can flip strategies
+    without restarting the process.
+    """
+    mode = os.getenv("RAG_FUSION_MODE", "rrf").lower()
+    over_k = max(k * 2, 10)
+
+    bm25_keys: List[str] = []
     dense_keys: List[str] = []
-    if dense is not None:
-        dense_hits = dense.search(query, k=over_k)
-        dense_keys = [key for key, _ in dense_hits]
+
+    if mode != "dense":
+        bm25_hits = sparse.search_bm25(query, k=over_k)
+        bm25_keys = [key for key, _ in bm25_hits]
+
+    if mode != "bm25":
+        dense = _get_dense()
+        if dense is not None:
+            dense_hits = dense.search(query, k=over_k)
+            dense_keys = [key for key, _ in dense_hits]
 
     if not bm25_keys and not dense_keys:
         return []
 
     rank_lists = [lst for lst in (bm25_keys, dense_keys) if lst]
+    # When a reranker will trim later, fuse over a wider pool so the
+    # cross-encoder has more candidates to score.
+    rerank_enabled = bool(int(os.getenv("RAG_RERANK_ENABLED", "0")))
+    fuse_k = max(int(os.getenv("RAG_RERANK_POOL", "30")), k) if rerank_enabled else k
     if len(rank_lists) == 1:
-        # Only one source — preserve its order (no RRF needed)
-        fused_keys = rank_lists[0][:k]
+        fused_keys = rank_lists[0][:fuse_k]
     else:
-        fused = reciprocal_rank_fusion(rank_lists, k=k, rrf_k=RRF_K)
+        fused = reciprocal_rank_fusion(rank_lists, k=fuse_k, rrf_k=RRF_K)
         fused_keys = [key for key, _ in fused]
 
     out: List[Tuple[str, str]] = []
@@ -101,6 +118,11 @@ def _hybrid_search(query: str, k: int) -> List[Tuple[str, str]]:
         if not text:
             continue
         out.append((key, sparse._snippet(text, None)))
+
+    if rerank_enabled and len(out) > k:
+        from backend.retrieval.reranker import rerank
+        out = rerank(query, out, top_k=k)
+
     return out
 
 
