@@ -34,6 +34,7 @@ from backend.evaluation.ragas_eval import (
     EvalRecord,
     QUESTIONS_CSV,
     _ragas_evaluate,
+    _safe_mean,
     load_questions,
     run_rag_pipeline,
 )
@@ -325,11 +326,13 @@ def run_streaming(
             vals = [getattr(ls, metric) for ls in lex_rows.values()]
             summary[f"lex_{metric}_mean"] = round(sum(vals) / max(1, len(vals)), 4)
     if mode in ("ragas", "both"):
+        n_total = len(records)
         for col in ("ragas_faithfulness", "ragas_answer_relevancy",
                     "ragas_context_precision", "ragas_context_recall"):
-            vals = [getattr(r, col) for r in records if isinstance(getattr(r, col), (int, float))]
-            summary[f"{col}_mean"] = round(sum(vals) / len(vals), 4) if vals else None
-            summary[f"{col}_n"] = len(vals)
+            mean, n_valid = _safe_mean(getattr(r, col) for r in records)
+            summary[f"{col}_mean"]    = mean
+            summary[f"{col}_n_valid"] = n_valid
+            summary[f"{col}_n_total"] = n_total
 
     yield {
         "event": "done",
@@ -356,12 +359,15 @@ def _write_summary(
     }
     if mode in ("lexical", "both") and lex_rows:
         for metric in ("jaccard", "rouge_l", "citation_match", "keyword_f1"):
-            vals = [getattr(ls, metric) for ls in lex_rows.values()]
-            summary[f"lex_{metric}_mean"] = round(sum(vals) / max(1, len(vals)), 4)
+            mean, n_valid = _safe_mean(getattr(ls, metric) for ls in lex_rows.values())
+            summary[f"lex_{metric}_mean"]    = mean
+            summary[f"lex_{metric}_n_valid"] = n_valid
     if mode in ("ragas", "both"):
+        n_total = len(records)
         for col in ("ragas_faithfulness", "ragas_answer_relevancy",
                     "ragas_context_precision", "ragas_context_recall"):
-            vals = [getattr(r, col) for r in records if isinstance(getattr(r, col), (int, float))]
-            summary[f"{col}_mean"] = round(sum(vals) / len(vals), 4) if vals else float("nan")
-            summary[f"{col}_n"] = len(vals)
+            mean, n_valid = _safe_mean(getattr(r, col) for r in records)
+            summary[f"{col}_mean"]    = mean
+            summary[f"{col}_n_valid"] = n_valid
+            summary[f"{col}_n_total"] = n_total
     pd.DataFrame([summary]).to_csv(path, index=False)
