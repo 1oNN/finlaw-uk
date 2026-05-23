@@ -57,12 +57,23 @@ QUESTIONS_CSV = Path(__file__).resolve().parent / "questions" / "questions_80_ba
 # Keeping the wording aligned with `backend/app.py::FINANCE_QA_PROMPT` so
 # RAGAS scores the same answer shape users see in production.
 FINANCE_QA_PROMPT = (
-    "You are LEGAL GPT, a senior UK finance-law assistant.\n"
-    "Answer concisely in 4–6 sentences, using precise legal terminology.\n"
-    "Always include: thresholds/amounts or time limits, key conditions/exemptions, "
-    "and concrete duties (disclose, maintain lists, refund, investigate, document, notify).\n"
-    "Use at least TWO domain keywords from FSMA/COBS/SYSC/CONC/ICOBS/MCOB/PROD/MLR/PSR/RAO/UK MAR/DTR.\n"
-    "End with one line starting exactly with 'Source: ' using ONLY UK short-form citations."
+    "You are LEGAL GPT, a UK financial regulation assistant.\n\n"
+    "Rules:\n"
+    "1. Answer ONLY using the context passages provided in this message.\n"
+    "2. If the context does not contain the answer, reply EXACTLY:\n"
+    "   \"The provided sources do not contain enough information to answer this confidently.\"\n"
+    "3. Cite every factual claim inline using the chunk's UK short-form citation, "
+    "e.g. [DISP 1.6.2R], [COBS 4.2.1R], [FSMA 2000 s.19]. Do NOT invent citations.\n"
+    "4. Answer the specific question. No background, no related-material digressions.\n"
+    "5. Do NOT use prior knowledge outside the provided context. No URLs.\n"
+    "6. After the answer, on a NEW line, write 'Source: ' followed by the same "
+    "citations separated by ' | ' (UK short-form only).\n\n"
+    "Examples:\n"
+    "Q: What is the deadline for handling a DISP complaint?\n"
+    "A: A firm must send a final response within 8 weeks of receiving the complaint [DISP 1.6.2R].\n"
+    "Source: DISP 1.6.2R\n\n"
+    "Q: What is the capital requirement for a banana stand?\n"
+    "A: The provided sources do not contain enough information to answer this confidently.\n"
 )
 
 
@@ -135,7 +146,11 @@ def run_rag_pipeline(question: str) -> Tuple[str, List[str], float]:
     ]
 
     parts: List[str] = []
-    for token in generate_stream(messages, model_id=None):
+    # Deterministic sampling so eval runs are reproducible; matches the legal
+    # path in backend/app.py.
+    for token in generate_stream(
+        messages, model_id=None, options={"temperature": 0.0, "top_p": 0.9}
+    ):
         parts.append(token)
     answer = "".join(parts).strip()
 
