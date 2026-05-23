@@ -28,54 +28,76 @@ export default function ChatSidebar({ selectedId, onSelect, onNewChat }) {
   };
 
   return (
-    <aside className="flex h-full w-[270px] flex-col border-r border-white/15 bg-panel">
-      <div className="p-3">
+    <aside className="hidden h-full w-[260px] flex-col border-r border-ivory-3 bg-ivory/60 md:flex">
+      <div className="border-b border-ivory-3 p-3">
         <button
-          className="flex w-full items-center justify-center gap-2 rounded-lg border border-white/15 bg-surface px-3 py-2 text-white hover:bg-surface/80"
+          className="flex w-full items-center justify-center gap-2 rounded-lg bg-ink px-3 py-2 text-sm font-medium text-ivory shadow-soft transition-colors hover:bg-ink-2"
           onClick={onNewChat}
           title="New chat"
         >
-          <FiPlus /> New chat
+          <FiPlus size={14} /> New chat
         </button>
+      </div>
+
+      <div className="border-b border-ivory-3 px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.15em] text-slate">
+        Recent
       </div>
 
       <div className="flex-1 overflow-auto p-2">
         {chats.length === 0 ? (
-          <div className="px-2 text-sm text-muted">No saved chats yet.</div>
+          <div className="px-2 py-3 text-xs text-slate">
+            No saved chats yet.
+          </div>
         ) : (
-          <div className="space-y-2">
+          <ul className="space-y-1">
             {chats.map((c) => {
               const active = selectedId === c.id;
               return (
-                <div
+                <li
                   key={c.id}
-                  className={`group flex items-center gap-2 rounded-lg border px-2 py-1.5 ${
+                  className={[
+                    "group flex items-center gap-1 rounded-md transition-colors",
                     active
-                      ? "border-accent bg-surface ring-1 ring-accent/40"
-                      : "border-white/15 bg-surface/60 hover:bg-surface/80"
-                  }`}
+                      ? "bg-white shadow-soft"
+                      : "hover:bg-ivory-2",
+                  ].join(" ")}
                 >
                   <button
-                    className="flex min-w-0 flex-1 items-center gap-2 text-left text-white"
+                    className="flex min-w-0 flex-1 items-center gap-2 px-2.5 py-2 text-left text-sm"
                     onClick={() => onSelect?.(c.id)}
                     title={c.title}
                   >
-                    <span className="grid h-6 w-6 flex-none place-items-center rounded-md bg-panel text-white/90">
-                      <FiMessageSquare size={14} />
+                    <span
+                      className={[
+                        "grid h-6 w-6 flex-none place-items-center rounded-md",
+                        active
+                          ? "bg-gold-soft text-gold-2"
+                          : "bg-ivory-2 text-slate",
+                      ].join(" ")}
+                    >
+                      <FiMessageSquare size={12} />
                     </span>
-                    <span className="truncate">{c.title}</span>
+                    <span
+                      className={[
+                        "truncate",
+                        active ? "text-ink" : "text-ink/85",
+                      ].join(" ")}
+                    >
+                      {c.title}
+                    </span>
                   </button>
                   <button
-                    className="grid h-8 w-8 flex-none place-items-center rounded-md border border-white/15 text-white/90 hover:bg-white/10"
+                    className="mr-1 grid h-7 w-7 flex-none place-items-center rounded-md text-slate opacity-0 transition-opacity hover:bg-ivory-2 hover:text-danger group-hover:opacity-100"
                     onClick={() => remove(c.id)}
                     title="Delete chat"
+                    aria-label="Delete chat"
                   >
-                    <FiTrash2 />
+                    <FiTrash2 size={13} />
                   </button>
-                </div>
+                </li>
               );
             })}
-          </div>
+          </ul>
         )}
       </div>
     </aside>

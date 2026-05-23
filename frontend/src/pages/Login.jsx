@@ -1,57 +1,131 @@
 import React, { useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { FiArrowRight, FiAlertCircle } from "react-icons/fi";
 import { AuthContext } from "../components/AuthContext";
+import Logo from "../components/Logo";
+import DisclaimerBand from "../components/DisclaimerBand";
+
+const API_BASE = "http://localhost:5000";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [submitting, setSubmitting] = useState(false);
   const navigate = useNavigate();
   const { setLoggedIn } = useContext(AuthContext);
 
   const submit = async (e) => {
     e.preventDefault();
     setError("");
-    const res = await fetch("http://localhost:5000/login", {
-      method: "POST",
-      credentials: "include",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
-    });
-    if (res.ok) {
-      setLoggedIn(true);
-      navigate("/chat");
-    } else {
-      const { error } = await res.json();
-      setError(error || "Login failed");
+    setSubmitting(true);
+    try {
+      const res = await fetch(`${API_BASE}/login`, {
+        method: "POST",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+      if (res.ok) {
+        setLoggedIn(true);
+        navigate("/chat");
+      } else {
+        const { error } = await res.json().catch(() => ({}));
+        setError(error || "Login failed.");
+      }
+    } catch (err) {
+      setError("Could not reach the server.");
+    } finally {
+      setSubmitting(false);
     }
   };
 
   return (
-    <div className="max-w-md mx-auto mt-20 p-6 bg-surface rounded-lg shadow">
-      <h1 className="text-2xl mb-4">Log In</h1>
-      {error && <div className="text-red-400 mb-2">{error}</div>}
-      <form onSubmit={submit} className="space-y-4">
-        <input
-          type="email"
-          placeholder="Email"
-          className="w-full p-2 border rounded"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          className="w-full p-2 border rounded"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-        <button className="w-full py-2 bg-accent text-white rounded">
-          Log In
-        </button>
-      </form>
+    <div className="flex min-h-screen flex-col bg-ivory text-ink">
+      <main className="flex flex-1 items-center justify-center px-4 py-16">
+        <div className="w-full max-w-md">
+          <Link to="/" className="mb-8 inline-flex">
+            <Logo variant="wordmark" size="lg" />
+          </Link>
+
+          <div className="rounded-card border border-ivory-3 bg-white p-7 shadow-soft">
+            <h1 className="font-display text-2xl font-semibold tracking-tightish">
+              Sign in
+            </h1>
+            <p className="mt-1 text-sm text-slate">
+              Welcome back. Continue to your saved chats.
+            </p>
+
+            {error && (
+              <div className="mt-4 flex items-start gap-2 rounded-md border border-danger/30 bg-danger/5 px-3 py-2 text-sm text-danger">
+                <FiAlertCircle className="mt-0.5 flex-none" size={14} />
+                <span>{error}</span>
+              </div>
+            )}
+
+            <form onSubmit={submit} className="mt-5 space-y-4">
+              <label className="block">
+                <span className="mb-1 block text-xs font-medium text-slate">
+                  Email
+                </span>
+                <input
+                  type="email"
+                  autoComplete="email"
+                  required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="w-full rounded-lg border border-ivory-3 bg-ivory/40 px-3 py-2.5 text-sm text-ink outline-none transition-colors focus:border-gold/60 focus:bg-white"
+                  placeholder="you@example.com"
+                />
+              </label>
+              <label className="block">
+                <span className="mb-1 block text-xs font-medium text-slate">
+                  Password
+                </span>
+                <input
+                  type="password"
+                  autoComplete="current-password"
+                  required
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="w-full rounded-lg border border-ivory-3 bg-ivory/40 px-3 py-2.5 text-sm text-ink outline-none transition-colors focus:border-gold/60 focus:bg-white"
+                  placeholder="••••••••"
+                />
+              </label>
+              <button
+                type="submit"
+                disabled={submitting}
+                className="group inline-flex w-full items-center justify-center gap-2 rounded-lg bg-ink px-4 py-2.5 text-sm font-medium text-ivory shadow-soft transition-colors hover:bg-ink-2 disabled:opacity-60"
+              >
+                {submitting ? "Signing in…" : "Sign in"}
+                {!submitting && (
+                  <FiArrowRight
+                    size={14}
+                    className="transition-transform group-hover:translate-x-0.5"
+                  />
+                )}
+              </button>
+            </form>
+
+            <p className="mt-5 text-center text-sm text-slate">
+              New here?{" "}
+              <Link
+                to="/signup"
+                className="border-b border-gold/50 text-ink hover:border-gold"
+              >
+                Create an account
+              </Link>
+            </p>
+          </div>
+
+          <p className="mt-6 text-center text-xs text-slate">
+            <Link to="/" className="hover:text-ink">
+              ← Back to home
+            </Link>
+          </p>
+        </div>
+      </main>
+      <DisclaimerBand />
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import DisclaimerBand from "../components/DisclaimerBand";
 import { FiPlay, FiSquare, FiFile, FiChevronDown, FiChevronRight } from "react-icons/fi";
 
 const API_BASE = "http://localhost:5000";
@@ -20,11 +21,15 @@ function fmtScore(v) {
 
 function MetricCard({ label, value, n }) {
   return (
-    <div className="rounded-xl border border-border bg-surface p-4">
-      <div className="text-xs uppercase tracking-wider text-muted">{label}</div>
-      <div className="mt-2 text-3xl font-semibold text-text">{fmtScore(value)}</div>
+    <div className="rounded-card border border-ivory-3 bg-white p-4 shadow-soft">
+      <div className="text-[11px] font-semibold uppercase tracking-[0.15em] text-slate">
+        {label}
+      </div>
+      <div className="mt-2 font-display text-3xl font-semibold text-ink">
+        {fmtScore(value)}
+      </div>
       {typeof n === "number" && (
-        <div className="mt-1 text-xs text-muted">n={n}</div>
+        <div className="mt-1 font-mono text-xs text-slate">n={n}</div>
       )}
     </div>
   );
@@ -250,14 +255,21 @@ export default function EvalPage() {
   const mCtxR = summary?.ragas_context_recall_mean;
 
   return (
-    <div className="flex min-h-screen flex-col bg-bg text-text">
+    <div className="flex min-h-screen flex-col bg-ivory text-ink">
       <Header />
-      <main className="mx-auto w-full max-w-5xl flex-1 px-4 py-8">
-        <div className="mb-6">
-          <h1 className="text-2xl font-semibold">RAGAS Evaluation</h1>
-          <p className="mt-1 text-sm text-muted">
-            Run the FinLaw-UK pipeline against the 80-question ground truth set and score
-            faithfulness, answer relevancy, context precision, context recall.
+      <main className="mx-auto w-full max-w-5xl flex-1 px-4 py-12 sm:px-6">
+        <div className="mb-8">
+          <div className="mb-3 inline-flex items-center gap-2 text-xs font-medium uppercase tracking-[0.18em] text-gold-2">
+            <span className="h-px w-6 bg-gold/60" aria-hidden />
+            Evaluation
+          </div>
+          <h1 className="font-display text-3xl font-semibold tracking-tightish sm:text-4xl">
+            RAGAS evaluation
+          </h1>
+          <p className="mt-3 max-w-2xl text-sm text-slate">
+            Run the FinLaw pipeline against the 80-question ground-truth set
+            and score faithfulness, answer relevancy, context precision, and
+            context recall.
           </p>
         </div>
 
@@ -404,6 +416,7 @@ export default function EvalPage() {
           </div>
         )}
       </main>
+      <DisclaimerBand />
       <Footer />
     </div>
   );

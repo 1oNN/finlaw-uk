@@ -1,6 +1,15 @@
 import { useState, useRef, useEffect, useCallback } from "react";
+import {
+  FiSend,
+  FiPaperclip,
+  FiSquare,
+  FiX,
+  FiBookOpen,
+  FiArrowRight,
+} from "react-icons/fi";
 import MessageBubble from "./MessageBubble";
-import { FiSend, FiUpload, FiSquare, FiX } from "react-icons/fi";
+import DisclaimerBand from "./DisclaimerBand";
+import Logo from "./Logo";
 
 const API_BASE = "http://localhost:5000";
 const CHAT_LIST_KEY = "flgpt:chats";
@@ -30,15 +39,34 @@ const safeSaveMessages = (id, msgs) => {
   } catch {}
 };
 
-export default function Chat({ activeChatId, onChatCreated }) {
-  const [chatId] = useState(activeChatId || uid());
+const MODES = [
+  { key: "auto", label: "Auto", hint: "auto-route" },
+  { key: "general", label: "General", hint: "free-form" },
+  { key: "finance", label: "Finance", hint: "RAG" },
+  { key: "traffic-light", label: "Risk", hint: "traffic-light" },
+];
+
+const SUGGESTIONS = [
+  "What is the 'general prohibition' in UK financial services?",
+  "What is the FSCS deposit protection limit per individual?",
+  "What standard applies to financial promotions in the UK?",
+  "How many days does a consumer have to cancel a general insurance policy?",
+];
+
+export default function Chat({
+  activeChatId,
+  onChatCreated,
+  onMetaUpdate,
+  onModeChange,
+  onOpenSources,
+}) {
+  const [chatId, setChatId] = useState(activeChatId || uid());
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
   const [isStreaming, setStreaming] = useState(false);
   const [abortCtrl, setAbortCtrl] = useState(null);
 
   const [filename, setFilename] = useState("");
-  // Multi-model selection was dropped — backend hardcodes Mistral via OLLAMA_MODEL.
   const model = "mistral:7b-instruct";
   const [mode, setMode] = useState("auto");
   const [status, setStatus] = useState("");
@@ -46,7 +74,17 @@ export default function Chat({ activeChatId, onChatCreated }) {
   const [dragOver, setDragOver] = useState(false);
   const bottomRef = useRef(null);
   const textRef = useRef(null);
-  const token = localStorage.getItem("access_token");
+  const token =
+    typeof localStorage !== "undefined"
+      ? localStorage.getItem("access_token")
+      : null;
+
+  // re-load when active chat switches
+  useEffect(() => {
+    if (activeChatId && activeChatId !== chatId) {
+      setChatId(activeChatId);
+    }
+  }, [activeChatId, chatId]);
 
   useEffect(() => setMessages(loadChatMessages(chatId)), [chatId]);
   useEffect(
@@ -54,6 +92,7 @@ export default function Chat({ activeChatId, onChatCreated }) {
     [messages, isStreaming]
   );
   useEffect(() => safeSaveMessages(chatId, messages), [chatId, messages]);
+  useEffect(() => onModeChange?.(mode), [mode, onModeChange]);
 
   const ensureChatListed = useCallback(
     (firstUserText) => {
@@ -108,6 +147,7 @@ export default function Chat({ activeChatId, onChatCreated }) {
   const onFileInput = (e) => {
     const f = e.target.files?.[0];
     if (f) uploadFile(f);
+    e.target.value = "";
   };
   const clearFile = () => setFilename("");
 
@@ -144,9 +184,11 @@ export default function Chat({ activeChatId, onChatCreated }) {
     });
   }
 
-  async function send(e) {
-    e?.preventDefault();
-    const prompt = input.trim();
+  async function send(textOverride) {
+    const prompt =
+      typeof textOverride === "string" && textOverride.trim()
+        ? textOverride.trim()
+        : input.trim();
     if (!prompt && !filename) return;
 
     ensureChatListed(prompt || filename);
@@ -166,10 +208,14 @@ export default function Chat({ activeChatId, onChatCreated }) {
       { id: uid(), role: "assistant", type: "text", content: "" },
     ]);
     pushMetaPlaceholder();
-    setInput("");
+    if (!textOverride) {
+      setInput("");
+    }
     autogrow();
     setStreaming(true);
     setStatus("");
+    // reset previous meta — new question, new sources
+    onMetaUpdate?.(null);
 
     const ctrl = new AbortController();
     setAbortCtrl(ctrl);
@@ -197,7 +243,7 @@ export default function Chat({ activeChatId, onChatCreated }) {
           .pop()?.[1];
         if (idx == null) return m;
         const copy = [...m];
-        copy[idx] = { ...copy[idx], content: "❌ Error contacting backend." };
+        copy[idx] = { ...copy[idx], content: "Error contacting backend." };
         return copy;
       });
       setMeta(0);
@@ -210,6 +256,7 @@ export default function Chat({ activeChatId, onChatCreated }) {
     const dec = new TextDecoder("utf-8");
     let buf = "";
     let finished = false;
+    let accumulatedMeta = {};
 
     const appendToken = (t) => {
       setMessages((m) => {
@@ -236,7 +283,10 @@ export default function Chat({ activeChatId, onChatCreated }) {
       if (ev === "meta") {
         try {
           const j = JSON.parse(data || "{}");
-          setMeta(j.thought_ms ?? j.thoughtMs ?? 0);
+          const ms = j.thought_ms ?? j.thoughtMs;
+          if (typeof ms === "number") setMeta(ms);
+          accumulatedMeta = { ...accumulatedMeta, ...j };
+          onMetaUpdate?.(accumulatedMeta);
         } catch {
           setMeta(0);
         }
@@ -258,7 +308,7 @@ export default function Chat({ activeChatId, onChatCreated }) {
       }
       if (value) {
         buf += dec.decode(value, { stream: true });
-        const parts = buf.split(/\r?\n\r?\n/); // CRLF or LF
+        const parts = buf.split(/\r?\n\r?\n/);
         buf = parts.pop() || "";
         for (const p of parts) handlePacket(p);
       }
@@ -282,6 +332,7 @@ export default function Chat({ activeChatId, onChatCreated }) {
     }
   };
   const canSend = !!input.trim() || !!filename;
+  const isEmpty = messages.length === 0;
 
   return (
     <div
@@ -291,100 +342,143 @@ export default function Chat({ activeChatId, onChatCreated }) {
       onDragLeave={onDragLeave}
     >
       {/* Top controls */}
-      <div className="sticky top-0 z-20 border-b border-white/15 bg-panel/95 backdrop-blur">
-        <div className="mx-auto flex w-full max-w-chat items-center justify-between px-4 py-2">
-          <div className="flex items-center gap-2">
-            <select
-              className="rounded-lg border border-white/15 bg-surface/90 px-2 py-1 text-sm text-white"
-              value={mode}
-              onChange={(e) => setMode(e.target.value)}
-              disabled={isStreaming}
-              title="Mode"
-            >
-              <option value="auto">auto</option>
-              <option value="general">general</option>
-              <option value="finance">finance review</option>
-              <option value="traffic-light">traffic-light</option>
-            </select>
-
-            {isStreaming && (
-              <span className="ml-1 animate-pulse text-xs text-muted">
-                thinking…
-              </span>
-            )}
+      <div className="border-b border-ivory-3 bg-ivory/85 backdrop-blur">
+        <div className="mx-auto flex w-full max-w-3xl items-center justify-between gap-3 px-4 py-2.5">
+          <div className="inline-flex rounded-lg border border-ivory-3 bg-white p-0.5">
+            {MODES.map((m) => (
+              <button
+                key={m.key}
+                type="button"
+                onClick={() => setMode(m.key)}
+                disabled={isStreaming}
+                title={m.hint}
+                className={[
+                  "rounded-md px-3 py-1 text-xs font-medium transition-colors",
+                  mode === m.key
+                    ? "bg-ink text-ivory"
+                    : "text-slate hover:text-ink",
+                  isStreaming ? "cursor-not-allowed opacity-60" : "",
+                ].join(" ")}
+              >
+                {m.label}
+              </button>
+            ))}
           </div>
 
           <div className="flex items-center gap-2">
-            {status && (
-              <div className="rounded-full border border-white/15 bg-surface/80 px-2 py-1 text-xs text-white">
-                {status}
-              </div>
+            {isStreaming && (
+              <span className="hidden animate-pulse text-xs text-slate sm:inline">
+                thinking…
+              </span>
             )}
+            {status && (
+              <span className="rounded-chip border border-ivory-3 bg-white px-2.5 py-1 text-xs text-ink">
+                {status}
+              </span>
+            )}
+            <button
+              type="button"
+              onClick={onOpenSources}
+              className="inline-flex items-center gap-1.5 rounded-md border border-ivory-3 bg-white px-2.5 py-1 text-xs font-medium text-ink hover:border-gold/40 lg:hidden"
+            >
+              <FiBookOpen size={12} />
+              Sources
+            </button>
           </div>
         </div>
       </div>
 
       {/* Messages */}
-      <div className="flex-1 bg-bg py-6">
-        {messages.length === 0 ? (
-          <div className="mx-auto max-w-chat px-4 py-10 text-center text-white/90">
-            <div className="text-3xl opacity-80">💼</div>
-            <div className="mt-2 font-extrabold">
-              Ask anything about UK finance and law
-            </div>
-          </div>
-        ) : null}
+      <div className="flex-1 overflow-y-auto">
+        <div className="mx-auto w-full max-w-3xl px-4 py-8">
+          {isEmpty ? (
+            <div className="mx-auto max-w-xl pt-6 text-center">
+              <div className="mx-auto mb-5 grid h-14 w-14 place-items-center">
+                <Logo variant="mark" size="lg" />
+              </div>
+              <h2 className="font-display text-2xl font-semibold text-ink">
+                What does the corpus say?
+              </h2>
+              <p className="mt-2 text-sm text-slate">
+                Ask in plain English. FinLaw will retrieve the relevant
+                provisions and ground the answer with UK short-form
+                citations.
+              </p>
 
-        {messages.map((m) =>
-          m.role === "meta" ? (
-            <div
-              key={m.id}
-              className="mx-auto max-w-chat px-4 text-xs text-muted"
-            >
-              {m.thoughtMs == null
-                ? "💡 Thinking…"
-                : `💡 Thought for ${(m.thoughtMs / 1000).toFixed(1)}s`}
+              <ul className="mx-auto mt-7 grid max-w-lg gap-2 text-left">
+                {SUGGESTIONS.map((s) => (
+                  <li key={s}>
+                    <button
+                      type="button"
+                      onClick={() => send(s)}
+                      className="group flex w-full items-start gap-3 rounded-lg border border-ivory-3 bg-white px-4 py-3 text-sm text-ink shadow-soft transition-colors hover:border-gold/40"
+                    >
+                      <span className="mt-0.5 text-gold-2">
+                        <FiArrowRight size={14} />
+                      </span>
+                      <span className="text-left">{s}</span>
+                    </button>
+                  </li>
+                ))}
+              </ul>
             </div>
           ) : (
-            <MessageBubble key={m.id} message={m} />
-          )
-        )}
-        <div ref={bottomRef} />
+            <div className="space-y-4">
+              {messages.map((m) =>
+                m.role === "meta" ? (
+                  <div
+                    key={m.id}
+                    className="pl-1 text-xs text-slate"
+                  >
+                    {m.thoughtMs == null
+                      ? "Thinking…"
+                      : `Thought for ${(m.thoughtMs / 1000).toFixed(1)} s`}
+                  </div>
+                ) : (
+                  <MessageBubble key={m.id} message={m} />
+                )
+              )}
+              <div ref={bottomRef} />
+            </div>
+          )}
+        </div>
       </div>
 
       {/* Composer */}
-      <div className="sticky bottom-0 z-10 border-t border-white/15 bg-panel/95 pb-3 pt-2 backdrop-blur">
-        <div className="mx-auto w-full max-w-chat px-4">
+      <div className="border-t border-ivory-3 bg-ivory/85 backdrop-blur">
+        <div className="mx-auto w-full max-w-3xl px-4 pb-3 pt-3">
           {filename && (
-            <div className="mb-2 flex items-center justify-between gap-3 rounded-full border border-white/15 bg-surface/80 px-3 py-1.5 text-sm text-white">
+            <div className="mb-2 flex items-center justify-between gap-3 rounded-chip border border-ivory-3 bg-white px-3 py-1.5 text-sm text-ink">
               <div className="truncate">
-                <span className="font-semibold">Attached:</span>{" "}
-                <span className="truncate">{filename}</span>
+                <span className="text-slate">Attached:</span>{" "}
+                <span className="font-medium">{filename}</span>
               </div>
               <button
-                className="grid h-7 w-7 place-items-center rounded-full border border-white/15 text-white/90 hover:bg-white/10"
+                className="grid h-6 w-6 place-items-center rounded-full text-slate hover:bg-ivory-2"
                 onClick={clearFile}
                 title="Remove file"
+                aria-label="Remove attached file"
               >
-                <FiX />
+                <FiX size={14} />
               </button>
             </div>
           )}
 
-          <div className="flex items-end gap-2">
+          <div className="flex items-end gap-2 rounded-2xl border border-ivory-3 bg-white p-1.5 shadow-soft transition-colors focus-within:border-gold/50">
             <label
-              className="grid h-11 w-11 cursor-pointer place-items-center rounded-xl border border-white/15 bg-surface/80 text-white hover:bg-surface"
+              className="grid h-10 w-10 flex-none cursor-pointer place-items-center rounded-xl text-slate hover:bg-ivory-2 hover:text-ink"
               title="Attach a file"
+              aria-label="Attach a file"
             >
-              <FiUpload />
+              <FiPaperclip size={16} />
               <input className="hidden" type="file" onChange={onFileInput} />
             </label>
 
             <textarea
               ref={textRef}
               rows={1}
-              placeholder="Ask about UK finance law, or anything else"
-              className="max-h-60 min-h-[46px] flex-1 resize-none rounded-2xl border border-white/15 bg-surface/90 px-4 py-3 text-white shadow-chat outline-none placeholder:text-muted"
+              placeholder="Ask about UK financial regulation…"
+              className="max-h-60 min-h-[40px] flex-1 resize-none bg-transparent px-2 py-2 text-ink outline-none placeholder:text-slate/70"
               value={input}
               onChange={(e) => {
                 setInput(e.target.value);
@@ -397,34 +491,45 @@ export default function Chat({ activeChatId, onChatCreated }) {
             {isStreaming ? (
               <button
                 type="button"
-                className="grid h-11 w-11 place-items-center rounded-xl border border-red-400/60 bg-red-500/10 text-red-300 hover:bg-red-500/20"
+                className="grid h-10 w-10 flex-none place-items-center rounded-xl bg-danger/10 text-danger hover:bg-danger/15"
                 onClick={stop}
                 title="Stop generating"
+                aria-label="Stop generating"
               >
-                <FiSquare />
+                <FiSquare size={14} />
               </button>
             ) : (
               <button
                 type="button"
                 disabled={!canSend}
-                className={`grid h-11 w-11 place-items-center rounded-xl border text-white transition ${
+                className={[
+                  "grid h-10 w-10 flex-none place-items-center rounded-xl transition-colors",
                   canSend
-                    ? "border-accent bg-accent hover:bg-accent-hover"
-                    : "cursor-not-allowed border-white/15 bg-surface/70 opacity-60"
-                }`}
-                onClick={send}
+                    ? "bg-ink text-ivory hover:bg-ink-2"
+                    : "cursor-not-allowed bg-ivory-2 text-slate",
+                ].join(" ")}
+                onClick={() => send()}
                 title="Send"
+                aria-label="Send"
               >
-                <FiSend />
+                <FiSend size={14} />
               </button>
             )}
+          </div>
+          <div className="mt-2 flex items-center justify-between gap-2 px-1">
+            <DisclaimerBand variant="thin" />
+            <span className="text-[11px] text-slate/70">
+              Enter to send · Shift+Enter for newline
+            </span>
           </div>
         </div>
       </div>
 
       {dragOver && (
-        <div className="fixed inset-0 z-40 grid place-items-center bg-black/70 text-2xl font-extrabold text-white">
-          Drop file to attach
+        <div className="fixed inset-0 z-50 grid place-items-center bg-ink/40">
+          <div className="rounded-card border-2 border-dashed border-gold bg-ivory px-10 py-8 text-center font-display text-xl text-ink">
+            Drop the file to attach
+          </div>
         </div>
       )}
     </div>
