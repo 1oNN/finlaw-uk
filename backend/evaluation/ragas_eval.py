@@ -28,6 +28,7 @@ Embeddings (used for some RAGAS metrics): `BAAI/bge-small-en-v1.5` via
 from __future__ import annotations
 
 import logging
+import math
 import os
 import time
 from dataclasses import dataclass, field, asdict
@@ -301,6 +302,34 @@ def evaluate_questions(
     return out_path
 
 
+def _is_real_number(x: object) -> bool:
+    """True iff x is a finite int/float (rejects None, bool, NaN, and inf).
+
+    `isinstance(float('nan'), (int, float))` is True, which is why the previous
+    summary code was averaging NaN values straight into the mean. We need an
+    explicit NaN check; we also reject inf to be safe.
+    """
+    if x is None or isinstance(x, bool):
+        return False
+    if isinstance(x, (int, float)):
+        if isinstance(x, float) and (math.isnan(x) or math.isinf(x)):
+            return False
+        return True
+    return False
+
+
+def _safe_mean(values: Iterable[object]) -> Tuple[Optional[float], int]:
+    """Mean of `values`, skipping None / NaN / inf / non-numeric.
+
+    Returns `(mean, n_valid)`; `mean` is `None` when no valid values remain so
+    the CSV cell renders empty rather than the literal string "nan".
+    """
+    real = [float(v) for v in values if _is_real_number(v)]
+    if not real:
+        return None, 0
+    return round(sum(real) / len(real), 4), len(real)
+
+
 def _write_summary(records: List[EvalRecord], path: Path) -> None:
     metric_cols = (
         "ragas_faithfulness",
@@ -308,12 +337,14 @@ def _write_summary(records: List[EvalRecord], path: Path) -> None:
         "ragas_context_precision",
         "ragas_context_recall",
     )
-    summary: Dict[str, float] = {}
+    n_total = len(records)
+    summary: Dict[str, object] = {}
     for c in metric_cols:
-        vals = [getattr(r, c) for r in records if isinstance(getattr(r, c), (int, float))]
-        summary[c + "_mean"] = round(sum(vals) / len(vals), 4) if vals else float("nan")
-        summary[c + "_n"] = len(vals)
+        mean, n_valid = _safe_mean(getattr(r, c) for r in records)
+        summary[c + "_mean"]    = mean
+        summary[c + "_n_valid"] = n_valid
+        summary[c + "_n_total"] = n_total
     summary["runtime_total_s"] = round(sum(r.runtime_s for r in records), 1)
-    summary["questions"] = len(records)
+    summary["questions"] = n_total
     summary["errors"] = sum(1 for r in records if r.error)
     pd.DataFrame([summary]).to_csv(path, index=False)
