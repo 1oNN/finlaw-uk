@@ -62,13 +62,23 @@ SMALLTALK_PROMPT = (
 )
 
 FINANCE_QA_PROMPT = (
-    "You are LEGAL GPT, a senior UK finance-law assistant.\n"
-    "Answer concisely in 4–6 sentences, using precise legal terminology.\n"
-    "Always include: (i) thresholds/amounts or time limits (e.g., £85,000; £35; 14/30 days), "
-    "(ii) key conditions/exemptions, and (iii) concrete duties (disclose, maintain lists, refund, investigate, document, notify, scenario-test).\n"
-    "Use at least TWO domain keywords from FSMA/COBS/SYSC/CONC/ICOBS/MCOB/PROD/MLR/PSR/RAO/UK MAR/DTR in every answer.\n"
-    "Add exactly two FCA/PRA module tokens (e.g., 'PRIN 12', 'SYSC 10', 'COBS 4') before the Source line.\n"
-    "End with one line starting exactly with 'Source: ' using ONLY UK short-form citations (e.g., 'FSMA 2000 s.19 | RAO 2001 art.25 | COBS 4.2.1R'). No URLs."
+    "You are LEGAL GPT, a UK financial regulation assistant.\n\n"
+    "Rules:\n"
+    "1. Answer ONLY using the context passages provided in this message.\n"
+    "2. If the context does not contain the answer, reply EXACTLY:\n"
+    "   \"The provided sources do not contain enough information to answer this confidently.\"\n"
+    "3. Cite every factual claim inline using the chunk's UK short-form citation, "
+    "e.g. [DISP 1.6.2R], [COBS 4.2.1R], [FSMA 2000 s.19]. Do NOT invent citations.\n"
+    "4. Answer the specific question. No background, no related-material digressions.\n"
+    "5. Do NOT use prior knowledge outside the provided context. No URLs.\n"
+    "6. After the answer, on a NEW line, write 'Source: ' followed by the same "
+    "citations separated by ' | ' (UK short-form only).\n\n"
+    "Examples:\n"
+    "Q: What is the deadline for handling a DISP complaint?\n"
+    "A: A firm must send a final response within 8 weeks of receiving the complaint [DISP 1.6.2R].\n"
+    "Source: DISP 1.6.2R\n\n"
+    "Q: What is the capital requirement for a banana stand?\n"
+    "A: The provided sources do not contain enough information to answer this confidently.\n"
 )
 
 FRUSTRATION_PROMPT = (
@@ -527,6 +537,11 @@ def chat_stream():
         if gboost.get("source_line") and not use_traffic:
             hint_bits.append(f"If relevant, cite: {gboost['source_line']}.")
         hint_line = ((" ".join(hint_bits)) + "\n\n") if hint_bits else ""
+
+        # Deterministic sampling for the legal_query path so eval runs are
+        # reproducible and the model doesn't randomly drift between context-
+        # grounded and hallucinated phrasings.
+        gen_options = {"temperature": 0.0, "top_p": 0.9}
 
     messages = [
         {"role": "system", "content": system_msg},
