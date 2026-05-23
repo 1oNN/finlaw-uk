@@ -1,0 +1,11 @@
+id,domain,complexity,question,gold_answer,expected_citations,expected_keywords
+Q1,FSMA,basic,What is the ‘general prohibition’ in UK financial services?,The FSMA 2000 ‘general prohibition’ makes it an offence to carry on a regulated activity in the UK unless authorised or exempt.,FSMA 2000 s.19 | RAO 2001 art.5,general prohibition|regulated activity|authorised|exempt
+Q2,COMP,basic,What is the FSCS deposit protection limit per individual?,"£85,000 per person per firm for eligible deposits.",COMP 10.2,"FSCS|£85,000|deposit protection"
+Q3,COBS,basic,What standard applies to financial promotions in the UK?,"Financial promotions must be fair, clear and not misleading.",COBS 4.2.1R,financial promotion|fair|clear|misleading
+Q4,ICOBS,basic,How many days does a consumer have to cancel a general insurance policy?,Consumers have 14 days to cancel most non-investment insurance contracts.,ICOBS 7,cancellation|cooling off|14 days|insurance
+Q5,PSR,basic,What is the maximum liability for an unauthorised payment transaction?,The payer’s liability is limited to £35 unless the payer acted fraudulently or with gross negligence.,PSR 2017 reg.77,unauthorised|payment|£35|liability
+Q6,MLR,basic,What is CDD under the Money Laundering Regulations 2017?,Customer due diligence requires firms to identify and verify customers and obtain information on purpose of business.,MLR 2017 reg.27,CDD|customer due diligence|verify|identify
+Q7,RAO,basic,Give one example of a regulated activity under RAO 2001.,Advising on investments is a regulated activity.,RAO 2001 art.53,regulated activity|advising|investments
+Q8,UK MAR,basic,What must issuers maintain regarding inside information?,Issuers must maintain and update insider lists and provide them to the FCA on request.,UK MAR art.18 | DTR 2,insider list|issuer|FCA
+Q9,PRIN,basic,Which FCA principle introduces the Consumer Duty?,"The Consumer Duty is Principle 12, requiring firms to act to deliver good outcomes for retail customers.",PRIN 12,Consumer Duty|good outcomes|Principle 12
+Q10,DISP,basic,How long do firms have to issue a final response to a complaint?,Firms must issue a final response within 8 weeks or a holding response with FOS rights.,DISP 1.6,complaint|final response|8 weeks|ombudsman
