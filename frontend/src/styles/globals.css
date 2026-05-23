@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Smooth scrollbars */
+*::-webkit-scrollbar { width: 10px; height: 10px }
+*::-webkit-scrollbar-thumb { background: #5f6786; border-radius: 8px }
+*::-webkit-scrollbar-track { background: #2f3240 }
+
+html, body, #root { height: 100% }
+body { @apply bg-bg text-text }

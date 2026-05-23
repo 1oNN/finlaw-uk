@@ -1,0 +1,2023 @@
+
+<!DOCTYPE html>
+<!--[if IE 9]><html lang="en" class="ie9 no-js"><![endif]-->
+<!--[if !IE]><!-->
+<html lang="en" class="no-js menu-closed">
+<!--<![endif]-->
+<head>
+	<!-- f6pz5 -->
+	
+	<link rel="preload" as="style" href="/styles/boe.vendor.min.css?ver=5287d" />
+<link rel="preload" as="style" href="/styles/BoE.min.css?ver=5287d" />
+<link rel="preload" as="style" href="/-/media/css/cludosearchmin.css?ver=212A61" />
+
+	
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+	
+<title>Solvency II | Bank of England</title>
+<meta name="description" content="Solvency II sets out regulatory requirements for insurance firms and groups, covering financial resources, governance and accountability, risk assessment and management, supervision, reporting and public disclosure"/>
+<meta name="apple-mobile-web-app-title" content="Bank of England" />
+<meta name="format-detection" content="telephone=no" />
+<link rel="canonical" href="https://www.bankofengland.co.uk/prudential-regulation/key-initiatives/solvency-ii" />
+<meta property="og:title" content="Solvency II">
+<meta property="og:description" content="Solvency II sets out regulatory requirements for insurance firms and groups, covering financial resources, governance and accountability, risk assessment and management, supervision, reporting and public disclosure.">
+<meta property="og:image" content="https://www.bankofengland.co.uk/-/media/boe/images/logo/boe-default ">
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://www.bankofengland.co.uk/prudential-regulation/key-initiatives/solvency-ii" />
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Solvency II">
+<meta name="twitter:description" content="Solvency II sets out regulatory requirements for insurance firms and groups, covering financial resources, governance and accountability, risk assessment and management, supervision, reporting and public disclosure.">
+<meta name="twitter:image" content="https://www.bankofengland.co.uk/-/media/boe/images/logo/boe-default ">
+
+	<script>
+// akam-sw.js install script version 1.3.6
+"serviceWorker"in navigator&&"find"in[]&&function(){var e=new Promise(function(e){"complete"===document.readyState||!1?e():(window.addEventListener("load",function(){e()}),setTimeout(function(){"complete"!==document.readyState&&e()},1e4))}),n=window.akamServiceWorkerInvoked,r="1.3.6";if(n)aka3pmLog("akam-setup already invoked");else{window.akamServiceWorkerInvoked=!0,window.aka3pmLog=function(){window.akamServiceWorkerDebug&&console.log.apply(console,arguments)};function o(e){(window.BOOMR_mq=window.BOOMR_mq||[]).push(["addVar",{"sm.sw.s":e,"sm.sw.v":r}])}var i="/akam-sw.js",a=new Map;navigator.serviceWorker.addEventListener("message",function(e){var n,r,o=e.data;if(o.isAka3pm)if(o.command){var i=(n=o.command,(r=a.get(n))&&r.length>0?r.shift():null);i&&i(e.data.response)}else if(o.commandToClient)switch(o.commandToClient){case"enableDebug":window.akamServiceWorkerDebug||(window.akamServiceWorkerDebug=!0,aka3pmLog("Setup script debug enabled via service worker message"),v());break;case"boomerangMQ":o.payload&&(window.BOOMR_mq=window.BOOMR_mq||[]).push(o.payload)}aka3pmLog("akam-sw message: "+JSON.stringify(e.data))});var t=function(e){return new Promise(function(n){var r,o;r=e.command,o=n,a.has(r)||a.set(r,[]),a.get(r).push(o),navigator.serviceWorker.controller&&(e.isAka3pm=!0,navigator.serviceWorker.controller.postMessage(e))})},c=function(e){return t({command:"navTiming",navTiming:e})},s=null,m={},d=function(){var e=i;return s&&(e+="?othersw="+encodeURIComponent(s)),function(e,n){return new Promise(function(r,i){aka3pmLog("Registering service worker with URL: "+e),navigator.serviceWorker.register(e,n).then(function(e){aka3pmLog("ServiceWorker registration successful with scope: ",e.scope),r(e),o(1)}).catch(function(e){aka3pmLog("ServiceWorker registration failed: ",e),o(0),i(e)})})}(e,m)},g=navigator.serviceWorker.__proto__.register;if(navigator.serviceWorker.__proto__.register=function(n,r){return n.includes(i)?g.call(this,n,r):(aka3pmLog("Overriding registration of service worker for: "+n),s=new URL(n,window.location.href),m=r,navigator.serviceWorker.controller?new Promise(function(n,r){var o=navigator.serviceWorker.controller.scriptURL;if(o.includes(i)){var a=encodeURIComponent(s);o.includes(a)?(aka3pmLog("Cancelling registration as we already integrate other SW: "+s),navigator.serviceWorker.getRegistration().then(function(e){n(e)})):e.then(function(){aka3pmLog("Unregistering existing 3pm service worker"),navigator.serviceWorker.getRegistration().then(function(e){e.unregister().then(function(){return d()}).then(function(e){n(e)}).catch(function(e){r(e)})})})}else aka3pmLog("Cancelling registration as we already have akam-sw.js installed"),navigator.serviceWorker.getRegistration().then(function(e){n(e)})}):g.call(this,n,r))},navigator.serviceWorker.controller){var u=navigator.serviceWorker.controller.scriptURL;u.includes("/akam-sw.js")||u.includes("/akam-sw-preprod.js")||u.includes("/threepm-sw.js")||(aka3pmLog("Detected existing service worker. Removing and re-adding inside akam-sw.js"),s=new URL(u,window.location.href),e.then(function(){navigator.serviceWorker.getRegistration().then(function(e){m={scope:e.scope},e.unregister(),d()})}))}else e.then(function(){window.akamServiceWorkerPreprod&&(i="/akam-sw-preprod.js"),d()});if(window.performance){var w=window.performance.timing,l=w.responseEnd-w.responseStart;c(l)}e.then(function(){t({command:"pageLoad"})});var k=!1;function v(){window.akamServiceWorkerDebug&&!k&&(k=!0,aka3pmLog("Initializing debug functions at window scope"),window.aka3pmInjectSwPolicy=function(e){return t({command:"updatePolicy",policy:e})},window.aka3pmDisableInjectedPolicy=function(){return t({command:"disableInjectedPolicy"})},window.aka3pmDeleteInjectedPolicy=function(){return t({command:"deleteInjectedPolicy"})},window.aka3pmGetStateAsync=function(){return t({command:"getState"})},window.aka3pmDumpState=function(){aka3pmGetStateAsync().then(function(e){aka3pmLog(JSON.stringify(e,null,"\t"))})},window.aka3pmInjectTiming=function(e){return c(e)},window.aka3pmUpdatePolicyFromNetwork=function(){return t({command:"pullPolicyFromNetwork"})})}v()}}();</script>
+<script>
+	var CheckCookies = {
+		getCookie: function (cname) {
+			var name = cname + "=";
+			var decodedCookie = decodeURIComponent(document.cookie);
+			var ca = decodedCookie.split(';');
+			for (var i = 0; i < ca.length; i++) {
+				var c = ca[i];
+				while (c.charAt(0) === ' ') {
+					c = c.substring(1);
+				}
+				if (c.indexOf(name) === 0) {
+					return c.substring(name.length, c.length);
+				}
+			}
+			return "";
+		}
+	};
+	var SetAnalytics = {
+		setTagManager: function () {
+			var hasConsentAnalytics = CheckCookies.getCookie('boeconsent');
+			if (hasConsentAnalytics === "analytics") {
+				(function (w, d, s, l, i) {
+					w[l] = w[l] || []; w[l].push({
+						'gtm.start':
+							new Date().getTime(), event: 'gtm.js'
+					}); var f = d.getElementsByTagName(s)[0],
+						j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+							'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+				})(window, document, 'script', 'dataLayer', 'GTM-5H35J9');
+			}
+		},
+	}
+	SetAnalytics.setTagManager();
+	</script>
+
+	<script>
+		var el = document.getElementsByTagName('html')[0];
+		if (el.classList) {
+			el.classList.remove('no-js');
+		} else {
+			el.className = el.className.replace('no-js', '');
+		}
+	</script>
+
+	
+	<link href="/styles/boe.vendor.min.css?ver=5287d" rel="stylesheet" media="screen,print" />
+<link href="/styles/BoE.min.css?ver=5287d" rel="stylesheet" media="screen,print" />
+<link href="/-/media/css/cludosearchmin.css?ver=212A61" rel="stylesheet" media="screen" />
+
+	
+		<!-- Tracking Disabled -->
+	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?ver=5287d">
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?ver=5287d">
+	<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png?ver=5287d">
+	<link rel="icon" type="image/png" sizes="180x180" href="/favicon-180x180.png?ver=5287d">
+	<link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png?ver=5287d">
+	<link rel="icon" type="image/png" sizes="512x512" href="/favicon-512x512.png?ver=5287d">
+
+	<link rel="icon" href="/favicon.ico?ver=5287d" sizes="any">
+	<link rel="icon" href="/favicon.svg?ver=5287d" type="image/svg+xml">
+	<link rel="apple-touch-icon" href="/apple-touch-icon.png?ver=5287d">
+
+
+<script>(window.BOOMR_mq=window.BOOMR_mq||[]).push(["addVar",{"rua.upush":"false","rua.cpush":"false","rua.upre":"false","rua.cpre":"false","rua.uprl":"false","rua.cprl":"false","rua.cprf":"false","rua.trans":"","rua.cook":"false","rua.ims":"false","rua.ufprl":"false","rua.cfprl":"false","rua.isuxp":"false","rua.texp":"norulematch","rua.ceh":"false","rua.ueh":"false","rua.ieh.st":"0"}]);</script>
+                              <script>!function(a){var e="https://s.go-mpulse.net/boomerang/",t="addEventListener";if("False"=="True")a.BOOMR_config=a.BOOMR_config||{},a.BOOMR_config.PageParams=a.BOOMR_config.PageParams||{},a.BOOMR_config.PageParams.pci=!0,e="https://s2.go-mpulse.net/boomerang/";if(window.BOOMR_API_key="9R3WH-S6EDC-8JGQW-55286-CGTTF",function(){function n(e){a.BOOMR_onload=e&&e.timeStamp||(new Date).getTime()}if(!a.BOOMR||!a.BOOMR.version&&!a.BOOMR.snippetExecuted){a.BOOMR=a.BOOMR||{},a.BOOMR.snippetExecuted=!0;var i,_,o,r=document.createElement("iframe");if(a[t])a[t]("load",n,!1);else if(a.attachEvent)a.attachEvent("onload",n);r.src="javascript:void(0)",r.title="",r.role="presentation",(r.frameElement||r).style.cssText="width:0;height:0;border:0;display:none;",o=document.getElementsByTagName("script")[0],o.parentNode.insertBefore(r,o);try{_=r.contentWindow.document}catch(O){i=document.domain,r.src="javascript:var d=document.open();d.domain='"+i+"';void(0);",_=r.contentWindow.document}_.open()._l=function(){var a=this.createElement("script");if(i)this.domain=i;a.id="boomr-if-as",a.src=e+"9R3WH-S6EDC-8JGQW-55286-CGTTF",BOOMR_lstart=(new Date).getTime(),this.body.appendChild(a)},_.write("<bo"+'dy onload="document._l();">'),_.close()}}(),"".length>0)if(a&&"performance"in a&&a.performance&&"function"==typeof a.performance.setResourceTimingBufferSize)a.performance.setResourceTimingBufferSize();!function(){if(BOOMR=a.BOOMR||{},BOOMR.plugins=BOOMR.plugins||{},!BOOMR.plugins.AK){var e=""=="true"?1:0,t="",n="xqol64fykuyzs2cyqaua-f-53704e517-clientnsv4-s.akamaihd.net",i="false"=="true"?2:1,_={"ak.v":"39","ak.cp":"445139","ak.ai":parseInt("286733",10),"ak.ol":"0","ak.cr":13,"ak.ipv":4,"ak.proto":"http/1.1","ak.rid":"21cd9c8e","ak.r":45814,"ak.a2":e,"ak.m":"a","ak.n":"essl","ak.bpcip":"188.28.191.0","ak.cport":21642,"ak.gh":"2.18.62.154","ak.quicv":"","ak.tlsv":"tls1.3","ak.0rtt":"","ak.0rtt.ed":"","ak.csrc":"-","ak.acc":"bbr","ak.t":"1750630440","ak.ak":"hOBiQwZUYzCg5VSAfCLimQ==fSIujKAhDPUrW++YYtlXU6+4dxhOtjkHfgpXn1fgrsPHzqIDPDa5KjE6Gkbo2QFhdRoDWEQGCM8cSj+eg1mevlj/6nyngdNoPNIFdJN8ZnqScwRGpmtlyUiygzc35J7RHiLrunm6+F619W9ftBIW/VGAzNJBY9beXnh0XfSiqJCnACZ7ZKghx/lM9pVB3NkDgq7Q1EUWaXYzlWdSwDCeM7SzkleookNsPSzO/bCVc8EkXoZVbi/C5IEC7XcXYCzUWvWi5PP/62BbCF3fTmbXV2CnBq4aNiugk13g/f3ffgGF6QawVuIdHKjmdvKvTeH2v6s7TJ0m385xIEbC9Z/nUz4IECWD22Jzq/WvFOp3C7UrhQ+M4kt5CY4okxl9b+pcKawG3wwdUhHjy0OqpgWQVPQara+gOG7kwc2qSzpTk80=","ak.pv":"320","ak.dpoabenc":"","ak.tf":i};if(""!==t)_["ak.ruds"]=t;var o={i:!1,av:function(e){var t="http.initiator";if(e&&(!e[t]||"spa_hard"===e[t]))_["ak.feo"]=void 0!==a.aFeoApplied?1:0,BOOMR.addVar(_)},rv:function(){var a=["ak.bpcip","ak.cport","ak.cr","ak.csrc","ak.gh","ak.ipv","ak.m","ak.n","ak.ol","ak.proto","ak.quicv","ak.tlsv","ak.0rtt","ak.0rtt.ed","ak.r","ak.acc","ak.t","ak.tf"];BOOMR.removeVar(a)}};BOOMR.plugins.AK={akVars:_,akDNSPreFetchDomain:n,init:function(){if(!o.i){var a=BOOMR.subscribe;a("before_beacon",o.av,null,null),a("onbeacon",o.rv,null,null),o.i=!0}return this},is_complete:function(){return!0}}}}()}(window);</script></head>
+<body >
+		<div class="wrap" itemscope="" itemtype="http://schema.org/WebPage">
+
+
+<div class="cookie-notice">
+	<div class="cookie-notice__panel">
+		<div class="cookie-content content-block">
+			<h2 class="cookie-title exclude-navigation">Our use of cookies</h2>
+
+			<p>We use necessary cookies to make our site work (for example, to manage your session). We&rsquo;d also like to use some non-essential cookies (including third-party cookies) to help us improve the site. By clicking &lsquo;Accept recommended settings&rsquo; on this banner, you accept our use of optional cookies.</p>
+
+
+			<table class="cookie-notice__table">
+				<tr>
+						<th>Necessary cookies</th>
+											<th>Analytics cookies</th>
+											<td class="table-header">&nbsp;</td>
+				</tr>
+				<tr>
+					<td>Yes</td>
+					<td>Yes</td>
+					<td>
+						<button class="cookie__button btn btn-default" data-cookie="analytics">Accept recommended cookies</button>
+					</td>
+				</tr>
+				<tr>
+					<td>Yes</td>
+					<td>No</td>
+					<td><button class="cookie__button btn btn-default btn-neutral" data-cookie="necessary">Proceed with necessary cookies only</button></td>
+				</tr>
+			</table>
+
+				<h3>Necessary cookies</h3>
+				<p>Necessary cookies enable core functionality on our website such as security, network management, and accessibility. You may disable these by changing your browser settings, but this may affect how the website functions. </p>
+							<h3>Analytics cookies</h3>
+				<p>We use analytics cookies so we can keep track of the number of visitors to various parts of the site and understand how our website is used. For more information on how these cookies work please see our <a href="/legal/privacy-and-cookie-policy">Cookie policy</a>.</p>
+		</div>
+	</div>
+</div>		<div class="nav-bypass">
+			<a href="#main-content" class="nav-bypass__link">Skip to main content</a>
+		</div>
+		
+<header class="global-header" itemscope="" itemtype="http://schema.org/WPHeader">
+    <div class="container">
+        <div class="col12">
+            <div class="header-brand" itemscope="" itemtype="http://schema.org/Organisation">
+                
+
+	<a class="header-logo " itemscope itemtype="http://schema.org/Brand" href="/">
+		<img src="/-/media/boe/images/logo/logo-boe.svg?iar=0&amp;mh=61&amp;hash=2C88D4FFDD47844D6BD2541F5A92D70F" alt="Bank of England home" />
+
+	</a>
+
+            </div>
+
+            <div class="header-nav " id="menu">
+                <nav class="container-nav-primary" id="container-nav-primary" role="navigation" aria-label="Main navigation" itemscope="" itemtype="http://schema.org/SiteNavigationElement" data-nav-primary>
+                    <button class="nav-primary__button" aria-controls="main-menu" data-nav-toggle>
+                        <span class="icon-menu"><span class="visually-hidden">Main menu</span></span>
+                        <span class="icon-cross"><span class="visually-hidden">Close main menu</span></span>
+                    </button>
+                    <ul class="nav-primary" id="main-menu">
+                        
+                        
+
+<li class="nav-primary__list-item nav-primary__list-item--has-children" data-nav-has-children>
+    <span class="nav-primary__link">
+        Topics
+    </span>
+    <button class="nav-primary__dropdown-toggle">
+		<span class="visually-hidden">
+			Open Topics sub menu
+		</span>
+	</button>
+    <ul class="nav-primary__sublist">
+        <li class="nav-primary__sublist-item nav-primary__sublist-item--back">
+            <a href="#" class="nav-primary__sublist-link" data-nav-back>
+                Back <span class="visually-hidden">to main menu</span>
+            </a>
+        </li>
+            <li class="nav-primary__sublist-item  nav-primary__sublist-item--has-children" data-nav-has-children>
+                    <a href="/banknotes" class="nav-primary__sublist-link">
+                        Banknotes
+                    </a>
+                                    <button class="nav-primary__dropdown-toggle">
+                        <span class="visually-hidden">Open Banknotes sub menu</span>
+                    </button>
+                    <ul class="nav-primary__sublist">
+                        <li class="nav-primary__sublist-item nav-primary__sublist-item--back">
+                            <a href="#" class="nav-primary__sublist-link" data-nav-back>
+                                Back <span class="visually-hidden">to main menu</span>
+                            </a>
+                        </li>
+                            <li class="nav-primary__sublist-item">
+                                <a href="/banknotes/banknote-characters" class="nav-primary__sublist-link">
+                                    Choosing banknote characters 
+                                </a>
+                            </li>
+                            <li class="nav-primary__sublist-item">
+                                <a href="/banknotes/counterfeit-banknotes" class="nav-primary__sublist-link">
+                                    Counterfeit banknotes 
+                                </a>
+                            </li>
+                            <li class="nav-primary__sublist-item">
+                                <a href="/banknotes/current-banknotes" class="nav-primary__sublist-link">
+                                    Current banknotes 
+                                </a>
+                            </li>
+                            <li class="nav-primary__sublist-item">
+                                <a href="/banknotes/damaged-and-contaminated-banknotes" class="nav-primary__sublist-link">
+                                    Damaged and contaminated banknotes 
+                                </a>
+                            </li>
+                            <li class="nav-primary__sublist-item">
+                                <a href="/banknotes/exchanging-old-banknotes" class="nav-primary__sublist-link">
+                                    Exchanging old banknotes 
+                                </a>
+                            </li>
+                            <li class="nav-primary__sublist-item">
+                                <a href="/banknotes/note-circulation-scheme" class="nav-primary__sublist-link">
+                                    Note Circulation Scheme 
+                                </a>
+                            </li>
+                            <li class="nav-primary__sublist-item">
+                                <a href="/banknotes/retailers-and-businesses" class="nav-primary__sublist-link">
+                                    Advice for retailers and businesses 
+                                </a>
+                            </li>
+                            <li class="nav-primary__sublist-item">
+                                <a href="/banknotes/scottish-and-northern-ireland-banknotes" class="nav-primary__sublist-link">
+                                    Scottish and Northern Ireland banknotes 
+                                </a>
+                            </li>
+                            <li class="nav-primary__sublist-item">
+                                <a href="/banknotes/using-images-of-banknotes" class="nav-primary__sublist-link">
+                                    Using images of banknotes 
+                                </a>
+                            </li>
+                            <li class="nav-primary__sublist-item">
+                                <a href="/banknotes/wholesale-cash-supervision" class="nav-primary__sublist-link">
+                                    Wholesale cash supervision 
+                                </a>
+                            </li>
+                            <li class="nav-primary__sublist-item">
+                                <a href="/banknotes/withdrawn-banknotes" class="nav-primary__sublist-link">
+                                    Withdrawn banknotes 
+                                </a>
+                            </li>
+					</ul>
+            </li>
+            <li class="nav-primary__sublist-item  nav-primary__sublist-item--has-children" data-nav-has-children>
+                    <a href="/careers" class="nav-primary__sublist-link">
+                        Careers
+                    </a>
+                                    <button class="nav-primary__dropdown-toggle">
+                        <span class="visually-hidden">Open Careers sub menu</span>
+                    </button>
+                    <ul class="nav-primary__sublist">
+                        <li class="nav-primary__sublist-item nav-primary__sublist-item--back">
+                            <a href="#" class="nav-primary__sublist-link" data-nav-back>
+                                Back <span class="visually-hidden">to main menu</span>
+                            </a>
+                        </li>
+                            <li class="nav-primary__sublist-item">
+                                <a href="/careers/application-tips" class="nav-primary__sublist-link">
+                                    Application tips 
+                                </a>
+                            </li>
+                            <li class="nav-primary__sublist-item">
+                                <a href="/careers/career-returner" class="nav-primary__sublist-link">
+                                    Career Returner Programme 
+                                </a>
+                            </li>
+                            <li class="nav-primary__sublist-item">
+                                <a href="/careers/early-careers" class="nav-primary__sublist-link">
+                                    Future talent 
+                                </a>
+                            </li>
+                            <li class="nav-primary__sublist-item">
+                                <a href="/careers/our-locations" class="nav-primary__sublist-link">
+                                    Our locations 
+                                </a>
+                            </li>
+                            <li class="nav-primary__sublist-item">
+                                <a href="/careers/research-careers" class="nav-primary__sublist-link">
+                                    Research careers 
+                                </a>
+                            </li>
+                            <li class="nav-primary__sublist-item">
+                                <a href="/careers/we-value-diversity-and-inclusion" class="nav-primary__sublist-link">
+                                    We value diversity and inclusion 
+                                </a>
+                            </li>
+                            <li class="nav-primary__sublist-item">
+                                <a href="/careers/what-we-offer-you" class="nav-primary__sublist-link">
+                                    What we offer you 
+                                </a>
+                            </li>
+                            <li class="nav-primary__sublist-item">
+                                <a href="/careers/why-you-should-join-us" class="nav-primary__sublist-link">
+                                    Why you should join us 
+                                </a>
+                            </li>
+					</ul>
+            </li>
+            <li class="nav-primary__sublist-item" >
+                    <a href="/climate-change" class="nav-primary__sublist-link">
+                        Climate change
+                    </a>
+                            </li>
+            <li class="nav-primary__sublist-item" >
+                    <a href="/the-digital-pound" class="nav-primary__sublist-link">
+                        Digital pound
+                    </a>
+                            </li>
+            <li class="nav-primary__sublist-item  nav-primary__sublist-item--has-children" data-nav-has-children>
+                    <a href="/education" class="nav-primary__sublist-link">
+                        Education
+                    </a>
+                                    <button class="nav-primary__dropdown-toggle">
+                        <span class="visually-hidden">Open Education sub menu</span>
+                    </button>
+                    <ul class="nav-primary__sublist">
+                        <li class="nav-primary__sublist-item nav-primary__sublist-item--back">
+                            <a href="#" class="nav-primary__sublist-link" data-nav-back>
+                                Back <span class="visually-hidden">to main menu</span>
+                            </a>
+                        </li>
+                            <li class="nav-primary__sublist-item">
+                                <a href="/education/competitions" class="nav-primary__sublist-link">
+                                    Competitions 
+                                </a>
+                            </li>
+                            <li class="nav-primary__sublist-item">
+                                <a href="/education/education-resources" class="nav-primary__sublist-link">
+                                    Education resources 
+                                </a>
+                            </li>
+                            <li class="nav-primary__sublist-item">
+                                <a href="/education/research-support-programme" class="nav-primary__sublist-link">
+                                    Research support programme 
+                                </a>
+                            </li>
+                            <li class="nav-primary__sublist-item">
+                                <a href="/education/school-visits" class="nav-primary__sublist-link">
+                                    Request a speaker for your school 
+                                </a>
+                            </li>
+					</ul>
+            </li>
+            <li class="nav-primary__sublist-item  nav-primary__sublist-item--has-children" data-nav-has-children>
+                    <a href="/financial-stability" class="nav-primary__sublist-link">
+                        Financial stability
+                    </a>
+                                    <button class="nav-primary__dropdown-toggle">
+                        <span class="visually-hidden">Open Financial stability sub menu</span>
+                    </button>
+                    <ul class="nav-primary__sublist">
+                        <li class="nav-primary__sublist-item nav-primary__sublist-item--back">
+                            <a href="#" class="nav-primary__sublist-link" data-nav-back>
+                                Back <span class="visually-hidden">to main menu</span>
+                            </a>
+                        </li>
+                            <li class="nav-primary__sublist-item">
+                                <a href="/financial-stability/digital-securities-sandbox" class="nav-primary__sublist-link">
+                                    Digital Securities Sandbox (DSS) 
+                                </a>
+                            </li>
+                            <li class="nav-primary__sublist-item">
+                                <a href="/financial-stability/financial-market-infrastructure-supervision" class="nav-primary__sublist-link">
+                                    Financial market infrastructure supervision 
+                                </a>
+                            </li>
+                            <li class="nav-primary__sublist-item">
+                                <a href="/financial-stability/operational-resilience-of-the-financial-sector" class="nav-primary__sublist-link">
+                                    Operational resilience of the financial sector 
+                                </a>
+                            </li>
+                            <li class="nav-primary__sublist-item">
+                                <a href="/financial-stability/resolution" class="nav-primary__sublist-link">
+                                    Resolution 
+                                </a>
+                            </li>
+                            <li class="nav-primary__sublist-item">
+                                <a href="/financial-stability/trade-repository-data" class="nav-primary__sublist-link">
+                                    Trade Repository (TR) Data Collections 
+                                </a>
+                            </li>
+					</ul>
+            </li>
+            <li class="nav-primary__sublist-item" >
+                    <a href="/gold" class="nav-primary__sublist-link">
+                        Gold
+                    </a>
+                            </li>
+            <li class="nav-primary__sublist-item  nav-primary__sublist-item--has-children" data-nav-has-children>
+                    <a href="/markets" class="nav-primary__sublist-link">
+                        Markets
+                    </a>
+                                    <button class="nav-primary__dropdown-toggle">
+                        <span class="visually-hidden">Open Markets sub menu</span>
+                    </button>
+                    <ul class="nav-primary__sublist">
+                        <li class="nav-primary__sublist-item nav-primary__sublist-item--back">
+                            <a href="#" class="nav-primary__sublist-link" data-nav-back>
+                                Back <span class="visually-hidden">to main menu</span>
+                            </a>
+                        </li>
+                            <li class="nav-primary__sublist-item">
+                                <a href="/markets/bank-of-england-market-operations-guide" class="nav-primary__sublist-link">
+                                    Bank of England Market Operations Guide 
+                                </a>
+                            </li>
+                            <li class="nav-primary__sublist-item">
+                                <a href="/markets/eligible-collateral" class="nav-primary__sublist-link">
+                                    Eligible collateral 
+                                </a>
+                            </li>
+                            <li class="nav-primary__sublist-item">
+                                <a href="/markets/fair-and-effective-markets" class="nav-primary__sublist-link">
+                                    Fair and Effective Markets  
+                                </a>
+                            </li>
+                            <li class="nav-primary__sublist-item">
+                                <a href="/markets/foreign-currency-reserves" class="nav-primary__sublist-link">
+                                    Foreign currency reserves 
+                                </a>
+                            </li>
+                            <li class="nav-primary__sublist-item">
+                                <a href="/markets/greening-the-corporate-bond-purchase-scheme" class="nav-primary__sublist-link">
+                                    Greening our Corporate Bond Purchase Scheme (CBPS) 
+                                </a>
+                            </li>
+                            <li class="nav-primary__sublist-item">
+                                <a href="/markets/market-intelligence" class="nav-primary__sublist-link">
+                                    Market intelligence 
+                                </a>
+                            </li>
+                            <li class="nav-primary__sublist-item">
+                                <a href="/markets/money-markets-committee-and-uk-money-markets-code" class="nav-primary__sublist-link">
+                                    Money Markets Committee and UK Money Markets Code 
+                                </a>
+                            </li>
+                            <li class="nav-primary__sublist-item">
+                                <a href="/markets/collateral-and-settlement" class="nav-primary__sublist-link">
+                                    Settlement and collateral management 
+                                </a>
+                            </li>
+                            <li class="nav-primary__sublist-item">
+                                <a href="/markets/sonia-benchmark" class="nav-primary__sublist-link">
+                                    SONIA interest rate benchmark 
+                                </a>
+                            </li>
+                            <li class="nav-primary__sublist-item">
+                                <a href="/markets/the-sterling-bond-portfolio" class="nav-primary__sublist-link">
+                                    The Sterling Bond Portfolio 
+                                </a>
+                            </li>
+                            <li class="nav-primary__sublist-item">
+                                <a href="/markets/transition-to-sterling-risk-free-rates-from-libor" class="nav-primary__sublist-link">
+                                    Transition from LIBOR to risk-free rates 
+                                </a>
+                            </li>
+					</ul>
+            </li>
+            <li class="nav-primary__sublist-item  nav-primary__sublist-item--has-children" data-nav-has-children>
+                    <a href="/monetary-policy" class="nav-primary__sublist-link">
+                        Monetary policy
+                    </a>
+                                    <button class="nav-primary__dropdown-toggle">
+                        <span class="visually-hidden">Open Monetary policy sub menu</span>
+                    </button>
+                    <ul class="nav-primary__sublist">
+                        <li class="nav-primary__sublist-item nav-primary__sublist-item--back">
+                            <a href="#" class="nav-primary__sublist-link" data-nav-back>
+                                Back <span class="visually-hidden">to main menu</span>
+                            </a>
+                        </li>
+                            <li class="nav-primary__sublist-item">
+                                <a href="/monetary-policy/inflation" class="nav-primary__sublist-link">
+                                    Inflation and the 2% target 
+                                </a>
+                            </li>
+                            <li class="nav-primary__sublist-item">
+                                <a href="/monetary-policy/quantitative-easing" class="nav-primary__sublist-link">
+                                    Quantitative easing 
+                                </a>
+                            </li>
+                            <li class="nav-primary__sublist-item">
+                                <a href="/monetary-policy/the-interest-rate-bank-rate" class="nav-primary__sublist-link">
+                                    Interest rates and Bank Rate 
+                                </a>
+                            </li>
+					</ul>
+            </li>
+            <li class="nav-primary__sublist-item  nav-primary__sublist-item--has-children" data-nav-has-children>
+                    <a href="/payment-and-settlement" class="nav-primary__sublist-link">
+                        Payment and settlement
+                    </a>
+                                    <button class="nav-primary__dropdown-toggle">
+                        <span class="visually-hidden">Open Payment and settlement sub menu</span>
+                    </button>
+                    <ul class="nav-primary__sublist">
+                        <li class="nav-primary__sublist-item nav-primary__sublist-item--back">
+                            <a href="#" class="nav-primary__sublist-link" data-nav-back>
+                                Back <span class="visually-hidden">to main menu</span>
+                            </a>
+                        </li>
+                            <li class="nav-primary__sublist-item">
+                                <a href="/payment-and-settlement/banking-services" class="nav-primary__sublist-link">
+                                    Banking services 
+                                </a>
+                            </li>
+                            <li class="nav-primary__sublist-item">
+                                <a href="/payment-and-settlement/chaps" class="nav-primary__sublist-link">
+                                    CHAPS 
+                                </a>
+                            </li>
+                            <li class="nav-primary__sublist-item">
+                                <a href="/payment-and-settlement/cross-border-payments" class="nav-primary__sublist-link">
+                                    Cross-border payments 
+                                </a>
+                            </li>
+                            <li class="nav-primary__sublist-item">
+                                <a href="/payment-and-settlement/payment-and-settlement-statistics" class="nav-primary__sublist-link">
+                                    Payment and settlement statistics 
+                                </a>
+                            </li>
+                            <li class="nav-primary__sublist-item">
+                                <a href="/payment-and-settlement/rtgs-renewal-programme" class="nav-primary__sublist-link">
+                                    RTGS Renewal Programme 
+                                </a>
+                            </li>
+					</ul>
+            </li>
+            <li class="nav-primary__sublist-item  nav-primary__sublist-item--has-children" data-nav-has-children>
+                    <a href="/prudential-regulation" class="nav-primary__sublist-link">
+                        Prudential regulation
+                    </a>
+                                    <button class="nav-primary__dropdown-toggle">
+                        <span class="visually-hidden">Open Prudential regulation sub menu</span>
+                    </button>
+                    <ul class="nav-primary__sublist">
+                        <li class="nav-primary__sublist-item nav-primary__sublist-item--back">
+                            <a href="#" class="nav-primary__sublist-link" data-nav-back>
+                                Back <span class="visually-hidden">to main menu</span>
+                            </a>
+                        </li>
+                            <li class="nav-primary__sublist-item">
+                                <a href="/prudential-regulation/authorisations" class="nav-primary__sublist-link">
+                                    Authorisations 
+                                </a>
+                            </li>
+                            <li class="nav-primary__sublist-item">
+                                <a href="/prudential-regulation/new-bank-start-up-unit" class="nav-primary__sublist-link">
+                                    New Bank Start-up Unit 
+                                </a>
+                            </li>
+                            <li class="nav-primary__sublist-item">
+                                <a href="/prudential-regulation/new-insurer-start-up-unit" class="nav-primary__sublist-link">
+                                    New Insurer Start-up Unit 
+                                </a>
+                            </li>
+                            <li class="nav-primary__sublist-item">
+                                <a href="/prudential-regulation/policy" class="nav-primary__sublist-link">
+                                    Policy 
+                                </a>
+                            </li>
+                            <li class="nav-primary__sublist-item">
+                                <a href="/prudential-regulation/prudential-and-resolution-policy-index" class="nav-primary__sublist-link">
+                                    Prudential and Resolution Policy Index 
+                                </a>
+                            </li>
+                            <li class="nav-primary__sublist-item">
+                                <a href="/prudential-regulation/regulatory-reporting" class="nav-primary__sublist-link">
+                                    Regulatory reporting 
+                                </a>
+                            </li>
+                            <li class="nav-primary__sublist-item">
+                                <a href="/prudential-regulation/secondary-competition-objective" class="nav-primary__sublist-link">
+                                    Our secondary objectives 
+                                </a>
+                            </li>
+                            <li class="nav-primary__sublist-item">
+                                <a href="/prudential-regulation/supervision" class="nav-primary__sublist-link">
+                                    Supervision 
+                                </a>
+                            </li>
+                            <li class="nav-primary__sublist-item">
+                                <a href="/prudential-regulation/the-bank-of-england-enforcement" class="nav-primary__sublist-link">
+                                    The Bank of England’s approach to enforcement 
+                                </a>
+                            </li>
+					</ul>
+            </li>
+            <li class="nav-primary__sublist-item  nav-primary__sublist-item--has-children" data-nav-has-children>
+                    <a href="/research" class="nav-primary__sublist-link">
+                        Research
+                    </a>
+                                    <button class="nav-primary__dropdown-toggle">
+                        <span class="visually-hidden">Open Research sub menu</span>
+                    </button>
+                    <ul class="nav-primary__sublist">
+                        <li class="nav-primary__sublist-item nav-primary__sublist-item--back">
+                            <a href="#" class="nav-primary__sublist-link" data-nav-back>
+                                Back <span class="visually-hidden">to main menu</span>
+                            </a>
+                        </li>
+                            <li class="nav-primary__sublist-item">
+                                <a href="/research/bank-of-england-agenda-for-research" class="nav-primary__sublist-link">
+                                    Bank of England Agenda for Research, 2025-2028 
+                                </a>
+                            </li>
+                            <li class="nav-primary__sublist-item">
+                                <a href="/research/fintech" class="nav-primary__sublist-link">
+                                    Fintech 
+                                </a>
+                            </li>
+                            <li class="nav-primary__sublist-item">
+                                <a href="/research/future-finance" class="nav-primary__sublist-link">
+                                    The Future of Finance - our response 
+                                </a>
+                            </li>
+                            <li class="nav-primary__sublist-item">
+                                <a href="/research/visitor-programme" class="nav-primary__sublist-link">
+                                    Research Visitor Programme 
+                                </a>
+                            </li>
+                            <li class="nav-primary__sublist-item">
+                                <a href="/research/research-funding-and-fellowships" class="nav-primary__sublist-link">
+                                    Research funding and fellowships 
+                                </a>
+                            </li>
+                            <li class="nav-primary__sublist-item">
+                                <a href="/research/researchers" class="nav-primary__sublist-link">
+                                    Researchers 
+                                </a>
+                            </li>
+					</ul>
+            </li>
+            <li class="nav-primary__sublist-item  nav-primary__sublist-item--has-children" data-nav-has-children>
+                    <a href="/statistics" class="nav-primary__sublist-link">
+                        Statistics
+                    </a>
+                                    <button class="nav-primary__dropdown-toggle">
+                        <span class="visually-hidden">Open Statistics sub menu</span>
+                    </button>
+                    <ul class="nav-primary__sublist">
+                        <li class="nav-primary__sublist-item nav-primary__sublist-item--back">
+                            <a href="#" class="nav-primary__sublist-link" data-nav-back>
+                                Back <span class="visually-hidden">to main menu</span>
+                            </a>
+                        </li>
+                            <li class="nav-primary__sublist-item">
+                                <a href="/statistics/banknote" class="nav-primary__sublist-link">
+                                    Banknote statistics 
+                                </a>
+                            </li>
+                            <li class="nav-primary__sublist-item">
+                                <a href="/statistics/tables" class="nav-primary__sublist-link">
+                                    Bankstats tables 
+                                </a>
+                            </li>
+                            <li class="nav-primary__sublist-item">
+                                <a href="/statistics/data-collection" class="nav-primary__sublist-link">
+                                    Data collection 
+                                </a>
+                            </li>
+                            <li class="nav-primary__sublist-item">
+                                <a href="/statistics/exchange-rates" class="nav-primary__sublist-link">
+                                    Exchange rates 
+                                </a>
+                            </li>
+                            <li class="nav-primary__sublist-item">
+                                <a href="/statistics/gold" class="nav-primary__sublist-link">
+                                    Gold statistics 
+                                </a>
+                            </li>
+                            <li class="nav-primary__sublist-item">
+                                <a href="/statistics/gdp-real-time-database" class="nav-primary__sublist-link">
+                                    Gross Domestic Product Real-Time Database 
+                                </a>
+                            </li>
+                            <li class="nav-primary__sublist-item">
+                                <a href="/statistics/option-implied-probability-density-functions" class="nav-primary__sublist-link">
+                                    Option-implied probability density functions 
+                                </a>
+                            </li>
+                            <li class="nav-primary__sublist-item">
+                                <a href="/statistics/research-datasets" class="nav-primary__sublist-link">
+                                    Research datasets 
+                                </a>
+                            </li>
+                            <li class="nav-primary__sublist-item">
+                                <a href="/statistics/statistics-requested-by-users" class="nav-primary__sublist-link">
+                                    Statistics requested by users 
+                                </a>
+                            </li>
+                            <li class="nav-primary__sublist-item">
+                                <a href="/statistics/yield-curves" class="nav-primary__sublist-link">
+                                    Yield curves 
+                                </a>
+                            </li>
+					</ul>
+            </li>
+    </ul>
+</li>
+
+                        
+                                <li class="nav-primary__list-item nav-primary__list-item--has-children" data-nav-has-children>
+
+            <a href="/about" class="nav-primary__link" >
+                <span>About</span>
+            </a>
+				<button class="nav-primary__dropdown-toggle">
+					<span class="visually-hidden">Open About sub menu</span>
+			    </button>
+				<ul class="nav-primary__sublist">
+					<li class="nav-primary__sublist-item nav-primary__sublist-item--back">
+						<a href="#" class="nav-primary__sublist-link" data-nav-back>
+							Back <span class="visually-hidden">to main menu</span>
+						</a>
+					</li>
+                    <li class="nav-primary__sublist-item  nav-primary__sublist-item--has-children" data-nav-has-children >
+                        <a href="/about/get-involved" class="nav-primary__sublist-link" >
+                                Get involved
+                        </a>
+                            <button class="nav-primary__dropdown-toggle">
+                                <span class="visually-hidden">Open Get involved sub menu</span>
+                            </button>
+                            <ul class="nav-primary__sublist">
+                                <li class="nav-primary__sublist-item nav-primary__sublist-item--back">
+                                    <a href="#" class="nav-primary__sublist-link" data-nav-back>
+                                        Back <span class="visually-hidden">to main menu</span>
+                                    </a>
+                                </li>
+                                        <li class="nav-primary__sublist-item">
+                                            <a href="/about/get-involved/citizens-panels" class="nav-primary__sublist-link" >
+                                                Citizens’ Forum
+                                            </a>
+                                        </li>
+                                        <li class="nav-primary__sublist-item">
+                                            <a href="/about/get-involved/community-forums" class="nav-primary__sublist-link" >
+                                                Community Forums
+                                            </a>
+                                        </li>
+                                        <li class="nav-primary__sublist-item">
+                                            <a href="/about/get-involved/community-partners" class="nav-primary__sublist-link" >
+                                                Partners
+                                            </a>
+                                        </li>
+                                        <li class="nav-primary__sublist-item">
+                                            <a href="/about/get-involved/insight-forum" class="nav-primary__sublist-link" >
+                                                Insights Forum
+                                            </a>
+                                        </li>
+                                        <li class="nav-primary__sublist-item">
+                                            <a href="/about/get-involved/youth-forum" class="nav-primary__sublist-link" >
+                                                Youth voice
+                                            </a>
+                                        </li>
+                            </ul>
+                    </li>
+                    <li class="nav-primary__sublist-item  nav-primary__sublist-item--has-children" data-nav-has-children >
+                        <a href="/about/governance-and-funding" class="nav-primary__sublist-link" >
+                                Governance and funding
+                        </a>
+                            <button class="nav-primary__dropdown-toggle">
+                                <span class="visually-hidden">Open Governance and funding sub menu</span>
+                            </button>
+                            <ul class="nav-primary__sublist">
+                                <li class="nav-primary__sublist-item nav-primary__sublist-item--back">
+                                    <a href="#" class="nav-primary__sublist-link" data-nav-back>
+                                        Back <span class="visually-hidden">to main menu</span>
+                                    </a>
+                                </li>
+                                        <li class="nav-primary__sublist-item">
+                                            <a href="/about/governance-and-funding/staff-codes-and-policies" class="nav-primary__sublist-link" >
+                                                Staff codes and policies
+                                            </a>
+                                        </li>
+                            </ul>
+                    </li>
+                    <li class="nav-primary__sublist-item"  >
+                        <a href="/about/history" class="nav-primary__sublist-link" >
+                                History
+                        </a>
+                    </li>
+                    <li class="nav-primary__sublist-item  nav-primary__sublist-item--has-children" data-nav-has-children >
+                        <a href="/about/people" class="nav-primary__sublist-link" >
+                                Our people
+                        </a>
+                            <button class="nav-primary__dropdown-toggle">
+                                <span class="visually-hidden">Open Our people sub menu</span>
+                            </button>
+                            <ul class="nav-primary__sublist">
+                                <li class="nav-primary__sublist-item nav-primary__sublist-item--back">
+                                    <a href="#" class="nav-primary__sublist-link" data-nav-back>
+                                        Back <span class="visually-hidden">to main menu</span>
+                                    </a>
+                                </li>
+                                        <li class="nav-primary__sublist-item">
+                                            <a href="/about/people/agents" class="nav-primary__sublist-link" >
+                                                Agents
+                                            </a>
+                                        </li>
+                                        <li class="nav-primary__sublist-item">
+                                            <a href="/about/people/chief-cashiers" class="nav-primary__sublist-link" >
+                                                Chief Cashiers
+                                            </a>
+                                        </li>
+                                        <li class="nav-primary__sublist-item">
+                                            <a href="/about/people/court-of-directors" class="nav-primary__sublist-link" >
+                                                Court of Directors
+                                            </a>
+                                        </li>
+                                        <li class="nav-primary__sublist-item">
+                                            <a href="/about/people/executive-directors" class="nav-primary__sublist-link" >
+                                                Executive Directors
+                                            </a>
+                                        </li>
+                                        <li class="nav-primary__sublist-item">
+                                            <a href="/about/people/financial-policy-committee" class="nav-primary__sublist-link" >
+                                                Financial Policy Committee
+                                            </a>
+                                        </li>
+                                        <li class="nav-primary__sublist-item">
+                                            <a href="/about/people/fmi-committee" class="nav-primary__sublist-link" >
+                                                Financial Market Infrastructure Committee
+                                            </a>
+                                        </li>
+                                        <li class="nav-primary__sublist-item">
+                                            <a href="/about/people/governors" class="nav-primary__sublist-link" >
+                                                Governors
+                                            </a>
+                                        </li>
+                                        <li class="nav-primary__sublist-item">
+                                            <a href="/about/people/monetary-policy-committee" class="nav-primary__sublist-link" >
+                                                Monetary Policy Committee
+                                            </a>
+                                        </li>
+                                        <li class="nav-primary__sublist-item">
+                                            <a href="/about/people/prudential-regulation-committee" class="nav-primary__sublist-link" >
+                                                Prudential Regulation Committee
+                                            </a>
+                                        </li>
+                            </ul>
+                    </li>
+				</ul>
+		</li>
+        <li class="nav-primary__list-item nav-primary__list-item--has-children" data-nav-has-children>
+
+            <a href="/news" class="nav-primary__link" >
+                <span>News and publications</span>
+            </a>
+				<button class="nav-primary__dropdown-toggle">
+					<span class="visually-hidden">Open News and publications sub menu</span>
+			    </button>
+				<ul class="nav-primary__sublist">
+					<li class="nav-primary__sublist-item nav-primary__sublist-item--back">
+						<a href="#" class="nav-primary__sublist-link" data-nav-back>
+							Back <span class="visually-hidden">to main menu</span>
+						</a>
+					</li>
+                    <li class="nav-primary__sublist-item"  >
+                        <a href="/news/events" class="nav-primary__sublist-link" >
+                                Events
+                        </a>
+                    </li>
+                    <li class="nav-primary__sublist-item"  >
+                        <a href="/news/news" class="nav-primary__sublist-link" >
+                                News and minutes
+                        </a>
+                    </li>
+                    <li class="nav-primary__sublist-item"  >
+                        <a href="/news/prudential-regulation" class="nav-primary__sublist-link" >
+                                Prudential regulation publications
+                        </a>
+                    </li>
+                    <li class="nav-primary__sublist-item"  >
+                        <a href="/news/publications" class="nav-primary__sublist-link" >
+                                Publications
+                        </a>
+                    </li>
+                    <li class="nav-primary__sublist-item"  >
+                        <a href="/news/speeches" class="nav-primary__sublist-link" >
+                                Speeches
+                        </a>
+                    </li>
+                    <li class="nav-primary__sublist-item"  >
+                        <a href="/news/statistics" class="nav-primary__sublist-link" >
+                                Statistical releases
+                        </a>
+                    </li>
+                    <li class="nav-primary__sublist-item"  >
+                        <a href="/news/upcoming" class="nav-primary__sublist-link" >
+                                Upcoming
+                        </a>
+                    </li>
+				</ul>
+		</li>
+        <li class="nav-primary__list-item" >
+
+            <a href="/museum" class="nav-primary__link" >
+                <span>Museum</span>
+            </a>
+		</li>
+        <li class="nav-primary__list-item" >
+
+            <a href="/contact" class="nav-primary__link" >
+                <span>Contact</span>
+            </a>
+		</li>
+
+
+                        
+                            <li class="nav-primary__list-item">
+                                
+
+<script>
+	var cludo_engineId = 9479; 
+	var cludo_language = 'en'; 
+	var cludo_searchUrl = 'https://www.bankofengland.co.uk/search'; 
+</script>
+<div class="search-widget " >
+    <form class="" id="cludo-search-form" >
+        <div class="search-widget-fields">
+            <label for="clu-q" class="label-hidden">Search</label>
+            <input tabindex="0" onkeyup="removeErrorMessage(event)" type="search" name="q" id="clu-q" placeholder="Search the Bank of England" data-placeholder="Search the Bank of England" data-empty="Search the Bank of England" class="search-widget-field" value="" autocomplete="off">
+            <div tabindex="0" role="button" id="clearInput" aria-label="Clear all search text"></div>
+            <input tabindex="0" type="submit" class="search-widget-btn" id="searchBtn" value="submit search">
+        </div>
+    </form>
+
+    <input tabindex="0" type="submit" class="search-widget-btn search-widget-btn--overlay" id="searchBtn-nosearch" onclick="giveErrorIfEmpty()" value="submit search">
+
+    <div role="alert" class="search-widget-error" id="search-error"><p>Nothing searched for. Please enter a search term.</p></div>
+</div>
+                            </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+		<main class="main" id="main-content" role="main">
+			
+
+ 
+
+
+<section class="page-banner">
+    <div class="page-banner__head">
+        <div class="container">
+            <div class="col9">
+                <nav aria-label="Breadcrumb">
+
+	<ol class="list-breadcrumbs">
+		<li class="list-breadcrumbs__item">
+			<a href="/" class="list-breadcrumbs__link">
+				Home
+			</a>
+		</li>
+		<li class="list-breadcrumbs__item">
+			<a href="/prudential-regulation" class="list-breadcrumbs__link">
+				Prudential regulation
+			</a>
+		</li>
+
+		<li class="list-breadcrumbs__item list-breadcrumbs__item--active" aria-current="page">
+			Solvency II
+		</li>
+
+	</ol>
+</nav>
+
+
+				<h1 itemprop="name">Solvency II</h1>
+            </div>
+        </div>
+
+    </div>
+    <div class="page-banner__body">
+        <div class="container">
+                <div class="col9 m-3_4">
+
+                        <div class="page-description" itemprop="description">       
+                            <span class="hero">Solvency II sets out regulatory requirements for insurance firms and groups, covering financial resources, governance and accountability, risk assessment and management, supervision, reporting and public disclosure.</span>
+                        </div>
+                </div>
+                            <div class="col3 m-1_4">
+                    
+<div class="related-links-wrap">
+	<ul class="accordion" data-accordion-mobile>
+		<li>
+			<div class="accordion-head">
+				<h2 class="exclude-navigation">
+					<span class="display-lap-desk">Related links</span>
+					<button class="accordion-button">
+						Related links
+						<span class="accordion-toggle"></span>
+					</button>
+				</h2>
+			</div>
+			<div class="accordion-content">
+				<ul class="related-links">
+					
+
+<li>
+		<a href="/prudential-regulation/regulatory-reporting/regulatory-reporting-insurance-sector"  >
+			Regulatory reporting insurance sector
+		</a>
+</li>
+				</ul>
+			</div>
+		</li>
+	</ul>
+</div>
+                </div>
+
+        </div>
+    </div>
+
+</section>
+
+
+<section class="page-section  ">
+  <div class="container">
+     <div class="col12">
+      
+
+<div class="sub-links-wrap">
+    <h2 class="exclude-navigation">In this section</h2>
+        <ul class="sub-links">
+                <li class="sub-links-item"><a href="/prudential-regulation/key-initiatives/solvency-ii/effective-value-test-parameters" class="sub-links-link">Solvency II Effective Value Test parameters</a></li>
+                <li class="sub-links-item"><a href="/prudential-regulation/key-initiatives/solvency-ii/solvency-uk-pra-abi-insurer-engagement" class="sub-links-link">Solvency UK: PRA/ABI Insurer Engagement</a></li>
+                <li class="sub-links-item"><a href="/prudential-regulation/key-initiatives/solvency-ii/technical-information" class="sub-links-link">Technical information for Solvency II firms</a></li>
+        </ul>
+</div>
+
+
+<div class="anchor-links-wrap" data-title="On this page" data-headerType="H2" data-pageeditor="False">
+
+</div>
+ </div>
+ 
+
+    <div class="clear"></div>
+</div>
+
+</section> 
+<section class="page-section  ">
+  <div class="container">
+     <div class="col9">
+          <div class="content-block">
+        <div class="page-content" data-id="0c59f05af6bc437b90811ec390299175">
+            <h2>Background</h2>
+<p>Solvency II came into force on 1 January 2016. You can <a href="http://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02009L0138-20140523" target="_blank" title="Link opens in new window">see the full directive</a>, and <a href="https://www.eiopa.europa.eu/browse/solvency-2_en" target="_blank" title="Link opens in new window">read more about Solvency II from the European Insurance and Occupational Pensions Authority</a>. </p>
+<p>Firms can apply for a <a href="/prudential-regulation/authorisations/solvency-ii-approvals">Solvency II approval</a>, a <a href="/prudential-regulation/authorisations/waivers-and-modifications-of-rules">waiver or modification of rules</a>, and find out about <a href="/prudential-regulation/regulatory-reporting/regulatory-reporting-insurance-sector">regulatory reporting under Solvency II</a>.</p>
+<p>Please see <a href="http://webarchive.nationalarchives.gov.uk/20170726163927/http://www.bankofengland.co.uk/pra/Pages/solvency2/default.aspx" target="_blank">The National Archives</a> for historic Solvency II information.</p>
+        </div>
+    </div>
+
+ </div>
+ 
+
+    <div class="clear"></div>
+</div>
+
+</section> 
+<section class="page-section  ">
+  <div class="container">
+     <div class="col9">
+          <div class="content-block">
+        <div class="page-content" data-id="bf41ae4d16b64f5f8df1c510af682345">
+            <h2>Latest Solvency II updates</h2>
+<p><strong>17 June 2025:</strong> In order to further consider responses to our consultation paper (CP) 19/24 - <a href="/prudential-regulation/publication/2024/december/closing-liquidity-reporting-gaps-consultation-paper">Closing liquidity reporting gaps and streamlining Standard Formula reporting</a>, we have revised our publication and implementation timelines. The final policy statement will be published by the end of Q3 2025 and we are now targeting an implementation date for insurance liquidity reporting in the second half of 2026.</p>
+<p><strong>30 May 2025: </strong>On 13 May 2025 the PRA held an Industry Roundtable in respect of <strong><a href="/prudential-regulation/publication/2025/april/matching-adjustment-investment-accelerator-consultation-paper">CP7/25 - Matching Adjustment Investment Accelerator</a>. </strong>Please see a <strong><a href="/-/media/boe/files/prudential-regulation/publication/2025/cp725-pra-industry-roundtable-summary.pdf" target="_blank">summary of the industry roundtable discussion</a></strong> and the <strong><a href="/-/media/boe/files/prudential-regulation/publication/2025/cp725-pra-industry-roundtable-matching-adjustment-investment-accelerator.pdf" target="_blank">slides from the Roundtable</a>. </strong></p>
+<p>The formal deadline to provide feedback to CP7/25 is 4 June 2025 and responses should be emailed to<strong> <a href="mailto:CP7_25@bankofengland.co.uk">CP7_25@bankofengland.co.uk</a>.</strong></p>
+<p><strong>16 May 2025: </strong>The PRA has confirmed it will participate in the Association of British Insurers&rsquo; (ABI) Investment Viability Group, a multilateral engagement forum involving the ABI, His Majesty&rsquo;s Treasury, representatives from the insurance industry, and the National Wealth Fund. The group is intended to focus on exploring how productive investments can be structured to meet Matching Adjustment eligibility criteria within the existing Solvency UK framework.</p>
+<p><strong>8 May 2025</strong>: Delay to implementation of the updated mapping of external credit rating agency ratings to credit quality steps for use in UK Solvency II</p>
+<p>On 15 October 2024 the Prudential Regulation Authority (PRA) published consultation paper (CP) 13/24 &ndash; <a href="/prudential-regulation/publication/2024/october/remainder-of-crr-restatement-of-assimilated-law-consultation-paper">Remainder of CRR: Restatement of assimilated law</a>. The consultation closed on 15 January 2025. Chapter 7 of CP13/24 set out proposals to restate updated versions of existing requirements within technical standards in respect of the mapping of external ratings produced by credit rating agencies (also known as external credit assessment institutions or &lsquo;ECAIs&rsquo;) to credit quality steps (&lsquo;CQSs&rsquo;) within the PRA Rulebook.</p>
+<p>This included restating an updated mapping table within the Solvency Capital Requirement &ndash; Standard Formula Part of the PRA Rulebook. The updated mapping proposed would replace that set out in <a rel="noopener noreferrer" href="https://www.legislation.gov.uk/eur/2016/1800" target="_blank">Commission Implementing Regulation 2016/1800</a>, which firms are currently required to use under UK Solvency II. The PRA proposed that the insurance-related CQS mapping rule changes would come into force on 1 July 2025, and other CQS mapping-related rule changes (applicable to banks, building societies and designated investment firms) would come into force on 1 January 2026.&nbsp;</p>
+<p>As indicated in the recent update to the <a href="/report/2025/eighth-edition-of-the-regulatory-initiatives-grid">Regulatory Initiatives Grid</a>, the PRA has reconsidered the timeline to finalise the policies consulted on in CP13/24. This follows the PRA&rsquo;s decision (in consultation with HM Treasury) to delay the implementation of Basel 3.1 in the UK, given many of the proposals in CP13/24 are dependent on the PRA&rsquo;s implementation of the Basel 3.1 standards.&nbsp;</p>
+<p>As a result, the PRA intends to publish final policy relating to its CQS mapping proposals in a policy statement (PS) in H2 2025, along with feedback to responses to the relevant consultation proposals. The intended publication of the PS in H2 2025 necessitates delayed implementation of any final policy on insurance-related CQS mapping.</p>
+<p>The PRA therefore expects to implement final policy for insurance-related CQS mapping no earlier than 1 January 2026, alongside its final policy relating to the other CQS mapping proposals in Chapter 7 of CP13/24. The implementation date of the PRA&rsquo;s final policy on this topic is not dependent on the implementation of Basel 3.1 in the UK.</p>
+<p><strong>29 April 2025:</strong> 13 May 2025: Industry Roundtable &ndash; CP7/25 Matching Adjustment Investment Accelerator</p>
+<p>Following the publication of consultation paper (CP) 7/25 &ndash; <a href="/prudential-regulation/publication/2025/april/matching-adjustment-investment-accelerator-consultation-paper">Matching Adjustment Investment Accelerator</a>&nbsp;the PRA would like to invite interested stakeholders to join a virtual roundtable on 13 May 2pm &ndash; 3pm.&nbsp;</p>
+<p>The formal deadline to provide feedback to CP7/25 is 4 June 2025. The roundtable will give attendees the opportunity to share initial observations on the proposals and seek clarifications in an open forum in advance of making written submissions.&nbsp;</p>
+<p>Please submit any questions you may have in advance to <a href="mailto:CP7_25@bankofengland.co.uk">CP7_25@bankofengland.co.uk</a> with the subject &lsquo;CP7/25 Roundtable&rsquo; before COB Tuesday 6 May.&nbsp;</p>
+<p><strong>How to participate</strong><br />
+Please confirm your intention to attend the roundtable by emailing <a href="mailto:CP7_25@bankofengland.co.uk">CP7_25@bankofengland.co.uk</a>&nbsp;with the subject &lsquo;CP7/25 Roundtable&rsquo; and include the relevant name(s) and email address(es) of proposed attendees, <strong>before COB Tuesday 6 May</strong>. We would welcome up to two attendees per organisation.&nbsp;</p>
+<p>We will provide participants with the final agenda and Microsoft Teams joining instructions ahead of the meeting.</p>
+<p><strong>11 February 2025</strong>:&nbsp;25 February 2025: Industry Roundtable &ndash; CP19/24 Closing liquidity reporting gaps and streamlining Standard Formula reporting</p>
+<p>Following the publication of consultation paper (CP) 19/24 &ndash; <a href="/prudential-regulation/publication/2024/december/closing-liquidity-reporting-gaps-consultation-paper">Closing liquidity reporting gaps and streamlining Standard Formula</a>&nbsp;reporting the PRA would like to invite relevant stakeholders to join a hybrid roundtable on 25 February 11am &ndash; 12.30pm.&nbsp;</p>
+<p>While the formal deadline to provide feedback to CP19/24 remains 31 March 2025, the roundtable will give interested stakeholders the opportunity to share initial observations on the proposals and seek clarifications in an open forum in advance of making bilateral written submissions.&nbsp;</p>
+<p>Please submit any questions you may have in advance to <a href="mailto:CP19_24@bankofengland.co.uk">CP19_24@bankofengland.co.uk</a> with the subject &lsquo;CP19/24 Roundtable&rsquo; <strong>before COB Wednesday 19 February</strong>.&nbsp;</p>
+<p><strong>How to participate</strong></p>
+<p>Please confirm your intention to attend the roundtable by emailing <a href="mailto:CP19_24@bankofengland.co.uk">CP19_24@bankofengland.co.uk</a> with the subject &lsquo;CP19/24 Roundtable&rsquo; and include the relevant name(s) and email address(es) of proposed attendees, <strong>before COB Wednesday 19 February</strong>. We would welcome one attendee per organisation to attend in-person, with all other attendees attending virtually.</p>
+<p>We will provide participants with the final agenda and Microsoft Teams joining instructions ahead of the meeting.</p>
+<p><strong>9 January 2025</strong>: We published a letter from Gareth Truran and Shoib Khan on the <a href="/prudential-regulation/letter/2025/insurance-supervision-2025-priorities">PRA&rsquo;s 2025 priorities for insurance supervision</a>.</p>
+        </div>
+    </div>
+
+ </div>
+ 
+
+    <div class="clear"></div>
+</div>
+
+</section> 
+<section class="page-section  ">
+  <div class="container">
+     <div class="col9">
+          <div class="content-block">
+        <div class="page-content" data-id="75340593199f4a0da7094528f8b85f0d">
+            <h2><a name="2018" id="anchor_1560507974994"></a>Solvency II news and publications</h2>
+        </div>
+    </div>
+
+
+<ul class="accordion ">
+                    <li>
+                        <div class="accordion-head">
+                            <h3>
+                            <button class="accordion-button">
+                                Solvency II updates - 2024<span class="accordion-toggle"></span>
+                            </button>
+                            </h3>
+                        </div>
+                        <div class="accordion-content">
+							<p><strong>1 November:&nbsp;PRA Regulatory Reporting (Taxonomy) roundtable 12 November 2024</strong></p>
+<p>The PRA will be holding an industry roundtable following the publication of the&nbsp;<a href="https://www.bankofengland.co.uk/prudential-regulation/regulatory-reporting/regulatory-reporting-insurance-sector#v201">Bank of England Insurance Taxonomy v2.0.1</a>. The purpose of this taxonomy-focused online roundtable is to provide a summary of the new taxonomy structure, and to highlight the new changes. The roundtable will be held on 12 November, 10am to 11.30am.</p>
+<p>The affected organisations have been contacted. However, if you believe that your organisation would benefit from attending this event, please confirm your intention to attend by emailing&nbsp;<a href="mailto:Solvency2Review@bankofengland.co.uk">Solvency2Review@bankofengland.co.uk</a>&nbsp;with the relevant name(s) and email address(es). We would welcome two attendees per organisation. Retained external advisors are welcome and are also limited to a maximum of two attendees (per firm).</p>
+<p>Please send any questions that you wish to submit in advance to&nbsp;<a href="mailto:uktaxonomypwdfeedback@bankofengland.co.uk">uktaxonomypwdfeedback@bankofengland.co.uk</a>&nbsp;by close of business 7 November 2024, along with your intention to attend. The PRA will provide participants with joining instructions for Microsoft Teams for this online roundtable ahead of the meeting.</p>
+<p><strong>PRA CP5/24 (Review of Solvency II: Restatement of assimilated law) virtual roundtable 8 July 2024</strong></p>
+<p>The PRA will be holding an industry roundtable in respect of&nbsp;<a href="/prudential-regulation/publication/2024/april/review-of-solvency-ii-consultation-paper">CP5/24 &ndash; Review of Solvency II: Restatement of assimilated law</a>. The purpose of the roundtable is for the PRA to gather stakeholder views on key thematic issues relating to CP5/24, and to provide stakeholders (where possible) more clarity on policy proposals to assist with providing any planned responses to the consultation. The roundtable will be held on 8 July 2024, 10am to 12pm.</p>
+<p>The agenda for this roundtable will be finalised and published in advance of the meeting. Please confirm your intention to attend by emailing&nbsp;<a href="mailto:Solvency2Review@bankofengland.co.uk">Solvency2Review@bankofengland.co.uk</a>&nbsp;with the relevant name(s) and email address(es). We would welcome up to two attendees per organisation. Retained external advisors are also welcome and limited to a maximum of two attendees (per firm).&nbsp;</p>
+<p>Please send any questions that you wish to submit in advance to&nbsp;<a href="mailto:Solvency2Review@bankofengland.co.uk">Solvency2Review@bankofengland.co.uk</a>&nbsp;by close of business 28 June 2024, along with your intention to attend. We will provide participants with joining instructions for Microsoft Teams ahead of the meeting.</p>
+<p><strong>3 July 2024:</strong>&nbsp;Following queries the PRA has received in respect of the proposals in CP5/24 (<a href="/prudential-regulation/publication/2024/april/review-of-solvency-ii-consultation-paper">CP5/24 &ndash; Review of Solvency II: Restatement of assimilated law</a>), the agenda for the roundtable will be as follows:</p>
+<ol>
+    <li>Introduction</li>
+    <li>Proposal for firms to notify the PRA with regards to compliance with a certain set of criteria &ndash; (CP5/24 Chapter 8)</li>
+    <li>Proposed restatement of the Standard Formula requirements relating to the loss-absorbing capacity of deferred taxes (LACDT) &ndash; (CP5/24 Chapter 8)</li>
+    <li>Proposed definition of the term &lsquo;ring-fenced fund&rsquo; (RFF) &ndash; (CP5/24 Chapter 8)</li>
+    <li>External credit assessments &ndash; (CP5/24 Chapter 2)</li>
+    <li>Any other business</li>
+</ol>
+<p>As a reminder, please register your attendance by contacting&nbsp;<a href="mailto:Solvency2Review@bankofengland.co.uk">Solvency2Review@bankofengland.co.uk</a>&nbsp;- up to two attendees per organisation.</p>
+<p><strong>13 May 2024: PRA/ABI industry subject expert groups on use of sandboxes in matching adjustment portfolios.</strong></p>
+<p>The consultation paper&nbsp;<a href="/prudential-regulation/publication/2023/september/review-of-solvency-ii-reform-of-the-matching-adjustment">(CP) 19/23 &ndash; Review of Solvency II: reform of the matching adjustment</a>&nbsp;set out the PRA&rsquo;s proposed reforms that will enable broader and quicker investment by insurers within their matching adjustment (MA) portfolios, while improving responsiveness to risk and enhancing firms&rsquo; responsibility for risk management.</p>
+<p>A number of responses to the consultation suggested that including &lsquo;sandboxes&rsquo; of one form or another within MA portfolios would be beneficial. The PRA has established a subject expert group to consider these or similar proposals which could be used in the development of future policy on Matching Adjustment in ways that would advance the PRA&rsquo;s statutory objectives and deliver clear benefits in line with the desired outcomes of the government&rsquo;s review of Solvency II, in particular by materially increasing productive investment in the UK by the life insurance sector.</p>
+<p>The group is co-chaired by representatives of the PRA and the Association of British Insurers. Organisations interested in sending a representative to the group should contact&nbsp;<a href="mailto:SandboxSEG@bankofengland.co.uk">SandboxSEG@bankofengland.co.uk</a>&nbsp;explaining their interest in the subject, what they feel they could contribute to discussions, the name of their nominated representative, and the latter&rsquo;s qualifications to contribute effectively to the work of the group.</p>
+<p><strong>PRA Regulatory Reporting (Taxonomy) roundtable 14 May 2024</strong></p>
+<p>The PRA are looking to engage with industry following the publication of the&nbsp;<a href="/prudential-regulation/regulatory-reporting/regulatory-reporting-insurance-sector">Bank of England Insurance Taxonomy 2.0.0</a>&nbsp;and have organised a roundtable on regulatory reporting. The purpose of this meeting is to provide a summary of the new taxonomy structure, the new naming conventions and to highlight the new XBRL filing manual. The PRA would also like to understand industry&rsquo;s implementation plans and we will take technology related questions. The roundtable will be held on 14 May, 10am to 11.30am.</p>
+<p>The affected organisations have been contacted. However, if you believe that your organisation would benefit from attending this event, please confirm your intention to attend by emailing&nbsp;<a href="mailto:Solvency2Review@bankofengland.co.uk">Solvency2Review@bankofengland.co.uk</a>&nbsp;with the relevant name(s) and email address(es). We would welcome two attendees per organisation. Retained external advisors are welcome and are also limited to a maximum of two attendees (per firm). Should you wish to submit questions in advance of the event, please supply these along with your response before 9 May to&nbsp;<a href="mailto:uktaxonomypwdfeedback@bankofengland.co.uk">uktaxonomypwdfeedback@bankofengland.co.uk</a>. Following this, we will issue the Microsoft Teams details to participants ahead of the meeting.</p>
+<p><strong>4 March 2024</strong>:&nbsp;The PRA are looking to engage with industry on developing liquidity reporting requirements through a roundtable with insurers and relevant stakeholders on Tuesday 19 March 2024, between 11am and 12pm.&nbsp;</p>
+<p>The roundtable will cover:</p>
+<ul>
+    <li>the PRA&rsquo;s views on sources of liquidity risk within insurers</li>
+    <li>the existing liquidity risk management framework, as set out in SS5/19</li>
+    <li>the PRA&rsquo;s planned engagement during 2024 to develop liquidity reporting requirements</li>
+</ul>
+<p>The PRA&rsquo;s initial focus will be on those firms with the largest derivatives exposures and potential for surrenders. However, all industry participants are free to nominate individuals to participate at the event. Please&nbsp;<a rel="noopener noreferrer" href="https://www.eventsforce.net/liquidityreport" target="_blank">register to attend the hybrid event</a>. Please note that deadline for registration is Wednesday 13 March 2024. This will be a hybrid event and we would encourage you to attend in person. Participation at the event is on a voluntary basis and the event joining details will be shared on registration. Further background to this work can be found on the&nbsp;<a href="/prudential-regulation/key-initiatives/solvency-ii/review-of-solvency-ii-reporting-phase-3-liquidity-reporting">Review of Solvency II: Reporting phase 3: liquidity reporting page</a>.&nbsp;</p>
+<p><strong>11 January 2024:&nbsp;</strong>We published a letter from Charlotte Gerken and Shoib Khan on the&nbsp;<a href="/prudential-regulation/letter/2024/insurance-supervision-2024-priorities">PRA&rsquo;s 2024 priorities for insurance supervision</a>.</p>
+
+	                        
+                        </div>
+                    </li>
+                    <li>
+                        <div class="accordion-head">
+                            <h3>
+                            <button class="accordion-button">
+                                Solvency II updates - 2023<span class="accordion-toggle"></span>
+                            </button>
+                            </h3>
+                        </div>
+                        <div class="accordion-content">
+							<p><strong>8 December 2023:</strong>&nbsp;We published a statement<a href="/prudential-regulation/publication/2023/december/solvency-ii-review-considerations-for-year-end-2023">&nbsp;Solvency II Review – considerations for year-end 2023</a>, relevant to PRA-regulated insurance firms.</p>
+<p><strong>15 November 2023:&nbsp;</strong>We published a&nbsp;<a href="/prudential-regulation/publication/2023/november/recalculation-of-the-transitional-measure-on-technical-provisions">statement on the recalculation of the Transitional Measure on Technical Provisions (TMTP)</a>&nbsp;, relevant to PRA-regulated insurance firms.&nbsp;</p>
+<p><strong>30 October 2023:</strong>&nbsp;We published information on the outcomes of the annual DLT assessment for PRA relevant currencies, as conducted by the PRA in September 2023, on&nbsp;<a href="/prudential-regulation/key-initiatives/solvency-ii/dlt-assessments-jan24">'Deep, liquid, and transparent (DLT) assessments for January 2024 implementation'</a>.&nbsp;</p>
+<p><strong>11 October 2023:&nbsp;</strong>Following the release of&nbsp;<a href="/prudential-regulation/publication/2023/september/review-of-solvency-ii-reform-of-the-matching-adjustment">CP19/23 &nbsp;– Review of Solvency II: Reform of the Matching Adjustment</a>, the PRA and ABI will be hosting two roundtables at the ABI offices (One America Square, London, EC3N 2LB):</p>
+<ul>
+    <li>Roundtable 1: focusing on investment flexibility and attestation proposals,&nbsp;<strong>1pm to 2.30pm, 30 October</strong></li>
+    <li>Roundtable 2: focusing on all other proposals in the CP,&nbsp;<strong>1pm to 2.30pm, 1 November</strong></li>
+</ul>
+<p>The purpose of these meetings is to summarise the key aspects of the CP, provide guidance for firms’ submitting their formal CP responses, and take initial questions. PRA attendees will consist of technical policy colleagues and the meeting is expected to take place at a working level.</p>
+<p>Please confirm your intention to attend by emailing&nbsp;<a href="mailto:Solvency2Review@bankofengland.co.uk">Solvency2Review@bankofengland.co.uk</a>&nbsp;with the relevant name(s) and email address(es), specifying the attendees for each roundtable, including whether they will come to ABI’s offices or attend virtually. We would welcome two attendees per insurance organisation and one attendee per consultancy for each of the roundtables. The deadline for responses is 25 October. Following your response, we will issue the invitations, MS Teams dial-in details and agendas ahead of the meetings. If you have any particular questions on the proposals in the CP you would like covered in the sessions please send these through in advance.</p>
+<p><strong>28 September 2023: </strong>The PRA published <a href="/prudential-regulation/publication/2023/september/review-of-solvency-ii-reform-of-the-matching-adjustment">CP19/23 – Review of Solvency II: Reform of the Matching Adjustment</a>. This CP is the second PRA consultation needed to implement the conclusions of the <a rel="noopener noreferrer" href="https://www.gov.uk/government/publications/solvency-ii-review-call-for-evidence" target="_blank">Solvency II Review</a>. It sets out the PRA’s proposed reforms that will enable broader and quicker investment by insurers in their MA portfolios. The PRA considers that by adapting the MA rules for the features of insurance business in the UK and the financing demands of the wider economy, the proposals will allow the life insurance sector to play a bigger role in productive investment in the UK economy, while continuing to offer their policyholders the level of security determined by legislation.</p>
+<p><strong>17 July 2023: </strong>We published a <a href="/prudential-regulation/publication/2023/july/recalculation-of-the-transitional-measure-on-technical-provisions">statement on the recalculation of the Transitional Measure on Technical Provisions (TMTP)</a>, relevant to PRA-regulated insurance firms.&nbsp;</p>
+<p><strong>5 July 2023</strong>: The PRA has given notice of a planned future update of one aspect of its Credit Risk Adjustment methodology in response to the cessation of USD Libor. See <a href="/prudential-regulation/key-initiatives/solvency-ii/technical-information">RFR updates due to Libor transitions</a>.</p>
+<p><strong>30 June 2023</strong>: The PRA are looking to engage with industry following the release of the June CP and have organised a series of roundtables to cover three key areas: reporting requirements, TMTP and internal models. The purpose of these meetings is to signpost the relevant materials and field high level questions. Although the meetings have been organised so that firms have time to digest the paper, the roundtables are intended to compliment the CP’s messages ahead of organisations providing their responses. The dates for these roundtables are:</p>
+<ul>
+    <li>Reporting: 12.30pm to 2pm, 10 July</li>
+    <li>Internal Model: 10am to 11.30am, 24 July</li>
+    <li>TMTP: 11am to 12.30pm, 28 July</li>
+</ul>
+<p>The affected organisations have been contacted. However, if you believe that your organisation would benefit from attending these events, please confirm your intention to attend by emailing <a href="mailto:Solvency2Review@bankofengland.co.uk">Solvency2Review@bankofengland.co.uk</a>&nbsp;with the relevant name(s) and email address(es). We would welcome two attendees per organisation. Retained external advisors are welcome and are also limited to a maximum of two attendees (per firm). Should you wish to submit questions in advance of the event, please supply these along with your response before 5 July. Following this, we will issue the MS teams details to participants ahead of the meeting.</p>
+<p><strong>29 June 2023</strong>: The PRA published CP12/23 – <a href="/prudential-regulation/publication/2023/june/review-of-solvency-ii-adapting-to-the-uk-insurance-market">Review of Solvency II: Adapting to the UK insurance market</a>&nbsp;which sets out the PRA’s proposals to deliver significant reforms for Solvency II, which the PRA considers will lead to a more competitive and dynamic insurance sector in the UK, while maintaining high standard of policyholder protection.</p>
+<p><strong>20 February 2023:</strong> Sam Woods delivered a speech <a href="/speech/2023/february/sam-woods-keynote-speech-association-british-insurers-dinner">‘Fundamental Spreads’</a>, covering the Solvency UK reforms, highlighting reforms that support competitiveness and growth, and outlining our expectations on implementation of the reforms.&nbsp;</p>
+<p><strong>30 January 2023:</strong> Further to the previous update on the 10 January 2023, we have now published the updated <a href="/-/media/boe/files/prudential-regulation/solvency-ii/pra-va-reference-portfolios-from-31-march-2023.xlsx">Volatility Adjustment (VA) Reference Portfolios</a> to be used for the SII Technical Information publications from 31 March 2023.</p>
+<p><strong>23 January 2023:</strong>&nbsp;We published the <a href="/prudential-regulation/letter/2023/ist-2022-report">Insurance Stress Test 2022 letter</a>. This letter sets out our findings on sector resilience and provides thematic observations that support improvements in risk management.&nbsp;&nbsp;</p>
+<p><strong>17 January 2023:</strong> On Friday 20 January 2023, the ABI, in conjunction with the PRA, will be hosting a Solvency UK reform industry engagement plenary to provide an overview of planned PRA engagement with industry from January 2023 onwards, in relation to the delivery of Solvency&nbsp; UK. This will consist of industry engagement groups focused on the reforms announced by the government as part of the 2022 Autumn Statement. Invitations to the meeting were sent out by the ABI on Friday 13 January. If you did not receive an invitation and would like us to consider your attendance, please contact <a href="mailto:Solvency2Review@bankofengland.co.uk">Solvency2Review@bankofengland.co.uk</a>.</p>
+<p><strong>10 January 2023:</strong> There has been an unexpected delay in our publication of the Volatility adjustment (VA) reference portfolios to be used for SII Technical Information publications from 31 March 2023. We are working to address this and expect to publish the information shortly. We apologise for any inconvenience caused.&nbsp;</p>
+<p><strong>10 January 2023:</strong> We published a letter from Charlotte Gerken and Shoib Khan on the <a href="/prudential-regulation/letter/2023/insurance-supervision-2023-priorities">PRA’s 2023 priorities for insurance supervision</a>.</p>
+<p><strong>6 January 2023:</strong> We published a <a href="/prudential-regulation/publication/2023/january/pra-statement-on-the-recalculation-of-the-transitional-measure-on-technical-provisions-tmtp">statement on the recalculation of the Transitional Measure on Technical Provisions (TMTP)</a>, relevant to PRA-regulated insurance firms.&nbsp;</p>
+
+	                        
+                        </div>
+                    </li>
+                    <li>
+                        <div class="accordion-head">
+                            <h3>
+                            <button class="accordion-button">
+                                Solvency II updates - 2022<span class="accordion-toggle"></span>
+                            </button>
+                            </h3>
+                        </div>
+                        <div class="accordion-content">
+							<p><strong><strong>17 November 2022</strong>: </strong>We published <a href="/prudential-regulation/publication/2022/november/fs1-22-potential-reforms-to-risk-margin-and-matching-adjustment-within-solvency-ii">FS 1/22 – Responses to DP 2/22 – ‘Potential Reforms to Risk Margin and Matching Adjustment within Solvency II.’</a></p>
+<p><strong>7 November 2022</strong>:<strong> </strong>The PRA published <a href="/prudential-regulation/publication/2022/november/review-solvency-ii-reporting-phase-2">CP14/22 – ‘Review of Solvency II: Reporting phase 2’</a>, which proposes to revoke retained EU Technical Standards for firms’ supervisory reporting and public disclosure under Solvency II, and to make new rules to amend and replace the retained EU Technical Standards. It also proposes amendments to the PRA’s expectations set out in Supervisory Statements (SS) relating to external audit of the public disclosure requirement, life insurance product reporting codes, and the national Specific Template LOG files.</p>
+<p><strong>25 July 2022</strong>: On Friday 15 July 2022, the PRA hosted a virtual roundtable to engage with Solvency II Technical Information (TI) industry users in order to: receive feedback on the first year and a half of operation; capture suggestions for improvement; and consider whether an SII TI users group should be established. <br />
+<br />
+The PRA has been successful in producing and publishing the TI by the legal deadline of the 8th working day for quarterly publications, and for some time now has been achieving this by the 6th working day of each month. However, we did have comments from some of the firms that they were finding the later publication, relative to EIOPA, a challenge in the context of their reporting processes. We had explained that the publication timing reflected the many checks that were in place for the TI, including comparisons with the EIOPA results themselves. With this in mind, firm representatives confirmed that they would appreciate a compensating extension to their current reporting deadline. We looked into the practicalities of providing an extension to firms. However, upon investigating, we have identified that we do not presently have the powers to make such changes. In the meantime, individual firms could make a case to their supervisors if they were not able to meet the reporting deadlines.<br />
+<br />
+We were pleased to hear that firms are content with the format of the TI publication templates, as these have been adapted from EIOPA’s so that firms were required to make minimal changes to their systems to use the rates. We did take a note that firms are having to regularly monitor the PRA publication webpages to know when to download our latest Excel templates, unlike for EIOPA which releases an intended publication date in advance. We will look into this as well, with a view to providing more support to firms.  <br />
+<br />
+We do plan to hold another virtual open roundtable sometime in the autumn, to further our engagement with the industry and to share results from the annual review of the Deep, Liquid and Transparent (DLT) assessment of the underlying market data that is fed into the TI production process.</p>
+<p><strong>12 July 2022</strong>:<strong></strong>We published <a href="/prudential-regulation/publication/2022/july/insurance-special-purpose-vehicles-further-updates-to-authorisation-and-supervision" target="_self">CP10/22 ‘Insurance special purpose vehicles: Further updates to authorisation and supervision’</a>, which sets out our approach to authorising and supervising Insurance Special Purpose Vehicles. </p>
+<p><strong>8 July 2022</strong>:<strong></strong><a href="/speech/2022/july/sam-woods-speech-given-at-the-bank-of-england-solvency-ii-striking-the-balance">Sam Woods gives a speech</a> at a Bank of England webinar, discussing opportunities to reform insurance regulation, to make it work better for the UK economy while safeguarding policyholders.</p>
+<p><strong>7 July 2022</strong>: We have been responsible for publishing the Solvency II Technical Information (SII TI) since Thursday 31 December 2020. On Friday 15 July 2022, we will be hosting a virtual roundtable between 1.30pm and 3pm. The purpose of the roundtable is to engage with industry users to receive feedback on this initial period of operation, to capture suggestions for improvement, and to consider whether an SII TI users group should be established.</p>
+<p>The event will be relevant for all insurance firms. Representatives from industry bodies and advisors to firms are welcome to attend.</p>
+<p>If you are interested in attending the PRA Industry Engagement Roundtable, please contact your relevant supervisor, and <a href="mailto:InsuranceData@bankofengland.co.uk">InsuranceData@bankofengland.co.uk</a>. Dial-in details will be sent to attendees prior to the event.</p>
+<p><strong>7 July 2022</strong>: We published <a href="/prudential-regulation/publication/2021/september/solvency-ii-definition-of-an-insurance-holding-company">PS6/22 – Solvency II: definition of an insurance holding company</a>, relevant to insurance firms within the scope of the Group Supervision Part of the PRA Rulebook and to the Society of Lloyd’s. The change to the Glossary Part of the Rulebook and the expectations set out in the updated SS9/15 will come into effect on Friday 7 July 2023.</p>
+<p><strong>6 July 2022</strong>: We published a <a href="/prudential-regulation/publication/2022/july/recalculation-of-the-transitional-measure-on-technical-provisions">statement on the recalculation of the Transitional Measure on Technical Provisions (TMTP)</a>, relevant to PRA-regulated insurance firms. </p>
+<p><strong>14 June 2022: </strong><a href="/speech/2022/june/charlotte-gerken-keynote-speaker-at-the-jp-morgan-european-insurance-conference">Charlotte Gerken gives a speech</a> at the JP Morgan European Insurance Conference, talking about the goals of competitiveness and productive investment, and the impact these are having on the Review of Solvency II. She says that changes to regulations for UK insurers could help to achieve these goals.</p>
+<p><strong>10 June 2022</strong>: On Friday 10 June, we launched a Data Collection Exercise (DCE) on the Matching Adjustment Fundamental Spread calibration (MA-FS), to further support the review of Solvency II. Please refer to <a href="/prudential-regulation/key-initiatives/solvency-ii/review-of-solvency-ii-2022-data-collection-exercise">Review of Solvency II: 2022 Data Collection Exercise (DCE)</a> for further information </p>
+<p><strong>4 May 2022</strong>: Today we launched the <a href="/prudential-regulation/letter/2022/may/insurance-stress-test-2022">PRA ‘Insurance Stress Test 2022 (IST 2022)’</a>, relevant to the largest life and general insurers, to provide information about the impact of a range of stress scenarios on their business.</p>
+<p><strong>28 April 2022</strong>: Coinciding with HM Treasury’s consultation on the Solvency II Review, we published the following:</p>
+<ul>
+    <li><a href="/prudential-regulation/publication/2022/april/pras-statement-on-the-review-of-solvency-ii-consultation-published-by-hm-treasury">The PRA’s statement on the ‘Review of Solvency II’ consultation published by HM Treasury</a></li>
+    <li><a href="/prudential-regulation/publication/2022/april/potential-reforms-to-risk-margin-and-matching-adjustment-within-solvency-ii">DP2/22 – Potential Reforms to Risk Margin and Matching Adjustment within Solvency II</a></li>
+    <li>Solvency II Review: Summary of Quantitative Impact Study (QIS), available on the <a href="/prudential-regulation/key-initiatives/solvency-ii/solvency-ii-reform-quantitative-impact-survey">Review of Solvency II: Quantitative Impact Study (QIS) page</a>. </li>
+</ul>
+<p><strong>20 January 2022</strong>: We published a <a href="/prudential-regulation/letter/2022/january/insurance-stress-test-2022-request-for-technical-input">letter on the Insurance Stress Test 2022</a>, requesting technical input by Thursday 17 March 2022.<strong> <br />
+</strong></p>
+<p><strong>12 January 2022</strong>: We published a <a href="/prudential-regulation/letter/2022/january/insurance-supervision-2022-priorities">letter from Anna Sweeney and Charlotte Gerken on the PRA’s 2022 priorities for insurance supervision</a>. </p>
+<p><strong>12 January 2022</strong>: We published <a href="/prudential-regulation/publication/2021/july/insurance-business-transfers">PS1/22 ‘Insurance business transfers’</a>, relevant to PRA-authorised insurers, including the Society of Lloyd’s and its managing agents. It is also relevant to mutuals and friendly societies. The expectations in the SoP take effect on the date of publication of this PS on Wednesday 12 January 2022.</p>
+
+	                        
+                        </div>
+                    </li>
+                    <li>
+                        <div class="accordion-head">
+                            <h3>
+                            <button class="accordion-button">
+                                Solvency II updates - 2021<span class="accordion-toggle"></span>
+                            </button>
+                            </h3>
+                        </div>
+                        <div class="accordion-content">
+							<p><strong><strong>17 December 2021</strong></strong>: We published <a href="/prudential-regulation/publication/2021/july/review-of-solvency-ii-reporting-phase-1">PS29/21 ‘Review of Solvency II: Reporting (Phase 1)’</a>, relevant to all UK Solvency II firms, the Society of Lloyd’s and its managing agents, insurance and reinsurance undertakings that have a UK branch (third-country branch undertakings), and firms within the PRA’s Temporary Permissions Regime (TRP) for (re)insurers. The policy as set out in the PS will take effect on Friday 17 December 2021. The modification by consent will also be made available for firms on the same date. The PRA Standards Instrument and the PRA Rulebook Instrument will be effective for quarterly and annual reporting reference dates falling on and after Friday 31 December 2021.</p>
+<p><strong>6 September 2021</strong>: Today we published <a href="/prudential-regulation/publication/2021/september/solvency-ii-definition-of-an-insurance-holding-company">CP17/21 ‘Solvency II: Definition of an insurance holding company’</a>, relevant to insurance firms within the scope of the Group Supervision Part of the PRA Rulebook and to the Society of Lloyd’s. This consultation closes on Monday 6 December 2021.</p>
+<p><strong>13 August 2021</strong>: Today we published a letter from <a href="/prudential-regulation/letter/2021/august/gathering-information-solvency-ii-review-qualitative-questionnaire">Charlotte Gerken: ‘Gathering information for the Solvency II Review: Qualitative Questionnaire’</a> , which introduces a qualitative questionnaire aimed at supporting the development of potential reforms, including cost benefit analysis, as part of the Government’s review of Solvency II.</p>
+<p><strong>4 August 2021</strong>: Today we published a <a href="/prudential-regulation/letter/2021/august/insurance-stress-test-2022">letter from the PRA ‘Insurance Stress Test 2022 (IST 2022)’</a>, relevant to the largest life and general insurers, setting out the high-level scope for the 2022 Insurance Stress Test exercise.</p>
+<p><strong>1 October 2021</strong>: We published information the outcomes of the annual DLT assessments for PRA relevant currencies, as conducted by the PRA in September 2021, on ‘<a href="/prudential-regulation/key-initiatives/solvency-ii/dlt-assessments-jan22">Deep, liquid, and transparent (DLT) assessments for January 2022 implementation</a>’.</p>
+<p><strong>28 July 2021</strong>: We published <a href="/prudential-regulation/publication/2021/july/insurance-business-transfers">CP16/21 ‘Insurance business transfers’</a>. This CP is relevant to all PRA-authorised insurers, including the Society of Lloyd’s and its managing agents. It is also relevant to mutuals and friendly societies. The consultation closes on Thursday 28 October 2021.</p>
+<p><strong>20 July 2021</strong>: We published a <a href="/prudential-regulation/letter/2021/july/gathering-data-solvency-ii-review">letter from Charlotte Gerken ‘Gathering data for the Solvency II Review’</a>, and updated our <a href="/prudential-regulation/key-initiatives/solvency-ii/solvency-ii-reform-quantitative-impact-survey">Review of Solvency II: Quantitative Impact Survey (QIS) page</a>, announcing its launch and providing more information to firms.</p>
+<p><strong>19 July 2021</strong>: We published a <a href="/prudential-regulation/publication/2021/july/recalculation-of-the-transitional-measure-on-technical-provisions">statement on the recalculation of the Transitional Measure on Technical Provisions (TMTP)</a>, relevant to PRA-regulated insurance firms. </p>
+<p><strong>8 July 2021</strong>: We published <a href="/prudential-regulation/publication/2021/july/review-of-solvency-ii-reporting-phase-1">CP11/21 ‘Review of Solvency II: Reporting (Phase 1)’</a>, relevant to all UK Solvency II firms, the Society of Lloyd’s and its managing agents, insurance and reinsurance undertakings that have a UK branch (third-country branch undertakings), and firms within the PRA’s Temporary Permissions Regime for (re)insurers. This consultation closes on Friday 8 October 2021.</p>
+<p><strong>16 June 2021</strong>: We launched the <a href="/prudential-regulation/key-initiatives/solvency-ii/solvency-ii-reform-quantitative-impact-survey">Review of Solvency II: Quantitative Impact Study (QIS) page</a>, setting out information regarding our upcoming QIS which will support the review of Solvency II.</p>
+<p><strong>3 June 2021:</strong> We published <a href="/prudential-regulation/publication/2021/january/solvency-ii-deep-liquid-and-transparent-assessments-gbp-transition-to-sonia">PS12/21 ‘Solvency II: Deep, liquid and transparent assessments, and GBP transition to SONIA’</a> relevant to all UK Solvency II firms, including in respect of the Solvency II groups provisions, and to the Society of Lloyd’s and its managing agents. It contains an updated Statement of Policy ‘The PRA’s approach to the publication of Solvency II technical information’ and a report ‘Deep, liquid, and transparent (DLT) assessment of the Sterling Overnight Index Average (SONIA) Overnight Index Swap (OIS) market’, which can be found on the <a href="/prudential-regulation/key-initiatives/solvency-ii/technical-information">Technical information for Solvency II firms page</a>. <br />
+<br />
+The new policy will take effect from the date of publication of this PS and updated SoP, Thursday 3 June 2021, except for the transition to the new GBP RFR, which will take effect from Saturday 31 July 2021.</p>
+<p><strong>31 March 2021: </strong>We published our review of <a href="/prudential-regulation/key-initiatives/solvency-ii/effective-value-test-parameters">Solvency II Effective Value Test parameters</a>, applicable from 31 March 2021.</p>
+<p><strong>18 March 2021</strong>: We published <a href="/prudential-regulation/publication/2020/pra-expectations-for-the-work-of-external-auditors-on-the-matching-adjustment">PS2/21 ‘Solvency II: The PRA’s expectations for the work of external auditors on the matching adjustment’</a>, which includes updates to <a href="/prudential-regulation/publication/2016/solvency2-external-audit-of-the-public-disclosure-requirement-ss">SS11/16 ‘Solvency II: External audit of, and responsibilities of the governing body in relation to, the public disclosure requirement’</a>.</p>
+<p>This PS is relevant to UK Solvency II firms (including mutuals) that have approval to make use of the matching adjustment (MA). It is especially relevant to those firms that are subject to an audit requirement in respect of their Solvency and Financial Condition Report (SFCR). The PS is also relevant for the auditors of such organisations and the users of these SFCRs.</p>
+<p>The changes to SS11/16 will be effective from Thursday 1 July 2021, and the updated version will replace the existing version at that date. The new expectations set out in the updated SS will come into effect for audits in respect of accounting periods ending on or after Thursday 1 July 2021.</p>
+<p><strong>1 February 2021</strong>: We published a <a href="/prudential-regulation/letter/2021/february/feedback-on-application-of-the-evt">letter from Sid Malik on ‘Feedback on the application of the Effective Value Test’</a> to Chief Actuaries of PRA-regulated insurance firms.</p>
+<p><strong>7 January 2021</strong>: We published <a href="/prudential-regulation/publication/2021/january/solvency-ii-deep-liquid-and-transparent-assessments-gbp-transition-to-sonia">CP1/21 ‘Solvency II: Deep, liquid and transparent assessments, and GBP transition to SONIA’</a>. This CP is relevant to all UK Solvency II firms, including in respect of the Solvency II groups provisions, and to the Society of Lloyd’s and its managing agents. Non-Directive firms are out of the scope of this CP. This consultation closes on Wednesday 31 March 2021.</p>
+
+	                        
+                        </div>
+                    </li>
+                    <li>
+                        <div class="accordion-head">
+                            <h3>
+                            <button class="accordion-button">
+                                Solvency II updates - 2020<span class="accordion-toggle"></span>
+                            </button>
+                            </h3>
+                        </div>
+                        <div class="accordion-content">
+							<p><strong>2 December 2020</strong>: We published <a href="/prudential-regulation/publication/2020/solvency-ii-technical-information">Policy Statement (PS) 24/20 ‘Solvency II technical information: The PRA’s proposed approach to the publication at the end of the transition period’</a>, relevant to all UK Solvency II firms, including in respect of the Solvency II groups provisions, and to the Society of Lloyd’s and its managing agents. This includes a <a href="/prudential-regulation/publication/2020/the-pras-approach-to-publication-of-sii-technical-information">Statement of Policy (SoP) ‘The PRA’s approach to the publication of Solvency II technical information’</a>.</p>
+<p><strong><strong><strong>13 November 2020</strong></strong></strong>: We published a letter on ‘<a href="/prudential-regulation/letter/2020/pra-review-reserving-and-exposure-management">Insights from PRA review work on reserving and exposure management</a>’ to chief risk officers of PRA-regulated general insurance firms.<strong><strong></strong></strong></p>
+<p><strong>30 September 2020</strong>: We published our review of <a href="/prudential-regulation/key-initiatives/solvency-ii/effective-value-test-parameters">Solvency II Effective Value Test parameters</a>, applicable from 30 September 2020. </p>
+<p><strong><strong>30 July 2020</strong></strong>: We published <a href="/prudential-regulation/publication/2020/pra-expectations-for-the-work-of-external-auditors-on-the-matching-adjustment">Consultation Paper (CP) 11/20 ‘Solvency II: The PRA’s expectations for the work of external auditors on the matching adjustment’</a>, relevant to UK Solvency II firms that have approval to make use of the matching adjustment. The consultation will close on Friday 30 October 2020.</p>
+<p><strong>7 July 2020</strong>:<strong></strong>We published a <a href="/prudential-regulation/publication/2020/statement-covid-19-prudential-insurers">statement clarifying the PRA’s approach to the application of the matching adjustment during Covid-19</a>.<strong></strong></p>
+<p><strong>30 June 2020</strong>: We published <a href="/prudential-regulation/publication/2020/solvency-ii-technical-information">Consultation Paper (CP) 5/20 ‘Solvency II technical information: The PRA’s proposed approach to the publication at the end of the transition period’</a> alongside a <a href="/-/media/boe/files/prudential-regulation/statement-of-policy/2020/solvency-ii-technical-information.pdf" target="_blank">draft Statement of Policy<span class="visually-hidden"> Opens in a new window</span></a> on the same topic. </p>
+<p><strong>27 May 2020</strong>: We published <a href="/prudential-regulation/publication/2019/solvency-ii-prudent-person-principle">Policy Statement (PS) 14/20 'Solvency II: Prudent Person Principle</a>' alongside <a href="/prudential-regulation/publication/2020/solvency-ii-prudent-person-principle-ss">Supervisory Statement (SS) 1/20 ‘Solvency II: Prudent Person Principle’</a>. Together they contain the PRA’s final policy for investment by Solvency II firms in accordance with the Prudent Person Principle as set out in Chapters 2 to 5 of the Investments Part of the PRA Rulebook.</p>
+<p><strong><strong>30 April 2020</strong>:</strong> We published <a href="/prudential-regulation/publication/2019/solvency-ii-group-availability-of-subordinated-liabilities-and-preference-shares">Policy Statement 10/20 ‘Solvency II: Group availability of subordinated liabilities and group preference shares’</a>, including an update to <a href="/prudential-regulation/publication/2015/solvency2-group-supervision-ss">Supervisory Statement 9/15 ‘Solvency II: Group supervision’</a>. </p>
+<p><strong>2 April 2020</strong>: We published <a href="/prudential-regulation/publication/2019/solvency-ii-ipre-loans-and-internal-credit-assessments-for-illiquid-unrated-assets">Policy Statement 9/20 ‘Solvency II: Income producing real estate loans and internal credit assessment for illiquid, unrated assets’</a>, including an update to <a href="/prudential-regulation/publication/2017/solvency-2-matching-adjustment-illiquid-unrated-assets-and-equity-release-mortgages-ss">Supervisory Statement 3/17 ‘Solvency II: Matching adjustment - illiquid unrated assets and equity release mortgages’</a>. </p>
+<p><strong>31 March 2020</strong>: We published our <a href="/prudential-regulation/key-initiatives/solvency-ii/effective-value-test-parameters">review of Solvency II Effective Value Test parameters</a>, applicable from 31 March 2020.</p>
+<p><strong><strong>16 March 2020</strong></strong>: We published <a href="/prudential-regulation/publication/2019/sii-adjusting-for-reduction-of-loss-absorbency-where-own-fund-instruments-are-taxed-on-conversion">PS7/20 ‘Solvency II: Adjusting for the reduction of loss absorbency where own fund instruments are taxed on conversion’</a>, including an update to <a href="/prudential-regulation/publication/2015/solvency2-the-quality-of-capital-instruments-ss">Supervisory Statement SS3/15 ‘Solvency II: the quality of capital instruments’</a>. </p>
+<p><strong>28 February 2020</strong>: We published a letter on <a href="/prudential-regulation/letter/2020/outstanding-eu-liabilities-following-uk-withdrawal-from-the-eu">‘Outstanding EU liabilities following the UK’s withdrawal from the European Union’</a> from Anna Sweeney, Executive Director of Insurance Supervision, to relevant PRA-regulated insurance firms.</p>
+<p><strong>15 January 2020</strong>: The Bank of England and Prudential Regulation Authority (PRA) are preparing to publish regular, aggregated data relating to the UK Insurance market on a quarterly basis. We published a ‘<a href="/prudential-regulation/publication/2020/insurance-data-release-information-and-format-a-call-for-feedback">call for feedback</a>’ to inform potential users of such data and the proposed content and presentation, and to invite comment and feedback that may help shape the publication. </p>
+<p><strong>9 January 2020</strong>: We published <a href="/prudential-regulation/publication/2019/solvency-ii-longevity-risk-transfers-simplification-of-pre-notification-expectations">Policy Statement 1/20 ‘Solvency II: Longevity risk transfers - simplification of pre-notification expectations’</a>, including an update to <a href="/prudential-regulation/publication/2016/solvency2-longevity-risk-transfers-ss">Supervisory Statement 18/16 ‘Solvency II: longevity risk transfers’</a>.</p>
+
+	                        
+                        </div>
+                    </li>
+                    <li>
+                        <div class="accordion-head">
+                            <h3>
+                            <button class="accordion-button">
+                                Solvency II updates - 2019<span class="accordion-toggle"></span>
+                            </button>
+                            </h3>
+                        </div>
+                        <div class="accordion-content">
+							<p><strong>30 November 2019</strong>: Following publication of <a href="/prudential-regulation/publication/2019/occasional-consultation-paper">PS21/19 ‘Responses to CP13/19 Occasional Consultation Paper’</a>, minor updates, corrections and clarifications to National Specific Templates, internal model output (IMO) templates and associated LOG files are now in effect. These are available on the <a href="/prudential-regulation/regulatory-reporting/regulatory-reporting-insurance-sector">Regulatory reporting – insurance sector</a> page.</p>
+<p><strong>20 November 2019</strong>: We published a reminder to firms that new requirements, primarily in relation to loss-absorbing capacity of deferred tax (LACDT) calculations, will come into effect on Wednesday 1 January 2020.</p>
+<p>For more information, please see <a href="/prudential-regulation/publication/2019/statement-on-the-delegated-regulation-changes-published-by-the-european-commission">‘The PRA’s statement on the delegated regulation changes published by the European Commission’</a>.</p>
+<p><strong>14 November 2019</strong>: We published: </p>
+<ul>
+    <li><a href="/prudential-regulation/publication/2019/solvency-ii-maintenance-of-the-transitional-measure-on-technical-provisions">Policy Statement 25/19 ‘Solvency II: Maintenance of the transitional measure on technical provisions’</a>, and an updated <a href="/prudential-regulation/publication/2016/maintenance-of-the-transitional-measure-on-technical-provisions-under-solvency2-ss">Supervisory Statement 6/16 ‘Maintenance of the ‘transitional measure on technical provisions’ under Solvency II’</a>.</li>
+    <li>‘<a href="/prudential-regulation/publication/2019/solvency-ii-supervisory-disclosures-pras-supervisory-approach-insurance-regulations-applicable-uk">Solvency II: Supervisory disclosures, PRA’s supervisory approach and insurance regulations applicable in the UK</a>’ in line with our obligations under Article 31(2) of the Solvency II Directive for year-end 2018. The material published will be of primary interest to PRA authorised insurance companies.</li>
+</ul>
+<p><strong>12 November 2019: </strong>On Thursday 31 October 2019 the European Insurance and Occupational Pensions Authority (EIOPA) published member state responses to its February 2019 ‘<a href="https://www.eiopa.europa.eu/content/recommendations-insurance-sector-light-united-kingdom-withdrawing-european-union_en" target="_blank">Recommendations for the insurance sector in light of the United Kingdom withdrawing from the European Union</a>’. The responses are available on <a href="https://www.eiopa.europa.eu/" target="_blank">EIOPA’s website</a>.</p>
+<p>The French regulator, Autorité de contrôle prudentiel et de résolution (ACPR), has indicated in its response that it does not intend to comply with EIOPA’s Recommendation 6, relating to insurance policies originally sold in the United Kingdom by UK insurers to policyholders now resident/established in France.</p>
+<p>For more information please see the ‘<a href="/prudential-regulation/publication/2019/statement-on-acpr-response-to-eiopa-recommendations-for-insurance-sector-uk-withdrawal-from-eu">PRA Statement on Autorité de contrôle prudentiel et de résolution (ACPR) response to EIOPA Recommendations for the Insurance Sector in light of the United Kingdom’s withdrawing from the European Union</a>’.</p>
+<p><strong>31 October 2019</strong>: In January, the European Commission released its Call for Advice, setting out the scope of its Solvency II 2020 Review. On Wednesday 16 October, the European Insurance and Occupational Pensions Authority (EIOPA) published a consultation paper, setting out its proposed response to the European Commission’s Call for Advice, including proposed reforms to Solvency II. As part of this, EIOPA also launched a data request, the primary purpose of which is to test the impact of its proposed reforms. </p>
+<p>Some industry participants may already be aware of this data request, and the PRA is in the process of contacting a number of firms directly. This notice promotes wider awareness of this voluntary <a href="https://www.eiopa.europa.eu/content/eiopa-consults-technical-advice-2020-review-solvency-ii_en" target="_blank">data request</a>, and the Solvency II 2020 Review more generally. </p>
+<p><strong><strong>11 October 2019</strong>: </strong>We published <a href="https://www.bankofengland.co.uk/prudential-regulation/publication/2019/sii-adjusting-for-reduction-of-loss-absorbency-where-own-fund-instruments-are-taxed-on-conversion">Consultation Paper 26/19 ‘Solvency II: Adjusting for the reduction of loss absorbency where own fund instruments are taxed on conversion’</a>. Responses to the consultation are requested by Monday 13 January 2020.</p>
+<p><strong>30 September 2019</strong>: We published <a href="/prudential-regulation/publication/2019/occasional-consultation-paper">PS21/19 ‘Responses to CP13/19 Occasional Consultation Paper’</a>, which includes material relevant to Solvency II insurers. </p>
+<p><strong>27 September 2019</strong>: We published the following publications relevant to Solvency II insurers:</p>
+<ul>
+    <li><a href="/prudential-regulation/publication/2019/solvency-ii-equity-release-mortgages-part-2">PS19/19 ‘Solvency II: Equity release mortgages – Part 2’</a>, including an update to <a href="/prudential-regulation/publication/2017/solvency-2-matching-adjustment-illiquid-unrated-assets-and-equity-release-mortgages-ss">SS3/17 ‘Solvency II: Matching adjustment - illiquid unrated assets and equity release mortgages’</a> as well as a new webpage with information on the <a href="/prudential-regulation/key-initiatives/solvency-ii/effective-value-test-parameters">Effective Value Test</a>.</li>
+    <li><a href="/prudential-regulation/publication/2019/solvency-ii-ipre-loans-and-internal-credit-assessments-for-illiquid-unrated-assets">CP23/19 ‘Solvency II: Solvency II: Income producing real estate loans and internal credit assessments for illiquid, unrated assets’</a>. Responses are requested by Monday 9 December 2019.</li>
+</ul>
+<p><strong>24 September 2019: </strong>We published <a href="/prudential-regulation/publication/2019/liquidity-risk-management-for-insurers">PS18/19</a> and <a href="/prudential-regulation/publication/2019/liquidity-risk-management-for-insurers-ss">SS5/19 ‘Liquidity risk management for insurers’</a>. These expectations come into effect from the date of publication.</p>
+<p><strong>18 September 2019</strong>: We published <a href="/prudential-regulation/publication/2019/solvency-ii-prudent-person-principle">Consultation Paper 22/19 ‘Solvency II: Prudent Person principle’</a>. Responses to the consultation are requested by Wednesday 18 December 2019.</p>
+<p><strong>16 September 2019</strong>: In line with <a href="/prudential-regulation/publication/2016/maintenance-of-the-transitional-measure-on-technical-provisions-under-solvency2-ss">Supervisory Statement 6/16 ‘Maintenance of the ‘transitional measure on technical provisions’ under Solvency II’</a>, we have been monitoring market conditions since the previous biennial transitional measure on technical provisions (TMTP) recalculation (as at 31 December 2017), and also have been considering whether changes in market conditions since the end of June can reasonably be considered to have been sustained. In our view, if the current market conditions persist we would be willing to accept applications from firms to recalculate TMTP as at Monday 30 September 2019. In any application, we expect firms to be able to demonstrate that a material change in risk profile has occurred. This is relevant to all firms with current TMTP approval.</p>
+<p>Firms should note that in order to expedite the application process, we would expect applications at this time to use firms’ existing TMTP calculation methodology. Applications received at this time would be in addition to the expected biennial TMTP recalculation as at Tuesday 31 December 2019.</p>
+<p>If you have any questions, please get in touch with your usual supervision contact in the first instance.</p>
+<p><strong>1 August 2019</strong>: We published a letter <a href="/prudential-regulation/letter/2019/proxy-modelling-survey-best-observed-practice">‘Proxy modelling survey: Best observed practice’</a> from Sid Malik, Head of Division for Life Insurance and Pensions Risk, to Chief Risk Officers of life insurers.</p>
+<p><strong>22 July 2019</strong>: We published <a href="/prudential-regulation/publication/2019/solvency-ii-group-availability-of-subordinated-liabilities-and-preference-shares">Consultation Paper 16/19 ‘Solvency II: Group availability of subordinated liabilities and preference shares’</a>. Responses to the consultation are requested by Monday 21 October 2019.</p>
+<p><strong>17 July 2019</strong>: We published a public working draft (PWD) of version 1.1.0 of the Bank of England Insurance XBRL taxonomy to support collection of the proposed changes to National Specific Templates (NSTs), internal model output (IMO), market risk sensitivities (MRS) and standard formula (SF) reporting, alongside related technical artefacts. The taxonomy, data point model (DPM) dictionary, annotated templates and validation rules represent the requirements for Solvency II as set out in <a href="/prudential-regulation/publication/2019/occasional-consultation-paper">CP13/19 ‘Occasional Consultation Paper’</a>. We invite feedback, particularly from firms and software vendors, on the PWD of the taxonomy and DPM artefacts by Wednesday 7 August 2019. We will aim to publish the updated Insurance XBRL taxonomy by the end of October 2019. See the Technical artefacts and support section of the <a href="/prudential-regulation/regulatory-reporting/regulatory-reporting-insurance-sector">Regulatory reporting – insurance sector page</a> for more information. </p>
+<p><strong>12 July 2019</strong>: We published a letter <a href="/prudential-regulation/letter/2019/remuneration-requirements-pra-findings-and-expectations">‘Remuneration requirements – PRA findings and expectations’</a> from David Rule, Executive Director of Insurance Supervision, to the Chairs of Remuneration Committees of PRA-regulated insurers.</p>
+<p><strong>19 June 2019</strong>: We published a letter <a href="/prudential-regulation/letter/2019/observations-from-recent-regulatory-reviews">‘Observations from recent regulatory reviews’</a> from Sid Malik, Head of Division for Life Insurance and Pensions Risk, to Chief Actuaries of life insurers.</p>
+<p><strong>18 June 2019</strong>: We published a <a href="/prudential-regulation/letter/2019/insurance-stress-test-2019">letter and accompanying materials on the Insurance Stress Test 2019</a> which asks the largest regulated life and general insurers to provide information about the impact of a range of stress tests on their business. In addition, the stress test includes an exploratory exercise in relation to cyber underwriting and climate change. The set of climate scenarios explores the impacts to both firms' liabilities and investments stemming from physical and transition risks. The PRA will publish a summary of the overall results but no individual firm results will be made public. The deadline for submission is as follows:</p>
+<ul>
+    <li>Sections A and B: 5pm, Monday 30 September 2019</li>
+    <li>Section C: 5pm, Thursday 31 October 2019</li>
+</ul>
+<p><strong>7 June 2019</strong>: We published <a href="/prudential-regulation/publication/2019/occasional-consultation-paper">CP13/19 ‘Occasional Consultation Paper’</a> which contains proposals for minor updates to supervisory statements, and minor updates, corrections and clarifications to National Specific Templates (NSTs), internal model output templates, and associated LOG files. </p>
+<p><strong>22 May 2019</strong>: We published:</p>
+<ul>
+    <li><a href="/prudential-regulation/publication/2019/solvency-ii-maintenance-of-the-transitional-measure-on-technical-provisions">Consultation Paper 11/19 ‘Solvency II: Maintenance of the transitional measure on technical provisions’</a> and</li>
+    <li>while not specifically related to Solvency II, a report for the general insurance sector from a cross-industry working group ‘<a href="/prudential-regulation/publication/2019/a-framework-for-assessing-financial-impacts-of-physical-climate-change">A framework for assessing financial impacts of physical climate change: A practitioner’s aide for the general insurance sector</a>’.</li>
+</ul>
+<p><strong>14 May 2019</strong>: We published a speech ‘<a href="/speech/2019/david-rule-british-insurers-prudential-regulation-seminar">Model use and misuse</a>’ by David Rule, Executive Director of Insurance Supervision. </p>
+<p><strong>8 April 2019</strong>: We issued the following two updates on the <a href="/prudential-regulation/regulatory-reporting/regulatory-reporting-insurance-sector">Regulatory reporting – insurance sector</a> page, relevant to Solvency II insurers:</p>
+<ol>
+    <li>National Specific Templates - we published a document to address inconsistencies in the NS.07 template, and assist firms in its submission for year-end 2018, see <a href="/prudential-regulation/regulatory-reporting/regulatory-reporting-insurance-sector#national_specific_templates">National Specific Templates (NSTs)</a>.</li>
+    <li>Bank of England Insurance XBRL taxonomy v1.0.0 – we released a hotfix for the Bank of England Insurance data point model (DPM) and XBRL taxonomy v1.0.0, and technical artefacts to address inconsistencies identified. We also published an updated Solvency II XBRL filing manual to update sections that reference the Bank of England insurance XBRL filings, see <a href="/prudential-regulation/regulatory-reporting/regulatory-reporting-insurance-sector#technical_artefacts">Technical artefacts and support</a>. </li>
+</ol>
+<p><strong><strong>3 April 2019</strong></strong>: We published <a href="/prudential-regulation/publication/2019/solvency-ii-equity-release-mortgages-part-2">Consultation Paper 7/19 ‘Solvency II: Equity release mortgages - Part 2’</a> together with a letter from <a href="/prudential-regulation/letter/2019/solvency-ii-equity-release-mortgages-part-2-apr-19">David Rule, Executive Director of Insurance Supervision</a>. </p>
+<p><strong>1 April 2019:</strong> We issued the following two updates on the Regulatory reporting – insurance sector page, relevant to Solvency II insurers:</p>
+<ol>
+    <li>National Specific Templates - we published a document to address inconsistencies in the NS.07 template, and assist firms in its submission for year-end 2018, see <a href="/prudential-regulation/regulatory-reporting/regulatory-reporting-insurance-sector#national_specific_templates">National Specific Templates (NSTs)</a>.</li>
+    <li>Bank of England Insurance XBRL taxonomy v1.0.0 – we released a hotfix for the Bank of England Insurance data point model (DPM) and XBRL taxonomy v1.0.0, and technical artefacts to address inconsistencies identified. We also published an updated Solvency II XBRL filing manual to update sections that reference the Bank of England insurance XBRL filings, see <a href="/prudential-regulation/regulatory-reporting/regulatory-reporting-insurance-sector#technical_artefacts">Technical artefacts and support</a>.</li>
+</ol>
+<p style="margin-bottom: 1em;"><strong>14 March 2019</strong>: We published an update on the <a href="/eu-withdrawal">EU withdrawal webpage</a> aimed at firms looking to use the Part VII of the Financial Services and Markets Act (FSMA) insurance business transfers: Saving Provisions available in the <a href="https://www.gov.uk/eu-withdrawal-act-2018-statutory-instruments/the-financial-services-miscellaneous-amendment-eu-exit-regulations-2019" target="_blank">Financial Services (Miscellaneous) (Amendment) (EU Exit) Regulations 2019</a>. Any insurers with EEA business contemplating undertaking a Part VII and whose transfer is not already underway, should make immediate contact with their PRA supervisory contact, or email the PRA Part VII Transfers team at <a href="mailto:Portfolio.Transfers@bankofengland.co.uk">Portfolio.Transfers@bankofengland.co.uk</a>.</p>
+<p><strong>14 March 2019</strong>: We published <a href="/prudential-regulation/publication/2018/solvency-2-group-own-fund-availability">Policy Statement 9/19 ‘Solvency II: Group own fund availability’</a>, and an updated <a href="/prudential-regulation/publication/2015/solvency2-group-supervision-ss">Supervisory Statement 9/15 ‘Solvency II: Group supervision’</a>.</p>
+<p style="margin-bottom: 1em;"><strong>5 March 2019</strong>: The Bank of England issued a <a href="/news/2019/march/boe-and-fca-agree-mou-with-eiopa-and-eu-insurance-supervisors">news release ‘Bank of England and Financial Conduct Authority agree Memoranda of Understanding (MoUs) with EIOPA and EU insurance supervisors’</a>.</p>
+<p><strong><strong>5 March 2019</strong></strong>: We published <a href="/prudential-regulation/publication/2019/liquidity-risk-management-for-insurers">Consultation Paper 4/19 ‘Liquidity risk management for insurers’</a>. Responses are requested by Wednesday 5 June 2019.</p>
+<p><strong>20 February 2019</strong>: We published <a href="/prudential-regulation/publication/2018/solvency-ii-adjusting-for-reduction-loss-absorbency-where-own-fund-instruments-taxed-on-write-down">PS4/19 ‘Solvency II: Adjusting for the reduction of loss absorbency where own fund instruments are taxed on write down’</a>, an updated <a href="/prudential-regulation/publication/2015/solvency2-the-quality-of-capital-instruments-ss">SS3/15 ‘Solvency II: The quality of capital instruments’</a>, and a reporting clarification.</p>
+<p><strong>13 February 2019: </strong>We published <a href="/prudential-regulation/publication/2018/pra-fees-and-levies-changes-to-periodic-and-transaction-fees">PS3/19 ‘PRA fees and levies: Changes to periodic and transaction fees’</a>, including amendments to the PRA Fees part of the Rulebook and an update to <a href="/prudential-regulation/publication/2016/fees-pra-approach-and-application-ss">SS3/16 ‘Fees: PRA approach and application’</a>. These updates come into effect on Friday 1 March 2019.</p>
+<p><strong><strong>7 February 2019:</strong> </strong>The Bank of England has updated the Solvency II XBRL filing manual to help firms and software vendors create XBRL instance documents for Solvency II Pillar 3 reporting in light of the EIOPA Solvency II Taxonomy 2.3.0 hotfix update. See <a href="https://www.bankofengland.co.uk/prudential-regulation/regulatory-reporting/regulatory-reporting-insurance-sector#technical_artefacts">Technical artefacts and support</a> on the <span style="color: #1f497d;"><a href="https://www.bankofengland.co.uk/prudential-regulation/regulatory-reporting/regulatory-reporting-insurance-sector">Regulatory reporting – insurance sector page</a></span>. We are planning to publish a further update to the filing manual in Spring 2019, to include updates to the NST sections following publication of <span style="color: black;"><a href="https://www.bankofengland.co.uk/prudential-regulation/publication/2018/solvency-ii-changes-to-reporting-format">Policy Statement 21/18 ‘Solvency II: Changes to reporting format’</a></span>. For reporting against the Bank of England insurance taxonomy, the Bank will adopt the same filing rules articulated for Solvency II reporting (in the Solvency II filing manual), where appropriate<strong>.</strong></p>
+<p><strong>5 February 2019: </strong>We published Consultation Paper 3/19 <a href="/prudential-regulation/publication/2019/solvency-ii-longevity-risk-transfers-simplification-of-pre-notification-expectations">‘Solvency II: Longevity risk transfers - simplification of pre-notification expectations’</a>. Responses are requested by Monday 6 May 2019.</p>
+<p><strong>5 February 2019:</strong> We published the <a href="/prudential-regulation/publication/2019/pra-response-to-dwp-consultation-paper-defined-benefit-pension-scheme-consolidation">‘PRA response to DWP consultation paper: Defined benefit pension scheme consolidation’</a>.</p>
+<p><strong>31 January 2019</strong>: We published the final direction and notification template for <a href="/prudential-regulation/publication/2018/securitisation-regulation-pra-and-fca-joint-statement-on-reporting-of-private-securitisations">‘Securitisation Regulation: PRA and FCA joint statement on reporting of private securitisations’</a>. This is applicable to all UK established originators, sponsors and securitisation special purpose entities (SSPEs). This comes into effect from Thursday 31 January 2019.</p>
+<p><strong>15 January 2019</strong>: Following comments from firms and other industry participants on ‘<a href="/prudential-regulation/publication/2018/securitisation-regulation-pra-and-fca-joint-statement-on-reporting-of-private-securitisations">Securitisation Regulation: PRA and FCA joint statement on reporting of private securitisations</a>’, the final direction applicable to all UK established originators, sponsors and securitisation special purpose entities (SSPEs) has been delayed and will be published by the end of January 2019, rather than on Tuesday 15 January 2019 as originally specified.</p>
+<ul class="list-links">
+    <li class="list-links__item"><a href="/prudential-regulation/key-initiatives/solvency-ii#2018" class="list-links__link">2018 updates</a></li>
+</ul>
+
+	                        
+                        </div>
+                    </li>
+                    <li>
+                        <div class="accordion-head">
+                            <h3>
+                            <button class="accordion-button">
+                                Solvency II updates - 2018<span class="accordion-toggle"></span>
+                            </button>
+                            </h3>
+                        </div>
+                        <div class="accordion-content">
+							<h4 class="exclude-navigation">December 2018</h4>
+<p>31 December 2018: Following publication of <a href="/prudential-regulation/publication/2018/solvency-ii-changes-to-reporting-format">PS21/18 ‘Solvency II: Changes to reporting format’</a>, <a href="/prudential-regulation/publication/2018/national-specific-templates-log-files-ss">SS6/18 'Solvency II: National Specific Templates LOG files'</a> and <a href="/prudential-regulation/publication/2018/solvency-ii-updates-to-internal-model-output-reporting">PS24/18 ‘Solvency II: Updates to internal model output reporting’</a>, related templates and LOG files have been updated to reflect the Monday 31 December 2018 effective date. These are available on the <a href="/prudential-regulation/regulatory-reporting/regulatory-reporting-insurance-sector">Regulatory reporting – insurance sector page</a>. </p>
+<p>20 December 2018: Further to <a href="/prudential-regulation/publication/2018/securitisation-the-new-eu-framework-and-significant-risk-transfer">Policy Statement 29/18 ‘Securitisation: The new EU framework and Significant Risk Transfer’</a>, we published a joint statement with the Financial Conduct Authority (FCA), <a href="/prudential-regulation/publication/2018/securitisation-regulation-pra-and-fca-joint-statement-on-reporting-of-private-securitisations">‘Securitisation Regulation: PRA and FCA joint statement on reporting of private securitisations’</a>. This direction is intended to apply to all UK established originators, sponsors and securitisation special purpose entities (SSPEs) from Tuesday 15 January 2019.</p>
+<p>14 December 2018: EIOPA published its results report of the insurance stress test exercise. More information on the stress tests and timescales can be found on EIOPA's website.</p>
+<ul class="list-links">
+    <li class="list-links__item">               <a class="list-links__link" href="https://www.eiopa.europa.eu/insurance-stress-test-2018_en" target="_blank">EIOPA Insurance test 2018</a>           </li>
+</ul>
+<br />
+<p>10 December 2018: We published a <a href="/prudential-regulation/letter/2018/solvency-ii-equity-release-mortgages-dec-18">letter from David Rule</a>, <a href="/prudential-regulation/publication/2018/solvency-ii-equity-release-mortgages">Policy Statement 31/18 ‘Solvency II: Equity release mortgages’</a> together with an updated SS3/17 <a href="/prudential-regulation/publication/2017/solvency-2-matching-adjustment-illiquid-unrated-assets-and-equity-release-mortgages-ss">‘Solvency II: Matching adjustment - illiquid unrated assets and equity release mortgages’</a>. The policy will take effect from 31 December 2019.</p>
+<h4 class="exclude-navigation">November 2018</h4>
+<p>15 November 2018: We published final policy on ‘Securitisation: The new EU framework and Significant Risk Transfer’, including the following policy for Solvency II firms:</p>
+<ul>
+    <li><a href="/prudential-regulation/publication/2018/securitisation-the-new-eu-framework-and-significant-risk-transfer">Policy Statement 29/18 ‘Securitisation: The new EU framework and Significant Risk Transfer’</a>; and</li>
+    <li><a href="/prudential-regulation/publication/2018/securitisation-general-requirements-and-capital-framework-ss">SS10/18 ‘Securitisation: General requirements and capital framework’</a></li>
+</ul>
+<p>13 November 2018: We published templates A and B as required under Article 31(2) of the Solvency II Directive. The information is available on the <a href="/prudential-regulation/publication/2018/solvency-ii-templates-for-the-disclosure-of-aggregate-statistical-data">‘Solvency II templates for the disclosure of aggregate statistical data year-end 2017’ webpage</a> and accurate for year-end 2017 as at 21 August 2018. These supplement <a href="/prudential-regulation/publication/2018/solvency-ii-supervisory-disclosures-pras-supervisory-approach-insurance-regulations-applicable-uk">‘Solvency II: Supervisory disclosures, PRA’s supervisory approach and insurance regulations applicable in the UK year-end 2017’</a>, published on 21 August 2018.</p>
+<p>This public disclosure is designed to foster a uniform level of transparency and accountability between supervisory authorities.</p>
+<p>8 November 2018: Following the <a href="/prudential-regulation/letter/2018/market-conditions-facing-specialist-general-insurers-feedback-from-recent-pra-review-work">letter from Anna Sweeney ‘Market conditions facing specialist general insurers: Feedback from recent PRA review work’</a> , we received responses from firms, which supervisors have followed up individually with the CEOs of Category 1-3 firms operating in the London Market. The letters included our overall impression of the market’s reaction to our letter, a version of which is presented with the letter.</p>
+<h4 class="exclude-navigation">October 2018</h4>
+<p class="exclude-navigation">31 October 2018: <strong></strong>We published CP27/18 ‘<a href="/prudential-regulation/publication/2018/solvency-ii-adjusting-for-reduction-loss-absorbency-where-own-fund-instruments-taxed-on-write-down">Solvency II: Adjusting for the reduction of loss absorbency where own fund instruments are taxed on write down</a>’. This consultation closes on Wednesday 2 January 2019, the short consultation period being necessary to provide certainty as soon as possible to firms considering issuing rT1 instruments.</p>
+<p class="exclude-navigation">17 October 2018: We published the following final policy relevant to Solvency II insurers:</p>
+<ul>
+    <li class="exclude-navigation"><a href="/prudential-regulation/publication/2015/solvency-2-supervisory-approval-for-the-volatility-adjustment">PS22/18 ‘Solvency II: Volatility adjustment’</a>, and an update to <a href="/prudential-regulation/publication/2015/solvency2-supervisory-approval-for-the-volatility-adjustment-ss">SS23/15 ‘Solvency II: Supervisory approval for the volatility adjustment’</a>.</li>
+    <li class="exclude-navigation"><a href="/prudential-regulation/publication/2018/solvency-ii-internal-models-modelling-of-the-volatility-adjustment">PS23/18 ‘Solvency II: Internal models – modelling of the volatility adjustment’</a>, <a href="/prudential-regulation/publication/2018/solvency-ii-internal-models-modelling-of-the-volatility-adjustment-ss">SS9/18 ‘Solvency II: Internal models – modelling of the volatility adjustment’</a>  and an update to <a href="/prudential-regulation/publication/2016/solvency2-internal-models-assessment-model-change-and-the-role-of-non-executive-directors-ss">SS17/16 ‘Solvency II: internal models - assessment, model change and the role of non-executive directors’</a>.</li>
+    <li class="exclude-navigation"><a href="/prudential-regulation/publication/2018/solvency-ii-updates-to-internal-model-output-reporting">PS24/18 ‘Solvency II: Updates to internal model output reporting’</a>, and updates to <a href="/prudential-regulation/publication/2015/solvency2-regulatory-reporting-internal-model-outputs-ss">SS25/15 ‘Solvency II: regulatory reporting internal model outputs’</a> and <a href="/prudential-regulation/publication/2015/solvency2-orsa-and-the-ultimate-time-horizon-non-life-firms-ss">SS26/15 ‘Solvency II: ORSA and the ultimate time horizon – non-life firms’</a>. We also published updates to internal model output templates and LOG files that will take effect from Monday 31 December 2018, see the <a href="/prudential-regulation/regulatory-reporting/regulatory-reporting-insurance-sector">Regulatory reporting – insurance sector</a> page.</li>
+    <li class="exclude-navigation"><a href="/prudential-regulation/publication/2018/solvency-ii-external-audit-of-the-public-disclosure-requirement">PS25/18 ‘Solvency II: External audit of the public disclosure requirement’</a>, and an update to <a href="/prudential-regulation/publication/2016/solvency2-external-audit-of-the-public-disclosure-requirement-ss">SS11/16 ‘Solvency II: External audit of, and responsibilities of the governing body in relation to, the public disclosure requirement’</a>. The updated SS will take effect from Thursday 15 November 2018.</li>
+</ul>
+<p class="exclude-navigation">17 October 2018: We published v1.0.0 of the Bank of England insurance XBRL taxonomy. This version of the taxonomy, data point model (DPM) dictionary, annotated templates and validation rules covers the requirements for reporting of internal model output (IMO), market risk sensitivities (MRS), National Specific Templates (NSTs) and standard formula reporting for firms with an approved internal model (SF.01). See the <a href="/prudential-regulation/regulatory-reporting/regulatory-reporting-insurance-sector">Regulatory reporting – insurance sector</a> page for more information.</p>
+<h4 class="exclude-navigation">September 2018</h4>
+<p class="exclude-navigation">21 September 2018: <strong></strong>We published a public working draft (PWD) of the standalone internal model output (IMO) and market risk sensitivities (MRS) taxonomy, alongside related technical artefacts, that will make up part of the Bank’s insurance XBRL taxonomy. Firms and software vendors are invited to provide feedback on the data point modelling, annotated templates, validations, and XBRL taxonomy to <a href="mailto:uktaxonomypwdfeedback@bankofengland.co.uk">uktaxonomypwdfeedback@bankofengland.co.uk</a> by Friday 28 September 2018. See the <a href="/prudential-regulation/regulatory-reporting/regulatory-reporting-insurance-sector">Regulatory Reporting – insurance sector</a> page for more information.</p>
+<h4 class="exclude-navigation">August 2018</h4>
+<p class="exclude-navigation">21 August 2018: <strong></strong>We published ‘<a href="/prudential-regulation/publication/2018/solvency-ii-supervisory-disclosures-pras-supervisory-approach-insurance-regulations-applicable-uk">Solvency II: Supervisory disclosures, PRA’s supervisory approach and insurance regulations applicable in the UK</a>’  in line with our obligations under Article 31(2) of the Solvency II Directive for year-end 2017. These disclosures include: aggregate statistical data on key aspects of the application of the prudential framework; a table covering the manner of exercise of the options provided for in the Solvency II Directive; links to the texts of insurance regulations applicable in the United Kingdom; and links to the PRA’s supervisory approach. This public disclosure is designed to foster a uniform level of transparency and accountability between supervisory authorities. The material published will be of primary interest to PRA-authorised insurance companies. We will publish templates A and B in Q4 2018.</p>
+<p class="exclude-navigation">10 August 2018: We published a public working draft (PWD) of the standalone National Specific Templates (NSTs) and standard formula reporting for firms with an approved internal model (SF.01) taxonomy, alongside related technical artefacts, that will make up part of the Bank’s insurance XBRL taxonomy. Firms and software vendors are invited to provide feedback on the modelling, annotated templates, validations, and XBRL taxonomy to <a href="mailto:uktaxonomypwdfeedback@bankofengland.co.uk">uktaxonomypwdfeedback@bankofengland.co.uk</a> by Friday 24 August 2018. See the <a href="/prudential-regulation/regulatory-reporting/regulatory-reporting-insurance-sector">Regulatory Reporting – insurance sector</a> page for more information.</p>
+<h4>July 2018</h4>
+<p class="exclude-navigation">31 July 2018: We published <a href="/prudential-regulation/publication/2018/strengthening-accountability-implementing-the-extension-of-the-smcr-to-insurers">Consultation Paper 18/18 ‘Strengthening accountability: implementing the extension of the SM&amp;CR to insurers’</a>.   This consultation closes on Monday 1 October 2018, which is intended to ensure that final rules can be made in advance of implementation so that the industry has certainty on the technical details of the regime prior to commencement on Monday 10 December 2018.</p>
+<p class="exclude-navigation">27 July 2018: We published a modification by consent of the Solvency II Group Supervision rules 20.1 and 20.2 with reference to US-parented undertakings. Please see ‘Available waivers and modifications of rules’ on the <a href="/prudential-regulation/authorisations/waivers-and-modifications-of-rules#availablewaivers">Waivers and modifications of rules page</a>.</p>
+<p class="exclude-navigation">26 July 2018: We published <a href="/prudential-regulation/publication/2018/solvency-ii-changes-to-reporting-format">Policy Statement 21/18 ‘Solvency II: Changes to reporting format’</a> relevant to all UK Solvency II firms, and the Society of Lloyd’s and its managing agents. This includes amendments to the Reporting Part of the PRA Rulebook, and updates to: </p>
+<ul>
+    <li class="exclude-navigation"><a href="/prudential-regulation/publication/2015/solvency2-regulatory-reporting-internal-model-outputs-ss">Supervisory Statement (SS) 25/15 'Solvency II: Regulatory reporting, internal model outputs'</a></li>
+    <li class="exclude-navigation"><a href="/prudential-regulation/publication/2015/solvency2-orsa-and-the-ultimate-time-horizon-non-life-firms-ss">SS26/15 ‘Solvency II: ORSA and the ultimate time horizon – non-life firms’</a></li>
+    <li class="exclude-navigation"><a href="/prudential-regulation/publication/2017/solvency-2-data-collection-of-market-risk-sensitivities-ss">SS7/17 ‘Solvency II Data collection of market risk sensitivities’</a></li>
+    <li class="exclude-navigation"><a href="/prudential-regulation/publication/2016/solvency2-monitoring-model-drift-and-standard-formula-scr-reporting-ss">SS15/16 ‘Solvency II: Monitoring model drift and standard formula SCR reporting for firms with an approved internal model</a>’.</li>
+</ul>
+<p style="margin-bottom: 1em;">The changes to the reporting format will be effective for submissions of year-end 2018 information, from Monday 31 December 2018 onwards. For further information and materials, see the <a href="/prudential-regulation/regulatory-reporting/regulatory-reporting-insurance-sector">Regulatory reporting – insurance sector webpage</a>.</p>
+<p class="exclude-navigation">13 July 2018: <strong></strong>We published final policy relating to <a href="/news/2017/october/pra-launches-series-of-improvements-to-the-implementation-of-solvency-ii">a series of improvements to the implementation of Solvency II</a>:</p>
+<ul>
+    <li class="exclude-navigation"><a href="/prudential-regulation/publication/2017/solvency-ii-matching-adjustment">PS18/18 and SS7/18 'Solvency II: Matching adjustment'</a></li>
+    <li class="exclude-navigation"><a href="/prudential-regulation/publication/2017/solvency-ii-internal-models-modelling-of-the-matching-adjustment">PS19/18 and SS8/18 'Solvency II: Internal models - modelling of the matching adjustment'</a></li>
+    <li class="exclude-navigation"><a href="/prudential-regulation/publication/2017/solvency-ii-internal-models-update">PS20/18 'Solvency II: Internal models update'</a>, including an update to <a href="/prudential-regulation/publication/2016/solvency2-changes-to-internal-models-used-by-uk-insurance-firms-ss">SS12/16 'Solvency II: Changes to internal models used by UK insurance firms'</a></li>
+    <li class="exclude-navigation"><a href="https://www.bankofengland.co.uk/prudential-regulation/publication/2016/solvency2-internal-models-assessment-model-change-and-the-role-of-non-executive-directors-ss">SS17/16 ‘Solvency II: internal models – assessment, model change and the role of non-executive directors’</a> has been updated following PS19/18 and PS20/18. This includes a template and LOG file for Quarterly Model Change Reporting (QMC.01) available on <a href="https://www.bankofengland.co.uk/prudential-regulation/regulatory-reporting/regulatory-reporting-insurance-sector">Regulatory Reporting – insurance sector</a>.</li>
+</ul>
+<p style="margin-bottom: 6pt;">We also published a letter <a href="https://www.bankofengland.co.uk/prudential-regulation/letter/2018/solvency-2-two-and-a-half-years-on">‘Solvency II: Two and half years on’</a> to Chief Actuaries of life insurers from Sid Malik, Head of Division of the PRA Life Insurance and Pensions Risk Division.</p>
+<p>12 July 2018: We published final policy and a consultation related to Solvency II groups:</p>
+<ul>
+    <li>PS17/18 <a href="/prudential-regulation/publication/2016/solvency-2-group-supervision">'Solvency II: Group supervision'</a></li>
+    <li>SS9/15 <a href="/prudential-regulation/publication/2015/solvency2-group-supervision-ss">'Solvency II: Group supervision'</a></li>
+    <li>CP15/18 <a href="/prudential-regulation/publication/2018/solvency-2-group-own-fund-availability">'Solvency II: Groups own funds availability'</a></li>
+</ul>
+<p style="margin-bottom: 1em;">Responses to CP15/18 are requested by Monday 12 November 2018.</p>
+<p>On Friday 6 July we published <a href="/prudential-regulation/publication/2018/changes-in-insurance-reporting-requirements">Policy Statement 16/18 'Changes in insurance reporting requirements'</a> relevant to all UK Solvency II firms, the Society of Lloyd's and its managing agents and mutuals. This includes updates to rules, <a href="/prudential-regulation/publication/2018/national-specific-templates-log-files-ss">Supervisory Statement (SS) 6/18 'Solvency II: National Specific Templates LOG files'</a> which includes updates to <a href="/prudential-regulation/regulatory-reporting/regulatory-reporting-insurance-sector">National Specific Template LOG files</a>, and an update to <a href="/prudential-regulation/publication/2015/solvency2-regulatory-reporting-and-exemptions-ss">SS11/15 'Solvency II: Regulatory Reporting and exemptions'</a> which includes a <a href="/prudential-regulation/authorisations/waivers-and-modifications-of-rules">modification by consent</a>.</p>
+<h4>June 2018</h4>
+<p>
+29 June: In <a href="/prudential-regulation/publication/2017/solvency-ii-internal-models-update">Consultation Paper 27/17 'Solvency II: Internal models update'</a> we had planned to issue the final policy to take effect from June 2018. We are currently finalising the policy with a view to publishing it shortly.</p>
+<p>29 June: In April 2018, we published <a href="/prudential-regulation/publication/2018/solvency-ii-changes-to-reporting-format">CP11/18 'Solvency II: Changes in reporting format'</a>.</p>
+<p>In CP11/18 we proposed to change the reporting format from Microsoft Excel workbooks to XBRL (eXtensible Business Reporting Language) standards for:</p>
+<ul>
+    <li>National specific Templates (NSTs)</li>
+    <li>internal model outputs (IMO)</li>
+    <li>market risk sensitivities (MRS)</li>
+    <li>standard formula reporting for firms with an approved internal model (SF.01, model drift).</li>
+</ul>
+<p>The consultation period is now closed. We received one response. In addressing the feedback received we are keen to ensure firms have a sufficient period to implement proposed changes for year-end 2018 reporting (for year-ends 31 December 2018 onwards). <span>Please see the <a href="/prudential-regulation/regulatory-reporting/regulatory-reporting-insurance-sector">Regulatory reporting – insurance sector webpage</a> for a table with planned dates for the availability of required information.</span> </p>
+<p>12 June: Following engagement with insurers about <a href="https://www.bankofengland.co.uk/prudential-regulation/publication/2017/solvency-2-matching-adjustment-illiquid-unrated-assets-and-equity-release-mortgages-ss">Supervisory Statement (SS) 3/17</a>, the PRA is planning to consult on an update to the SS that would build on the four key principles currently set out by providing additional clarity about the PRA's expectations for valuation of the no-negative-equity guarantee for the purpose of the effective value test and on the applicability of Transitional Measures on Technical Provisions. We expect to publish the consultation around the end of June or first half of July.</p>
+<p>On Wednesday 6 June we published <a href="/prudential-regulation/letter/2018/solvency-2-risk-margin">a letter from Sam Woods</a> to the Chair of the Treasury Committee regarding the Solvency II risk margin.</p>
+<h4>May 2018</h4>
+<p>On Thursday 31 May we published a <a href="/prudential-regulation/letter/2018/market-conditions-facing-specialist-general-insurers-feedback-from-recent-pra-review-work">Letter from Anna Sweeney ‘Market conditions facing specialist general insurers: Feedback from recent PRA review work’</a>, addressed to Chief Executives of specialist general insurance firms regulated by the PRA. The letter requests a summary of firms’ responses on the issues raised by Friday 27 July 2018 from PRA Category 1, 2 or 3 firms predominantly operating in the London Market.</p>
+<p><span>On Tuesday 22 May we published </span><span><a href="/prudential-regulation/publication/2018/securitisation-the-new-eu-framework-and-significant-risk-transfer">Consultation Paper 12/18 ‘Securitisation: The new EU framework and Significant Risk Transfer’</a></span><span>, relevant to all PRA-authorised Capital Requirements Directive IV (CRD IV) firms and all Solvency II firms.</span><span> This consultation closes on Wednesday 22 August 2018.</span></p>
+<p>On Thursday 17 May we published <a href="/prudential-regulation/publication/2017/financial-management-and-planning-by-insurers">Policy Statement 10/18  'Financial management and planning by insurers'</a>, relevant to all UK insurance firms and groups in scope of the Solvency II Directive, and to the Society of Lloyd's and managing agents.</p>
+<p><strong>14 May: </strong>We are holding a Chief Actuary Forum for general insurers on Monday 2 July targeted at holders of Senior Insurance Management Function (SIMF) 20 Chief Actuary. Please <a href="http://www.cvent.com/d/8gqphp" target="_blank">register by Friday 15 June</a>. If you have any queries, please contact <a href="mailto:PRAeventsmanagement@bankofengland.co.uk">PRAeventsmanagement@bankofengland.co.uk</a>.</p>
+<h4>April 2018</h4>
+<p>On Friday 20 April, we published two consultations related to Solvency II regulatory reporting:</p>
+<ul>
+    <li><a href="/prudential-regulation/publication/2018/solvency-ii-updates-to-internal-model-output-reporting">CP10/18 'Solvency II: Updates to internal model output reporting'</a>, with responses requested by Friday 13 July 2018</li>
+    <li><a href="/prudential-regulation/publication/2018/solvency-ii-changes-to-reporting-format">CP11/18 'Solvency II: Changes to reporting format'</a>, with responses requested by Friday 1 June 2018</li>
+</ul>
+<p>Please see <a href="/prudential-regulation/regulatory-reporting/regulatory-reporting-insurance-sector">Regulatory reporting - insurance sector</a> for more general information on Solvency II regulatory reporting, including templates and instructions.</p>
+<p>On Thursday 12 April, we published a letter <a href="https://www.bankofengland.co.uk/prudential-regulation/letter/2018/capital-extractions-by-insurance-firms-in-run-off" target="_blank">'Capital extractions by insurance firms in run-off'</a> addressed to CEOs.</p>
+<p>On Wednesday 11 April 2018 we published two consultation papers (CP) relevant to those working in, or with, Solvency II firms. Both consultations close on Wednesday 11 July 2018:</p>
+<ol>
+    <li><a href="/prudential-regulation/publication/2018/solvency-ii-external-audit-of-the-public-disclosure-requirement">CP8/18 'Solvency II: external audit of the public disclosure requirement'</a>.</li>
+    <li><a href="/prudential-regulation/publication/2018/solvency-ii-internal-models-modelling-of-the-volatility-adjustment">CP9/18 'Solvency II: Internal models - modelling of the volatility adjustment'</a>.</li>
+</ol>
+<h4>March 2018</h4>
+<p>On Monday 5 March 2018 we gave a presentation on PRA internal model outputs for general insurers at the PRA. The following presentation slides used at the event are available below.</p>
+<p style="margin-bottom: 1em;"><a href="/-/media/boe/files/prudential-regulation/solvency-ii/feedback-on-data-quality-and-expectations-for-ye2017.pdf" class="btn btn-pubs btn-has-img btn-lg" target="_blank">  <img width="40" height="44" alt="PDF" src="/assets/img/icon-pdf.svg" />Feedback on data quality and expectations for YE2017</a></p>
+<p style="margin-bottom: 1em;"><a href="/-/media/boe/files/prudential-regulation/solvency-ii/potential-changes-to-data-collection-ye2018.pdf" class="btn btn-pubs btn-has-img btn-lg" target="_blank">  <img width="40" height="44" alt="PDF" src="/assets/img/icon-pdf.svg" />Potential changes to data collection YE2018</a></p>
+<h4>February 2018</h4>
+<p>On Wednesday 7 February 2018, the Bank of England Electronic Data Submission (BEEDS) user guide was updated to incorporate changes that have been made as part of ongoing system maintenance, as well as important information regarding account practices. For more information, see <a href="/prudential-regulation/regulatory-reporting/regulatory-reporting-insurance-sector">Regulatory reporting: insurance sector page</a>.</p>
+<h4>January 2018</h4>
+<p>On Wednesday 17 January 2018 we issued an invitation to a briefing taking place on Monday 5 March 2018 to general insurers who submit the internal model outputs to us annually. As places are limited, we are offering one space per firm, with registration closing on Friday 16 February 2018. Information about the briefing on ‘PRA internal model outputs for general insurers’, including how to register, is available on the <a href="http://www.cvent.com/events/pra-internal-model-outputs-for-general-insurers/event-summary-52e61d38a52f4b84b796b876992a833e.aspx" target="_blank">Bank's event website</a>.</p>
+<p>On 11 January 2018, the PRA published <a href="/prudential-regulation/publication/2018/changes-in-insurance-reporting-requirements">Consultation Paper 2/18 ‘Changes in insurance reporting requirements’</a>. This CP is the third and final consultation referred in the <a href="/news/2017/october/pra-launches-series-of-improvements-to-the-implementation-of-solvency-ii">News Release of 25 October 2017</a>. Information, templates and guidance on reporting are available on our <a href="/prudential-regulation/regulatory-reporting/regulatory-reporting-insurance-sector">Regulatory reporting: insurance sector page</a>.</p>
+
+	                        
+                        </div>
+                    </li>
+</ul>
+
+<ul class="accordion ">
+                    <li>
+                        <div class="accordion-head">
+                            <h3>
+                            <button class="accordion-button">
+                                Insurance aggregate data report<span class="accordion-toggle"></span>
+                            </button>
+                            </h3>
+                        </div>
+                        <div class="accordion-content">
+							<ul class="list-links">
+    <li class="list-links__item"><a href="/statistics/insurance-aggregate-data-report" class="list-links__link">Insurance aggregate data quarterly report</a></li>
+</ul>
+<p>This report is a quarterly statistical release of aggregated data, produced using PRA regulatory data supplied by UK authorised insurance firms.</p>
+<p>The insurance aggregate data quarterly report and data file are scheduled to be updated on:&nbsp;</p>
+<ul>
+    <li><span>19 May&nbsp;2025 (December 2024 data)</span></li>
+    <li><span>Within Q3 2025 (March 2025 data)</span></li>
+    <li>30 September 2025 (June 2025 data)</li>
+    <li>31 December 2025 (September 2025 data)</li>
+    <li>31 March 2026 (December 2025 data)</li>
+</ul>
+<ul class="list-links">
+    <li class="list-links__item"><a href="/statistics/insurance-aggregate-annual-data-report" class="list-links__link">Insurance aggregate data annual report</a></li>
+</ul>
+<p>This report is an annual statistical release of aggregated data, produced using PRA regulatory data supplied by UK authorised insurance firms.</p>
+<p>The insurance aggregate data annual report and data file are scheduled to be updated on:&nbsp;</p>
+<ul>
+    <li><span>Within Q3 2025</span></li>
+</ul>
+<ul class="list-links">
+    <li class="list-links__item"><a href="/prudential-regulation" class="list-links__link">Prudential Regulation Authority (PRA)</a></li>
+    <li class="list-links__item">Which firms does the PRA regulate?</li>
+</ul>
+
+	                        
+                        </div>
+                    </li>
+</ul>
+ </div>
+ 
+
+    <div class="clear"></div>
+</div>
+
+</section> 
+<section class="page-section  ">
+  <div class="container">
+     <div class="col12">
+      <div class="container container-latest">
+	<div class="col12">
+		<h2 class="exclude-navigation">Prudential regulation news and publications</h2>
+	</div>
+	<div class="clear"></div>
+</div>
+<div class="container">
+	
+
+<div class="col3">
+    <a href="/prudential-regulation/publication/2024/december/closing-liquidity-reporting-gaps-consultation-paper" class="release release-regulation " >
+        <div class="release-tag-wrap"><div class="release-tag">Prudential Regulation // Consultation paper</div></div>
+	
+        
+        <div class="release-content">
+			<div class="release-copy">
+					<div class="release-meta">
+
+						<time class="release-date" itemprop="datePublished" datetime="2024-12-11">
+							11 December 2024
+						</time>
+
+					</div>
+				<h3 itemprop="name" class="grid-view exclude-navigation">CP19/24 – Closing liquidity reporting gaps...</h3>
+				<h3 itemprop="name" class="list exclude-navigation">CP19/24 – Closing liquidity reporting gaps and streamlining Standard Formula reporting</h3>
+			</div>
+        </div>
+    </a>
+</div>
+
+<div class="col3">
+    <a href="/prudential-regulation/key-initiatives/solvency-ii/dlt-assessments-jan25" class="release release-regulation " >
+        <div class="release-tag-wrap"><div class="release-tag">Prudential Regulation </div></div>
+	
+        
+        <div class="release-content">
+			<div class="release-copy">
+					<div class="release-meta">
+
+						<time class="release-date" itemprop="datePublished" datetime="2024-12-04">
+							04 December 2024
+						</time>
+
+					</div>
+				<h3 itemprop="name" class="grid-view exclude-navigation">Deep, liquid, and transparent (DLT) assessment...</h3>
+				<h3 itemprop="name" class="list exclude-navigation">Deep, liquid, and transparent (DLT) assessment for January 2025 implementation</h3>
+			</div>
+        </div>
+    </a>
+</div>
+
+<div class="col3">
+    <a href="/prudential-regulation/publication/2015/solvency2-the-treatment-of-pension-scheme-risk-ss" class="release release-regulation " >
+        <div class="release-tag-wrap"><div class="release-tag">Prudential Regulation // Supervisory statement</div></div>
+	
+        
+        <div class="release-content">
+			<div class="release-copy">
+					<div class="release-meta">
+
+						<time class="release-date" itemprop="datePublished" datetime="2024-11-15">
+							15 November 2024
+						</time>
+
+					</div>
+				<h3 itemprop="name" class="grid-view exclude-navigation">SS5/15 - Solvency II: the treatment of pension...</h3>
+				<h3 itemprop="name" class="list exclude-navigation">SS5/15 - Solvency II: the treatment of pension scheme risk</h3>
+			</div>
+        </div>
+    </a>
+</div>
+
+<div class="col3">
+    <a href="/prudential-regulation/publication/2024/november/review-of-solvency-ii-restatement-of-assimilated-law-policy-statement" class="release release-regulation " >
+        <div class="release-tag-wrap"><div class="release-tag">Prudential Regulation // Policy statement</div></div>
+	
+        
+        <div class="release-content">
+			<div class="release-copy">
+					<div class="release-meta">
+
+						<time class="release-date" itemprop="datePublished" datetime="2024-11-15">
+							15 November 2024
+						</time>
+
+					</div>
+				<h3 itemprop="name" class="grid-view exclude-navigation">PS15/24 – Review of Solvency II: Restatement...</h3>
+				<h3 itemprop="name" class="list exclude-navigation">PS15/24 – Review of Solvency II: Restatement of assimilated law</h3>
+			</div>
+        </div>
+    </a>
+</div>
+
+<div class="clear"></div>
+
+</div>
+<div class="container">
+	<div class="col12">
+		<a class="release-view-more" href="/news?NewsTypes=65d34b0d42784c6bb1dd302c1ed63653&amp;Taxonomies=4ba8ad6129bc475093996d115fd257d2&amp;InfiniteScrolling=False&amp;Direction=Latest">View more <span class="visually-hidden">Prudential regulation news and publications</span></a>
+	</div>
+	<div class="clear"></div>
+</div>
+
+ </div>
+ 
+
+    <div class="clear"></div>
+</div>
+
+</section> 				<section class="page-section page-section--last">
+					<div class="container">
+						<div class="col12">
+							<p class="txtr">
+								<a class="scroll-to-top" href="#">Back to top</a>
+							</p>
+						</div>
+					</div>
+				</section>
+
+
+<section class="page-section-survey">
+    <div class="container">
+        <div class="col12">          
+			<div class="page-survey">
+				<div class="page-last-updated">This page was last updated 16 June 2025</div>
+								<div class="page-survey-survey">
+					
+						<iframe src="/forms/page-survey-page?path=%2fsitecore%2fcontent%2fBoE%2fHome%2fprudential-regulation%2fkey-initiatives%2fsolvency-ii&id=pageSurvey9a8179198f0a4969941f361c54a9ad8d" id="pageSurvey9a8179198f0a4969941f361c54a9ad8d" frameborder="0" title="Page Survey" class="page-survey-iframe"></iframe>
+				</div>
+			</div>
+        </div>
+    </div>
+</section>
+		</main>
+		<div class="clear"></div>
+		<footer class="global-footer" itemscope="" itemtype="http://schema.org/WPFooter">
+			<div class="container">
+	<div class="grid">
+		<div class="grid__col col-desk--1-5 col-lap--1-2">
+			<div class="footer-social-bank">
+				<ul class="accordion" data-accordion-mobile>
+					<li>
+						<div class="accordion-head">
+							<h3 class="exclude-navigation">
+								<span class="display-lap-desk">Follow us</span>
+								<button class="accordion-button">
+									Follow us
+									<span class="accordion-toggle"></span>
+								</button>
+							</h3>
+						</div>
+						<div class="accordion-content">
+							
+
+<div class="footer-social-bank">
+    <ul class="social-links">
+            <li class="social-item">
+                    <a class="social-link "
+                        href="https://x.com/bankofengland"
+                        target="_blank"
+						title="Opens in a new window">
+                            <span class="icon-twitter-bird"></span>
+                        <span class="si-text">Follow us on Twitter</span>
+                    </a>
+			</li>
+            <li class="social-item">
+                    <a class="social-link "
+                        href="https://www.linkedin.com/company/bank-of-england/"
+                        target="_blank"
+						title="Opens in a new window">
+                            <span class="icon-linkedin"></span>
+                        <span class="si-text">Connect with us on LinkedIn</span>
+                    </a>
+			</li>
+            <li class="social-item">
+                    <a class="social-link "
+                        href="https://www.facebook.com/bankofengland.co.uk"
+                        target="_blank"
+						title="Opens in a new window">
+                            <span class="icon-facebook"></span>
+                        <span class="si-text">Add us on Facebook</span>
+                    </a>
+			</li>
+            <li class="social-item">
+                    <a class="social-link "
+                        href="https://www.instagram.com/bankofengland"
+                        target="_blank"
+						>
+                            <span class="icon-instagram"></span>
+                        <span class="si-text">Follow us on Instagram</span>
+                    </a>
+			</li>
+            <li class="social-item">
+                    <a class="social-link "
+                        href="https://www.youtube.com/user/bankofenglanduk"
+                        target="_blank"
+						title="Opens in a new window">
+                            <span class="icon-youtube-play"></span>
+                        <span class="si-text">Watch us on Youtube</span>
+                    </a>
+			</li>
+            <li class="social-item">
+                    <a class="social-link "
+                        href="https://www.flickr.com/photos/bankofengland/albums"
+                        target="_blank"
+						title="Opens in a new window">
+                            <span class="icon-flickr"></span>
+                        <span class="si-text">Find us on Flickr</span>
+                    </a>
+			</li>
+    </ul>
+</div>
+							
+
+<div class="footer-social-bank">
+		<h3 class="exclude-navigation">Museum</h3>
+    <ul class="social-links">
+            <li class="social-item">
+                    <a class="social-link "
+                        href="https://www.facebook.com/boemuseum"
+                        target="_blank"
+						title="Opens in a new window">
+                            <span class="icon-facebook"></span>
+                        <span class="si-text">Like the Bank of England museum on Facebook</span>
+                    </a>
+			</li>
+            <li class="social-item">
+                    <a class="social-link "
+                        href="https://instagram.com/boemuseum"
+                        target="_blank"
+						title="Opens in a new window">
+                            <span class="icon-instagram"></span>
+                        <span class="si-text">Follow the Bank of England museum on Instagram</span>
+                    </a>
+			</li>
+    </ul>
+</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+
+		</div>
+		<div class="grid__col col-desk--1-5 col-lap--1-2">
+			
+<div class="footer-topics">
+    <ul class="accordion" data-accordion-mobile>
+        <li>
+            <div class="accordion-head">
+                <h3 class="exclude-navigation">
+                    <span class="display-lap-desk">Browse topics</span>
+                    <button class="accordion-button">Browse topics<span class="accordion-toggle"></span></button>
+                </h3>
+            </div>
+			<div class="accordion-content">
+				<ul class="footer-links">
+						<li class="footer-item">
+                                <a href="/banknotes" class="footer-link" >
+                                    Banknotes
+                                </a>
+						</li>
+						<li class="footer-item">
+                                <a href="/careers" class="footer-link" >
+                                    Careers
+                                </a>
+						</li>
+						<li class="footer-item">
+                                <a href="/the-digital-pound" class="footer-link" >
+                                    Digital pound
+                                </a>
+						</li>
+						<li class="footer-item">
+                                <a href="/education" class="footer-link" >
+                                    Education
+                                </a>
+						</li>
+						<li class="footer-item">
+                                <a href="/financial-stability" class="footer-link" >
+                                    Financial stability
+                                </a>
+						</li>
+						<li class="footer-item">
+                                <a href="/gold" class="footer-link" >
+                                    Gold
+                                </a>
+						</li>
+						<li class="footer-item">
+                                <a href="/markets" class="footer-link" >
+                                    Markets
+                                </a>
+						</li>
+						<li class="footer-item">
+                                <a href="/monetary-policy" class="footer-link" >
+                                    Monetary policy
+                                </a>
+						</li>
+						<li class="footer-item">
+                                <a href="/payment-and-settlement" class="footer-link" >
+                                    Payment and settlement
+                                </a>
+						</li>
+						<li class="footer-item">
+                                <a href="/prudential-regulation" class="footer-link" >
+                                    Prudential regulation
+                                </a>
+						</li>
+						<li class="footer-item">
+                                <a href="/research" class="footer-link" >
+                                    Research
+                                </a>
+						</li>
+						<li class="footer-item">
+                                <a href="/statistics" class="footer-link" >
+                                    Statistics
+                                </a>
+						</li>
+				</ul>
+			</div>
+		</li>
+	</ul>
+</div>
+		</div>
+		<div class="grid__col col-desk--1-5 col-lap--1-2">
+			
+<div class="footer-topics">
+    <ul class="accordion" data-accordion-mobile>
+        <li>
+            <div class="accordion-head">
+                <h3 class="exclude-navigation">
+                    <span class="display-lap-desk">Useful links</span>
+                    <button class="accordion-button">Useful links<span class="accordion-toggle"></span></button>
+                </h3>
+            </div>
+			<div class="accordion-content">
+				<ul class="footer-links">
+						<li class="footer-item">
+                                <a href="/about" class="footer-link" >
+                                    About us
+                                </a>
+						</li>
+						<li class="footer-item">
+                                <a href="/archive" class="footer-link" >
+                                    Archive
+                                </a>
+						</li>
+						<li class="footer-item">
+                                <a href="/contact" class="footer-link" >
+                                    Contact us
+                                </a>
+						</li>
+						<li class="footer-item">
+                                <a href="/explainers" class="footer-link" >
+                                    Explainers
+                                </a>
+						</li>
+						<li class="footer-item">
+                                <a href="/faq" class="footer-link" >
+                                    FAQs
+                                </a>
+						</li>
+						<li class="footer-item">
+                                <a href="/freedom-of-information" class="footer-link" >
+                                    Freedom of Information
+                                </a>
+						</li>
+						<li class="footer-item">
+                                <a href="/glossary" class="footer-link" >
+                                    Glossary
+                                </a>
+						</li>
+						<li class="footer-item">
+                                <a href="/museum" class="footer-link" >
+                                    Museum
+                                </a>
+						</li>
+						<li class="footer-item">
+                                <a href="/subscribe-to-emails" class="footer-link" >
+                                    Subscribe to emails
+                                </a>
+						</li>
+				</ul>
+			</div>
+		</li>
+	</ul>
+</div>
+		</div>
+		<div class="grid__col col-desk--1-5 col-lap--1-2">
+			<div class="footer-contact">
+				
+<h3 class="exclude-navigation">Bank of England</h3>
+<ul class="footer-contact-info">
+    <li class="footer-address">Threadneedle Street, London, EC2R 8AH</li>
+    <li class="footer-tel">Switchboard: <a class="footer-tel-link" href="tel://00442034614444" target="_blank" title="Switchboard">+44(0)20 3461 4444</a></li>
+    <li class="footer-tel">Enquiries: <a class="footer-tel-link" href="tel://00442034614878" target="_blank" title="Enquiries">+44(0)20 3461 4878</a></li>
+</ul>
+				
+<h3 class="exclude-navigation">Bank of England Museum</h3>
+<ul class="footer-contact-info">
+    <li class="footer-address">Bartholomew Lane, London, EC2R 8AH</li>
+</ul>
+			</div>
+		</div>
+		<div class="grid__col col-desk--1-5">
+			
+	<div class="container-seal">
+		<a class="icon-seal" href="/"  ><img src="/-/media/boe/images/logo/footer-logo.svg?h=50&amp;iar=0&amp;mh=50&amp;mw=240&amp;w=50&amp;hash=21937D63AC8E857977043CB73AE10F74" alt="Bank of England home" width="50" height="50" /></a>
+	</div>
+
+		</div>
+	</div>
+</div>
+<div class="footer-copyright">
+	<div class="container">
+		<div class="col12">
+			
+<ul class="list-inline">
+	    <li class="list-inline__item"> 
+			    <a href="/accessibility" class="list-inline__link" >
+Accessibility statement			    </a>
+	    </li>
+	    <li class="list-inline__item"> 
+			    <a href="/legal/privacy-and-cookie-policy" class="list-inline__link" >
+Cookies			    </a>
+	    </li>
+	    <li class="list-inline__item"> 
+			    <a href="/about/gymraeg" class="list-inline__link" >
+						<span lang="cy">
+							Cymraeg
+						</span>
+			    </a>
+	    </li>
+	    <li class="list-inline__item"> 
+			    <a href="/legal" class="list-inline__link" >
+Legal			    </a>
+	    </li>
+	    <li class="list-inline__item"> 
+			    <a href="/legal/privacy" class="list-inline__link" >
+Privacy			    </a>
+	    </li>
+	    <li class="list-inline__item"> 
+			    <a href="/sitemap" class="list-inline__link" >
+Sitemap			    </a>
+	    </li>
+</ul>
+
+
+			
+<p class="text-copyright">&#169;2025 Bank of England&#160;</p>
+		</div>
+	</div>
+</div>
+		</footer>
+		<script src="/scripts/boe.vendor.min.js?ver=5287d" type="text/javascript"></script>
+<script src="/scripts/boe.min.js?ver=5287d" type="text/javascript"></script>
+<script src="/-/media/css/search-bundle-script.js?ver=BB56DD&mode=npe" type="text/javascript"></script>
+<script src="/-/media/css/search-new-js.js?ver=6AFCD3&mode=npe" type="text/javascript"></script>
+<script src="/-/media/css/docraptor-is-finished.js?ver=CAB513&mode=nf" type="text/javascript"></script>
+
+		
+		
+	</div>
+</body>
+</html>

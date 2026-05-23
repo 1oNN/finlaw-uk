@@ -1,0 +1,81 @@
+id,domain,complexity,question,gold_answer,expected_citations,expected_keywords
+Q1,FSMA,basic,What is the ‘general prohibition’ in UK financial services?,The FSMA 2000 ‘general prohibition’ makes it an offence to carry on a regulated activity in the UK unless authorised or exempt.,FSMA 2000 s.19 | RAO 2001 art.5,general prohibition|regulated activity|authorised|exempt
+Q2,COMP,basic,What is the FSCS deposit protection limit per individual?,"£85,000 per person per firm for eligible deposits.",COMP 10.2,"FSCS|£85,000|deposit protection"
+Q3,COBS,basic,What standard applies to financial promotions in the UK?,"Financial promotions must be fair, clear and not misleading.",COBS 4.2.1R,financial promotion|fair|clear|misleading
+Q4,ICOBS,basic,How many days does a consumer have to cancel a general insurance policy?,Consumers have 14 days to cancel most non-investment insurance contracts.,ICOBS 7,cancellation|cooling off|14 days|insurance
+Q5,PSR,basic,What is the maximum liability for an unauthorised payment transaction?,The payer’s liability is limited to £35 unless the payer acted fraudulently or with gross negligence.,PSR 2017 reg.77,unauthorised|payment|£35|liability
+Q6,MLR,basic,What is CDD under the Money Laundering Regulations 2017?,Customer due diligence requires firms to identify and verify customers and obtain information on purpose of business.,MLR 2017 reg.27,CDD|customer due diligence|verify|identify
+Q7,RAO,basic,Give one example of a regulated activity under RAO 2001.,Advising on investments is a regulated activity.,RAO 2001 art.53,regulated activity|advising|investments
+Q8,UK MAR,basic,What must issuers maintain regarding inside information?,Issuers must maintain and update insider lists and provide them to the FCA on request.,UK MAR art.18 | DTR 2,insider list|issuer|FCA
+Q9,PRIN,basic,Which FCA principle introduces the Consumer Duty?,"The Consumer Duty is Principle 12, requiring firms to act to deliver good outcomes for retail customers.",PRIN 12,Consumer Duty|good outcomes|Principle 12
+Q10,DISP,basic,How long do firms have to issue a final response to a complaint?,Firms must issue a final response within 8 weeks or a holding response with FOS rights.,DISP 1.6,complaint|final response|8 weeks|ombudsman
+Q11,FSMA,basic,Sample basic question 11 for FSMA?,"Gold-standard answer for FSMA, basic level.",FSMA 2000 s.19,regulated activity|authorised|exempt
+Q12,COMP,basic,Sample basic question 12 for COMP?,"Gold-standard answer for COMP, basic level.",COMP 10.2,"FSCS|£85,000|deposit protection"
+Q13,COBS,basic,Sample basic question 13 for COBS?,"Gold-standard answer for COBS, basic level.",COBS 4.2.1R,financial promotion|clear|misleading
+Q14,ICOBS,basic,Sample basic question 14 for ICOBS?,"Gold-standard answer for ICOBS, basic level.",ICOBS 7,insurance|cooling off|cancellation
+Q15,PSR,basic,Sample basic question 15 for PSR?,"Gold-standard answer for PSR, basic level.",PSR 2017 reg.77,unauthorised payment|liability|refund
+Q16,MLR,basic,Sample basic question 16 for MLR?,"Gold-standard answer for MLR, basic level.",MLR 2017 reg.27,CDD|EDD|due diligence
+Q17,RAO,basic,Sample basic question 17 for RAO?,"Gold-standard answer for RAO, basic level.",RAO 2001 art.25,regulated activity|arranging|advising
+Q18,UK MAR,basic,Sample basic question 18 for UK MAR?,"Gold-standard answer for UK MAR, basic level.",UK MAR art.17,inside information|disclosure|issuer
+Q19,PRIN,basic,Sample basic question 19 for PRIN?,"Gold-standard answer for PRIN, basic level.",PRIN 12,Consumer Duty|fair value|good outcomes
+Q20,DISP,basic,Sample basic question 20 for DISP?,"Gold-standard answer for DISP, basic level.",DISP 1.6,complaint|ombudsman|final response
+Q21,FSMA,basic,Sample basic question 21 for FSMA?,"Gold-standard answer for FSMA, basic level.",FSMA 2000 s.19,regulated activity|authorised|exempt
+Q22,COMP,basic,Sample basic question 22 for COMP?,"Gold-standard answer for COMP, basic level.",COMP 10.2,"FSCS|£85,000|deposit protection"
+Q23,COBS,basic,Sample basic question 23 for COBS?,"Gold-standard answer for COBS, basic level.",COBS 4.2.1R,financial promotion|clear|misleading
+Q24,ICOBS,basic,Sample basic question 24 for ICOBS?,"Gold-standard answer for ICOBS, basic level.",ICOBS 7,insurance|cooling off|cancellation
+Q25,PSR,basic,Sample basic question 25 for PSR?,"Gold-standard answer for PSR, basic level.",PSR 2017 reg.77,unauthorised payment|liability|refund
+Q26,MLR,intermediate,Sample intermediate question 26 for MLR?,"Gold-standard answer for MLR, intermediate level.",MLR 2017 reg.27,CDD|EDD|due diligence
+Q27,RAO,intermediate,Sample intermediate question 27 for RAO?,"Gold-standard answer for RAO, intermediate level.",RAO 2001 art.25,regulated activity|arranging|advising
+Q28,UK MAR,intermediate,Sample intermediate question 28 for UK MAR?,"Gold-standard answer for UK MAR, intermediate level.",UK MAR art.17,inside information|disclosure|issuer
+Q29,PRIN,intermediate,Sample intermediate question 29 for PRIN?,"Gold-standard answer for PRIN, intermediate level.",PRIN 12,Consumer Duty|fair value|good outcomes
+Q30,DISP,intermediate,Sample intermediate question 30 for DISP?,"Gold-standard answer for DISP, intermediate level.",DISP 1.6,complaint|ombudsman|final response
+Q31,FSMA,intermediate,Sample intermediate question 31 for FSMA?,"Gold-standard answer for FSMA, intermediate level.",FSMA 2000 s.19,regulated activity|authorised|exempt
+Q32,COMP,intermediate,Sample intermediate question 32 for COMP?,"Gold-standard answer for COMP, intermediate level.",COMP 10.2,"FSCS|£85,000|deposit protection"
+Q33,COBS,intermediate,Sample intermediate question 33 for COBS?,"Gold-standard answer for COBS, intermediate level.",COBS 4.2.1R,financial promotion|clear|misleading
+Q34,ICOBS,intermediate,Sample intermediate question 34 for ICOBS?,"Gold-standard answer for ICOBS, intermediate level.",ICOBS 7,insurance|cooling off|cancellation
+Q35,PSR,intermediate,Sample intermediate question 35 for PSR?,"Gold-standard answer for PSR, intermediate level.",PSR 2017 reg.77,unauthorised payment|liability|refund
+Q36,MLR,intermediate,Sample intermediate question 36 for MLR?,"Gold-standard answer for MLR, intermediate level.",MLR 2017 reg.27,CDD|EDD|due diligence
+Q37,RAO,intermediate,Sample intermediate question 37 for RAO?,"Gold-standard answer for RAO, intermediate level.",RAO 2001 art.25,regulated activity|arranging|advising
+Q38,UK MAR,intermediate,Sample intermediate question 38 for UK MAR?,"Gold-standard answer for UK MAR, intermediate level.",UK MAR art.17,inside information|disclosure|issuer
+Q39,PRIN,intermediate,Sample intermediate question 39 for PRIN?,"Gold-standard answer for PRIN, intermediate level.",PRIN 12,Consumer Duty|fair value|good outcomes
+Q40,DISP,intermediate,Sample intermediate question 40 for DISP?,"Gold-standard answer for DISP, intermediate level.",DISP 1.6,complaint|ombudsman|final response
+Q41,FSMA,intermediate,Sample intermediate question 41 for FSMA?,"Gold-standard answer for FSMA, intermediate level.",FSMA 2000 s.19,regulated activity|authorised|exempt
+Q42,COMP,intermediate,Sample intermediate question 42 for COMP?,"Gold-standard answer for COMP, intermediate level.",COMP 10.2,"FSCS|£85,000|deposit protection"
+Q43,COBS,intermediate,Sample intermediate question 43 for COBS?,"Gold-standard answer for COBS, intermediate level.",COBS 4.2.1R,financial promotion|clear|misleading
+Q44,ICOBS,intermediate,Sample intermediate question 44 for ICOBS?,"Gold-standard answer for ICOBS, intermediate level.",ICOBS 7,insurance|cooling off|cancellation
+Q45,PSR,intermediate,Sample intermediate question 45 for PSR?,"Gold-standard answer for PSR, intermediate level.",PSR 2017 reg.77,unauthorised payment|liability|refund
+Q46,MLR,intermediate,Sample intermediate question 46 for MLR?,"Gold-standard answer for MLR, intermediate level.",MLR 2017 reg.27,CDD|EDD|due diligence
+Q47,RAO,intermediate,Sample intermediate question 47 for RAO?,"Gold-standard answer for RAO, intermediate level.",RAO 2001 art.25,regulated activity|arranging|advising
+Q48,UK MAR,intermediate,Sample intermediate question 48 for UK MAR?,"Gold-standard answer for UK MAR, intermediate level.",UK MAR art.17,inside information|disclosure|issuer
+Q49,PRIN,intermediate,Sample intermediate question 49 for PRIN?,"Gold-standard answer for PRIN, intermediate level.",PRIN 12,Consumer Duty|fair value|good outcomes
+Q50,DISP,intermediate,Sample intermediate question 50 for DISP?,"Gold-standard answer for DISP, intermediate level.",DISP 1.6,complaint|ombudsman|final response
+Q51,FSMA,advanced,Sample advanced question 51 for FSMA?,"Gold-standard answer for FSMA, advanced level.",FSMA 2000 s.19,regulated activity|authorised|exempt
+Q52,COMP,advanced,Sample advanced question 52 for COMP?,"Gold-standard answer for COMP, advanced level.",COMP 10.2,"FSCS|£85,000|deposit protection"
+Q53,COBS,advanced,Sample advanced question 53 for COBS?,"Gold-standard answer for COBS, advanced level.",COBS 4.2.1R,financial promotion|clear|misleading
+Q54,ICOBS,advanced,Sample advanced question 54 for ICOBS?,"Gold-standard answer for ICOBS, advanced level.",ICOBS 7,insurance|cooling off|cancellation
+Q55,PSR,advanced,Sample advanced question 55 for PSR?,"Gold-standard answer for PSR, advanced level.",PSR 2017 reg.77,unauthorised payment|liability|refund
+Q56,MLR,advanced,Sample advanced question 56 for MLR?,"Gold-standard answer for MLR, advanced level.",MLR 2017 reg.27,CDD|EDD|due diligence
+Q57,RAO,advanced,Sample advanced question 57 for RAO?,"Gold-standard answer for RAO, advanced level.",RAO 2001 art.25,regulated activity|arranging|advising
+Q58,UK MAR,advanced,Sample advanced question 58 for UK MAR?,"Gold-standard answer for UK MAR, advanced level.",UK MAR art.17,inside information|disclosure|issuer
+Q59,PRIN,advanced,Sample advanced question 59 for PRIN?,"Gold-standard answer for PRIN, advanced level.",PRIN 12,Consumer Duty|fair value|good outcomes
+Q60,DISP,advanced,Sample advanced question 60 for DISP?,"Gold-standard answer for DISP, advanced level.",DISP 1.6,complaint|ombudsman|final response
+Q61,FSMA,advanced,Sample advanced question 61 for FSMA?,"Gold-standard answer for FSMA, advanced level.",FSMA 2000 s.19,regulated activity|authorised|exempt
+Q62,COMP,advanced,Sample advanced question 62 for COMP?,"Gold-standard answer for COMP, advanced level.",COMP 10.2,"FSCS|£85,000|deposit protection"
+Q63,COBS,advanced,Sample advanced question 63 for COBS?,"Gold-standard answer for COBS, advanced level.",COBS 4.2.1R,financial promotion|clear|misleading
+Q64,ICOBS,advanced,Sample advanced question 64 for ICOBS?,"Gold-standard answer for ICOBS, advanced level.",ICOBS 7,insurance|cooling off|cancellation
+Q65,PSR,advanced,Sample advanced question 65 for PSR?,"Gold-standard answer for PSR, advanced level.",PSR 2017 reg.77,unauthorised payment|liability|refund
+Q66,MLR,advanced,Sample advanced question 66 for MLR?,"Gold-standard answer for MLR, advanced level.",MLR 2017 reg.27,CDD|EDD|due diligence
+Q67,RAO,advanced,Sample advanced question 67 for RAO?,"Gold-standard answer for RAO, advanced level.",RAO 2001 art.25,regulated activity|arranging|advising
+Q68,UK MAR,advanced,Sample advanced question 68 for UK MAR?,"Gold-standard answer for UK MAR, advanced level.",UK MAR art.17,inside information|disclosure|issuer
+Q69,PRIN,advanced,Sample advanced question 69 for PRIN?,"Gold-standard answer for PRIN, advanced level.",PRIN 12,Consumer Duty|fair value|good outcomes
+Q70,DISP,advanced,Sample advanced question 70 for DISP?,"Gold-standard answer for DISP, advanced level.",DISP 1.6,complaint|ombudsman|final response
+Q71,FSMA,advanced,Sample advanced question 71 for FSMA?,"Gold-standard answer for FSMA, advanced level.",FSMA 2000 s.19,regulated activity|authorised|exempt
+Q72,COMP,advanced,Sample advanced question 72 for COMP?,"Gold-standard answer for COMP, advanced level.",COMP 10.2,"FSCS|£85,000|deposit protection"
+Q73,COBS,advanced,Sample advanced question 73 for COBS?,"Gold-standard answer for COBS, advanced level.",COBS 4.2.1R,financial promotion|clear|misleading
+Q74,ICOBS,advanced,Sample advanced question 74 for ICOBS?,"Gold-standard answer for ICOBS, advanced level.",ICOBS 7,insurance|cooling off|cancellation
+Q75,PSR,advanced,Sample advanced question 75 for PSR?,"Gold-standard answer for PSR, advanced level.",PSR 2017 reg.77,unauthorised payment|liability|refund
+Q76,MLR,advanced,Sample advanced question 76 for MLR?,"Gold-standard answer for MLR, advanced level.",MLR 2017 reg.27,CDD|EDD|due diligence
+Q77,RAO,advanced,Sample advanced question 77 for RAO?,"Gold-standard answer for RAO, advanced level.",RAO 2001 art.25,regulated activity|arranging|advising
+Q78,UK MAR,advanced,Sample advanced question 78 for UK MAR?,"Gold-standard answer for UK MAR, advanced level.",UK MAR art.17,inside information|disclosure|issuer
+Q79,PRIN,advanced,Sample advanced question 79 for PRIN?,"Gold-standard answer for PRIN, advanced level.",PRIN 12,Consumer Duty|fair value|good outcomes
+Q80,DISP,advanced,Sample advanced question 80 for DISP?,"Gold-standard answer for DISP, advanced level.",DISP 1.6,complaint|ombudsman|final response

@@ -1,0 +1,11 @@
+id,domain,scenario,gold_rationale,expected_citations
+C1,FSMA,An unauthorised firm promoted investment products to the public.,This breaches the financial promotion restriction and the general prohibition.,FSMA 2000 s.19 | COBS 4.2.1R
+C2,UK MAR,A listed company delayed disclosure of inside information about a merger.,Issuers must disclose inside information as soon as possible unless lawful delay applies.,UK MAR art.17
+C3,COBS,"Scenario description for COBS, case 3.","Gold rationale for COBS, case 3.",COBS 4.2.1R
+C4,ICOBS,"Scenario description for ICOBS, case 4.","Gold rationale for ICOBS, case 4.",ICOBS 7
+C5,PSR,"Scenario description for PSR, case 5.","Gold rationale for PSR, case 5.",PSR 2017 reg.77
+C6,MLR,"Scenario description for MLR, case 6.","Gold rationale for MLR, case 6.",MLR 2017 reg.27
+C7,RAO,"Scenario description for RAO, case 7.","Gold rationale for RAO, case 7.",RAO 2001 art.25
+C8,UK MAR,"Scenario description for UK MAR, case 8.","Gold rationale for UK MAR, case 8.",UK MAR art.17
+C9,PRIN,"Scenario description for PRIN, case 9.","Gold rationale for PRIN, case 9.",PRIN 12
+C10,DISP,"Scenario description for DISP, case 10.","Gold rationale for DISP, case 10.",DISP 1.6

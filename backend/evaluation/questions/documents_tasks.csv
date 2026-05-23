@@ -1,0 +1,21 @@
+id,domain,document_excerpt,task,expected_issue,expected_risk
+D1,ICOBS,The policyholder may cancel this policy within 30 days of inception for a full refund.,Identify the risk and duty.,Cooling-off right for insurance,Green
+D2,COMP,"Eligible deposits are protected up to £85,000 per person per firm.",Identify the protection scheme and threshold.,FSCS protection limit,Green
+D3,PSR,The bank refused to refund an unauthorised payment of £200.,What rule applies?,Unauthorised payments refund duty,Amber
+D4,DISP,The firm failed to issue a response to a complaint for over 12 weeks.,Assess the compliance risk.,Breach of DISP complaint-handling deadlines,Red
+D5,PSR,"Excerpt text for PSR, doc 5.",Identify main issue and risk.,Expected issue for PSR,Green
+D6,MLR,"Excerpt text for MLR, doc 6.",Identify main issue and risk.,Expected issue for MLR,Yellow
+D7,RAO,"Excerpt text for RAO, doc 7.",Identify main issue and risk.,Expected issue for RAO,Green
+D8,UK MAR,"Excerpt text for UK MAR, doc 8.",Identify main issue and risk.,Expected issue for UK MAR,Green
+D9,PRIN,"Excerpt text for PRIN, doc 9.",Identify main issue and risk.,Expected issue for PRIN,Yellow
+D10,DISP,"Excerpt text for DISP, doc 10.",Identify main issue and risk.,Expected issue for DISP,Green
+D11,FSMA,"Excerpt text for FSMA, doc 11.",Identify main issue and risk.,Expected issue for FSMA,Green
+D12,COMP,"Excerpt text for COMP, doc 12.",Identify main issue and risk.,Expected issue for COMP,Yellow
+D13,COBS,"Excerpt text for COBS, doc 13.",Identify main issue and risk.,Expected issue for COBS,Green
+D14,ICOBS,"Excerpt text for ICOBS, doc 14.",Identify main issue and risk.,Expected issue for ICOBS,Green
+D15,PSR,"Excerpt text for PSR, doc 15.",Identify main issue and risk.,Expected issue for PSR,Yellow
+D16,MLR,"Excerpt text for MLR, doc 16.",Identify main issue and risk.,Expected issue for MLR,Green
+D17,RAO,"Excerpt text for RAO, doc 17.",Identify main issue and risk.,Expected issue for RAO,Green
+D18,UK MAR,"Excerpt text for UK MAR, doc 18.",Identify main issue and risk.,Expected issue for UK MAR,Yellow
+D19,PRIN,"Excerpt text for PRIN, doc 19.",Identify main issue and risk.,Expected issue for PRIN,Green
+D20,DISP,"Excerpt text for DISP, doc 20.",Identify main issue and risk.,Expected issue for DISP,Green
