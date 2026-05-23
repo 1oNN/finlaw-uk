@@ -8,7 +8,8 @@ import {
 import Home from "./pages/Home";
 import ChatPage from "./pages/ChatPage";
 import EvalPage from "./pages/EvalPage";
-import "./App.css"; // <- all styles here
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
 
 export default function App() {
   return (
@@ -17,6 +18,8 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="/chat" element={<ChatPage />} />
         <Route path="/eval" element={<EvalPage />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </Router>
