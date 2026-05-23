@@ -21,7 +21,7 @@ import os
 import re
 import time
 from pathlib import Path
-from typing import Dict, List
+from typing import Dict, List, Optional
 
 from flask import Flask, Response, jsonify, request
 from flask_cors import CORS
@@ -48,14 +48,17 @@ GENERAL_PROMPT = (
 )
 
 SMALLTALK_PROMPT = (
-    "You are FinLaw GPT, a UK finance-law assistant. The user is greeting you or "
-    "making small-talk, not asking a regulatory question. "
-    "Respond in ONE short, friendly sentence (max 25 words). "
-    "Do NOT cite any legislation, regulations, FCA/PRA modules, or sources. "
-    "Do NOT include a 'Source:' line. "
-    "If asked who you are or what you can do, briefly say you answer UK finance-law "
-    "questions (FSMA, COBS, SYSC, PRA Rulebook, CRR, etc.) and can run a traffic-light "
-    "review on text or uploaded documents."
+    "You are FinLaw GPT. The user greeted you — they did NOT ask a question. "
+    "Reply with a warm, casual 1-sentence greeting back (max 18 words). "
+    "Examples of good replies:\n"
+    "  • 'Hey — what's up?'\n"
+    "  • 'Hi there! How can I help today?'\n"
+    "  • 'Hello! What's on your mind?'\n"
+    "STRICT RULES:\n"
+    "  • DO NOT introduce yourself unless asked.\n"
+    "  • DO NOT mention FSMA, COBS, SYSC, FCA, PRA, CRR, or any finance topic.\n"
+    "  • DO NOT list what you can help with.\n"
+    "  • DO NOT include a 'Source:' line."
 )
 
 FINANCE_QA_PROMPT = (
@@ -66,6 +69,42 @@ FINANCE_QA_PROMPT = (
     "Use at least TWO domain keywords from FSMA/COBS/SYSC/CONC/ICOBS/MCOB/PROD/MLR/PSR/RAO/UK MAR/DTR in every answer.\n"
     "Add exactly two FCA/PRA module tokens (e.g., 'PRIN 12', 'SYSC 10', 'COBS 4') before the Source line.\n"
     "End with one line starting exactly with 'Source: ' using ONLY UK short-form citations (e.g., 'FSMA 2000 s.19 | RAO 2001 art.25 | COBS 4.2.1R'). No URLs."
+)
+
+FRUSTRATION_PROMPT = (
+    "You are FinLaw GPT. The user sounds frustrated. "
+    "Reply in EXACTLY TWO short sentences: (1) acknowledge that something seems off, "
+    "(2) ask ONE clarifying question about what they were trying to find. "
+    "Examples of good replies:\n"
+    "  • 'Sorry, sounds like something's off — what were you trying to find?'\n"
+    "  • 'Ugh, that's annoying. What were you hoping I could help with?'\n"
+    "STRICT RULES:\n"
+    "  • DO NOT introduce yourself.\n"
+    "  • DO NOT mention FSMA, COBS, SYSC, FCA, PRA, or any finance topic.\n"
+    "  • DO NOT list what you can do.\n"
+    "  • DO NOT include a 'Source:' line."
+)
+
+EMPTY_PROMPT = (
+    "You are FinLaw GPT. The user sent an empty or punctuation-only message. "
+    "Reply with ONE short prompt-back (max 12 words). "
+    "Examples:\n"
+    "  • 'Did you mean to send something?'\n"
+    "  • 'Hmm, looks blank — what's on your mind?'\n"
+    "STRICT RULES:\n"
+    "  • DO NOT introduce yourself.\n"
+    "  • DO NOT mention finance, law, FSMA, COBS, or any topic.\n"
+    "  • DO NOT include a 'Source:' line."
+)
+
+META_PROMPT = (
+    "You are FinLaw GPT. The user is asking who or what you are. "
+    "Reply in ONE friendly sentence (max 35 words): you answer UK finance-law "
+    "questions (FSMA, COBS, SYSC, PRA Rulebook, CRR, etc.) and can run a "
+    "traffic-light review on uploaded documents. "
+    "Example: 'I'm FinLaw GPT — I help with UK finance regulation (FSMA, COBS, "
+    "SYSC, PRA Rulebook) and can run traffic-light reviews on documents you upload.'\n"
+    "DO NOT include a 'Source:' line."
 )
 
 TRAFFIC_LIGHT_PROMPT = (
@@ -156,6 +195,51 @@ def is_smalltalk_intent(text: str) -> bool:
     if len(tokens) <= 3 and not is_finance_intent(text) and not is_traffic_light_intent(text):
         return True
     return False
+
+
+_FRUSTRATION_RE = re.compile(
+    r"\b(?:wtf|tf|wth|fml|stupid|broken|sucks?|fuck(?:ing)?|shit|damn|crap|"
+    r"this\s+doesn'?t\s+work|doesn'?t\s+work|not\s+working|"
+    r"hate\s+this|worst|useless|garbage|trash)\b",
+    re.IGNORECASE,
+)
+
+_META_RE = re.compile(
+    r"^(?:who\s+are\s+you|what\s+are\s+you|what\s+can\s+you\s+do|"
+    r"what\s+do\s+you\s+do|what\s+is\s+this|help|introduce\s+yourself)"
+    r"[\s!.?,]*$",
+    re.IGNORECASE,
+)
+
+
+def classify_intent(text: str) -> str:
+    """Bucket a user message BEFORE retrieval.
+
+    Returns one of: 'empty', 'frustration', 'meta', 'greeting', 'legal_query'.
+    Order matters: frustration overrides greeting if profanity is present;
+    legal_query is the default fall-through to the RAG pipeline.
+    """
+    if not text:
+        return "empty"
+    s = text.strip()
+    if len(s) < 2 or re.fullmatch(r"[\s\W_]+", s):
+        return "empty"
+    if _FRUSTRATION_RE.search(s):
+        return "frustration"
+    s_lower = s.lower()
+    if _META_RE.match(s_lower):
+        return "meta"
+    if _SMALLTALK_RE.match(s_lower):
+        return "greeting"
+    tokens = re.findall(r"\w+", s_lower)
+    if len(tokens) <= 3 and not is_finance_intent(text) and not is_traffic_light_intent(text):
+        return "greeting"
+    return "legal_query"
+
+
+# Per-session state, in-memory. Restart wipes; matches existing app behaviour.
+# Used so the first turn for a session can mention capability, subsequent turns don't.
+_SESSION_STATE: Dict[str, Dict[str, bool]] = {}
 
 
 _CITE_PATTERNS = [
@@ -380,15 +464,40 @@ def chat_stream():
     if not prompt and not ctx:
         return jsonify({"error": "No prompt or file context."}), 400
 
-    smalltalk = (mode == "auto") and (not fname) and is_smalltalk_intent(prompt)
-    app.logger.info("chat_stream: prompt=%r mode=%r smalltalk=%s", prompt[:60], mode, smalltalk)
+    session_id = (data.get("session_id") or "").strip()
+    intent = classify_intent(prompt) if (mode == "auto" and not fname) else "legal_query"
+    smalltalk = intent in ("empty", "frustration", "meta", "greeting")
+    app.logger.info(
+        "chat_stream: prompt=%r mode=%r intent=%s session=%r",
+        prompt[:60], mode, intent, session_id[:16],
+    )
+
+    # Default generation options; chitchat path overrides for variety.
+    gen_options: Optional[Dict[str, object]] = None
 
     if smalltalk:
         gboost = {}
         use_finance = False
         use_traffic = False
-        system_msg = SMALLTALK_PROMPT
+        if intent == "frustration":
+            system_msg = FRUSTRATION_PROMPT
+        elif intent == "empty":
+            system_msg = EMPTY_PROMPT
+        elif intent == "meta":
+            system_msg = META_PROMPT
+        else:  # greeting
+            system_msg = SMALLTALK_PROMPT
+            if session_id:
+                st = _SESSION_STATE.setdefault(session_id, {})
+                first_turn = not st.get("greeted", False)
+                st["greeted"] = True
+                if first_turn:
+                    system_msg = system_msg + (
+                        "\nThis is the user's first message — end with one short clause "
+                        "offering to help with UK finance regulation when they're ready."
+                    )
         hint_line = ""
+        gen_options = {"temperature": 0.7, "top_p": 0.9}
     else:
         query_hint = prompt if len(prompt) < 120 else prompt[:120]
         gboost = get_graph_boost(query_hint)
@@ -398,7 +507,11 @@ def chat_stream():
         if retrieved:
             ctx = f"{retrieved}\n" + (ctx or "")
 
-        use_finance = (mode in ("finance", "traffic-light")) or (mode == "auto" and is_finance_intent(prompt + " " + ctx))
+        # Latent-bug fix: classify intent from the prompt alone, NOT prompt+ctx.
+        # The retrieved corpus is entirely UK finance regulation, so concatenating
+        # it would force FINANCE_QA_PROMPT for any prompt that triggered retrieval
+        # (memory: finlaw-intent-router-latent-bug, 2026-05-23).
+        use_finance = (mode in ("finance", "traffic-light")) or (mode == "auto" and is_finance_intent(prompt))
         use_traffic = (mode == "traffic-light") or (mode == "auto" and is_traffic_light_intent(prompt))
 
         system_msg = (
@@ -435,7 +548,7 @@ def chat_stream():
                 yield "event: done\ndata:\n\n"
                 return
 
-            for token in llm.generate_stream(messages, model_id=None):
+            for token in llm.generate_stream(messages, model_id=None, options=gen_options):
                 if "<think>" in token:
                     suppress = True
                     think_started = time.time()
