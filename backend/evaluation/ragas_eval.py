@@ -174,8 +174,17 @@ def _build_judge_llm(judge: str):
         return HFMistralClient.create()
 
     # Ollama path — preferred (faster, no 14 GB download).
+    # Judge LLM defaults to mistral:7b-instruct: it's the same model the chat
+    # backend uses (already loaded into VRAM), and it produces well-formed
+    # RAGAS judgment JSON reliably. Smaller models that look attractive on
+    # paper either (a) emit reasoning traces that blow the timeout
+    # (qwen3:4b), or (b) struggle to produce valid JSON (gemma3:1b).
+    # The previous run's 72 timeouts came from RAGAS calling the judge
+    # in one big batch with the default 60s per-call ceiling; the new
+    # RunConfig pushes that to 180s and the per-record loop limits the
+    # blast radius of any single failure.
     base = os.getenv("OLLAMA_BASE_URL", "http://127.0.0.1:11434")
-    model = os.getenv("OLLAMA_MODEL", "mistral:7b-instruct")
+    model = os.getenv("RAGAS_JUDGE_MODEL", "mistral:7b-instruct")
     try:
         from langchain_community.chat_models import ChatOllama
         return ChatOllama(model=model, base_url=base, temperature=0.0)
@@ -193,9 +202,9 @@ def _build_embeddings():
     return HuggingFaceEmbeddings(model_name=os.getenv("DENSE_MODEL", "BAAI/bge-small-en-v1.5"))
 
 
-def _ragas_evaluate(records: List[EvalRecord], judge: str) -> List[EvalRecord]:
-    """Run RAGAS over `records` and attach the four metric scores in place.
-    Returns the same list (for chaining)."""
+def _ragas_imports():
+    """Lazy import of the RAGAS stack so a missing optional dep raises only
+    when the evaluation actually runs."""
     try:
         from datasets import Dataset
         from ragas import evaluate
@@ -207,53 +216,102 @@ def _ragas_evaluate(records: List[EvalRecord], judge: str) -> List[EvalRecord]:
             context_recall,
             faithfulness,
         )
+        from ragas.run_config import RunConfig
     except ImportError as e:
         raise RuntimeError(
             "ragas + datasets are required for RAGAS evaluation. "
             "Install with `pip install ragas datasets langchain-community`."
         ) from e
+    return {
+        "Dataset": Dataset, "evaluate": evaluate,
+        "LangchainLLMWrapper": LangchainLLMWrapper,
+        "LangchainEmbeddingsWrapper": LangchainEmbeddingsWrapper,
+        "metrics": [faithfulness, answer_relevancy, context_precision, context_recall],
+        "RunConfig": RunConfig,
+    }
 
-    ds = Dataset.from_list([
-        {
-            "user_input": r.question,
-            "response": r.answer,
-            "retrieved_contexts": r.contexts if r.contexts else [""],
-            "reference": r.ground_truth,
-        }
-        for r in records
-        if r.answer and not r.error
-    ])
-    if len(ds) == 0:
+
+def _ragas_run_config(ragas_mods):
+    """Construct the shared RunConfig for the judge.
+
+    Settings calibrated from the 20260523 incident (72 timeouts on a single
+    full-batch call with the default 60s timeout):
+      max_workers=4   parallelism within one record (4 metrics)
+      timeout=180     per-call ceiling; way above mistral cold-start
+      max_retries=3   covers transient network blips
+      max_wait=30     exponential backoff cap
+    """
+    return ragas_mods["RunConfig"](
+        max_workers=int(os.getenv("RAGAS_MAX_WORKERS", "4")),
+        timeout=int(os.getenv("RAGAS_TIMEOUT", "180")),
+        max_retries=int(os.getenv("RAGAS_MAX_RETRIES", "3")),
+        max_wait=int(os.getenv("RAGAS_MAX_WAIT", "30")),
+    )
+
+
+def _coerce_score(v: object) -> Optional[float]:
+    try:
+        f = float(v)  # type: ignore[arg-type]
+        if math.isnan(f) or math.isinf(f):
+            return None
+        return f
+    except (TypeError, ValueError):
+        return None
+
+
+def _evaluate_one_record(record: EvalRecord, judge_llm, embeddings, ragas_mods, run_config) -> None:
+    """Score a single record in place. Failures leave RAGAS scores as None
+    rather than poisoning the rest of the batch."""
+    if not record.answer or record.error:
+        return
+    try:
+        ds = ragas_mods["Dataset"].from_list([{
+            "user_input": record.question,
+            "response": record.answer,
+            "retrieved_contexts": record.contexts if record.contexts else [""],
+            "reference": record.ground_truth,
+        }])
+        result = ragas_mods["evaluate"](
+            ds,
+            metrics=ragas_mods["metrics"],
+            llm=judge_llm,
+            embeddings=embeddings,
+            run_config=run_config,
+            raise_exceptions=False,
+        )
+        df = result.to_pandas()
+        if len(df) == 0:
+            return
+        row = df.iloc[0]
+        record.ragas_faithfulness      = _coerce_score(row.get("faithfulness"))
+        record.ragas_answer_relevancy  = _coerce_score(row.get("answer_relevancy"))
+        record.ragas_context_precision = _coerce_score(row.get("context_precision"))
+        record.ragas_context_recall    = _coerce_score(row.get("context_recall"))
+    except Exception as e:
+        log.warning("RAGAS scoring failed for qid=%s: %s", record.qid, e)
+
+
+def _ragas_evaluate(records: List[EvalRecord], judge: str) -> List[EvalRecord]:
+    """Run RAGAS over `records` and attach the four metric scores in place.
+
+    Per-record loop (instead of one big batch) so a single judge timeout
+    no longer wipes out the entire eval — each record is scored independently
+    with `raise_exceptions=False`, and partial NaN scores are coerced to None.
+
+    Returns the same list (for chaining)."""
+    valid = [r for r in records if r.answer and not r.error]
+    if not valid:
         log.warning("No valid records to score; skipping RAGAS.")
         return records
 
-    judge_llm = LangchainLLMWrapper(_build_judge_llm(judge))
-    embeddings = LangchainEmbeddingsWrapper(_build_embeddings())
+    ragas_mods = _ragas_imports()
+    judge_llm = ragas_mods["LangchainLLMWrapper"](_build_judge_llm(judge))
+    embeddings = ragas_mods["LangchainEmbeddingsWrapper"](_build_embeddings())
+    run_config = _ragas_run_config(ragas_mods)
 
-    result = evaluate(
-        ds,
-        metrics=[faithfulness, answer_relevancy, context_precision, context_recall],
-        llm=judge_llm,
-        embeddings=embeddings,
-    )
-    df = result.to_pandas()
+    for r in valid:
+        _evaluate_one_record(r, judge_llm, embeddings, ragas_mods, run_config)
 
-    question_col = "user_input" if "user_input" in df.columns else "question"
-    by_q: Dict[str, Dict[str, float]] = {}
-    for _, row in df.iterrows():
-        by_q[row[question_col]] = {
-            "faithfulness": row.get("faithfulness"),
-            "answer_relevancy": row.get("answer_relevancy"),
-            "context_precision": row.get("context_precision"),
-            "context_recall": row.get("context_recall"),
-        }
-    for r in records:
-        if r.question in by_q:
-            scores = by_q[r.question]
-            r.ragas_faithfulness = scores.get("faithfulness")
-            r.ragas_answer_relevancy = scores.get("answer_relevancy")
-            r.ragas_context_precision = scores.get("context_precision")
-            r.ragas_context_recall = scores.get("context_recall")
     return records
 
 
@@ -280,37 +338,54 @@ def evaluate_questions(
 
     print(f"Indexing local document corpus … ({sparse.get_index_stats()['num_docs']} docs)")
 
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    out_path = output_dir / f"eval_results_ragas_{timestamp}.csv"
+    summary_path = output_dir / f"eval_results_ragas_{timestamp}_summary.csv"
+
+    # Build the judge once so its model is loaded into memory before the loop.
+    # If RAGAS deps are missing we surface that NOW rather than after 80 RAG
+    # passes have already burned 20+ minutes.
+    ragas_mods = _ragas_imports()
+    judge_llm = ragas_mods["LangchainLLMWrapper"](_build_judge_llm(judge))
+    embeddings = ragas_mods["LangchainEmbeddingsWrapper"](_build_embeddings())
+    run_config = _ragas_run_config(ragas_mods)
+    print(f"Running per-question RAG + RAGAS judge ({judge}, "
+          f"model={os.getenv('RAGAS_JUDGE_MODEL', 'mistral:7b-instruct')}) …")
+
+    header_written = False
     for i, r in enumerate(records, start=1):
         try:
             answer, contexts, runtime_s = run_rag_pipeline(r.question)
             r.answer = answer
             r.contexts = contexts
             r.runtime_s = round(runtime_s, 2)
-            print(f"  [{i}/{len(records)}] {r.qid} ({runtime_s:.1f}s) {r.question[:60]}")
         except Exception as e:
             r.error = str(e)
             log.exception("RAG pipeline failed for qid=%s: %s", r.qid, e)
-            print(f"  [{i}/{len(records)}] {r.qid} ERROR: {e}")
 
-    print(f"Running RAGAS judge ({judge}) over {sum(1 for r in records if r.answer)} answers …")
-    try:
-        _ragas_evaluate(records, judge=judge)
-    except Exception as e:
-        log.exception("RAGAS scoring failed: %s", e)
-        print(f"RAGAS scoring failed: {e}  (per-question CSV will still be written without scores)")
+        # Score this single record; failures leave RAGAS fields as None
+        # rather than dropping the entire batch.
+        _evaluate_one_record(r, judge_llm, embeddings, ragas_mods, run_config)
 
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    out_path = output_dir / f"eval_results_ragas_{timestamp}.csv"
-    summary_path = output_dir / f"eval_results_ragas_{timestamp}_summary.csv"
-
-    rows = [
-        {
+        # Append this record to CSV immediately so a crash on Q47 preserves
+        # questions 1..46 instead of losing the whole run.
+        row = {
             **{k: v for k, v in asdict(r).items() if k != "contexts"},
             "contexts": " ||| ".join(r.contexts) if r.contexts else "",
         }
-        for r in records
-    ]
-    pd.DataFrame(rows).to_csv(out_path, index=False)
+        pd.DataFrame([row]).to_csv(
+            out_path, mode="a", header=not header_written, index=False,
+        )
+        header_written = True
+
+        recall = r.ragas_context_recall
+        recall_str = f"{recall:.2f}" if recall is not None else "N/A "
+        print(
+            f"  [{i}/{len(records)}] {r.qid} "
+            f"({r.runtime_s:.1f}s) recall={recall_str}  "
+            f"{r.question[:55]}"
+        )
+
     _write_summary(records, summary_path)
     print(f"Per-question results: {out_path}")
     print(f"Summary:              {summary_path}")
