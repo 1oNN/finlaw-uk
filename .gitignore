@@ -16,10 +16,11 @@ env/
 .env.local
 
 # Generated / cached artefacts
-data/cache/
-data/raw/
-data/eval_results/*.csv
-!data/eval_results/eval_results_legacy.csv
+data/
+
+# Logs
+*.log
+logs/
 
 # User-uploaded data
 uploads/
