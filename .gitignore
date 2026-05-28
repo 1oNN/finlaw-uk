@@ -18,8 +18,9 @@ env/
 # Generated / cached artefacts
 data/
 
-# Logs
+# Logs and debug-output captures
 *.log
+*.out
 logs/
 
 # User-uploaded data
