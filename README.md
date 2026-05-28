@@ -30,6 +30,8 @@ MSc dissertation project, University of Bradford, 2025.
 - **[docs/DSR_MAPPING.md](docs/DSR_MAPPING.md)** — Design Science Research mapping
 - **[docs/QUALITATIVE_SUMMARY.md](docs/QUALITATIVE_SUMMARY.md)** — qualitative findings summary
 - **[docs/WORKFLOW.md](docs/WORKFLOW.md)** — plain-English walkthrough of the system
+- **[DIAGNOSIS.md](DIAGNOSIS.md)** — post-submission diagnostic for the May 23 RAGAS run (context_recall = 0.075 root cause)
+- **[AFTER_FIX_BEFORE_AFTER.md](AFTER_FIX_BEFORE_AFTER.md)** — post-submission remediation pass; before/after metrics with caveats
 
 ## Acknowledgements
 

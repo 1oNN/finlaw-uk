@@ -550,7 +550,7 @@ def chat_stream():
         # refusal. Only fires on the finance/legal path; chit-chat is unaffected.
         if use_finance:
             from backend.retrieval.orchestrator import top_dense_similarity
-            refusal_threshold = float(os.getenv("RAG_REFUSAL_THRESHOLD", "0.35"))
+            refusal_threshold = float(os.getenv("RAG_REFUSAL_THRESHOLD", "0.25"))
             if top_dense_similarity(query_hint) < refusal_threshold:
                 def _refuse_stream():
                     yield "data:I do not have authoritative source material for this question.\n\n"

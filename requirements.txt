@@ -17,7 +17,11 @@ lxml>=5.0
 langchain-text-splitters>=0.0.1
 
 # Evaluation (Stage 5 — real RAGAS via local Mistral judge)
-ragas>=0.1
+# Pin to 0.2.x: 0.4.x changed JSON-output schemas in ways the Mistral 7B judge
+# can't satisfy reliably (see DIAGNOSIS.md §9). 0.2.15 is the originally-intended
+# version per the Stage 5 spec; it produces parseable output for
+# context_precision + answer_relevancy on this judge.
+ragas>=0.2,<0.3
 datasets>=2.14
 langchain-core>=0.1
 langchain-community>=0.0.20

@@ -23,8 +23,10 @@ default; commit them if you want to track scores in version control).
   definition.
 
 ### RAGAS metrics
-All four are computed by the `ragas>=0.1` library with a local Mistral
-judge (Ollama by default; HF transformers opt-in via `--judge hf`):
+All four are computed by the `ragas` library (pinned to `ragas>=0.2,<0.3`
+in `requirements.txt` — see `DIAGNOSIS.md` §9 for the pin rationale) with a
+local Mistral judge (Ollama by default; HF transformers opt-in via
+`--judge hf`):
 
 | Metric | What it measures |
 |---|---|
@@ -152,3 +154,33 @@ measure different things. For the interview, it's defensible to say:
   decomposition / scoring. On CPU this is the dominant cost.
 - **The chat history feature** (`/api/chats/{id}/messages`) is not
   exercised by the eval — questions are evaluated stateless.
+- **Judge parallelism caveat (discovered 2026-05-28).** RAGAS's default
+  `RunConfig(max_workers=4)` runs the four metric jobs concurrently
+  against the same Ollama instance. Ollama serialises per-model requests
+  internally, but the langchain async wrapper appears to interleave or
+  truncate outputs when several coroutines share the same chat-completion
+  socket. The faithfulness (`n_l_i_statement_prompt`) and recall
+  (`context_recall_classification_prompt`) prompts are the most heavily
+  affected — both return NaN consistently on the post-submission
+  remediation pass even though Mistral handles them correctly when called
+  serially. See `DIAGNOSIS.md` §9 and `AFTER_FIX_BEFORE_AFTER.md` for the
+  full investigation. Untested mitigation worth trying:
+  `RAGAS_MAX_WORKERS=1` in the eval env.
+
+## Post-submission remediation pass
+
+After the dissertation was submitted, a forward-looking remediation
+pass was attempted to lift the May 23 numbers. The investigation and
+results live in:
+
+- `DIAGNOSIS.md` — root cause of the May 23 `context_recall = 0.075`
+  (70 of 80 question rows are template stubs, not a citation-format
+  bug) and the judge-parallelism note.
+- `AFTER_FIX_BEFORE_AFTER.md` — partial remediation results.
+  `context_precision` n_valid lift is real (1/10 → 9/10 on curated;
+  expected ~70+/80 on balanced). `faithfulness` and `context_recall`
+  remain un-measurable in the current judge stack; the May 23 baseline
+  values for those two metrics are the only signal available.
+
+Neither doc revises the dissertation's reported numbers. They are
+forward-looking improvement records only.
