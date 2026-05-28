@@ -22,6 +22,8 @@ MSc dissertation project, University of Bradford, 2025.
 
 ## Documentation
 
+### Project docs (dissertation deliverables)
+
 - **[docs/REQUIREMENTS.md](docs/REQUIREMENTS.md)** — hardware + software requirements
 - **[docs/RUN.md](docs/RUN.md)** — setup walkthrough for Windows / macOS / Linux
 - **[docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)** — system diagram, request lifecycle, where every design pick lives
@@ -30,8 +32,15 @@ MSc dissertation project, University of Bradford, 2025.
 - **[docs/DSR_MAPPING.md](docs/DSR_MAPPING.md)** — Design Science Research mapping
 - **[docs/QUALITATIVE_SUMMARY.md](docs/QUALITATIVE_SUMMARY.md)** — qualitative findings summary
 - **[docs/WORKFLOW.md](docs/WORKFLOW.md)** — plain-English walkthrough of the system
-- **[DIAGNOSIS.md](DIAGNOSIS.md)** — post-submission diagnostic for the May 23 RAGAS run (context_recall = 0.075 root cause)
-- **[AFTER_FIX_BEFORE_AFTER.md](AFTER_FIX_BEFORE_AFTER.md)** — post-submission remediation pass; before/after metrics with caveats
+
+### Post-submission addenda (forward-looking, not dissertation-revising)
+
+These were produced after thesis submission to investigate and partially
+remediate the headline numbers in `eval_results_ragas_20260523_025543`.
+They do not change anything reported in the dissertation.
+
+- **[DIAGNOSIS.md](DIAGNOSIS.md)** — root cause of `context_recall = 0.075` (70 of 80 question rows in `questions_80_balanced.csv` are template stubs, not a citation-format bug). Also documents the judge-LLM parallelism issue surfaced by the AFTER_FIX runs.
+- **[AFTER_FIX_BEFORE_AFTER.md](AFTER_FIX_BEFORE_AFTER.md)** — partial remediation results. `context_precision` valid-count lifts from 8/80 to 77/80 (a coverage win, not a mean win); `faithfulness` and `context_recall` are literally un-measurable in the AFTER_FIX judge configuration. May 23 baseline values for those two metrics remain the only signal.
 
 ## Acknowledgements
 
