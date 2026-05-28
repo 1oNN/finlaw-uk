@@ -41,6 +41,7 @@ import pandas as pd
 from backend.llm.ollama_client import generate_stream
 from backend.retrieval.orchestrator import (
     gather_contexts,
+    gather_contexts_wide,  # Task 3: pre-rerank pool for RAGAS scoring
     get_graph_boost,
     get_raw_context,
 )
@@ -154,10 +155,15 @@ def run_rag_pipeline(question: str) -> Tuple[str, List[str], float]:
         parts.append(token)
     answer = "".join(parts).strip()
 
-    contexts = gather_contexts(question)
+    # Task 3: score RAGAS against the pre-rerank pool (20) for fair recall.
+    # The LLM still saw the post-rerank top-k via `raw` above; only the
+    # `contexts` field RAGAS scores against is widened here.
+    contexts = gather_contexts_wide(
+        question, pool_size=int(os.getenv("EVAL_CONTEXT_POOL", "20"))
+    )
     if not contexts and raw:
-        # Fallback for the rare case where gather_contexts found nothing but
-        # the raw retrieval did (e.g., graph disabled).
+        # Fallback for the rare case where the wide pool found nothing but
+        # the raw retrieval did (e.g., graph disabled and dense unavailable).
         contexts = [snip for _, snip in raw if snip]
 
     return answer, contexts, time.time() - t0

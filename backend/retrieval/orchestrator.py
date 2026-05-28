@@ -72,7 +72,7 @@ def _get_dense():
         return None
 
 
-def _hybrid_search(query: str, k: int) -> List[Tuple[str, str]]:
+def _hybrid_search(query: str, k: int, *, rerank: Optional[bool] = None) -> List[Tuple[str, str]]:
     """BM25 + dense → RRF. Returns (key, snippet) pairs.
 
     Fusion strategy is controlled by `RAG_FUSION_MODE`:
@@ -81,6 +81,10 @@ def _hybrid_search(query: str, k: int) -> List[Tuple[str, str]]:
         'bm25'            — bm25-only (skip dense)
     The env var is read per-call so the ablation harness can flip strategies
     without restarting the process.
+
+    `rerank=None` honours the RAG_RERANK_ENABLED env var. Pass `rerank=False`
+    explicitly when you want the wider pre-rerank pool (used by
+    `gather_contexts_wide` for RAGAS scoring).
     """
     mode = os.getenv("RAG_FUSION_MODE", "rrf").lower()
     over_k = max(k * 2, 10)
@@ -104,8 +108,9 @@ def _hybrid_search(query: str, k: int) -> List[Tuple[str, str]]:
     rank_lists = [lst for lst in (bm25_keys, dense_keys) if lst]
     # When a reranker will trim later, fuse over a wider pool so the
     # cross-encoder has more candidates to score.
-    rerank_enabled = bool(int(os.getenv("RAG_RERANK_ENABLED", "0")))
-    fuse_k = max(int(os.getenv("RAG_RERANK_POOL", "30")), k) if rerank_enabled else k
+    # Task 3: rerank on by default + 20-candidate pool — fairer RAGAS recall.
+    rerank_enabled = bool(int(os.getenv("RAG_RERANK_ENABLED", "1"))) if rerank is None else rerank
+    fuse_k = max(int(os.getenv("RAG_RERANK_POOL", "20")), k) if rerank_enabled else k
     if len(rank_lists) == 1:
         fused_keys = rank_lists[0][:fuse_k]
     else:
@@ -120,8 +125,8 @@ def _hybrid_search(query: str, k: int) -> List[Tuple[str, str]]:
         out.append((key, sparse._snippet(text, None)))
 
     if rerank_enabled and len(out) > k:
-        from backend.retrieval.reranker import rerank
-        out = rerank(query, out, top_k=k)
+        from backend.retrieval.reranker import rerank as _rerank
+        out = _rerank(query, out, top_k=k)
 
     return out
 
@@ -197,6 +202,29 @@ def gather_contexts(query: str) -> List[str]:
             if line.startswith("- ") and len(line) > 4:
                 out.append(line[2:])
     for _, snippet in get_raw_context(query):
+        if snippet:
+            out.append(snippet)
+    return out
+
+
+def gather_contexts_wide(query: str, pool_size: int = 20) -> List[str]:
+    """Like `gather_contexts`, but returns the pre-rerank pool for RAGAS scoring.
+
+    Task 3: RAGAS context_recall benefits from seeing the wider candidate pool
+    before the cross-encoder trims it down. The chat route still uses
+    `gather_contexts` (post-rerank top-k); only the evaluation pipeline uses this.
+    Calls `_hybrid_search` with `rerank=False` so the full `pool_size` candidates
+    come back, then layers the graph-boost bullets on top.
+    """
+    out: List[str] = []
+    if ENABLE_GRAPH:
+        gboost = get_graph_boost(query)
+        for line in (gboost.get("context_md") or "").splitlines():
+            line = line.strip()
+            if line.startswith("- ") and len(line) > 4:
+                out.append(line[2:])
+    hits = _hybrid_search(query, k=pool_size, rerank=False)
+    for _, snippet in hits:
         if snippet:
             out.append(snippet)
     return out
