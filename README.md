@@ -30,10 +30,6 @@ For full setup details see [docs/RUN.md](docs/RUN.md).
 - **[docs/RUN.md](docs/RUN.md)** — setup walkthrough for Windows / macOS / Linux
 - **[docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)** — system diagram, request lifecycle, where every design pick lives
 - **[docs/NEO4J_SCHEMA.md](docs/NEO4J_SCHEMA.md)** — live graph schema + example Cypher
-- **[docs/RAGAS_RESULTS.md](docs/RAGAS_RESULTS.md)** — evaluation methodology and reproduction
-- **[docs/INTERVIEW_QA.md](docs/INTERVIEW_QA.md)** — interview prep (30+ Q&A)
-- **[docs/ROUND_1_QUESTIONS.md](docs/ROUND_1_QUESTIONS.md)** — defensible answers to the four round-1 questions
-- **[docs/ROUND_2_EXPECTED.md](docs/ROUND_2_EXPECTED.md)** — anticipated round-2 deep dives, including the bio/proteomics pivot
 - **[docs/DSR_MAPPING.md](docs/DSR_MAPPING.md)** — Design Science Research mapping
 - **[docs/QUALITATIVE_SUMMARY.md](docs/QUALITATIVE_SUMMARY.md)** — qualitative findings summary
 
