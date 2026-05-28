@@ -65,20 +65,22 @@ FINANCE_QA_PROMPT = (
     "You are LEGAL GPT, a UK financial regulation assistant.\n\n"
     "Rules:\n"
     "1. Answer ONLY using the context passages provided in this message.\n"
-    "2. If the context does not contain the answer, reply EXACTLY:\n"
-    "   \"The provided sources do not contain enough information to answer this confidently.\"\n"
-    "3. Cite every factual claim inline using the chunk's UK short-form citation, "
-    "e.g. [DISP 1.6.2R], [COBS 4.2.1R], [FSMA 2000 s.19]. Do NOT invent citations.\n"
-    "4. Answer the specific question. No background, no related-material digressions.\n"
-    "5. Do NOT use prior knowledge outside the provided context. No URLs.\n"
-    "6. After the answer, on a NEW line, write 'Source: ' followed by the same "
+    "2. Keep the answer to 2–4 sentences unless the question explicitly asks for detail.\n"
+    "3. If the context does not contain the answer, reply EXACTLY:\n"
+    "   \"I do not have authoritative source material for this question.\"\n"
+    "4. Cite EVERY regulatory claim inline using the chunk's UK short-form citation, "
+    "e.g. [DISP 1.6.2R], [COBS 4.2.1R], [FSMA 2000 s.19]. Inline citations are MANDATORY — "
+    "every factual sentence ends with a bracketed citation. Do NOT invent citations.\n"
+    "5. Answer the specific question. No background, no related-material digressions.\n"
+    "6. Do NOT use prior knowledge outside the provided context. No URLs.\n"
+    "7. After the answer, on a NEW line, write 'Source: ' followed by the same "
     "citations separated by ' | ' (UK short-form only).\n\n"
     "Examples:\n"
     "Q: What is the deadline for handling a DISP complaint?\n"
     "A: A firm must send a final response within 8 weeks of receiving the complaint [DISP 1.6.2R].\n"
     "Source: DISP 1.6.2R\n\n"
     "Q: What is the capital requirement for a banana stand?\n"
-    "A: The provided sources do not contain enough information to answer this confidently.\n"
+    "A: I do not have authoritative source material for this question.\n"
 )
 
 FRUSTRATION_PROMPT = (
@@ -542,6 +544,23 @@ def chat_stream():
         # reproducible and the model doesn't randomly drift between context-
         # grounded and hallucinated phrasings.
         gen_options = {"temperature": 0.0, "top_p": 0.9}
+
+        # Task 4: weak-retrieval refusal — if the top dense cosine similarity
+        # is below RAG_REFUSAL_THRESHOLD, skip Mistral and stream the canonical
+        # refusal. Only fires on the finance/legal path; chit-chat is unaffected.
+        if use_finance:
+            from backend.retrieval.orchestrator import top_dense_similarity
+            refusal_threshold = float(os.getenv("RAG_REFUSAL_THRESHOLD", "0.35"))
+            if top_dense_similarity(query_hint) < refusal_threshold:
+                def _refuse_stream():
+                    yield "data:I do not have authoritative source material for this question.\n\n"
+                    yield 'event: meta\ndata:{"citations_ok":true,"invalid":[],"verification":{"note":"refused_low_similarity"},"claim_trace":[]}\n\n'
+                    yield "event: done\ndata:\n\n"
+                resp = Response(_refuse_stream(), content_type="text/event-stream")
+                resp.headers["Cache-Control"] = "no-cache"
+                resp.headers["X-Accel-Buffering"] = "no"
+                resp.headers["Connection"] = "keep-alive"
+                return resp
 
     messages = [
         {"role": "system", "content": system_msg},
