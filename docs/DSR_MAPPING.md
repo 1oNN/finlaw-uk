@@ -83,9 +83,9 @@ Two metric families, run on the same 80-question balanced set
 - Context precision — retrieved contexts were relevant
 - Context recall — retrieved contexts covered the ground truth
 
-The local Mistral judge has known biases (Q24 in `INTERVIEW_QA.md`)
-which is why both metric families are reported — lexical for absolute
-similarity, RAGAS for relative answer quality.
+The local Mistral judge has known biases, which is why both metric
+families are reported — lexical for absolute similarity, RAGAS for
+relative answer quality.
 
 User validation: the qualitative chapter reports semi-structured
 interviews with compliance practitioners (see `QUALITATIVE_SUMMARY.md`)
@@ -93,16 +93,10 @@ on RAG shortcomings, verification UI trust, and sourcebook coverage
 priorities.
 
 ### Step 6 — Communication
-- **Thesis** (submitted, graded MSc with Merit at University of Bradford,
-  2025).
-- **Codebase** — this repository, with every architectural claim in the
-  application materials made literally true (Stages 0-7 of the upgrade).
+- **Thesis** (submitted at University of Bradford, 2025).
+- **Codebase** — this repository.
 - **Documentation** — `README.md`, `ARCHITECTURE.md`, `RUN.md`,
-  `RAGAS_RESULTS.md`, `INTERVIEW_QA.md`, this document.
-- **Interview defence** — the round-1 and round-2 prep documents
-  (`ROUND_1_QUESTIONS.md`, `ROUND_2_EXPECTED.md`) prepare the
-  candidate to communicate the artefact's design rationale and
-  evaluation to a non-domain-expert panel.
+  `RAGAS_RESULTS.md`, this document.
 
 ## Why DSR (and not, say, action research)?
 
@@ -113,12 +107,10 @@ inspect the metrics, ablate components and re-evaluate. Action
 research, by contrast, would focus on the *process* of changing
 compliance practice — a different question.
 
-DSR also makes the iteration loop explicit: Stage 0-7 of the upgrade
-are themselves DSR iterations, each refining the artefact based on
-the evaluation gap surfaced in the previous stage. The upgrade story
-("the system was claimed in materials but not all components were
-literally true; the upgrade fixed that") is a clean DSR narrative of
-problem → design → demonstration → re-evaluation.
+DSR also makes the iteration loop explicit: each design cycle refines
+the artefact based on the evaluation gap surfaced in the previous
+iteration — a clean DSR narrative of problem → design → demonstration
+→ re-evaluation.
 
 ## Limitations of the DSR framing
 
