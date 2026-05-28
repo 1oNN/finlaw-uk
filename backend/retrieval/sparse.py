@@ -56,7 +56,7 @@ import requests
 
 ROOT_DIR = Path(os.getenv("RAG_DATA_DIR", str(Path(__file__).resolve().parent.parent / "data")))
 MAX_SNIP = int(os.getenv("RAG_MAX_SNIP", "2200"))
-TOPK = int(os.getenv("RAG_TOPK", "3"))
+TOPK = int(os.getenv("RAG_TOPK", "8"))  # Task 3: 3 → 8 — give the LLM more grounding
 ENABLE_REMOTE = bool(int(os.getenv("RAG_ENABLE_REMOTE", "1")))
 DEBUG = bool(int(os.getenv("RAG_DEBUG", "0")))
 
