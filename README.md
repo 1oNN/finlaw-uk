@@ -6,31 +6,6 @@ financial regulation. Combines a Neo4j knowledge graph with hybrid sparse
 and graph-grounded citation verification — served by a Flask backend and
 a React frontend.
 
-> MSc dissertation project (University of Bradford, 2025). The codebase
-> has been upgraded post-submission so that every architectural claim in
-> the application materials — dense vector embeddings, LangChain, HF
-> Transformers, real RAGAS evaluation, symbolic verification — is
-> literally true in the code.
-
-## Quickstart
-
-```bash
-# 1. Clone + venv
-python -m venv .venv
-.venv\Scripts\Activate.ps1            # Windows; macOS/Linux: source .venv/bin/activate
-pip install -r requirements.txt
-
-# 2. Bring up Neo4j and Ollama
-docker compose up -d                  # Neo4j on 7474/7687
-ollama pull mistral:7b-instruct       # ~4 GB
-
-# 3. Seed the graph (XML + supplementary PDFs)
-python scripts/seed_neo4j.py
-
-# 4. Run the backend + frontend
-python -m backend.app                 # Flask on :5000
-cd frontend && npm install && npm start   # React on :3000
-```
 
 Open http://localhost:3000 and ask a question like *"What is the UK
 general prohibition and when does the FSCS £85,000 limit apply?"*
