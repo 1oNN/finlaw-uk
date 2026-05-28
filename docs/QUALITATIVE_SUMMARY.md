@@ -1,9 +1,8 @@
 # Qualitative Findings Summary
 
 > **Template.** This file is a structured placeholder to be filled in
-> from the thesis qualitative chapter. The headings reflect the
-> structure a Karolinska reviewer will expect; each section has a
-> prompt for what to write.
+> from the thesis qualitative chapter. Each section has a prompt for
+> what to write.
 
 ## Who was consulted
 
