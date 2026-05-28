@@ -1,24 +1,34 @@
 # AFTER_FIX evaluation — before/after comparison
 
-> **Status.** Every number in this document is from **post-thesis-submission**
-> code (FinLaw-UK after the five-task remediation pass committed on
-> 2026-05-28). The dissertation's reported results remain the
-> `eval_results_ragas_20260523_025543` baseline; this file is a
-> forward-looking improvement record, not a revision to the submitted thesis.
+> **(a) Thesis numbers are unchanged by this document.** The dissertation's
+> reported results are the May 23 baseline (`eval_results_ragas_20260523_025543`).
+> Nothing in this file revises, overrides, or supersedes them. This is a
+> forward-looking improvement record produced after submission; the viva
+> panel evaluates the thesis numbers, not these.
 
-> **Caveat — judge LLM measurement gap.** The Mistral 7B-Instruct judge
-> produces NaN on `ragas_faithfulness` and `ragas_context_recall` for every
-> AFTER_FIX row, on both `ragas==0.2.15` and `ragas==0.4.3`. The same model
-> answered these prompts correctly on May 23. The Task-1 investigation
-> (see `DIAGNOSIS.md` §9) points at `RunConfig(max_workers=4)` corrupting
-> outputs under concurrent Ollama invocation; the direct-probe experiment
-> showed Mistral handles both NLI and recall-classification prompts cleanly
-> when called serially. The fix (`max_workers=1`) is flagged for a
-> follow-up pass — it is out of scope for this remediation per the
-> user-imposed "no more iterations" gate. So in the tables below, **the
-> May 23 baseline values for `faithfulness` and `context_recall` are the
-> only signal available**; AFTER_FIX numbers are "n/a (un-measurable
-> with current judge stack)".
+> **(b) Faithfulness and context_recall are LITERALLY UN-MEASURABLE in the
+> AFTER_FIX configuration — they are not "lower" than the May 23 baseline,
+> they have no value.** Every AFTER_FIX row returns NaN on `ragas_faithfulness`
+> and `ragas_context_recall` (0 valid of 10 on curated, 0 valid of 80 on
+> balanced), on both `ragas==0.2.15` and `ragas==0.4.3`. The Mistral 7B
+> judge produces those same prompts correctly when called serially (verified
+> by direct probe), but RAGAS's `RunConfig(max_workers=4)` invokes four
+> metric jobs concurrently against a single Ollama instance and the
+> faithfulness + recall outputs come back malformed under that contention.
+> See `DIAGNOSIS.md` §9 for the trace. Until this is fixed (the untested
+> mitigation is `RAGAS_MAX_WORKERS=1`), the May 23 baseline numbers for
+> these two metrics are the only signal available. **Do not report any
+> AFTER_FIX value for faithfulness or recall, and do not characterise the
+> NaNs as a quality regression — they are a measurement gap.**
+
+> **(c) The context_precision improvement is a COVERAGE improvement, not a
+> mean improvement.** The mean is essentially flat (0.9056 → 0.8974 on
+> the balanced 80; 0.81 → 0.80 on the curated 10). The actual win is that
+> the metric now reports a value for **77 of 80 rows** instead of the
+> 8 of 80 it managed on May 23 — a 9.6× lift in valid-count, driven by
+> the per-record loop + 180s `RunConfig` shipped in commit `9ad4225`
+> (the Task 2 fix). Read the precision row as "now measurable across the
+> full eval set", not "model got more precise".
 
 ---
 
