@@ -207,6 +207,30 @@ def gather_contexts(query: str) -> List[str]:
     return out
 
 
+def top_dense_similarity(query: str) -> float:
+    """Task 4: max dense cosine similarity for the top hit, or 0.0 if dense
+    retrieval is unavailable. Used by the chat route and evaluator to decide
+    whether to refuse with the canonical 'no authoritative sources' phrase
+    instead of letting Mistral confabulate from low-signal contexts.
+
+    The score comes from `DenseRetriever.search` which returns
+    `(doc_key, cosine_score)` pairs sorted highest-first (dense.py:120).
+    """
+    dense = _get_dense()
+    if dense is None:
+        return 0.0
+    try:
+        hits = dense.search(query, k=1)
+    except Exception:
+        return 0.0
+    if not hits:
+        return 0.0
+    try:
+        return float(hits[0][1])
+    except (TypeError, ValueError, IndexError):
+        return 0.0
+
+
 def gather_contexts_wide(query: str, pool_size: int = 20) -> List[str]:
     """Like `gather_contexts`, but returns the pre-rerank pool for RAGAS scoring.
 
