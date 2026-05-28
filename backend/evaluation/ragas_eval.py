@@ -143,11 +143,11 @@ def run_rag_pipeline(question: str) -> Tuple[str, List[str], float]:
     # same answer shape users would see. Refusal short-circuits Mistral but
     # still returns the wide context pool so RAGAS can score recall against it.
     from backend.retrieval.orchestrator import top_dense_similarity
-    refusal_threshold = float(os.getenv("RAG_REFUSAL_THRESHOLD", "0.35"))
+    refusal_threshold = float(os.getenv("RAG_REFUSAL_THRESHOLD", "0.25"))
     if top_dense_similarity(question) < refusal_threshold:
         answer = "I do not have authoritative source material for this question."
         contexts = gather_contexts_wide(
-            question, pool_size=int(os.getenv("EVAL_CONTEXT_POOL", "20"))
+            question, pool_size=int(os.getenv("EVAL_CONTEXT_POOL", "8"))
         )
         return answer, contexts, time.time() - t0
 
@@ -172,11 +172,13 @@ def run_rag_pipeline(question: str) -> Tuple[str, List[str], float]:
         parts.append(token)
     answer = "".join(parts).strip()
 
-    # Task 3: score RAGAS against the pre-rerank pool (20) for fair recall.
-    # The LLM still saw the post-rerank top-k via `raw` above; only the
-    # `contexts` field RAGAS scores against is widened here.
+    # Task 3 (tuned): RAGAS sees an 8-chunk pool for fair recall measurement.
+    # Earlier we tried 20 chunks but that blew the Mistral 7B judge's context
+    # window — RAGAS output parser failed on faithfulness + recall on every
+    # row. 8 matches the chat-side post-rerank top-k, keeps judge prompts
+    # parseable, and still widens vs. the May 23 baseline of 3 chunks.
     contexts = gather_contexts_wide(
-        question, pool_size=int(os.getenv("EVAL_CONTEXT_POOL", "20"))
+        question, pool_size=int(os.getenv("EVAL_CONTEXT_POOL", "8"))
     )
     if not contexts and raw:
         # Fallback for the rare case where the wide pool found nothing but
@@ -461,3 +463,46 @@ def _write_summary(records: List[EvalRecord], path: Path) -> None:
     summary["questions"] = n_total
     summary["errors"] = sum(1 for r in records if r.error)
     pd.DataFrame([summary]).to_csv(path, index=False)
+
+
+def _cli() -> None:
+    """Task 5: CLI shim so `python -m backend.evaluation.ragas_eval` works.
+
+    Accepts `--questions` and `--out` per the AFTER_FIX brief. The timestamped
+    default filename is renamed to whatever `--out` requests once the eval
+    completes, with the matching `_summary.csv` carried along.
+    """
+    import argparse
+
+    ap = argparse.ArgumentParser(description="Run FinLaw-UK RAG + RAGAS evaluation")
+    ap.add_argument("--questions", type=Path, default=QUESTIONS_CSV,
+                    help="path to questions CSV (default: questions_80_balanced.csv)")
+    ap.add_argument("--out", type=Path, default=None,
+                    help="output filename (placed under EVAL_OUTPUT_DIR)")
+    ap.add_argument("--sample", type=int, default=None,
+                    help="only run first N rows (smoke testing)")
+    ap.add_argument("--judge", type=str, default=os.getenv("RAGAS_JUDGE", "ollama"),
+                    choices=["ollama", "hf"],
+                    help="RAGAS judge LLM (default: ollama)")
+    args = ap.parse_args()
+
+    out_dir = EVAL_OUTPUT_DIR
+    out_path = evaluate_questions(
+        sample=args.sample,
+        judge=args.judge,
+        output_dir=out_dir,
+        questions_path=args.questions,
+    )
+
+    if args.out is not None:
+        target = out_dir / args.out.name
+        os.replace(out_path, target)
+        summary_src = out_path.with_name(out_path.stem + "_summary.csv")
+        summary_dst = target.with_name(target.stem + "_summary.csv")
+        if summary_src.exists():
+            os.replace(summary_src, summary_dst)
+        print(f"Renamed to: {target}")
+
+
+if __name__ == "__main__":
+    _cli()

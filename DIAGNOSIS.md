@@ -142,3 +142,32 @@ The pattern is unambiguous: every real row gets non-zero recall, every stub row 
 - The 72 NaN context_precision is caused by judge LLM timeouts on the slow precision prompt. The fix is already in `HEAD` (commit `9ad4225`); the May 23 run predates it.
 - The citation-format hypothesis is disproved by direct evidence (Q1 scores `recall=1.0` with no normaliser applied).
 - The five-task remediation pass that follows this diagnosis targets the actual levers: widen the retrieval pool (Task 3) and tighten the generation prompt (Task 4). Tasks 1 (this document), 2 (smoke-verify the timeout fix), and 5 (re-run + before/after) are the supporting work.
+
+## 9. AFTER_FIX run — methodology caveat and unresolved metric-measurement issue
+
+The AFTER_FIX runs against the curated 10 and balanced 80 surface a new failure that the May 23 baseline did not have: `ragas_faithfulness` and `ragas_context_recall` return NaN on every row, while `ragas_context_precision` and `ragas_answer_relevancy` work as expected.
+
+Investigation steps taken:
+
+1. Reduced the RAGAS context pool from 20 → 8 to rule out Mistral 7B's context-window. Pool size dropped from ~24 chunks/row to ~12. Faithfulness and recall still NaN. **Not a context-window problem.**
+2. Downgraded `ragas` from 0.4.3 to 0.2.15 (the version implied by the original spec). Same failure pattern. **Not a RAGAS version problem.**
+3. Swapped the judge to `qwen3:4b` for a 3-question smoke. Worse: 3 of 4 metrics return NaN (faithfulness, precision, recall). **Not a fix; rejected per the user-set 1-of-3-rows gate.**
+4. **Direct probe of Mistral on the same RAGAS 0.2.15 prompts, called serially via `LangchainLLMWrapper`:** Mistral produces clean, parseable JSON for both `StatementGenerator` (decomposes the answer into 2 atomic statements) and `NLIStatement` (verdicts for each statement). Q2's answer, 104 chars, yields a small structured payload that Mistral handles correctly when the call is serial.
+
+The most likely cause is **concurrent invocation under `RunConfig(max_workers=4)`** combined with a single Ollama instance serving Mistral 7B. Ollama's HTTP server handles one in-flight generation at a time per model; four parallel RAGAS metric jobs against the same model effectively serialise on the server side, and the langchain async wrapper appears to scramble outputs when multiple coroutines share the same chat-completion socket. The faithfulness and recall prompts are larger and more structured than precision/relevancy, so they are the ones that get truncated or interleaved.
+
+**Untested but plausible fix (out of scope for this pass — flagged for follow-up):** Set `RAGAS_MAX_WORKERS=1` in the eval config so metrics run serially. The direct-probe evidence suggests this would restore faithfulness and recall to non-NaN values. The user explicitly bounded this remediation pass at "do not retune timeouts, do not try a third judge", so this experiment is left for a future session.
+
+**Consequence for the AFTER_FIX deliverable:**
+
+- `ragas_context_precision`: lifts from 8/80 valid (May 23) to ~70/80 valid (AFTER_FIX) — the Task 2 timeout fix is verified by the rise in valid count. Real win.
+- `ragas_answer_relevancy`: small drift from baseline. Real measurement.
+- `ragas_faithfulness`, `ragas_context_recall`: **un-measurable in this judge stack**. The numbers in `AFTER_FIX_BEFORE_AFTER.md` carry the explicit caveat that the May 23 baseline values for these two metrics are the only signal we have, and the AFTER_FIX behaviour on faithfulness/recall is structurally not comparable.
+
+The dissertation's reported results remain the May 23 baseline. AFTER_FIX is a partial remediation with a documented measurement gap on two of four metrics.
+
+## 10. Additional retrieval gap noted in AFTER_FIX runs
+
+Q4 ("How many days does a consumer have to cancel a general insurance policy?", expected ICOBS 7) — even with the widened 8-chunk pool and the post-rerank top-8 chat path, the retriever does not surface the specific ICOBS 7 cooling-off provision. Mistral correctly answers "I do not have authoritative source material for this question in the provided contexts." This pulls Q4's `answer_relevancy` to 0.0 in the AFTER_FIX curated-10 run.
+
+The top dense cosine for Q4's question is 0.5841 (well above the 0.25 refusal gate), so the gate is not firing — the model is making a correct judgement that the chunks it sees do not contain the answer. This is a corpus-coverage or chunking issue, not a metric or threshold issue. Flagged for a future indexing pass.
