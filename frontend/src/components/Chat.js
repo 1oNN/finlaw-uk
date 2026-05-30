@@ -7,6 +7,7 @@ import {
   FiBookOpen,
 } from "react-icons/fi";
 import MessageBubble from "./MessageBubble";
+import MicButton from "./MicButton";
 import DisclaimerBand from "./DisclaimerBand";
 
 const API_BASE = "http://localhost:5000";
@@ -574,6 +575,13 @@ export default function Chat({
               <FiPaperclip size={15} />
               <input className="hidden" type="file" onChange={onFileInput} />
             </label>
+
+            <MicButton
+              onTranscript={(text) => {
+                setInput((prev) => (prev ? prev + " " : "") + text);
+                setTimeout(() => autogrow(), 0);
+              }}
+            />
 
             <textarea
               ref={textRef}
