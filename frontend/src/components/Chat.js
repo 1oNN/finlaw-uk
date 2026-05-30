@@ -5,11 +5,9 @@ import {
   FiSquare,
   FiX,
   FiBookOpen,
-  FiArrowRight,
 } from "react-icons/fi";
 import MessageBubble from "./MessageBubble";
 import DisclaimerBand from "./DisclaimerBand";
-import Logo from "./Logo";
 
 const API_BASE = "http://localhost:5000";
 const CHAT_LIST_KEY = "flgpt:chats";
@@ -73,6 +71,8 @@ export default function Chat({
 
   const [dragOver, setDragOver] = useState(false);
   const bottomRef = useRef(null);
+  const messagesContainerRef = useRef(null);
+  const isNearBottomRef = useRef(true);
   const textRef = useRef(null);
   const token =
     typeof localStorage !== "undefined"
@@ -87,10 +87,25 @@ export default function Chat({
   }, [activeChatId, chatId]);
 
   useEffect(() => setMessages(loadChatMessages(chatId)), [chatId]);
-  useEffect(
-    () => bottomRef.current?.scrollIntoView({ behavior: "smooth" }),
-    [messages, isStreaming]
-  );
+  useEffect(() => {
+    const el = messagesContainerRef.current;
+    if (!el) return;
+    const onScroll = () => {
+      isNearBottomRef.current =
+        el.scrollHeight - (el.scrollTop + el.clientHeight) < 80;
+    };
+    el.addEventListener("scroll", onScroll, { passive: true });
+    return () => el.removeEventListener("scroll", onScroll);
+  }, []);
+  useEffect(() => {
+    // Auto-scroll only when the user is near the bottom OR the last message
+    // is the user's own — a freshly-sent prompt should always pull into view.
+    const last = messages[messages.length - 1];
+    if (!last) return;
+    if (last.role === "user" || isNearBottomRef.current) {
+      bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [messages, isStreaming]);
   useEffect(() => safeSaveMessages(chatId, messages), [chatId, messages]);
   useEffect(() => onModeChange?.(mode), [mode, onModeChange]);
 
@@ -356,6 +371,25 @@ export default function Chat({
     setStatus("Stopped");
     setTimeout(() => setStatus(""), 900);
   };
+
+  function regenerate() {
+    if (isStreaming) return;
+    // Find the most recent user-text message; drop it and everything after,
+    // then re-send so a fresh user+assistant pair takes its place.
+    let lastUserText = null;
+    let dropFromIdx = messages.length;
+    for (let i = messages.length - 1; i >= 0; i--) {
+      const m = messages[i];
+      if (m.role === "user" && m.type === "text" && (m.content || "").trim()) {
+        lastUserText = m.content;
+        dropFromIdx = i;
+        break;
+      }
+    }
+    if (!lastUserText) return;
+    setMessages((cur) => cur.slice(0, dropFromIdx));
+    setTimeout(() => send(lastUserText), 0);
+  }
   const onKeyDown = (e) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
@@ -372,10 +406,10 @@ export default function Chat({
       onDrop={onDrop}
       onDragLeave={onDragLeave}
     >
-      {/* Top controls */}
-      <div className="border-b border-ivory-3 bg-ivory/85 backdrop-blur">
-        <div className="mx-auto flex w-full max-w-3xl items-center justify-between gap-3 px-4 py-2.5">
-          <div className="inline-flex rounded-lg border border-ivory-3 bg-white p-0.5">
+      {/* Top controls — hairline only, no card */}
+      <div className="border-b border-[var(--rule)] bg-paper">
+        <div className="mx-auto flex w-full max-w-3xl items-center justify-between gap-3 px-5 py-2.5">
+          <div className="inline-flex items-baseline gap-4">
             {MODES.map((m) => (
               <button
                 key={m.key}
@@ -384,108 +418,144 @@ export default function Chat({
                 disabled={isStreaming}
                 title={m.hint}
                 className={[
-                  "rounded-md px-3 py-1 text-xs font-medium transition-colors",
+                  "text-[0.78rem] font-medium tracking-wide transition-colors",
                   mode === m.key
-                    ? "bg-ink text-ivory"
-                    : "text-slate hover:text-ink",
+                    ? "text-accent"
+                    : "text-ink-soft hover:text-ink",
                   isStreaming ? "cursor-not-allowed opacity-60" : "",
                 ].join(" ")}
               >
+                {mode === m.key && (
+                  <span aria-hidden className="mr-1.5 inline-block h-1 w-1 -translate-y-[1px] rounded-full bg-accent align-middle" />
+                )}
                 {m.label}
               </button>
             ))}
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-3">
             {isStreaming && (
-              <span className="hidden animate-pulse text-xs text-slate sm:inline">
+              <span className="hidden text-[0.78rem] italic text-ink-mute sm:inline">
                 thinking…
               </span>
             )}
             {status && (
-              <span className="rounded-chip border border-ivory-3 bg-white px-2.5 py-1 text-xs text-ink">
+              <span className="text-[0.78rem] italic text-ink-soft">
                 {status}
               </span>
             )}
             <button
               type="button"
               onClick={onOpenSources}
-              className="inline-flex items-center gap-1.5 rounded-md border border-ivory-3 bg-white px-2.5 py-1 text-xs font-medium text-ink hover:border-gold/40 lg:hidden"
+              className="inline-flex items-center gap-1 text-[0.78rem] text-ink-soft hover:text-accent lg:hidden"
             >
-              <FiBookOpen size={12} />
-              Sources
+              <FiBookOpen size={12} aria-hidden />
+              Footnotes
             </button>
           </div>
         </div>
       </div>
 
       {/* Messages */}
-      <div className="flex-1 overflow-y-auto">
-        <div className="mx-auto w-full max-w-3xl px-4 py-8">
+      <div ref={messagesContainerRef} className="flex-1 overflow-y-auto">
+        <div className="mx-auto w-full max-w-3xl px-5 py-10">
           {isEmpty ? (
-            <div className="mx-auto max-w-xl pt-6 text-center">
-              <div className="mx-auto mb-5 grid h-14 w-14 place-items-center">
-                <Logo variant="mark" size="lg" />
+            <div className="mx-auto max-w-xl pt-6">
+              <div className="font-display text-[2.4rem] text-accent leading-none">
+                ¶
               </div>
-              <h2 className="font-display text-2xl font-semibold text-ink">
-                What does the corpus say?
+              <h2 className="mt-3 font-display text-[1.75rem] font-normal leading-tight tracking-tightish text-ink">
+                Ask about UK financial regulation.
               </h2>
-              <p className="mt-2 text-sm text-slate">
-                Ask in plain English. FinLaw will retrieve the relevant
-                provisions and ground the answer with UK short-form
-                citations.
+              <p className="mt-3 text-[0.95rem] leading-relaxed text-ink-soft">
+                Plain English is fine. FinLaw-UK will retrieve the
+                relevant provisions and ground the answer in the FCA
+                Handbook, PRA Rulebook, and UK statutory instruments —
+                with every claim linked to its footnote.
               </p>
 
-              <ul className="mx-auto mt-7 grid max-w-lg gap-2 text-left">
-                {SUGGESTIONS.map((s) => (
-                  <li key={s}>
+              <div className="smallcaps-fallback mt-9 pb-2 text-ink-mute">
+                Try
+              </div>
+              <ul className="m-0 list-none p-0">
+                {SUGGESTIONS.map((s, i) => (
+                  <li
+                    key={s}
+                    className={i === 0 ? "" : "border-t border-[var(--rule)]"}
+                  >
                     <button
                       type="button"
                       onClick={() => send(s)}
-                      className="group flex w-full items-start gap-3 rounded-lg border border-ivory-3 bg-white px-4 py-3 text-sm text-ink shadow-soft transition-colors hover:border-gold/40"
+                      className="w-full py-3 text-left font-display text-[1.02rem] italic text-ink-soft transition-colors hover:text-accent"
                     >
-                      <span className="mt-0.5 text-gold-2">
-                        <FiArrowRight size={14} />
-                      </span>
-                      <span className="text-left">{s}</span>
+                      {s}
                     </button>
                   </li>
                 ))}
               </ul>
             </div>
           ) : (
-            <div className="space-y-4">
-              {messages.map((m) =>
-                m.role === "meta" ? (
-                  <div
-                    key={m.id}
-                    className="pl-1 text-xs text-slate"
-                  >
-                    {m.thoughtMs == null
-                      ? "Thinking…"
-                      : `Thought for ${(m.thoughtMs / 1000).toFixed(1)} s`}
-                  </div>
-                ) : (
-                  <MessageBubble key={m.id} message={m} />
-                )
-              )}
+            <div>
+              {(() => {
+                let latestAssistantIdx = -1;
+                for (let i = messages.length - 1; i >= 0; i--) {
+                  if (messages[i]?.role === "assistant") {
+                    latestAssistantIdx = i;
+                    break;
+                  }
+                }
+                return messages.map((m, idx) =>
+                  m.role === "meta" ? (
+                    <div
+                      key={m.id}
+                      className="pb-3 pt-1 text-[0.78rem] italic text-ink-mute"
+                    >
+                      {m.thoughtMs == null
+                        ? "Thinking…"
+                        : `Thought for ${(m.thoughtMs / 1000).toFixed(1)} s`}
+                    </div>
+                  ) : (
+                    <div
+                      key={m.id}
+                      className={
+                        idx > 0 && messages[idx - 1]?.role === "assistant"
+                          ? "border-t border-[var(--rule)] pt-2"
+                          : ""
+                      }
+                    >
+                      <MessageBubble
+                        message={m}
+                        onRegenerate={
+                          idx === latestAssistantIdx &&
+                          !isStreaming &&
+                          (m.content || "").trim()
+                            ? regenerate
+                            : undefined
+                        }
+                      />
+                    </div>
+                  )
+                );
+              })()}
               <div ref={bottomRef} />
             </div>
           )}
         </div>
       </div>
 
-      {/* Composer */}
-      <div className="border-t border-ivory-3 bg-ivory/85 backdrop-blur">
-        <div className="mx-auto w-full max-w-3xl px-4 pb-3 pt-3">
+      {/* Composer — hairline-only, no shadow, no rounded card */}
+      <div className="border-t border-[var(--rule)] bg-paper">
+        <div className="mx-auto w-full max-w-3xl px-5 pb-3 pt-3">
           {filename && (
-            <div className="mb-2 flex items-center justify-between gap-3 rounded-chip border border-ivory-3 bg-white px-3 py-1.5 text-sm text-ink">
+            <div className="mb-2 flex items-baseline justify-between gap-3 border-b border-[var(--rule)] pb-2 text-[0.86rem] text-ink-soft">
               <div className="truncate">
-                <span className="text-slate">Attached:</span>{" "}
-                <span className="font-medium">{filename}</span>
+                <span className="smallcaps-fallback mr-2 text-ink-mute">
+                  Attached
+                </span>
+                <span className="font-medium text-ink">{filename}</span>
               </div>
               <button
-                className="grid h-6 w-6 place-items-center rounded-full text-slate hover:bg-ivory-2"
+                className="text-ink-mute hover:text-accent"
                 onClick={clearFile}
                 title="Remove file"
                 aria-label="Remove attached file"
@@ -495,21 +565,21 @@ export default function Chat({
             </div>
           )}
 
-          <div className="flex items-end gap-2 rounded-2xl border border-ivory-3 bg-white p-1.5 shadow-soft transition-colors focus-within:border-gold/50">
+          <div className="flex items-end gap-2 border border-[var(--rule-2)] bg-paper px-2 py-1.5 transition-colors focus-within:border-accent">
             <label
-              className="grid h-10 w-10 flex-none cursor-pointer place-items-center rounded-xl text-slate hover:bg-ivory-2 hover:text-ink"
+              className="grid h-10 w-9 flex-none cursor-pointer place-items-center text-ink-mute hover:text-accent"
               title="Attach a file"
               aria-label="Attach a file"
             >
-              <FiPaperclip size={16} />
+              <FiPaperclip size={15} />
               <input className="hidden" type="file" onChange={onFileInput} />
             </label>
 
             <textarea
               ref={textRef}
               rows={1}
-              placeholder="Ask about UK financial regulation…"
-              className="max-h-60 min-h-[40px] flex-1 resize-none bg-transparent px-2 py-2 text-ink outline-none placeholder:text-slate/70"
+              placeholder="Ask about UK financial regulation"
+              className="max-h-60 min-h-[40px] flex-1 resize-none bg-transparent px-1 py-2 text-[0.98rem] text-ink outline-none placeholder:text-ink-mute"
               value={input}
               onChange={(e) => {
                 setInput(e.target.value);
@@ -522,34 +592,36 @@ export default function Chat({
             {isStreaming ? (
               <button
                 type="button"
-                className="grid h-10 w-10 flex-none place-items-center rounded-xl bg-danger/10 text-danger hover:bg-danger/15"
+                className="px-3 py-2 text-[0.84rem] font-medium tracking-wide text-danger hover:text-accent"
                 onClick={stop}
                 title="Stop generating"
                 aria-label="Stop generating"
               >
-                <FiSquare size={14} />
+                <FiSquare size={13} className="-mt-0.5 mr-1 inline" aria-hidden />
+                Stop
               </button>
             ) : (
               <button
                 type="button"
                 disabled={!canSend}
                 className={[
-                  "grid h-10 w-10 flex-none place-items-center rounded-xl transition-colors",
+                  "px-3.5 py-2 text-[0.84rem] font-medium tracking-wide transition-colors",
                   canSend
-                    ? "bg-ink text-ivory hover:bg-ink-2"
-                    : "cursor-not-allowed bg-ivory-2 text-slate",
+                    ? "bg-ink text-paper hover:bg-accent"
+                    : "cursor-not-allowed bg-mute text-ink-mute",
                 ].join(" ")}
                 onClick={() => send()}
                 title="Send"
                 aria-label="Send"
               >
-                <FiSend size={14} />
+                <FiSend size={13} className="-mt-0.5 mr-1 inline" aria-hidden />
+                Send
               </button>
             )}
           </div>
-          <div className="mt-2 flex items-center justify-between gap-2 px-1">
+          <div className="mt-2 flex items-center justify-between gap-2 px-0.5">
             <DisclaimerBand variant="thin" />
-            <span className="text-[11px] text-slate/70">
+            <span className="text-[0.72rem] text-ink-mute">
               Enter to send · Shift+Enter for newline
             </span>
           </div>
@@ -557,8 +629,8 @@ export default function Chat({
       </div>
 
       {dragOver && (
-        <div className="fixed inset-0 z-50 grid place-items-center bg-ink/40">
-          <div className="rounded-card border-2 border-dashed border-gold bg-ivory px-10 py-8 text-center font-display text-xl text-ink">
+        <div className="fixed inset-0 z-50 grid place-items-center bg-ink/30">
+          <div className="border-2 border-dashed border-accent bg-paper px-10 py-8 text-center font-display text-xl text-ink">
             Drop the file to attach
           </div>
         </div>
