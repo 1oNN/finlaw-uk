@@ -2,34 +2,65 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ============================================================================
+   Theme tokens. Palette = "navy minimal" (cool neutrals + one restrained navy
+   accent). Colors are stored as space-separated RGB *channel triplets* so they
+   work with Tailwind's `rgb(var(--x) / <alpha-value>)` tokens AND opacity
+   modifiers like bg-ink/30. Borders (--rule, --rule-2) are full colors because
+   components reference them directly via border-[var(--rule-2)].
+   Flip the whole app by toggling the `.dark` class on <html>.
+   ========================================================================== */
 :root {
-  /* Editorial palette — single source of truth for components that
-     don't go through Tailwind tokens. */
-  --paper:     #FAF8F3;
-  --paper-2:   #F4EFE5;
-  --ink:       #1A1A1A;
-  --ink-2:     #2A2A2A;
-  --ink-soft:  #4A4A4A;
-  --ink-mute:  #767676;
-  --accent:    #722F37;
-  --accent-2:  #5A252C;
-  --accent-soft: #E9D8DA;
-  --rule:      rgba(0, 0, 0, 0.08);
-  --rule-2:    rgba(0, 0, 0, 0.18);
-  --mute:      #F0EBE0;
+  color-scheme: light;
 
-  /* Legacy aliases kept compiling for un-refactored components. */
-  --ivory:     #FAF8F3;
-  --ivory-2:   #F4EFE5;
-  --ivory-3:   #E8E5DE;
-  --gold:      #722F37;
-  --gold-2:    #5A252C;
-  --gold-soft: #E9D8DA;
-  --slate:     #4A4A4A;
-  --mist:      #D8D8D8;
-  --verified:  #2F7A4F;
-  --caution:   #B07A1F;
-  --danger:    #A33A2A;
+  --paper:       255 255 255;   /* page background */
+  --paper-2:     247 248 250;   /* raised surface  */
+  --ink:         15 20 25;      /* primary text    */
+  --ink-2:       31 41 53;      /* strong / hover  */
+  --ink-soft:    71 84 103;     /* secondary text  */
+  --ink-mute:    98 109 125;    /* tertiary text   */
+  --accent:      10 90 140;     /* navy            */
+  --accent-2:    7 71 112;      /* navy hover/active */
+  --accent-soft: 226 237 245;   /* navy tint fill  */
+  --mute:        237 241 245;   /* code / subtle fill */
+  --verified:    31 122 79;
+  --caution:     176 122 31;
+  --danger:      178 58 46;
+  --risk-green:  74 138 107;
+  --risk-yellow: 199 160 74;
+  --risk-amber:  181 117 54;
+  --risk-red:    181 69 62;
+  --scrim:       15 20 25;       /* modal overlay base */
+
+  /* Borders — full colors (used directly in border-[var(--rule*)]). */
+  --rule:   rgb(227 232 238);
+  --rule-2: rgb(213 220 228);
+}
+
+.dark {
+  color-scheme: dark;
+
+  --paper:       15 20 25;
+  --paper-2:     29 38 53;
+  --ink:         232 238 245;
+  --ink-2:       203 213 225;
+  --ink-soft:    156 165 180;
+  --ink-mute:    122 133 149;
+  --accent:      63 169 255;
+  --accent-2:    110 190 255;
+  --accent-soft: 23 49 74;
+  --mute:        22 28 36;
+  --verified:    76 175 125;
+  --caution:     214 168 74;
+  --danger:      224 110 92;
+  --risk-green:  95 176 136;
+  --risk-yellow: 216 182 96;
+  --risk-amber:  208 142 78;
+  --risk-red:    216 110 100;
+  --scrim:       0 0 0;
+
+  --rule:   rgb(42 51 64);
+  --rule-2: rgb(58 69 86);
 }
 
 html, body, #root {
@@ -38,8 +69,8 @@ html, body, #root {
 
 body {
   margin: 0;
-  background: var(--paper);
-  color: var(--ink);
+  background: rgb(var(--paper));
+  color: rgb(var(--ink));
   font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
   font-size: 16px;
   line-height: 1.62;
@@ -50,8 +81,8 @@ body {
 }
 
 ::selection {
-  background: rgba(114, 47, 55, 0.18);
-  color: var(--ink);
+  background: rgb(var(--accent) / 0.20);
+  color: rgb(var(--ink));
 }
 
 *::-webkit-scrollbar {
@@ -63,13 +94,13 @@ body {
   border-radius: 4px;
 }
 *::-webkit-scrollbar-thumb:hover {
-  background: var(--ink-mute);
+  background: rgb(var(--ink-mute));
 }
 *::-webkit-scrollbar-track {
   background: transparent;
 }
 * {
-  scrollbar-color: rgba(0, 0, 0, 0.18) transparent;
+  scrollbar-color: var(--rule-2) transparent;
   scrollbar-width: thin;
 }
 
@@ -78,7 +109,7 @@ h1, h2, h3, h4 {
   font-family: 'Source Serif 4', 'Newsreader', Georgia, serif;
   font-feature-settings: 'opsz' 36, 'kern', 'liga';
   letter-spacing: -0.012em;
-  color: var(--ink);
+  color: rgb(var(--ink));
 }
 
 /* The first paragraph in an assistant answer reads as the lede — set
@@ -91,19 +122,19 @@ h1, h2, h3, h4 {
   line-height: 1.4;
   font-weight: 400;
   letter-spacing: -0.01em;
-  color: var(--ink);
+  color: rgb(var(--ink));
   margin-bottom: 1.2rem;
 }
 
 /* Inline links inside prose — accent underline only */
 .prose a {
   text-decoration: none;
-  border-bottom: 1px solid var(--accent);
-  color: var(--ink);
+  border-bottom: 1px solid rgb(var(--accent));
+  color: rgb(var(--ink));
 }
 .prose a:hover {
-  border-bottom-color: var(--accent-2);
-  color: var(--accent-2);
+  border-bottom-color: rgb(var(--accent-2));
+  color: rgb(var(--accent-2));
 }
 
 /* Real-small-caps utility — applied to inline source labels like
@@ -116,32 +147,32 @@ h1, h2, h3, h4 {
   letter-spacing: 0.08em;
   font-size: 0.82em;
   font-weight: 500;
-  color: var(--ink-soft);
+  color: rgb(var(--ink-soft));
 }
 .smallcaps-fallback {
   text-transform: uppercase;
   letter-spacing: 0.12em;
   font-size: 0.72em;
   font-weight: 500;
-  color: var(--ink-soft);
+  color: rgb(var(--ink-soft));
 }
 
 /* Inline citation — editorial form
    The token (FCA Handbook DISP 1.6.2R) renders as:
-     (smallcaps source)  +  underlined oxblood code
+     (smallcaps source)  +  underlined accent code
    No pill, no chip, no border. */
 .cite {
   white-space: nowrap;
-  color: var(--ink);
+  color: rgb(var(--ink));
 }
 .cite .code {
-  border-bottom: 1px solid var(--accent);
+  border-bottom: 1px solid rgb(var(--accent));
   padding-bottom: 1px;
-  color: var(--accent-2);
+  color: rgb(var(--accent-2));
   font-weight: 500;
 }
 .cite-sup {
-  color: var(--accent);
+  color: rgb(var(--accent));
   font-size: 0.62em;
   font-weight: 600;
   vertical-align: super;
@@ -156,8 +187,8 @@ h1, h2, h3, h4 {
   display: inline;
   font-family: inherit;
   font-size: 0.9em;
-  border-bottom: 1px solid var(--accent);
-  color: var(--accent-2);
+  border-bottom: 1px solid rgb(var(--accent));
+  color: rgb(var(--accent-2));
   padding-bottom: 1px;
 }
 
@@ -170,14 +201,14 @@ h1, h2, h3, h4 {
   width: 1ch;
   text-align: center;
   opacity: 0.6;
-  color: var(--ink-mute);
+  color: rgb(var(--ink-mute));
   animation: finlaw-blink 1s infinite;
 }
 
-/* Focus ring — accent, not gold */
+/* Focus ring — accent */
 :focus-visible {
   outline: none;
-  box-shadow: 0 0 0 2px rgba(114, 47, 55, 0.35);
+  box-shadow: 0 0 0 2px rgb(var(--accent) / 0.45);
   border-radius: 2px;
 }
 

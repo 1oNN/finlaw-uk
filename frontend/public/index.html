@@ -6,14 +6,29 @@
       name="viewport"
       content="width=device-width,initial-scale=1,maximum-scale=1"
     />
-    <title>FinLaw — UK financial regulation, cited.</title>
+
+    <!-- Apply the saved (or OS) theme before paint, so there is no flash. -->
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem("theme");
+          var dark = t
+            ? t === "dark"
+            : window.matchMedia("(prefers-color-scheme: dark)").matches;
+          if (dark) document.documentElement.classList.add("dark");
+        } catch (e) {}
+      })();
+    </script>
+
+    <title>FinLaw-UK — UK financial regulation, cited.</title>
 
     <meta
       name="description"
       content="FinLaw is a graph-grounded research assistant for UK financial regulation. Answers are checked against FSMA, the FCA Handbook, the PRA Rulebook, MLR 2017, PSR 2017 and UK MAR, with every claim linked to its source."
     />
-    <meta name="theme-color" content="#1A1A1A" />
-    <meta name="color-scheme" content="light" />
+    <meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0F1419" media="(prefers-color-scheme: dark)" />
+    <meta name="color-scheme" content="light dark" />
 
     <link rel="icon" type="image/svg+xml" href="%PUBLIC_URL%/favicon.svg" />
     <link rel="alternate icon" type="image/x-icon" href="%PUBLIC_URL%/favicon.ico" />
@@ -27,7 +42,7 @@
       href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
     />
 
-    <meta property="og:title" content="FinLaw — UK financial regulation, cited." />
+    <meta property="og:title" content="FinLaw-UK — UK financial regulation, cited." />
     <meta
       property="og:description"
       content="Graph-grounded answers on UK financial regulation. Every claim linked to its source."

@@ -1,73 +1,74 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}", "./public/index.html"],
+  // Theme is driven by CSS variables (see src/styles/globals.css). Toggling the
+  // `dark` class on <html> flips every token below at once.
+  darkMode: "class",
   theme: {
     extend: {
       colors: {
-        // --- Editorial palette (new semantic names) -------------------
-        // Warm off-white paper, near-black ink, deep oxblood accent.
-        // One accent only — no gradients, no secondary brand color.
+        // --- Palette: "navy minimal" -------------------------------------
+        // Every token reads an RGB channel triplet from a CSS var, so the
+        // class works in both themes AND supports opacity (bg-ink/30, etc.).
+        // Borders are full colors because components use border-[var(--rule*)].
         paper: {
-          DEFAULT: "#FAF8F3",
-          2: "#F4EFE5",
+          DEFAULT: "rgb(var(--paper) / <alpha-value>)",
+          2: "rgb(var(--paper-2) / <alpha-value>)",
         },
         accent: {
-          DEFAULT: "#722F37",
-          2: "#5A252C",
-          soft: "#E9D8DA",
+          DEFAULT: "rgb(var(--accent) / <alpha-value>)",
+          2: "rgb(var(--accent-2) / <alpha-value>)",
+          soft: "rgb(var(--accent-soft) / <alpha-value>)",
         },
         rule: {
-          DEFAULT: "#E8E5DE",     // hairline border on paper
-          2: "#D6D2C8",           // stronger separator
+          DEFAULT: "var(--rule)",     // hairline border
+          2: "var(--rule-2)",         // stronger separator
         },
-        mute: "#F0EBE0",
+        mute: "rgb(var(--mute) / <alpha-value>)",
+        scrim: "rgb(var(--scrim) / <alpha-value>)",
 
-        // --- Legacy token names, REMAPPED to editorial palette --------
-        // Old class names (bg-ivory, text-ink, text-gold, etc.) used in
-        // pages we haven't refactored yet (Home, Login, Signup, Eval)
-        // pick up the new colors automatically. The numeric meaning is
-        // preserved (ivory = the page surface, ink = the body text,
-        // gold = the accent), only the hex values change.
+        // --- Legacy token names, remapped to the same vars ----------------
+        // Old class names (bg-ivory, text-gold, text-slate, …) used across
+        // the app keep working and now flip with the theme automatically.
         ink: {
-          DEFAULT: "#1A1A1A",
-          2: "#2A2A2A",
-          soft: "#4A4A4A",
+          DEFAULT: "rgb(var(--ink) / <alpha-value>)",
+          2: "rgb(var(--ink-2) / <alpha-value>)",
+          soft: "rgb(var(--ink-soft) / <alpha-value>)",
+          mute: "rgb(var(--ink-mute) / <alpha-value>)",
         },
         ivory: {
-          DEFAULT: "#FAF8F3",
-          2: "#F4EFE5",
-          3: "#E8E5DE",
+          DEFAULT: "rgb(var(--paper) / <alpha-value>)",
+          2: "rgb(var(--paper-2) / <alpha-value>)",
+          3: "var(--rule)",
         },
         gold: {
-          DEFAULT: "#722F37",
-          2: "#5A252C",
-          soft: "#E9D8DA",
+          DEFAULT: "rgb(var(--accent) / <alpha-value>)",
+          2: "rgb(var(--accent-2) / <alpha-value>)",
+          soft: "rgb(var(--accent-soft) / <alpha-value>)",
         },
         slate: {
-          DEFAULT: "#4A4A4A",
-          2: "#767676",
+          DEFAULT: "rgb(var(--ink-soft) / <alpha-value>)",
+          2: "rgb(var(--ink-mute) / <alpha-value>)",
         },
-        mist: "#D8D8D8",
-        verified: "#2F7A4F",
-        caution: "#B07A1F",
-        danger: "#A33A2A",
+        mist: "var(--rule-2)",
+        verified: "rgb(var(--verified) / <alpha-value>)",
+        caution: "rgb(var(--caution) / <alpha-value>)",
+        danger: "rgb(var(--danger) / <alpha-value>)",
 
-        // Legacy alias bag — kept compiling, redirected to editorial
-        bg: "#FAF8F3",
-        panel: "#FFFFFF",
-        surface: "#F4EFE5",
-        border: "#E8E5DE",
-        text: "#1A1A1A",
-        muted: "#4A4A4A",
+        // Legacy alias bag — redirected to the var palette
+        bg: "rgb(var(--paper) / <alpha-value>)",
+        panel: "rgb(var(--paper-2) / <alpha-value>)",
+        surface: "rgb(var(--paper-2) / <alpha-value>)",
+        border: "var(--rule)",
+        text: "rgb(var(--ink) / <alpha-value>)",
+        muted: "rgb(var(--ink-soft) / <alpha-value>)",
 
-        // Traffic-light review colors — UNCHANGED. The Green/Yellow/
-        // Amber/Red sections in MessageBubble depend on these exact
-        // tokens, and the four-category review is part of the product.
+        // Traffic-light review colors — semantic, tuned per theme in globals.css.
         risk: {
-          green: "#4A8A6B",
-          yellow: "#C7A04A",
-          amber: "#B57536",
-          red: "#B5453E",
+          green: "rgb(var(--risk-green) / <alpha-value>)",
+          yellow: "rgb(var(--risk-yellow) / <alpha-value>)",
+          amber: "rgb(var(--risk-amber) / <alpha-value>)",
+          red: "rgb(var(--risk-red) / <alpha-value>)",
         },
       },
       fontFamily: {
@@ -86,10 +87,10 @@ module.exports = {
         chip: "999px",
       },
       boxShadow: {
-        // Light hairline shadow only — no bubble blur, no chat-product glow.
+        // Hairline only — borders carry elevation (invisible-by-design on dark).
         soft: "0 1px 0 rgba(0,0,0,0.04)",
         chat: "0 1px 0 rgba(0,0,0,0.04)",
-        ring: "0 0 0 2px rgba(114,47,55,0.25)",
+        ring: "0 0 0 2px rgb(var(--accent) / 0.25)",
       },
       letterSpacing: {
         tightish: "-0.01em",
