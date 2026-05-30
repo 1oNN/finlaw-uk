@@ -23,7 +23,7 @@ export default function ChatPage() {
   };
 
   return (
-    <div className="flex h-screen flex-col bg-ivory text-ink">
+    <div className="flex h-screen flex-col bg-paper text-ink">
       <Header variant="chat" />
 
       <div className="relative flex flex-1 overflow-hidden">
@@ -42,19 +42,24 @@ export default function ChatPage() {
 
         <button
           onClick={() => setSidebarOpen((o) => !o)}
-          className="absolute left-0 top-3 z-30 grid h-7 w-7 -translate-x-1/2 place-items-center rounded-full border border-ivory-3 bg-white text-ink shadow-soft hover:bg-ivory-2"
+          className="absolute left-0 top-3 z-30 grid h-6 w-6 -translate-x-1/2 place-items-center rounded-full border border-[var(--rule-2)] bg-paper text-ink-soft hover:text-accent"
           title={sidebarOpen ? "Hide sidebar" : "Show sidebar"}
           aria-label={sidebarOpen ? "Hide sidebar" : "Show sidebar"}
         >
           {sidebarOpen ? (
-            <FiChevronLeft size={14} />
+            <FiChevronLeft size={12} />
           ) : (
-            <FiChevronRight size={14} />
+            <FiChevronRight size={12} />
           )}
         </button>
 
         {/* Center column */}
-        <main className="flex min-w-0 flex-1 flex-col bg-ivory">
+        <main
+          className={[
+            "flex min-w-0 flex-1 flex-col bg-paper",
+            sidebarOpen ? "border-l border-[var(--rule)]" : "",
+          ].join(" ")}
+        >
           <Chat
             activeChatId={activeId}
             onChatCreated={setActiveId}
@@ -64,8 +69,8 @@ export default function ChatPage() {
           />
         </main>
 
-        {/* Right rail — desktop */}
-        <div className="hidden w-[320px] flex-none lg:flex">
+        {/* Right rail — desktop, footnotes column */}
+        <div className="hidden w-[300px] flex-none lg:flex">
           <SourcesPanel meta={lastMeta} mode={lastMode} />
         </div>
 
@@ -75,17 +80,17 @@ export default function ChatPage() {
             <button
               type="button"
               className="absolute inset-0 bg-ink/30"
-              aria-label="Close sources panel"
+              aria-label="Close footnotes panel"
               onClick={() => setSourcesOpenMobile(false)}
             />
-            <div className="relative ml-auto flex h-full w-[320px] max-w-[85vw] flex-col bg-ivory shadow-chat">
-              <div className="flex items-center justify-between border-b border-ivory-3 px-3 py-2">
-                <span className="text-sm font-medium text-ink">
-                  Sources & verification
+            <div className="relative ml-auto flex h-full w-[320px] max-w-[85vw] flex-col bg-paper">
+              <div className="flex items-center justify-between border-b border-[var(--rule)] px-4 py-2.5">
+                <span className="smallcaps-fallback text-ink-mute">
+                  Footnotes
                 </span>
                 <button
                   type="button"
-                  className="grid h-8 w-8 place-items-center rounded-md text-slate hover:bg-ivory-2"
+                  className="grid h-8 w-8 place-items-center text-ink-soft hover:text-accent"
                   onClick={() => setSourcesOpenMobile(false)}
                   aria-label="Close"
                 >

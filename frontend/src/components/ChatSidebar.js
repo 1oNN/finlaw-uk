@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { FiPlus, FiTrash2, FiMessageSquare } from "react-icons/fi";
+import { FiPlus, FiTrash2 } from "react-icons/fi";
 
 const CHAT_LIST_KEY = "flgpt:chats";
 const loadChats = () => {
@@ -11,6 +11,23 @@ const loadChats = () => {
 };
 const saveChats = (list) =>
   localStorage.setItem(CHAT_LIST_KEY, JSON.stringify(list));
+
+// Group chats into "Today" / "Yesterday" / "Earlier" buckets so the
+// list reads as a typeset index, not a stack of identical rows.
+function bucket(ts) {
+  if (!ts) return "Earlier";
+  const d = new Date(ts);
+  const now = new Date();
+  const sameDay = d.toDateString() === now.toDateString();
+  if (sameDay) return "Today";
+  const yest = new Date(now);
+  yest.setDate(now.getDate() - 1);
+  if (d.toDateString() === yest.toDateString()) return "Yesterday";
+  const weekAgo = new Date(now);
+  weekAgo.setDate(now.getDate() - 7);
+  if (d > weekAgo) return "Earlier this week";
+  return "Earlier";
+}
 
 export default function ChatSidebar({ selectedId, onSelect, onNewChat }) {
   const [chats, setChats] = useState(loadChats());
@@ -27,77 +44,95 @@ export default function ChatSidebar({ selectedId, onSelect, onNewChat }) {
     if (id === selectedId && next.length) onSelect?.(next[0].id);
   };
 
+  // Bucket the list while preserving order within each bucket.
+  const groups = [];
+  const byBucket = new Map();
+  for (const c of chats) {
+    const b = bucket(c.createdAt);
+    if (!byBucket.has(b)) {
+      byBucket.set(b, []);
+      groups.push(b);
+    }
+    byBucket.get(b).push(c);
+  }
+
   return (
-    <aside className="hidden h-full w-[260px] flex-col border-r border-ivory-3 bg-ivory/60 md:flex">
-      <div className="border-b border-ivory-3 p-3">
+    <aside className="hidden h-full w-[244px] flex-col bg-paper md:flex">
+      <div className="px-5 pt-5">
         <button
-          className="flex w-full items-center justify-center gap-2 rounded-lg bg-ink px-3 py-2 text-sm font-medium text-ivory shadow-soft transition-colors hover:bg-ink-2"
+          className="inline-flex items-center gap-1.5 text-sm font-medium text-ink transition-colors hover:text-accent"
           onClick={onNewChat}
-          title="New chat"
+          title="New research"
         >
-          <FiPlus size={14} /> New chat
+          <FiPlus size={14} aria-hidden /> New research
         </button>
       </div>
 
-      <div className="border-b border-ivory-3 px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.15em] text-slate">
+      <div className="smallcaps-fallback px-5 pt-7 text-ink-mute">
         Recent
       </div>
 
-      <div className="flex-1 overflow-auto p-2">
+      <div className="mt-1 flex-1 overflow-auto px-5 pb-5">
         {chats.length === 0 ? (
-          <div className="px-2 py-3 text-xs text-slate">
-            No saved chats yet.
+          <div className="pt-3 text-[0.86rem] italic text-ink-mute">
+            Nothing yet — your previous questions will list here.
           </div>
         ) : (
-          <ul className="space-y-1">
-            {chats.map((c) => {
-              const active = selectedId === c.id;
-              return (
-                <li
-                  key={c.id}
-                  className={[
-                    "group flex items-center gap-1 rounded-md transition-colors",
-                    active
-                      ? "bg-white shadow-soft"
-                      : "hover:bg-ivory-2",
-                  ].join(" ")}
-                >
-                  <button
-                    className="flex min-w-0 flex-1 items-center gap-2 px-2.5 py-2 text-left text-sm"
-                    onClick={() => onSelect?.(c.id)}
-                    title={c.title}
-                  >
-                    <span
+          groups.map((g) => (
+            <section key={g} className="pt-4">
+              <div
+                className="pb-1 text-[0.7rem] uppercase tracking-[0.08em] text-ink-mute"
+              >
+                {g}
+              </div>
+              <ul className="m-0 list-none p-0">
+                {byBucket.get(g).map((c, i) => {
+                  const active = selectedId === c.id;
+                  return (
+                    <li
+                      key={c.id}
                       className={[
-                        "grid h-6 w-6 flex-none place-items-center rounded-md",
-                        active
-                          ? "bg-gold-soft text-gold-2"
-                          : "bg-ivory-2 text-slate",
+                        "group flex items-baseline gap-2",
+                        i === 0
+                          ? "border-t-0"
+                          : "border-t border-[var(--rule)]",
                       ].join(" ")}
                     >
-                      <FiMessageSquare size={12} />
-                    </span>
-                    <span
-                      className={[
-                        "truncate",
-                        active ? "text-ink" : "text-ink/85",
-                      ].join(" ")}
-                    >
-                      {c.title}
-                    </span>
-                  </button>
-                  <button
-                    className="mr-1 grid h-7 w-7 flex-none place-items-center rounded-md text-slate opacity-0 transition-opacity hover:bg-ivory-2 hover:text-danger group-hover:opacity-100"
-                    onClick={() => remove(c.id)}
-                    title="Delete chat"
-                    aria-label="Delete chat"
-                  >
-                    <FiTrash2 size={13} />
-                  </button>
-                </li>
-              );
-            })}
-          </ul>
+                      <button
+                        type="button"
+                        onClick={() => onSelect?.(c.id)}
+                        className={[
+                          "min-w-0 flex-1 truncate py-2 pr-2 text-left text-[0.92rem] leading-snug transition-colors",
+                          active
+                            ? "text-ink"
+                            : "text-ink-soft hover:text-accent",
+                        ].join(" ")}
+                        title={c.title}
+                        aria-current={active ? "page" : undefined}
+                      >
+                        {active && (
+                          <span
+                            aria-hidden
+                            className="mr-1.5 inline-block h-1 w-1 -translate-y-[1px] rounded-full bg-accent align-middle"
+                          />
+                        )}
+                        {c.title}
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => remove(c.id)}
+                        className="flex-none py-2 text-ink-mute opacity-0 transition-opacity hover:text-accent group-hover:opacity-100"
+                        title="Delete"
+                        aria-label="Delete research item"
+                      >
+                        <FiTrash2 size={12} />
+                      </button>
+                    </li>
+                  );
+                })}
+              </ul>
+            </section>
+          ))
         )}
       </div>
     </aside>

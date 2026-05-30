@@ -1,9 +1,9 @@
 import React from "react";
 
 function Mark({ size = 28, monochrome = false, className = "" }) {
-  const ink = monochrome ? "currentColor" : "#0F1E3D";
-  const surface = monochrome ? "transparent" : "#F7F3EA";
-  const gold = monochrome ? "currentColor" : "#B8893A";
+  const ink = monochrome ? "currentColor" : "#1A1A1A";
+  const surface = monochrome ? "transparent" : "#FAF8F3";
+  const accent = monochrome ? "currentColor" : "#722F37";
 
   return (
     <svg
@@ -12,17 +12,17 @@ function Mark({ size = 28, monochrome = false, className = "" }) {
       width={size}
       height={size}
       role="img"
-      aria-label="FinLaw"
+      aria-label="FinLaw-UK"
       className={className}
     >
-      <rect width="100" height="100" rx="18" fill={ink} />
+      <rect width="100" height="100" rx="4" fill={ink} />
       <g fill={surface}>
         <rect x="22" y="20" width="56" height="10" rx="1" />
         <rect x="32" y="20" width="14" height="60" rx="1" />
         <rect x="32" y="46" width="32" height="10" rx="1" />
         <rect x="18" y="78" width="64" height="6" rx="1" />
       </g>
-      <circle cx="72" cy="51" r="4.5" fill={gold} />
+      <circle cx="72" cy="51" r="4.5" fill={accent} />
     </svg>
   );
 }
@@ -49,7 +49,7 @@ function Wordmark({ size = "md", withMark = true, className = "" }) {
           Law
           <span
             aria-hidden
-            className="pointer-events-none absolute -bottom-0.5 left-0 right-0 h-[2px] bg-gold"
+            className="pointer-events-none absolute -bottom-0.5 left-0 right-0 h-[1px] bg-accent"
           />
         </span>
       </span>

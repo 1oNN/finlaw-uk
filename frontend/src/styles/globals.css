@@ -3,19 +3,33 @@
 @tailwind utilities;
 
 :root {
-  --ink: #0F1E3D;
-  --ink-2: #1A2A4F;
-  --ivory: #F7F3EA;
-  --ivory-2: #EFE9DA;
-  --ivory-3: #E5DEC9;
-  --gold: #B8893A;
-  --gold-2: #8E6A2C;
-  --gold-soft: #E8D9B7;
-  --slate: #4A5878;
-  --mist: #C7CCDB;
-  --verified: #2F7A4F;
-  --caution: #B07A1F;
-  --danger: #A33A2A;
+  /* Editorial palette — single source of truth for components that
+     don't go through Tailwind tokens. */
+  --paper:     #FAF8F3;
+  --paper-2:   #F4EFE5;
+  --ink:       #1A1A1A;
+  --ink-2:     #2A2A2A;
+  --ink-soft:  #4A4A4A;
+  --ink-mute:  #767676;
+  --accent:    #722F37;
+  --accent-2:  #5A252C;
+  --accent-soft: #E9D8DA;
+  --rule:      rgba(0, 0, 0, 0.08);
+  --rule-2:    rgba(0, 0, 0, 0.18);
+  --mute:      #F0EBE0;
+
+  /* Legacy aliases kept compiling for un-refactored components. */
+  --ivory:     #FAF8F3;
+  --ivory-2:   #F4EFE5;
+  --ivory-3:   #E8E5DE;
+  --gold:      #722F37;
+  --gold-2:    #5A252C;
+  --gold-soft: #E9D8DA;
+  --slate:     #4A4A4A;
+  --mist:      #D8D8D8;
+  --verified:  #2F7A4F;
+  --caution:   #B07A1F;
+  --danger:    #A33A2A;
 }
 
 html, body, #root {
@@ -24,94 +38,130 @@ html, body, #root {
 
 body {
   margin: 0;
-  background: var(--ivory);
+  background: var(--paper);
   color: var(--ink);
   font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-  font-size: 15px;
-  line-height: 1.55;
-  font-feature-settings: 'ss01', 'cv11';
+  font-size: 16px;
+  line-height: 1.62;
+  font-feature-settings: 'kern', 'liga', 'cv11';
+  hanging-punctuation: first;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 ::selection {
-  background: rgba(184, 137, 58, 0.25);
+  background: rgba(114, 47, 55, 0.18);
   color: var(--ink);
 }
 
 *::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
+  width: 8px;
+  height: 8px;
 }
 *::-webkit-scrollbar-thumb {
-  background: #C9C0AC;
-  border-radius: 8px;
+  background: var(--rule-2);
+  border-radius: 4px;
 }
 *::-webkit-scrollbar-thumb:hover {
-  background: #B5A98E;
+  background: var(--ink-mute);
 }
 *::-webkit-scrollbar-track {
   background: transparent;
 }
 * {
-  scrollbar-color: #C9C0AC transparent;
+  scrollbar-color: rgba(0, 0, 0, 0.18) transparent;
   scrollbar-width: thin;
 }
 
-/* On dark (ink) surfaces */
-.ink-surface *::-webkit-scrollbar-thumb {
-  background: #2A3A5C;
-}
-.ink-surface *::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-/* Headings default — display serif */
+/* Headings default — editorial serif */
 h1, h2, h3, h4 {
-  font-family: 'Fraunces', Georgia, serif;
-  font-feature-settings: 'opsz' 36, 'ss01';
-  letter-spacing: -0.01em;
+  font-family: 'Source Serif 4', 'Newsreader', Georgia, serif;
+  font-feature-settings: 'opsz' 36, 'kern', 'liga';
+  letter-spacing: -0.012em;
+  color: var(--ink);
 }
 
-/* Hairline links inside prose */
+/* The first paragraph in an assistant answer reads as the lede — set
+   in serif at a larger optical size. CSS-only so streaming doesn't
+   need any JS to apply it; works whether the answer is one sentence
+   or four paragraphs long. */
+.finlaw-prose > p:first-of-type {
+  font-family: 'Source Serif 4', 'Newsreader', Georgia, serif;
+  font-size: 1.28rem;
+  line-height: 1.4;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin-bottom: 1.2rem;
+}
+
+/* Inline links inside prose — accent underline only */
 .prose a {
   text-decoration: none;
-  border-bottom: 1px solid rgba(184, 137, 58, .5);
+  border-bottom: 1px solid var(--accent);
+  color: var(--ink);
 }
 .prose a:hover {
-  border-bottom-color: var(--gold);
+  border-bottom-color: var(--accent-2);
+  color: var(--accent-2);
 }
 
-/* Inline citation chip used by MessageBubble */
-.cite-chip {
-  display: inline-flex;
-  align-items: baseline;
-  gap: .2rem;
-  padding: 0.05rem 0.45rem;
-  margin: 0 0.1rem;
-  border-radius: 999px;
-  background: var(--gold-soft);
-  color: var(--ink);
-  font-family: 'JetBrains Mono', ui-monospace, monospace;
-  font-size: 0.78em;
+/* Real-small-caps utility — applied to inline source labels like
+   FCA HANDBOOK inside a citation. Uses OpenType smcp when the font
+   has it (Source Serif 4 has smcp glyphs); otherwise the visual still
+   works via uppercase + tracking. */
+.smallcaps {
+  font-feature-settings: 'smcp', 'c2sc';
+  text-transform: lowercase;
+  letter-spacing: 0.08em;
+  font-size: 0.82em;
   font-weight: 500;
-  border: 1px solid rgba(184, 137, 58, .35);
+  color: var(--ink-soft);
+}
+.smallcaps-fallback {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.72em;
+  font-weight: 500;
+  color: var(--ink-soft);
+}
+
+/* Inline citation — editorial form
+   The token (FCA Handbook DISP 1.6.2R) renders as:
+     (smallcaps source)  +  underlined oxblood code
+   No pill, no chip, no border. */
+.cite {
   white-space: nowrap;
-  line-height: 1.4;
+  color: var(--ink);
 }
-
-/* Drop-cap for first paragraph of long assistant answers */
-.drop-cap > p:first-of-type::first-letter {
-  font-family: 'Fraunces', Georgia, serif;
+.cite .code {
+  border-bottom: 1px solid var(--accent);
+  padding-bottom: 1px;
+  color: var(--accent-2);
+  font-weight: 500;
+}
+.cite-sup {
+  color: var(--accent);
+  font-size: 0.62em;
   font-weight: 600;
-  font-size: 2.6em;
-  line-height: 0.9;
-  float: left;
-  margin: 0.05em 0.18em 0 0;
-  color: var(--gold-2);
+  vertical-align: super;
+  line-height: 0;
+  margin-left: 0.15em;
+  letter-spacing: 0.04em;
 }
 
-/* Streaming caret */
+/* Legacy .cite-chip — kept for any code we haven't refactored, restyled
+   to look editorial rather than pill-shaped. */
+.cite-chip {
+  display: inline;
+  font-family: inherit;
+  font-size: 0.9em;
+  border-bottom: 1px solid var(--accent);
+  color: var(--accent-2);
+  padding-bottom: 1px;
+}
+
+/* Streaming caret — kept; subtle */
 @keyframes finlaw-blink {
   50% { opacity: 0.2; }
 }
@@ -119,15 +169,16 @@ h1, h2, h3, h4 {
   display: inline-block;
   width: 1ch;
   text-align: center;
-  opacity: 0.7;
+  opacity: 0.6;
+  color: var(--ink-mute);
   animation: finlaw-blink 1s infinite;
 }
 
-/* Focus ring */
+/* Focus ring — accent, not gold */
 :focus-visible {
   outline: none;
-  box-shadow: 0 0 0 3px rgba(184, 137, 58, 0.35);
-  border-radius: 8px;
+  box-shadow: 0 0 0 2px rgba(114, 47, 55, 0.35);
+  border-radius: 2px;
 }
 
 /* Reduced motion */
