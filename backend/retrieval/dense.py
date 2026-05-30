@@ -37,6 +37,22 @@ DEFAULT_MODEL = os.getenv("DENSE_MODEL", "BAAI/bge-small-en-v1.5")
 DEFAULT_CACHE_DIR = Path(os.getenv("DENSE_CACHE_DIR", "./data/cache"))
 DEFAULT_DEVICE = os.getenv("DENSE_DEVICE", "cpu")
 
+# Process-wide shared encoder so per-session indices reuse the same
+# SentenceTransformer instance the corpus retriever loads. Without this each
+# session would load its own ~134 MB copy of BGE-small.
+_SHARED_MODEL = None
+_SHARED_MODEL_KEY: Optional[Tuple[str, str]] = None
+
+
+def _load_shared_model(model_name: str = DEFAULT_MODEL, device: str = DEFAULT_DEVICE):
+    global _SHARED_MODEL, _SHARED_MODEL_KEY
+    key = (model_name, device)
+    if _SHARED_MODEL is None or _SHARED_MODEL_KEY != key:
+        from sentence_transformers import SentenceTransformer
+        _SHARED_MODEL = SentenceTransformer(model_name, device=device)
+        _SHARED_MODEL_KEY = key
+    return _SHARED_MODEL
+
 
 class DenseRetriever:
     """Sentence-transformer + FAISS dense retriever.
@@ -63,8 +79,7 @@ class DenseRetriever:
 
     def _load_model(self):
         if self._model is None:
-            from sentence_transformers import SentenceTransformer
-            self._model = SentenceTransformer(self.model_name, device=self.device)
+            self._model = _load_shared_model(self.model_name, self.device)
         return self._model
 
     def _encode(self, texts: List[str]) -> np.ndarray:
