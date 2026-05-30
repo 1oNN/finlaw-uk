@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
-import Logo from "./Logo";
+import Wordmark from "./Wordmark";
 
 export default function Footer({ variant = "default" }) {
   const year = new Date().getFullYear();
@@ -26,7 +26,7 @@ export default function Footer({ variant = "default" }) {
     <footer className="border-t border-[var(--rule-2)] bg-paper">
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-12 sm:px-6 md:grid-cols-3">
         <div className="space-y-3">
-          <Logo variant="wordmark" size="md" />
+          <Wordmark size="md" />
           <p className="max-w-xs text-sm text-slate">
             A graph-grounded research assistant for UK financial regulation.
             Every claim linked to its source.

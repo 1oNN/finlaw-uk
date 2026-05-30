@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FiX } from "react-icons/fi";
-import Logo from "./Logo";
+import { PilcrowMark } from "./Wordmark";
 
 export default function DisclaimerModal() {
   const [open, setOpen] = useState(false);
@@ -20,7 +20,7 @@ export default function DisclaimerModal() {
       {open && (
         <>
           <motion.div
-            className="fixed inset-0 z-40 bg-ink/40"
+            className="fixed inset-0 z-40 bg-scrim/50"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -35,7 +35,7 @@ export default function DisclaimerModal() {
             exit={{ y: 40, opacity: 0 }}
           >
             <div className="flex items-start gap-4 p-6">
-              <Logo variant="mark" size="md" />
+              <PilcrowMark size="md" />
               <div className="flex-1">
                 <div className="font-display text-lg font-semibold text-ink">
                   A note before you start

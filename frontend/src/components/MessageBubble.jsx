@@ -231,7 +231,7 @@ function AssistantAnswer({ message, onRegenerate }) {
                   </code>
                 );
               return (
-                <pre className="overflow-auto rounded-card border border-rule bg-[#1A1A1A] p-3 font-mono text-[12px] leading-5 text-paper">
+                <pre className="overflow-auto rounded-card border border-rule bg-mute p-3 font-mono text-[12px] leading-5 text-ink">
                   <code className={className} {...props}>
                     {txt}
                   </code>

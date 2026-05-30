@@ -306,7 +306,7 @@ export default function EvalPage() {
             {!running ? (
               <button
                 type="submit"
-                className="inline-flex items-center gap-2 rounded-[4px] bg-accent px-4 py-2 font-medium text-white hover:bg-accent-2"
+                className="inline-flex items-center gap-2 rounded-[4px] bg-accent px-4 py-2 font-medium text-paper hover:bg-accent-2"
               >
                 <FiPlay /> Run evaluation
               </button>
@@ -314,7 +314,7 @@ export default function EvalPage() {
               <button
                 type="button"
                 onClick={stopRun}
-                className="inline-flex items-center gap-2 rounded-[4px] bg-risk-red px-4 py-2 font-medium text-white"
+                className="inline-flex items-center gap-2 rounded-[4px] bg-risk-red px-4 py-2 font-medium text-paper"
               >
                 <FiSquare /> Stop
               </button>

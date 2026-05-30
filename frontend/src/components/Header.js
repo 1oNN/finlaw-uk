@@ -2,36 +2,14 @@ import React, { useContext, useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { FiArrowRight, FiMenu, FiX } from "react-icons/fi";
 import { AuthContext } from "./AuthContext";
+import ThemeToggle from "./ThemeToggle";
+import Wordmark from "./Wordmark";
 
 function navClass({ isActive }) {
   return [
     "px-1 py-2 text-[0.86rem] font-medium tracking-wide transition-colors",
     isActive ? "text-ink" : "text-ink-soft hover:text-accent",
   ].join(" ");
-}
-
-// Typographic mark — a pilcrow in the accent color paired with the
-// FinLaw-UK wordmark in editorial serif. Replaces the SVG logo for the
-// chrome of the chat experience.
-function PilcrowWordmark({ size = "md" }) {
-  const big = size === "lg";
-  return (
-    <span className="inline-flex items-baseline gap-2">
-      <span
-        aria-hidden
-        className="font-display leading-none text-accent"
-        style={{ fontSize: big ? "1.8rem" : "1.4rem" }}
-      >
-        ¶
-      </span>
-      <span
-        className="font-display font-semibold tracking-tightish text-ink"
-        style={{ fontSize: big ? "1.2rem" : "1.05rem" }}
-      >
-        FinLaw-UK
-      </span>
-    </span>
-  );
 }
 
 export default function Header({ variant = "default" }) {
@@ -59,7 +37,7 @@ export default function Header({ variant = "default" }) {
     >
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-6 px-5 sm:px-7">
         <Link to="/" className="group inline-flex items-baseline" aria-label="FinLaw-UK home">
-          <PilcrowWordmark size="md" />
+          <Wordmark size="md" />
           <span className="smallcaps-fallback ml-3 hidden text-ink-mute md:inline">
             UK financial regulation, cited
           </span>
@@ -77,7 +55,8 @@ export default function Header({ variant = "default" }) {
           </NavLink>
         </nav>
 
-        <div className="hidden items-baseline gap-4 md:flex">
+        <div className="hidden items-center gap-4 md:flex">
+          <ThemeToggle />
           {!loggedIn ? (
             <>
               <Link
@@ -116,14 +95,17 @@ export default function Header({ variant = "default" }) {
           )}
         </div>
 
-        <button
-          type="button"
-          className="grid h-10 w-10 place-items-center text-ink md:hidden"
-          aria-label="Open menu"
-          onClick={() => setOpen((o) => !o)}
-        >
-          {open ? <FiX size={20} /> : <FiMenu size={20} />}
-        </button>
+        <div className="flex items-center gap-1 md:hidden">
+          <ThemeToggle />
+          <button
+            type="button"
+            className="grid h-10 w-10 place-items-center text-ink"
+            aria-label="Open menu"
+            onClick={() => setOpen((o) => !o)}
+          >
+            {open ? <FiX size={20} /> : <FiMenu size={20} />}
+          </button>
+        </div>
       </div>
 
       {open && (

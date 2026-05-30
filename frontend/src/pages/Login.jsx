@@ -1,8 +1,8 @@
 import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { FiArrowRight, FiAlertCircle } from "react-icons/fi";
+import { FiArrowRight, FiAlertCircle, FiLoader } from "react-icons/fi";
 import { AuthContext } from "../components/AuthContext";
-import Logo from "../components/Logo";
+import Wordmark from "../components/Wordmark";
 import DisclaimerBand from "../components/DisclaimerBand";
 
 const API_BASE = "http://localhost:5000";
@@ -45,7 +45,7 @@ export default function Login() {
       <main className="flex flex-1 items-center justify-center px-4 py-16">
         <div className="w-full max-w-md">
           <Link to="/" className="mb-8 inline-flex">
-            <Logo variant="wordmark" size="lg" />
+            <Wordmark size="lg" />
           </Link>
 
           <div className="rounded-card border border-[var(--rule-2)] bg-paper p-7 shadow-soft">
@@ -98,7 +98,9 @@ export default function Login() {
                 className="group inline-flex w-full items-center justify-center gap-2 rounded-[4px] bg-ink px-4 py-2.5 text-sm font-medium text-paper shadow-soft transition-colors hover:bg-ink-2 disabled:opacity-60"
               >
                 {submitting ? "Signing in…" : "Sign in"}
-                {!submitting && (
+                {submitting ? (
+                  <FiLoader size={14} className="animate-spin" />
+                ) : (
                   <FiArrowRight
                     size={14}
                     className="transition-transform group-hover:translate-x-0.5"

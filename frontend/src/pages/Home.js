@@ -13,7 +13,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import DisclaimerBand from "../components/DisclaimerBand";
 import StatuteBadge from "../components/StatuteBadge";
-import Logo from "../components/Logo";
+import { PilcrowMark } from "../components/Wordmark";
 
 const STATUTES = [
   { label: "FSMA 2000", sub: "primary" },
@@ -105,9 +105,9 @@ function ExampleAnswerCard() {
 
           <div className="flex items-start gap-3">
             <div className="flex-none">
-              <Logo variant="mark" size="sm" />
+              <PilcrowMark size="sm" />
             </div>
-            <div className="prose prose-sm max-w-none text-ink">
+            <div className="prose prose-sm max-w-none text-ink dark:prose-invert">
               <p>
                 Under{" "}
                 <span className="cite-chip">FSMA 2000 s.19</span>, no person
@@ -239,7 +239,6 @@ export default function Home() {
       <section className="border-t border-[var(--rule)] bg-paper">
         <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
           <div className="mx-auto max-w-2xl text-center">
-            <SectionEyebrow>Why FinLaw</SectionEyebrow>
             <h2 className="font-display text-3xl font-semibold tracking-tightish sm:text-4xl">
               Built for compliance work,{" "}
               <span className="italic">not for vibes.</span>
@@ -274,7 +273,6 @@ export default function Home() {
       <section className="border-t border-[var(--rule)] bg-paper-2">
         <div className="mx-auto grid max-w-6xl gap-12 px-4 py-20 sm:px-6 md:grid-cols-[1fr_1.2fr] md:items-center">
           <div>
-            <SectionEyebrow>See it in context</SectionEyebrow>
             <h2 className="font-display text-3xl font-semibold tracking-tightish sm:text-4xl">
               Every claim, linked to its source.
             </h2>
@@ -311,7 +309,6 @@ export default function Home() {
       <section className="border-t border-[var(--rule)] bg-paper">
         <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
           <div className="mx-auto max-w-2xl text-center">
-            <SectionEyebrow>How it works</SectionEyebrow>
             <h2 className="font-display text-3xl font-semibold tracking-tightish sm:text-4xl">
               Retrieval, then verification.
             </h2>
@@ -339,16 +336,16 @@ export default function Home() {
       </section>
 
       {/* DISSERTATION / TRUST */}
-      <section className="bg-ink text-paper ink-surface">
+      <section className="border-t border-[var(--rule)] bg-paper-2">
         <div className="mx-auto grid max-w-6xl gap-12 px-4 py-20 sm:px-6 md:grid-cols-2 md:items-center">
           <div>
             <SectionEyebrow>
-              <span className="text-accent-soft">Dissertation-backed</span>
+              <span className="text-accent">Dissertation-backed</span>
             </SectionEyebrow>
-            <h2 className="font-display text-3xl font-semibold tracking-tightish text-paper sm:text-4xl">
+            <h2 className="font-display text-3xl font-semibold tracking-tightish text-ink sm:text-4xl">
               Not a marketing site dressed as a product.
             </h2>
-            <p className="mt-4 text-paper/80">
+            <p className="mt-4 text-ink-soft">
               FinLaw started as an MSc dissertation at the University of
               Bradford. Every architectural claim — hybrid retrieval, dense
               embeddings, LangChain, graph verification, RAGAS evaluation —
@@ -358,14 +355,14 @@ export default function Home() {
             <div className="mt-6 flex flex-wrap gap-3">
               <Link
                 to="/eval"
-                className="inline-flex items-center gap-2 rounded-[4px] bg-paper px-5 py-3 text-sm font-medium text-ink hover:bg-white"
+                className="inline-flex items-center gap-2 rounded-[4px] bg-ink px-5 py-3 text-sm font-medium text-paper transition-colors hover:bg-accent"
               >
                 Run the evaluation
                 <FiArrowRight size={16} />
               </Link>
               <Link
                 to="/chat"
-                className="inline-flex items-center gap-2 rounded-[4px] border border-paper/25 px-5 py-3 text-sm font-medium text-paper hover:bg-paper/10"
+                className="inline-flex items-center gap-2 rounded-[4px] border border-[var(--rule-2)] px-5 py-3 text-sm font-medium text-ink transition-colors hover:border-accent hover:text-accent"
               >
                 Try a question
               </Link>
@@ -373,39 +370,39 @@ export default function Home() {
           </div>
 
           <div className="grid gap-3 sm:grid-cols-2">
-            <div className="rounded-card border border-paper/10 bg-ink-2 p-5">
-              <FiBookOpen className="text-accent-soft" size={20} />
+            <div className="rounded-card border border-[var(--rule-2)] bg-paper p-5">
+              <FiBookOpen className="text-accent" size={20} />
               <div className="mt-3 font-display text-2xl font-semibold">
                 7 corpora
               </div>
-              <div className="text-sm text-paper/70">
+              <div className="text-sm text-ink-mute">
                 FSMA · FCA · PRA · RAO · MLR · PSR · UK MAR
               </div>
             </div>
-            <div className="rounded-card border border-paper/10 bg-ink-2 p-5">
-              <FiCpu className="text-accent-soft" size={20} />
+            <div className="rounded-card border border-[var(--rule-2)] bg-paper p-5">
+              <FiCpu className="text-accent" size={20} />
               <div className="mt-3 font-display text-2xl font-semibold">
                 Local LLM
               </div>
-              <div className="text-sm text-paper/70">
+              <div className="text-sm text-ink-mute">
                 Mistral 7B-Instruct via Ollama. No third-party calls.
               </div>
             </div>
-            <div className="rounded-card border border-paper/10 bg-ink-2 p-5">
-              <FiGitBranch className="text-accent-soft" size={20} />
+            <div className="rounded-card border border-[var(--rule-2)] bg-paper p-5">
+              <FiGitBranch className="text-accent" size={20} />
               <div className="mt-3 font-display text-2xl font-semibold">
                 Neo4j graph
               </div>
-              <div className="text-sm text-paper/70">
+              <div className="text-sm text-ink-mute">
                 Provision-level nodes with 2-hop citation edges.
               </div>
             </div>
-            <div className="rounded-card border border-paper/10 bg-ink-2 p-5">
-              <FiShield className="text-accent-soft" size={20} />
+            <div className="rounded-card border border-[var(--rule-2)] bg-paper p-5">
+              <FiShield className="text-accent" size={20} />
               <div className="mt-3 font-display text-2xl font-semibold">
                 RAGAS scored
               </div>
-              <div className="text-sm text-paper/70">
+              <div className="text-sm text-ink-mute">
                 Faithfulness · relevancy · context precision · context recall.
               </div>
             </div>
