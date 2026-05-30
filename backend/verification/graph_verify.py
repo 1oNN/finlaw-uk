@@ -20,7 +20,7 @@ degraded mode to the user.
 
 from __future__ import annotations
 
-from typing import Dict, Iterable, List, Set
+from typing import Dict, Iterable, List, Optional, Set
 
 from backend.graph.client import get_session
 from backend.graph.extract_xrefs import extract_from_clause
@@ -75,15 +75,23 @@ def verify_citations_batch(cites: Iterable[str]) -> Set[str]:
         return set()
 
 
-def verify_answer(answer_text: str, context_cites: Iterable[str] = ()) -> Dict:
+def verify_answer(
+    answer_text: str,
+    context_cites: Iterable[str] = (),
+    retrieved_chunk_cites: Optional[Iterable[str]] = None,
+) -> Dict:
     """Audit every citation in `answer_text`.
 
     Args:
         answer_text: the full model-generated response (Markdown).
-        context_cites: the citations the retriever surfaced to the model,
-            usually `gboost['source_line'].split('|')`. Used to flag
-            citations that appear in the answer without ever having been
-            shown to the model.
+        context_cites: citations the graph-boost surfaced to the model,
+            usually ``gboost['source_line'].split('|')``.
+        retrieved_chunk_cites: canonical citations parsed out of the
+            sparse / dense / session retrieved chunks. When provided, a
+            cited provision counts as "retrieved" iff it appears in
+            *either* this set or ``context_cites`` — broader than the
+            graph-boost-only check, which historically misses cites that
+            sparse/dense retrieval surfaced.
 
     Returns:
         {
@@ -91,12 +99,19 @@ def verify_answer(answer_text: str, context_cites: Iterable[str] = ()) -> Dict:
             'all_retrieved': bool,           # every cited provision was in the context
             'verified':    list[str],        # cites that pass the graph lookup
             'unverified':  list[str],        # cites that fail the graph lookup
-            'hallucinated_context': list[str], # cites not in `context_cites`
+            'hallucinated_context': list[str], # cites not in any retrieved source
             'note': str,                     # diagnostic when graph unavailable
+            'warning': str,                  # set when all_retrieved is False
         }
     """
     cites = _extract_cites(answer_text)
     context_set: Set[str] = {c.strip() for c in context_cites if c and c.strip()}
+    chunk_set: Set[str] = (
+        {c.strip() for c in retrieved_chunk_cites if c and c.strip()}
+        if retrieved_chunk_cites is not None
+        else set()
+    )
+    grounding_set: Set[str] = context_set | chunk_set
 
     if not cites:
         return {
@@ -129,7 +144,9 @@ def verify_answer(answer_text: str, context_cites: Iterable[str] = ()) -> Dict:
         else:
             unverified.append(c)
 
-    hallucinated_context = [c for c in cites if context_set and c not in context_set]
+    hallucinated_context = (
+        [c for c in cites if c not in grounding_set] if grounding_set else []
+    )
 
     if note == "graph_unavailable":
         # Fail open: don't penalise the model when we can't actually check.
@@ -142,7 +159,7 @@ def verify_answer(answer_text: str, context_cites: Iterable[str] = ()) -> Dict:
             "note": note,
         }
 
-    return {
+    result: Dict = {
         "all_grounded": len(unverified) == 0,
         "all_retrieved": len(hallucinated_context) == 0,
         "verified": verified,
@@ -150,3 +167,10 @@ def verify_answer(answer_text: str, context_cites: Iterable[str] = ()) -> Dict:
         "hallucinated_context": hallucinated_context,
         "note": note,
     }
+    if hallucinated_context:
+        bad = ", ".join(hallucinated_context[:3])
+        result["warning"] = (
+            f"Citation(s) not present in retrieved sources: {bad}. "
+            "Verify manually against legislation.gov.uk / FCA Handbook."
+        )
+    return result

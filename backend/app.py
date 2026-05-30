@@ -29,7 +29,11 @@ from werkzeug.utils import secure_filename
 
 from backend.llm import ollama_client as llm
 from backend.retrieval import session_index
-from backend.retrieval.orchestrator import get_context, get_graph_boost
+from backend.retrieval.orchestrator import (
+    get_context,
+    get_context_and_cites,
+    get_graph_boost,
+)
 from backend.verification.citations import normalise_citations
 from backend.verification.claim_trace import trace_all
 from backend.verification.graph_verify import verify_answer
@@ -561,6 +565,11 @@ def chat_stream():
     # Default generation options; chitchat path overrides for variety.
     gen_options: Optional[Dict[str, object]] = None
 
+    # Populated by the retrieval branch below; the smalltalk path leaves it
+    # empty. Forwarded to `verify_answer` so it can fail a citation that
+    # isn't in any retrieved chunk.
+    retrieved_chunk_cites: set = set()
+
     if smalltalk:
         gboost = {}
         use_finance = False
@@ -589,7 +598,9 @@ def chat_stream():
         gboost = get_graph_boost(query_hint)
         if gboost.get("context_md"):
             ctx = gboost["context_md"] + (ctx or "")
-        retrieved = get_context(query_hint, session_id=session_id)
+        retrieved, retrieved_chunk_cites = get_context_and_cites(
+            query_hint, session_id=session_id
+        )
         if retrieved:
             ctx = f"{retrieved}\n" + (ctx or "")
 
@@ -729,7 +740,9 @@ def chat_stream():
             ]
             if GRAPH_VERIFY_ENABLED and not smalltalk:
                 try:
-                    verification = verify_answer(full_text, context_cites)
+                    verification = verify_answer(
+                        full_text, context_cites, retrieved_chunk_cites
+                    )
                 except Exception as e:
                     app.logger.warning("verify_answer failed: %s", e)
                     verification = {"note": f"error: {e}", "all_grounded": True, "all_retrieved": True}

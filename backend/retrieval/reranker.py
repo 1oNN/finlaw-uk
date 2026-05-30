@@ -4,9 +4,12 @@ Loaded LAZILY (only on first call to ``rerank()``) so the backend cold-start
 doesn't have to wait ~3 s for a transformer that may never be used in a
 given session.
 
-Default model is ``cross-encoder/ms-marco-MiniLM-L-6-v2`` (~80MB, ~50-200ms
-per query depending on candidate count). Override via env var
-``RAG_RERANK_MODEL``.
+Default model is ``BAAI/bge-reranker-base`` (~280 MB, ~80-300 ms per
+query depending on candidate count) — BGE rerankers handle UK
+legal / regulatory phrasing better than the MS MARCO MiniLM
+cross-encoder we used previously. Override via env var
+``RAG_RERANK_MODEL`` (e.g. ``cross-encoder/ms-marco-MiniLM-L-6-v2`` to
+fall back).
 
 Used by ``backend.retrieval.orchestrator._hybrid_search`` when
 ``RAG_RERANK_ENABLED=1``; the orchestrator retrieves top-30 hybrid then
@@ -23,7 +26,7 @@ log = logging.getLogger(__name__)
 
 _MODEL = None
 _DISABLED = False
-_MODEL_NAME = os.getenv("RAG_RERANK_MODEL", "cross-encoder/ms-marco-MiniLM-L-6-v2")
+_MODEL_NAME = os.getenv("RAG_RERANK_MODEL", "BAAI/bge-reranker-base")
 
 
 def _get_model():
