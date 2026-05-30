@@ -153,13 +153,26 @@ EMPTY_PROMPT = (
 )
 
 META_PROMPT = (
-    "You are FinLaw GPT. The user is asking who or what you are. "
-    "Reply in ONE friendly sentence (max 35 words): you answer UK finance-law "
-    "questions (FSMA, COBS, SYSC, PRA Rulebook, CRR, etc.) and can run a "
-    "traffic-light review on uploaded documents. "
-    "Example: 'I'm FinLaw GPT — I help with UK finance regulation (FSMA, COBS, "
-    "SYSC, PRA Rulebook) and can run traffic-light reviews on documents you upload.'\n"
-    "DO NOT include a 'Source:' line."
+    "You are FinLaw-UK, a research tool that answers questions about UK "
+    "financial regulation with citations grounded in the FCA Handbook, "
+    "PRA Rulebook, and UK statutory instruments. You are not a lawyer and "
+    "your answers are not legal advice. You decline to answer questions "
+    "outside UK financial regulation.\n\n"
+    "Reply in ONE clear sentence (max ~40 words). Identify yourself, name "
+    "your scope (UK financial regulation), and mention sources (FCA "
+    "Handbook, PRA Rulebook, UK statutes) when it reads naturally. Do NOT "
+    "recite every rule you know. Do NOT include a 'Source:' line. Do NOT "
+    "open with 'Hi' or 'Hello'."
+)
+
+OUT_OF_SCOPE_PROMPT = (
+    "You are FinLaw-UK. The user's question is outside your scope — it is "
+    "not about UK financial regulation (e.g. general law, non-UK "
+    "jurisdictions, non-financial topics, opinions, jokes). Reply with ONE "
+    "polite sentence (max 30 words): explain that you only cover UK "
+    "financial regulation and offer to help if they have a question in "
+    "that scope. Do NOT attempt to answer the question. Do NOT include a "
+    "'Source:' line."
 )
 
 TRAFFIC_LIGHT_PROMPT = (
@@ -179,6 +192,7 @@ TRAFFIC_LIGHT_PROMPT = (
 app = Flask(__name__)
 CORS(app)
 logging.getLogger("werkzeug").setLevel(logging.INFO)
+
 
 def allowed_file(fn: str) -> bool:
     return "." in fn and fn.rsplit(".", 1)[1].lower() in ALLOWED_EXTS
@@ -216,12 +230,42 @@ def is_finance_intent(text: str) -> bool:
     if not text:
         return False
     kws = [
-        r"\bloan\b", r"\bcredit\b", r"\bsecurity\b", r"\bcovenant",
-        r"\bPRA\b", r"\bFCA\b", r"\bCRR\b", r"\bfacility\b",
-        r"\bdebenture\b", r"\bcharge\b", r"\bUK finance\b",
-        r"\bmifid\b", r"\bregulation\b", r"\bfsma\b", r"\bcobs\b", r"\bsysc\b",
-        r"\bprin\b", r"\bconc\b", r"\bicobs\b", r"\bmortgage\b", r"\bmlr\b",
-        r"\bmar\b", r"\bprod\b", r"\bdisp\b", r"\brao\b", r"\bpsr\b", r"\bdtr\b",
+        # Regulators and statutes (short forms)
+        r"\bPRA\b", r"\bFCA\b", r"\bCRR\b", r"\bFOS\b", r"\bombudsman\b",
+        r"\bUK finance\b", r"\bmifid\b", r"\bregulation\b",
+        r"\bfsma\b", r"\bcobs\b", r"\bsysc\b", r"\bprin\b", r"\bconc\b",
+        r"\bicobs\b", r"\bmcob\b", r"\bmlr\b", r"\bmar\b", r"\bprod\b",
+        r"\bdisp\b", r"\brao\b", r"\bpsr\b", r"\bdtr\b", r"\bcoll\b",
+        r"\bcomp\b", r"\bfscs\b",
+        # Lending / credit / debt-finance vocabulary
+        r"\bloan\b", r"\bcredit\b", r"\bcovenant", r"\bfacility\b",
+        r"\bdebenture\b", r"\bdebt\b",
+        # Common UK retail-finance products
+        r"\bmortgage\b", r"\bbuy[- ]?to[- ]?let\b",
+        r"\b(current|savings)\s+account\b", r"\bisa\b",
+        r"\bpension\b", r"\bsipp\b", r"\bannuit", r"\bbank\s+account\b",
+        # Securities / corporate finance
+        r"\bsecurity\b", r"\bcharge\b", r"\bequity\b", r"\bshare\s+(?:buy|capital)\b",
+        r"\b(?:share\s+)?buyback\b", r"\bdividend\b", r"\binsider\b",
+        r"\bdisclosure\b", r"\bprospectus\b", r"\blisting\b",
+        r"\b(?:ipo|sweep|bookbuild)\b",
+        # Conduct / consumer-finance language
+        r"\bcomplaint", r"\bconsumer\s+duty\b", r"\bclient\s+money\b",
+        r"\bbest\s+execution\b", r"\bsuitabilit", r"\bappropriaten",
+        r"\bvulnerable\s+customer", r"\bmis[- ]?selling\b",
+        # AML / sanctions / financial crime
+        r"\baml\b", r"\bkyc\b", r"\bcdd\b", r"\bdue\s+diligence\b",
+        r"\bsanction", r"\bpep\b",
+        # Payments / e-money
+        r"\bpayment\s+(?:service|institut)", r"\be[- ]?money\b",
+        r"\bcontingent\s+reimbursement", r"\bauthorised\s+push",
+        # Insurance
+        r"\binsurance\b", r"\binsurer\b", r"\binsured\b", r"\bpolicyholder\b",
+        # Capital / prudential
+        r"\bcapital\b", r"\bliquidity\b", r"\bbasel\b", r"\bicaap\b",
+        r"\bilaap\b", r"\bring[- ]?fenc", r"\bsmcr\b",
+        # Market abuse / disclosure
+        r"\bmarket\s+abuse\b", r"\binside\s+information\b",
     ]
     return any(re.search(p, text, re.I) for p in kws)
 
@@ -277,19 +321,104 @@ _FRUSTRATION_RE = re.compile(
 )
 
 _META_RE = re.compile(
-    r"^(?:who\s+are\s+you|what\s+are\s+you|what\s+can\s+you\s+do|"
-    r"what\s+do\s+you\s+do|what\s+is\s+this|help|introduce\s+yourself)"
+    r"^(?:"
+    r"who\s+(?:are\s+you|made\s+you|built\s+you|created\s+you|trained\s+you)|"
+    r"what\s+are\s+you|"
+    r"what(?:'s|\s+is)\s+your\s+name|"
+    r"what(?:'s|\s+is)\s+this(?:\s+(?:tool|app|thing|chatbot))?|"
+    r"what\s+model(?:\s+(?:are\s+you|is\s+this|do\s+you\s+use|powers\s+(?:you|this)))?|"
+    r"which\s+(?:model|llm|ai)(?:\s+(?:are\s+you|is\s+this))?|"
+    r"are\s+you\s+(?:an?\s+)?(?:ai|bot|chatgpt|claude|gpt|llm|robot|human|lawyer|person)|"
+    r"how\s+(?:do\s+you|does\s+(?:this|it))\s+work|"
+    r"how\s+were\s+you\s+(?:built|made|trained)|"
+    r"what\s+(?:can|do)\s+you\s+do|"
+    r"introduce\s+yourself|help|"
+    r"tell\s+me\s+about\s+(?:yourself|this(?:\s+(?:tool|app))?)"
+    r")"
     r"[\s!.?,]*$",
     re.IGNORECASE,
 )
 
 
-def classify_intent(text: str) -> str:
+def _classify_intent_llm(text: str) -> Optional[str]:
+    """One-shot LLM disambiguator for messages that pass every cheap rule.
+
+    Returns 'regulatory_question' | 'meta' | 'out_of_scope', or None if the
+    call fails or the output can't be parsed. Caller decides the fallback.
+
+    Budget is small: num_predict=6, temperature=0. The classifier prompt asks
+    Ollama for a single label, so the median cost is one short token roundtrip.
+    On any exception this returns None so the route handler can fall back to
+    the legacy 'route everything to RAG' default and the user never sees a
+    classifier-induced failure.
+    """
+    sys = (
+        "You classify a user message into ONE label. Reply with the label "
+        "and nothing else. No explanation.\n\n"
+        "Labels:\n"
+        "  regulatory_question  - any question about UK financial "
+        "regulation, UK banking, UK consumer credit, UK mortgages, UK "
+        "insurance, UK payments, UK pensions, financial conduct, market "
+        "abuse, AML, financial crime, complaint handling, ombudsman, "
+        "FSCS, capital rules, prudential rules, share buybacks, "
+        "dividends, listings, IPOs, prospectuses, financial-services "
+        "firms, brokers, advisers, custodians, payment institutions, "
+        "e-money issuers, even when the user uses plain English and "
+        "does not name FCA / PRA / a specific handbook chapter. The "
+        "default for any UK money / banking / payments / insurance / "
+        "investment question is regulatory_question.\n"
+        "  meta                 - a question about you, your identity, "
+        "your model, how you were built, what you can do.\n"
+        "  out_of_scope         - questions that are clearly NOT about "
+        "UK financial regulation: general law (criminal, family, "
+        "employment, immigration unless it touches financial firms), "
+        "non-UK jurisdictions, non-financial topics, opinions, jokes, "
+        "riddles, weather, sports, personal advice.\n\n"
+        "Examples:\n"
+        "  'Can I structure a dividend as a share buyback?' -> regulatory_question\n"
+        "  'What is the deadline for handling a complaint about a current account?' -> regulatory_question\n"
+        "  'Does my SIPP provider have to send a final response?' -> regulatory_question\n"
+        "  'What rules apply to APP fraud reimbursement?' -> regulatory_question\n"
+        "  'What is the law on UK speeding tickets?' -> out_of_scope\n"
+        "  'Tell me a joke' -> out_of_scope\n"
+        "  'What model are you' -> meta\n\n"
+        "Output exactly one of: regulatory_question | meta | out_of_scope"
+    )
+    messages = [
+        {"role": "system", "content": sys},
+        {"role": "user", "content": text.strip()},
+    ]
+    try:
+        chunks: List[str] = []
+        for tok in llm.generate_stream(
+            messages,
+            model_id=None,
+            options={"num_predict": 6, "temperature": 0.0, "top_p": 0.9},
+        ):
+            chunks.append(tok)
+            if sum(len(c) for c in chunks) > 50:
+                break
+        out = "".join(chunks).strip().lower()
+        for label in ("regulatory_question", "out_of_scope", "meta"):
+            if label in out:
+                return label
+    except Exception as e:
+        app.logger.warning("intent LLM classifier failed: %s", e)
+    return None
+
+
+def route_intent(text: str) -> str:
     """Bucket a user message BEFORE retrieval.
 
-    Returns one of: 'empty', 'frustration', 'meta', 'greeting', 'legal_query'.
-    Order matters: frustration overrides greeting if profanity is present;
-    legal_query is the default fall-through to the RAG pipeline.
+    Returns one of:
+        'empty' | 'frustration' | 'meta' | 'greeting' |
+        'regulatory_question' | 'out_of_scope'
+
+    Cheap regex rules fire first (microseconds, no LLM). The LLM
+    disambiguator only fires for ambiguous fall-through: a real-looking
+    question with no finance keyword signal. On any classifier failure the
+    function returns 'regulatory_question' so the user still gets an answer
+    via the RAG pipeline.
     """
     if not text:
         return "empty"
@@ -306,7 +435,25 @@ def classify_intent(text: str) -> str:
     tokens = re.findall(r"\w+", s_lower)
     if len(tokens) <= 3 and not is_finance_intent(text) and not is_traffic_light_intent(text):
         return "greeting"
-    return "legal_query"
+    if is_finance_intent(text) or is_traffic_light_intent(text):
+        return "regulatory_question"
+    llm_label = _classify_intent_llm(text)
+    if llm_label:
+        return llm_label
+    return "regulatory_question"
+
+
+def classify_intent(text: str) -> str:
+    """Back-compat alias for older callers expecting the legacy label set.
+
+    Maps 'regulatory_question' back to 'legal_query' so existing tests and
+    eval harnesses that key off the old labels continue to work. New code
+    should call route_intent directly.
+    """
+    label = route_intent(text)
+    if label == "regulatory_question":
+        return "legal_query"
+    return label
 
 
 # Per-session state, in-memory. Restart wipes; matches existing app behaviour.
@@ -382,6 +529,33 @@ def scrub_known_bad(text: str) -> str:
 
 def fix_currency(text: str) -> str:
     return text.replace("Â£", "£")
+
+
+# Regexes for `scrub_qa_scaffolding` — line-anchored so we only catch the
+# Q:/A:/Source: shape, never plain prose that happens to start with the letter A.
+_QA_Q_LINE = re.compile(r"^\s*\*{0,2}\s*Q\s*[:]\s+.*?$", re.MULTILINE)
+_QA_A_PREFIX = re.compile(r"^\s*\*{0,2}\s*A\s*[:]\s+", re.MULTILINE)
+_STRAY_SOURCE_LINE = re.compile(r"^\s*\*{0,2}\s*Source\s*[:]\s.*?$", re.IGNORECASE | re.MULTILINE)
+_MULTI_BLANK_LINES = re.compile(r"\n{3,}")
+
+
+def scrub_qa_scaffolding(text: str) -> str:
+    """Strip Q/A scaffolding and stray 'Source:' footers that leak from
+    retrieved training chunks into the model's output.
+
+    The new FINANCE_QA_PROMPT explicitly forbids the model from emitting any
+    of these patterns, but some retrieval chunks themselves contain Q/A
+    pairs and the model occasionally echoes them. This is the safety net.
+    Runs FIRST in the post-processing chain so the leaked tokens are gone
+    before the citation normaliser or verification see them.
+    """
+    if not text:
+        return text
+    out = _QA_Q_LINE.sub("", text)
+    out = _QA_A_PREFIX.sub("", out)
+    out = _STRAY_SOURCE_LINE.sub("", out)
+    out = _MULTI_BLANK_LINES.sub("\n\n", out)
+    return out.strip()
 
 
 def patch_with_warning(text: str, invalid: List[str]) -> str:
@@ -555,8 +729,9 @@ def chat_stream():
         return jsonify({"error": "No prompt or file context."}), 400
 
     ctx = ""
-    intent = classify_intent(prompt) if (mode == "auto" and not fname) else "legal_query"
-    smalltalk = intent in ("empty", "frustration", "meta", "greeting")
+    intent = route_intent(prompt) if (mode == "auto" and not fname) else "regulatory_question"
+    non_rag = intent in ("empty", "frustration", "meta", "greeting", "out_of_scope")
+    smalltalk = non_rag  # legacy local name still referenced by verification block below
     app.logger.info(
         "chat_stream: prompt=%r mode=%r intent=%s session=%r",
         prompt[:60], mode, intent, session_id[:16],
@@ -570,7 +745,7 @@ def chat_stream():
     # isn't in any retrieved chunk.
     retrieved_chunk_cites: set = set()
 
-    if smalltalk:
+    if non_rag:
         gboost = {}
         use_finance = False
         use_traffic = False
@@ -580,6 +755,8 @@ def chat_stream():
             system_msg = EMPTY_PROMPT
         elif intent == "meta":
             system_msg = META_PROMPT
+        elif intent == "out_of_scope":
+            system_msg = OUT_OF_SCOPE_PROMPT
         else:  # greeting
             system_msg = SMALLTALK_PROMPT
             if session_id:
@@ -592,7 +769,12 @@ def chat_stream():
                         "offering to help with UK finance regulation when they're ready."
                     )
         hint_line = ""
-        gen_options = {"temperature": 0.7, "top_p": 0.9}
+        # out_of_scope is a firm refusal so it stays deterministic; the chatty
+        # branches (greeting / frustration / meta / empty) want a bit of variety.
+        if intent == "out_of_scope":
+            gen_options = {"temperature": 0.2, "top_p": 0.9}
+        else:
+            gen_options = {"temperature": 0.7, "top_p": 0.9}
     else:
         query_hint = prompt if len(prompt) < 120 else prompt[:120]
         gboost = get_graph_boost(query_hint)
@@ -693,6 +875,9 @@ def chat_stream():
                 time.sleep(0.002)
 
             full_text = "".join(buffer_out)
+            # Strip Q/A and stray Source: leakage FIRST so it never reaches
+            # the citation normaliser or graph verifier.
+            full_text = scrub_qa_scaffolding(full_text)
             full_text = scrub_known_bad(full_text)
             full_text = normalise_citations(full_text)
             full_text = fix_currency(full_text)
@@ -710,11 +895,13 @@ def chat_stream():
                     if add:
                         yield f"data:{add}\n\n"
                     full_text = coerced
-            elif not smalltalk:
-                if not re.search(r"(?im)^source\s*:\s*", full_text) and gboost.get("source_line"):
-                    add = f"\n\nSource: {gboost['source_line']}"
-                    full_text += add
-                    yield f"data:{add}\n\n"
+            # NOTE: the in-body 'Source:' footer auto-append used to live here
+            # for the non-traffic-light path. It was the wrong shape for the
+            # new editorial answer style — citations are inline like
+            # (FCA Handbook DISP 1.6.2R), and the sources column on the right
+            # of the UI renders the graph-verified list from the audit SSE
+            # meta event below. No need to paste a 'Source:' line into the
+            # answer body.
 
             citations_ok = True
             invalid: List[str] = []
