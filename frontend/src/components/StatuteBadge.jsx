@@ -8,10 +8,10 @@ export default function StatuteBadge({
   className = "",
 }) {
   const tones = {
-    default: "bg-ivory border-ivory-3 text-ink",
-    soft: "bg-ivory-2 border-ivory-3 text-ink",
+    default: "bg-paper border-[var(--rule-2)] text-ink",
+    soft: "bg-paper-2 border-[var(--rule-2)] text-ink",
     ink: "bg-ink/5 border-ink/15 text-ink",
-    gold: "bg-gold-soft border-gold/30 text-ink",
+    gold: "bg-accent-soft border-accent/30 text-ink",
     verified: "bg-verified/10 border-verified/30 text-verified",
     caution: "bg-caution/10 border-caution/30 text-caution",
   };

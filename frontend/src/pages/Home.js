@@ -68,8 +68,8 @@ const STEPS = [
 
 function SectionEyebrow({ children }) {
   return (
-    <div className="mb-3 inline-flex items-center gap-2 text-xs font-medium uppercase tracking-[0.18em] text-gold-2">
-      <span className="h-px w-6 bg-gold/60" aria-hidden />
+    <div className="mb-3 inline-flex items-center gap-2 text-xs font-medium uppercase tracking-[0.18em] text-accent">
+      <span className="h-px w-6 bg-accent/60" aria-hidden />
       {children}
     </div>
   );
@@ -77,13 +77,13 @@ function SectionEyebrow({ children }) {
 
 function ExampleAnswerCard() {
   return (
-    <div className="overflow-hidden rounded-card border border-ivory-3 bg-white shadow-soft">
+    <div className="overflow-hidden rounded-card border border-[var(--rule-2)] bg-paper shadow-soft">
       {/* card chrome */}
-      <div className="flex items-center justify-between border-b border-ivory-3 bg-ivory-2/60 px-4 py-2.5">
+      <div className="flex items-center justify-between border-b border-[var(--rule-2)] bg-paper-2/60 px-4 py-2.5">
         <div className="flex items-center gap-2">
-          <span className="h-2.5 w-2.5 rounded-full bg-ivory-3" />
-          <span className="h-2.5 w-2.5 rounded-full bg-ivory-3" />
-          <span className="h-2.5 w-2.5 rounded-full bg-ivory-3" />
+          <span className="h-2.5 w-2.5 rounded-full bg-[var(--rule-2)]" />
+          <span className="h-2.5 w-2.5 rounded-full bg-[var(--rule-2)]" />
+          <span className="h-2.5 w-2.5 rounded-full bg-[var(--rule-2)]" />
           <span className="ml-3 font-mono text-[11px] text-slate">
             finlaw.local — chat
           </span>
@@ -95,7 +95,7 @@ function ExampleAnswerCard() {
         {/* answer column */}
         <div className="space-y-4 p-6">
           <div className="flex items-start gap-3">
-            <div className="grid h-7 w-7 flex-none place-items-center rounded-full bg-ink text-[11px] font-semibold text-ivory">
+            <div className="grid h-7 w-7 flex-none place-items-center rounded-[4px] bg-ink text-[11px] font-semibold text-paper">
               You
             </div>
             <p className="pt-0.5 text-sm text-ink">
@@ -131,7 +131,7 @@ function ExampleAnswerCard() {
         </div>
 
         {/* sources column */}
-        <aside className="border-t border-ivory-3 bg-ivory-2/40 p-5 md:border-l md:border-t-0">
+        <aside className="border-t border-[var(--rule-2)] bg-paper-2/40 p-5 md:border-l md:border-t-0">
           <div className="mb-3 text-xs font-semibold uppercase tracking-wider text-slate">
             Sources & verification
           </div>
@@ -166,7 +166,7 @@ function ExampleAnswerCard() {
             </li>
           </ul>
 
-          <div className="mt-5 border-t border-ivory-3 pt-3 text-[11px] text-slate">
+          <div className="mt-5 border-t border-[var(--rule-2)] pt-3 text-[11px] text-slate">
             Claim trace · 4 claims linked to 4 sources · 0 unverified
           </div>
         </aside>
@@ -177,19 +177,11 @@ function ExampleAnswerCard() {
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen flex-col bg-ivory text-ink">
+    <div className="flex min-h-screen flex-col bg-paper text-ink">
       <Header />
 
       {/* HERO */}
-      <section className="relative overflow-hidden">
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-0 -z-10"
-          style={{
-            background:
-              "radial-gradient(60% 60% at 50% 0%, rgba(184,137,58,0.12) 0%, rgba(247,243,234,0) 60%)",
-          }}
-        />
+      <section className="relative">
         <div className="mx-auto max-w-5xl px-4 pb-16 pt-20 text-center sm:px-6 sm:pt-24">
           <SectionEyebrow>UK financial regulation</SectionEyebrow>
           <h1 className="font-display text-4xl font-semibold leading-[1.05] tracking-tightish sm:text-5xl md:text-6xl">
@@ -198,7 +190,7 @@ export default function Home() {
               cited.
               <span
                 aria-hidden
-                className="pointer-events-none absolute -bottom-1 left-0 right-0 h-[3px] bg-gold"
+                className="pointer-events-none absolute -bottom-1 left-0 right-0 h-[3px] bg-accent"
               />
             </span>
           </h1>
@@ -212,7 +204,7 @@ export default function Home() {
           <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <Link
               to="/chat"
-              className="group inline-flex items-center gap-2 rounded-lg bg-ink px-5 py-3 text-sm font-medium text-ivory shadow-soft transition-colors hover:bg-ink-2"
+              className="group inline-flex items-center gap-2 rounded-[4px] bg-ink px-5 py-3 text-sm font-medium text-paper shadow-soft transition-colors hover:bg-ink-2"
             >
               Open the chat
               <FiArrowRight
@@ -222,7 +214,7 @@ export default function Home() {
             </Link>
             <Link
               to="/eval"
-              className="inline-flex items-center gap-2 rounded-lg border border-ivory-3 bg-white px-5 py-3 text-sm font-medium text-ink shadow-soft transition-colors hover:border-gold/40 hover:text-gold-2"
+              className="inline-flex items-center gap-2 rounded-[4px] border border-[var(--rule-2)] bg-paper px-5 py-3 text-sm font-medium text-ink shadow-soft transition-colors hover:border-accent hover:text-accent"
             >
               See the evaluation
             </Link>
@@ -244,7 +236,7 @@ export default function Home() {
       </section>
 
       {/* DIFFERENTIATORS */}
-      <section className="border-t border-ivory-3 bg-white">
+      <section className="border-t border-[var(--rule)] bg-paper">
         <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
           <div className="mx-auto max-w-2xl text-center">
             <SectionEyebrow>Why FinLaw</SectionEyebrow>
@@ -263,9 +255,9 @@ export default function Home() {
             {DIFFERENTIATORS.map(({ icon: Icon, title, body }) => (
               <div
                 key={title}
-                className="group rounded-card border border-ivory-3 bg-ivory/40 p-6 transition-all hover:border-gold/40 hover:bg-white hover:shadow-soft"
+                className="group rounded-card border border-[var(--rule-2)] bg-paper-2/50 p-6 transition-colors hover:border-accent hover:bg-paper-2"
               >
-                <div className="mb-4 grid h-10 w-10 place-items-center rounded-lg bg-ink text-ivory">
+                <div className="mb-4 grid h-10 w-10 place-items-center rounded-[4px] bg-ink text-paper">
                   <Icon size={18} />
                 </div>
                 <h3 className="font-display text-xl font-semibold text-ink">
@@ -279,7 +271,7 @@ export default function Home() {
       </section>
 
       {/* EXAMPLE ANSWER */}
-      <section className="bg-ivory">
+      <section className="border-t border-[var(--rule)] bg-paper-2">
         <div className="mx-auto grid max-w-6xl gap-12 px-4 py-20 sm:px-6 md:grid-cols-[1fr_1.2fr] md:items-center">
           <div>
             <SectionEyebrow>See it in context</SectionEyebrow>
@@ -316,7 +308,7 @@ export default function Home() {
       </section>
 
       {/* HOW IT WORKS */}
-      <section className="border-t border-ivory-3 bg-white">
+      <section className="border-t border-[var(--rule)] bg-paper">
         <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
           <div className="mx-auto max-w-2xl text-center">
             <SectionEyebrow>How it works</SectionEyebrow>
@@ -333,9 +325,9 @@ export default function Home() {
             {STEPS.map(({ n, title, body }) => (
               <li
                 key={n}
-                className="relative rounded-card border border-ivory-3 bg-ivory/40 p-5"
+                className="relative rounded-card border border-[var(--rule-2)] bg-paper-2/50 p-5"
               >
-                <div className="font-mono text-xs text-gold-2">{n}</div>
+                <div className="font-mono text-xs text-accent">{n}</div>
                 <h3 className="mt-2 font-display text-lg font-semibold text-ink">
                   {title}
                 </h3>
@@ -347,16 +339,16 @@ export default function Home() {
       </section>
 
       {/* DISSERTATION / TRUST */}
-      <section className="bg-ink text-ivory ink-surface">
+      <section className="bg-ink text-paper ink-surface">
         <div className="mx-auto grid max-w-6xl gap-12 px-4 py-20 sm:px-6 md:grid-cols-2 md:items-center">
           <div>
             <SectionEyebrow>
-              <span className="text-gold">Dissertation-backed</span>
+              <span className="text-accent-soft">Dissertation-backed</span>
             </SectionEyebrow>
-            <h2 className="font-display text-3xl font-semibold tracking-tightish text-ivory sm:text-4xl">
+            <h2 className="font-display text-3xl font-semibold tracking-tightish text-paper sm:text-4xl">
               Not a marketing site dressed as a product.
             </h2>
-            <p className="mt-4 text-ivory/80">
+            <p className="mt-4 text-paper/80">
               FinLaw started as an MSc dissertation at the University of
               Bradford. Every architectural claim — hybrid retrieval, dense
               embeddings, LangChain, graph verification, RAGAS evaluation —
@@ -366,14 +358,14 @@ export default function Home() {
             <div className="mt-6 flex flex-wrap gap-3">
               <Link
                 to="/eval"
-                className="inline-flex items-center gap-2 rounded-lg bg-ivory px-5 py-3 text-sm font-medium text-ink hover:bg-white"
+                className="inline-flex items-center gap-2 rounded-[4px] bg-paper px-5 py-3 text-sm font-medium text-ink hover:bg-white"
               >
                 Run the evaluation
                 <FiArrowRight size={16} />
               </Link>
               <Link
                 to="/chat"
-                className="inline-flex items-center gap-2 rounded-lg border border-ivory/25 px-5 py-3 text-sm font-medium text-ivory hover:bg-ivory/10"
+                className="inline-flex items-center gap-2 rounded-[4px] border border-paper/25 px-5 py-3 text-sm font-medium text-paper hover:bg-paper/10"
               >
                 Try a question
               </Link>
@@ -381,39 +373,39 @@ export default function Home() {
           </div>
 
           <div className="grid gap-3 sm:grid-cols-2">
-            <div className="rounded-card border border-ivory/10 bg-ink-2 p-5">
-              <FiBookOpen className="text-gold" size={20} />
+            <div className="rounded-card border border-paper/10 bg-ink-2 p-5">
+              <FiBookOpen className="text-accent-soft" size={20} />
               <div className="mt-3 font-display text-2xl font-semibold">
                 7 corpora
               </div>
-              <div className="text-sm text-ivory/70">
+              <div className="text-sm text-paper/70">
                 FSMA · FCA · PRA · RAO · MLR · PSR · UK MAR
               </div>
             </div>
-            <div className="rounded-card border border-ivory/10 bg-ink-2 p-5">
-              <FiCpu className="text-gold" size={20} />
+            <div className="rounded-card border border-paper/10 bg-ink-2 p-5">
+              <FiCpu className="text-accent-soft" size={20} />
               <div className="mt-3 font-display text-2xl font-semibold">
                 Local LLM
               </div>
-              <div className="text-sm text-ivory/70">
+              <div className="text-sm text-paper/70">
                 Mistral 7B-Instruct via Ollama. No third-party calls.
               </div>
             </div>
-            <div className="rounded-card border border-ivory/10 bg-ink-2 p-5">
-              <FiGitBranch className="text-gold" size={20} />
+            <div className="rounded-card border border-paper/10 bg-ink-2 p-5">
+              <FiGitBranch className="text-accent-soft" size={20} />
               <div className="mt-3 font-display text-2xl font-semibold">
                 Neo4j graph
               </div>
-              <div className="text-sm text-ivory/70">
+              <div className="text-sm text-paper/70">
                 Provision-level nodes with 2-hop citation edges.
               </div>
             </div>
-            <div className="rounded-card border border-ivory/10 bg-ink-2 p-5">
-              <FiShield className="text-gold" size={20} />
+            <div className="rounded-card border border-paper/10 bg-ink-2 p-5">
+              <FiShield className="text-accent-soft" size={20} />
               <div className="mt-3 font-display text-2xl font-semibold">
                 RAGAS scored
               </div>
-              <div className="text-sm text-ivory/70">
+              <div className="text-sm text-paper/70">
                 Faithfulness · relevancy · context precision · context recall.
               </div>
             </div>
@@ -422,7 +414,7 @@ export default function Home() {
       </section>
 
       {/* CTA */}
-      <section className="bg-ivory">
+      <section className="border-t border-[var(--rule)] bg-paper">
         <div className="mx-auto max-w-4xl px-4 py-20 text-center sm:px-6">
           <h2 className="font-display text-3xl font-semibold tracking-tightish sm:text-4xl">
             Try a question.
@@ -435,7 +427,7 @@ export default function Home() {
           <div className="mt-7">
             <Link
               to="/chat"
-              className="group inline-flex items-center gap-2 rounded-lg bg-ink px-6 py-3.5 text-sm font-medium text-ivory shadow-soft transition-colors hover:bg-ink-2"
+              className="group inline-flex items-center gap-2 rounded-[4px] bg-ink px-6 py-3.5 text-sm font-medium text-paper shadow-soft transition-colors hover:bg-ink-2"
             >
               Open the chat
               <FiArrowRight

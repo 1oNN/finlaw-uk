@@ -9,7 +9,7 @@ export default function Footer({ variant = "default" }) {
 
   if (compact) {
     return (
-      <footer className="border-t border-ivory-3 bg-ivory">
+      <footer className="border-t border-[var(--rule-2)] bg-paper">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-3 text-xs text-slate">
           <span>
             FinLaw is a research tool. Not legal advice.
@@ -23,7 +23,7 @@ export default function Footer({ variant = "default" }) {
   }
 
   return (
-    <footer className="border-t border-ivory-3 bg-ivory">
+    <footer className="border-t border-[var(--rule-2)] bg-paper">
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-12 sm:px-6 md:grid-cols-3">
         <div className="space-y-3">
           <Logo variant="wordmark" size="md" />
@@ -39,17 +39,17 @@ export default function Footer({ variant = "default" }) {
           </div>
           <ul className="space-y-2">
             <li>
-              <Link to="/chat" className="text-ink hover:text-gold-2">
+              <Link to="/chat" className="text-ink hover:text-accent">
                 Open the chat
               </Link>
             </li>
             <li>
-              <Link to="/eval" className="text-ink hover:text-gold-2">
+              <Link to="/eval" className="text-ink hover:text-accent">
                 Evaluation
               </Link>
             </li>
             <li>
-              <Link to="/login" className="text-ink hover:text-gold-2">
+              <Link to="/login" className="text-ink hover:text-accent">
                 Sign in
               </Link>
             </li>
@@ -68,7 +68,7 @@ export default function Footer({ variant = "default" }) {
         </div>
       </div>
 
-      <div className="border-t border-ivory-3">
+      <div className="border-t border-[var(--rule-2)]">
         <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-2 px-4 py-5 text-xs text-slate sm:flex-row sm:items-center sm:px-6">
           <span>
             © {year} FinLaw. Information provided is for educational

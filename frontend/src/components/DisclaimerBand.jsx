@@ -15,12 +15,12 @@ export default function DisclaimerBand({ variant = "page", className = "" }) {
 
   return (
     <div
-      className={`border-y border-ivory-3 bg-ivory-2 ${className}`}
+      className={`border-y border-[var(--rule-2)] bg-paper-2 ${className}`}
       role="note"
     >
       <div className="mx-auto flex max-w-7xl items-start gap-3 px-4 py-3 text-sm text-ink/85 sm:px-6">
         <FiInfo
-          className="mt-0.5 flex-none text-gold-2"
+          className="mt-0.5 flex-none text-accent"
           size={16}
           aria-hidden
         />

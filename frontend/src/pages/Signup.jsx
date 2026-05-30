@@ -47,14 +47,14 @@ export default function Signup() {
   };
 
   return (
-    <div className="flex min-h-screen flex-col bg-ivory text-ink">
+    <div className="flex min-h-screen flex-col bg-paper text-ink">
       <main className="flex flex-1 items-center justify-center px-4 py-16">
         <div className="w-full max-w-md">
           <Link to="/" className="mb-8 inline-flex">
             <Logo variant="wordmark" size="lg" />
           </Link>
 
-          <div className="rounded-card border border-ivory-3 bg-white p-7 shadow-soft">
+          <div className="rounded-card border border-[var(--rule-2)] bg-paper p-7 shadow-soft">
             <h1 className="font-display text-2xl font-semibold tracking-tightish">
               Create your account
             </h1>
@@ -63,7 +63,7 @@ export default function Signup() {
             </p>
 
             {error && (
-              <div className="mt-4 flex items-start gap-2 rounded-md border border-danger/30 bg-danger/5 px-3 py-2 text-sm text-danger">
+              <div className="mt-4 flex items-start gap-2 rounded-[4px] border border-danger/30 bg-danger/5 px-3 py-2 text-sm text-danger">
                 <FiAlertCircle className="mt-0.5 flex-none" size={14} />
                 <span>{error}</span>
               </div>
@@ -80,7 +80,7 @@ export default function Signup() {
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full rounded-lg border border-ivory-3 bg-ivory/40 px-3 py-2.5 text-sm text-ink outline-none transition-colors focus:border-gold/60 focus:bg-white"
+                  className="w-full rounded-[4px] border border-[var(--rule-2)] bg-paper-2/40 px-3 py-2.5 text-sm text-ink outline-none transition-colors focus:border-accent focus:bg-paper"
                   placeholder="you@example.com"
                 />
               </label>
@@ -95,14 +95,14 @@ export default function Signup() {
                   minLength={8}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full rounded-lg border border-ivory-3 bg-ivory/40 px-3 py-2.5 text-sm text-ink outline-none transition-colors focus:border-gold/60 focus:bg-white"
+                  className="w-full rounded-[4px] border border-[var(--rule-2)] bg-paper-2/40 px-3 py-2.5 text-sm text-ink outline-none transition-colors focus:border-accent focus:bg-paper"
                   placeholder="At least 8 characters"
                 />
               </label>
               <button
                 type="submit"
                 disabled={submitting}
-                className="group inline-flex w-full items-center justify-center gap-2 rounded-lg bg-ink px-4 py-2.5 text-sm font-medium text-ivory shadow-soft transition-colors hover:bg-ink-2 disabled:opacity-60"
+                className="group inline-flex w-full items-center justify-center gap-2 rounded-[4px] bg-ink px-4 py-2.5 text-sm font-medium text-paper shadow-soft transition-colors hover:bg-ink-2 disabled:opacity-60"
               >
                 {submitting ? "Creating…" : "Create account"}
                 {!submitting && (
@@ -118,7 +118,7 @@ export default function Signup() {
               Already have an account?{" "}
               <Link
                 to="/login"
-                className="border-b border-gold/50 text-ink hover:border-gold"
+                className="border-b border-accent/50 text-ink hover:border-accent"
               >
                 Sign in
               </Link>

@@ -20,7 +20,7 @@ export default function DisclaimerModal() {
       {open && (
         <>
           <motion.div
-            className="fixed inset-0 z-40 bg-ink/40 backdrop-blur-sm"
+            className="fixed inset-0 z-40 bg-ink/40"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -29,7 +29,7 @@ export default function DisclaimerModal() {
           <motion.div
             role="dialog"
             aria-modal="true"
-            className="fixed inset-x-0 bottom-6 z-50 mx-auto w-[calc(100%-2rem)] max-w-md overflow-hidden rounded-card border border-ivory-3 bg-white shadow-chat"
+            className="fixed inset-x-0 bottom-6 z-50 mx-auto w-[calc(100%-2rem)] max-w-md overflow-hidden rounded-card border border-[var(--rule-2)] bg-paper shadow-chat"
             initial={{ y: 40, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: 40, opacity: 0 }}
@@ -53,16 +53,16 @@ export default function DisclaimerModal() {
               <button
                 type="button"
                 onClick={accept}
-                className="grid h-8 w-8 flex-none place-items-center rounded-md text-slate hover:bg-ivory-2"
+                className="grid h-8 w-8 flex-none place-items-center rounded-[4px] text-slate hover:bg-paper-2"
                 aria-label="Dismiss"
               >
                 <FiX size={16} />
               </button>
             </div>
-            <div className="flex items-center justify-end gap-2 border-t border-ivory-3 bg-ivory-2/40 px-6 py-3">
+            <div className="flex items-center justify-end gap-2 border-t border-[var(--rule-2)] bg-paper-2/40 px-6 py-3">
               <button
                 onClick={accept}
-                className="rounded-lg bg-ink px-4 py-2 text-sm font-medium text-ivory hover:bg-ink-2"
+                className="rounded-[4px] bg-ink px-4 py-2 text-sm font-medium text-paper hover:bg-ink-2"
               >
                 I understand
               </button>

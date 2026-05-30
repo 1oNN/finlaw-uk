@@ -21,7 +21,7 @@ function fmtScore(v) {
 
 function MetricCard({ label, value, n }) {
   return (
-    <div className="rounded-card border border-ivory-3 bg-white p-4 shadow-soft">
+    <div className="rounded-card border border-[var(--rule-2)] bg-paper p-4 shadow-soft">
       <div className="text-[11px] font-semibold uppercase tracking-[0.15em] text-slate">
         {label}
       </div>
@@ -38,18 +38,18 @@ function MetricCard({ label, value, n }) {
 function PerQuestionRow({ row }) {
   const [open, setOpen] = useState(false);
   return (
-    <div className="rounded-lg border border-border bg-surface">
+    <div className="rounded-[4px] border border-[var(--rule-2)] bg-paper-2">
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
-        className="flex w-full items-start gap-3 px-4 py-3 text-left hover:bg-panel"
+        className="flex w-full items-start gap-3 px-4 py-3 text-left hover:bg-paper"
       >
         <div className="pt-1 text-muted">
           {open ? <FiChevronDown /> : <FiChevronRight />}
         </div>
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2">
-            <span className="rounded-md bg-panel px-2 py-0.5 text-xs text-muted">
+            <span className="rounded-[4px] bg-paper px-2 py-0.5 text-xs text-muted">
               {row.qid}
             </span>
             <span className="text-xs text-muted">{row.domain}</span>
@@ -80,14 +80,14 @@ function PerQuestionRow({ row }) {
         </div>
       </button>
       {open && (
-        <div className="space-y-3 border-t border-border p-4 text-sm">
+        <div className="space-y-3 border-t border-[var(--rule-2)] p-4 text-sm">
           <div>
             <div className="mb-1 text-xs uppercase tracking-wider text-muted">Ground truth</div>
             <div className="whitespace-pre-wrap text-text">{row.ground_truth || "—"}</div>
           </div>
           <div>
             <div className="mb-1 text-xs uppercase tracking-wider text-muted">Model answer</div>
-            <div className="whitespace-pre-wrap rounded-md bg-panel p-3 font-mono text-xs leading-5 text-text">
+            <div className="whitespace-pre-wrap rounded-[4px] bg-mute p-3 font-mono text-xs leading-5 text-text">
               {row.answer || "(empty)"}
             </div>
           </div>
@@ -255,12 +255,12 @@ export default function EvalPage() {
   const mCtxR = summary?.ragas_context_recall_mean;
 
   return (
-    <div className="flex min-h-screen flex-col bg-ivory text-ink">
+    <div className="flex min-h-screen flex-col bg-paper text-ink">
       <Header />
       <main className="mx-auto w-full max-w-5xl flex-1 px-4 py-12 sm:px-6">
         <div className="mb-8">
-          <div className="mb-3 inline-flex items-center gap-2 text-xs font-medium uppercase tracking-[0.18em] text-gold-2">
-            <span className="h-px w-6 bg-gold/60" aria-hidden />
+          <div className="mb-3 inline-flex items-center gap-2 text-xs font-medium uppercase tracking-[0.18em] text-accent">
+            <span className="h-px w-6 bg-accent/60" aria-hidden />
             Evaluation
           </div>
           <h1 className="font-display text-3xl font-semibold tracking-tightish sm:text-4xl">
@@ -273,14 +273,14 @@ export default function EvalPage() {
           </p>
         </div>
 
-        <form onSubmit={startRun} className="mb-6 flex flex-wrap items-end gap-4 rounded-xl border border-border bg-surface p-4">
+        <form onSubmit={startRun} className="mb-6 flex flex-wrap items-end gap-4 rounded-card border border-[var(--rule-2)] bg-paper-2 p-4">
           <label className="flex flex-col gap-1 text-sm">
             <span className="text-muted">Sample size</span>
             <select
               value={sample}
               onChange={(e) => setSample(e.target.value)}
               disabled={running}
-              className="rounded-md border border-border bg-panel px-3 py-2 text-text"
+              className="rounded-[4px] border border-[var(--rule-2)] bg-paper px-3 py-2 text-text"
             >
               <option value="5">5 (smoke, ~30s)</option>
               <option value="10">10 (~1-2 min)</option>
@@ -295,7 +295,7 @@ export default function EvalPage() {
               value={mode}
               onChange={(e) => setMode(e.target.value)}
               disabled={running}
-              className="rounded-md border border-border bg-panel px-3 py-2 text-text"
+              className="rounded-[4px] border border-[var(--rule-2)] bg-paper px-3 py-2 text-text"
             >
               <option value="ragas">RAGAS only</option>
               <option value="lexical">Lexical only</option>
@@ -306,7 +306,7 @@ export default function EvalPage() {
             {!running ? (
               <button
                 type="submit"
-                className="inline-flex items-center gap-2 rounded-md bg-accent px-4 py-2 font-medium text-white hover:bg-accent-hover"
+                className="inline-flex items-center gap-2 rounded-[4px] bg-accent px-4 py-2 font-medium text-white hover:bg-accent-2"
               >
                 <FiPlay /> Run evaluation
               </button>
@@ -314,7 +314,7 @@ export default function EvalPage() {
               <button
                 type="button"
                 onClick={stopRun}
-                className="inline-flex items-center gap-2 rounded-md bg-risk-red px-4 py-2 font-medium text-white"
+                className="inline-flex items-center gap-2 rounded-[4px] bg-risk-red px-4 py-2 font-medium text-white"
               >
                 <FiSquare /> Stop
               </button>
@@ -323,7 +323,7 @@ export default function EvalPage() {
         </form>
 
         {(running || phase) && (
-          <div className="mb-6 rounded-xl border border-border bg-surface p-4">
+          <div className="mb-6 rounded-card border border-[var(--rule-2)] bg-paper-2 p-4">
             <div className="flex items-center justify-between text-sm">
               <span className="text-muted">
                 {phase === "done" ? "Done" : PHASE_LABEL[phase] || phase || "Starting"}
@@ -332,20 +332,20 @@ export default function EvalPage() {
                 {progress.i}/{progress.total} · {pct}%
               </span>
             </div>
-            <div className="mt-2 h-2 w-full rounded-full bg-panel">
+            <div className="mt-2 h-2 w-full rounded-[2px] bg-mute">
               <div
-                className="h-2 rounded-full bg-accent transition-all"
+                className="h-2 rounded-[2px] bg-accent transition-all"
                 style={{ width: `${pct}%` }}
               />
             </div>
-            <pre className="mt-3 max-h-48 overflow-y-auto whitespace-pre-wrap rounded-md bg-panel p-3 text-xs leading-5 text-muted">
+            <pre className="mt-3 max-h-48 overflow-y-auto whitespace-pre-wrap rounded-[4px] bg-mute p-3 text-xs leading-5 text-muted">
               {feed.join("\n")}
             </pre>
           </div>
         )}
 
         {errorMsg && (
-          <div className="mb-6 rounded-xl border border-risk-red bg-surface p-4 text-sm text-risk-red">
+          <div className="mb-6 rounded-card border border-risk-red bg-paper-2 p-4 text-sm text-risk-red">
             {errorMsg}
           </div>
         )}
@@ -360,7 +360,7 @@ export default function EvalPage() {
         )}
 
         {summary && (
-          <div className="mb-6 rounded-xl border border-border bg-surface p-4 text-sm">
+          <div className="mb-6 rounded-card border border-[var(--rule-2)] bg-paper-2 p-4 text-sm">
             <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
               <div>
                 <div className="text-xs uppercase tracking-wider text-muted">Questions</div>
@@ -402,7 +402,7 @@ export default function EvalPage() {
                   <button
                     type="button"
                     onClick={() => loadPast(r.name)}
-                    className="inline-flex items-center gap-2 rounded-md px-2 py-1 hover:bg-surface"
+                    className="inline-flex items-center gap-2 rounded-[4px] px-2 py-1 hover:bg-paper-2"
                   >
                     <FiFile className="text-muted" />
                     <span className="font-mono text-xs">{r.name}</span>
