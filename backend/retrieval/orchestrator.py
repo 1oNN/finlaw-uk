@@ -14,9 +14,10 @@ plus a suggested source line.
 from __future__ import annotations
 
 import os
-from typing import Dict, List, Optional, Tuple
+from typing import Dict, List, Optional, Set, Tuple
 
 from backend.graph.client import get_session
+from backend.graph.extract_xrefs import extract_from_clause
 from backend.graph.traversal import neighbors_2hop
 from backend.retrieval import session_index, sparse
 from backend.retrieval.hybrid import reciprocal_rank_fusion
@@ -24,8 +25,26 @@ from backend.retrieval.hybrid import reciprocal_rank_fusion
 ENABLE_GRAPH = bool(int(os.getenv("RAG_ENABLE_GRAPH", "1")))
 ENABLE_DENSE = bool(int(os.getenv("RAG_ENABLE_DENSE", "1")))
 RRF_K = int(os.getenv("RAG_RRF_K", "60"))
+# Dense hits below this cosine threshold are dropped before they enter
+# RRF — keeps unrelated chunks out of the prompt entirely. Set to 0 to
+# disable. 0.35 was picked empirically against the FinLaw smoke set:
+# low enough to keep paraphrase-of-question matches, high enough to
+# drop ambient noise that was leaking into answers.
+RAG_DENSE_MIN_SCORE = float(os.getenv("RAG_DENSE_MIN_SCORE", "0.35"))
 MAX_SNIP = sparse.MAX_SNIP
 TOPK = sparse.TOPK
+
+
+def _extract_chunk_cites(text: str) -> Set[str]:
+    """Canonical UK citations found in a retrieved chunk. Used by the
+    strict citation verifier to check whether each cite the model
+    produced actually appears in at least one retrieved chunk."""
+    if not text:
+        return set()
+    try:
+        return set(extract_from_clause(text))
+    except Exception:
+        return set()
 
 _DENSE = None
 _DENSE_TRIED = False
@@ -113,6 +132,15 @@ def _hybrid_search(
         dense = _get_dense()
         if dense is not None:
             dense_hits = dense.search(query, k=over_k)
+            if RAG_DENSE_MIN_SCORE > 0:
+                kept = [(k, s) for k, s in dense_hits if s >= RAG_DENSE_MIN_SCORE]
+                dropped = len(dense_hits) - len(kept)
+                if dropped:
+                    sparse._dbg(
+                        f"dense filter: dropped {dropped}/{len(dense_hits)} below "
+                        f"{RAG_DENSE_MIN_SCORE}"
+                    )
+                dense_hits = kept
             dense_keys = [key for key, _ in dense_hits]
 
     if session_id and mode != "bm25" and session_index.has_session(session_id):
@@ -213,16 +241,36 @@ def get_context(
     Fallback cascade if hybrid returns nothing: phrase → keyword →
     uploaded-document concat → remote legislation.gov.uk.
     """
+    md, _ = get_context_and_cites(query, max_chars=max_chars, session_id=session_id)
+    return md
+
+
+def get_context_and_cites(
+    query: str,
+    *,
+    max_chars: int = MAX_SNIP,
+    session_id: Optional[str] = None,
+) -> Tuple[str, Set[str]]:
+    """Like `get_context` but also returns the union of canonical UK
+    citations parsed out of the retrieved chunk text. The strict
+    citation verifier uses this set to check that every cited provision
+    in the model's answer actually appeared in at least one retrieved
+    chunk (rather than only in the graph-boost source line, which
+    currently has narrower coverage than sparse/dense retrieval).
+    """
     hits = get_raw_context(query, max_chars=max_chars, session_id=session_id)
+    chunk_cites: Set[str] = set()
+    for _, snip in hits:
+        chunk_cites.update(_extract_chunk_cites(snip))
     if not hits:
-        return ""
+        return "", chunk_cites
     if len(hits) == 1 and hits[0][0] == "legislation.gov.uk":
-        return hits[0][1]
+        return hits[0][1], chunk_cites
     upload_keys = set(sparse.list_upload_keys())
     if hits and all(k in upload_keys for k, _ in hits):
         full = "\n\n".join(snip for _, snip in hits)
-        return f"**Full uploaded document:**\n{full[:max_chars]}\n\n"
-    return _format_hits(hits, max_chars)
+        return f"**Full uploaded document:**\n{full[:max_chars]}\n\n", chunk_cites
+    return _format_hits(hits, max_chars), chunk_cites
 
 
 def gather_contexts(query: str) -> List[str]:
