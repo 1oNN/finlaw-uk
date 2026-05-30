@@ -133,6 +133,8 @@ export default function MessageBubble({ message }) {
             name={attachment?.name}
             type={attachment?.type}
             size={attachment?.size}
+            chunks={attachment?.chunks}
+            error={attachment?.error}
           />
         ) : typing ? (
           <span className="cursor-blink text-slate">▍</span>

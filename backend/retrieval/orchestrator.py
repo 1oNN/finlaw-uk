@@ -18,7 +18,7 @@ from typing import Dict, List, Optional, Tuple
 
 from backend.graph.client import get_session
 from backend.graph.traversal import neighbors_2hop
-from backend.retrieval import sparse
+from backend.retrieval import session_index, sparse
 from backend.retrieval.hybrid import reciprocal_rank_fusion
 
 ENABLE_GRAPH = bool(int(os.getenv("RAG_ENABLE_GRAPH", "1")))
@@ -72,8 +72,14 @@ def _get_dense():
         return None
 
 
-def _hybrid_search(query: str, k: int, *, rerank: Optional[bool] = None) -> List[Tuple[str, str]]:
-    """BM25 + dense → RRF. Returns (key, snippet) pairs.
+def _hybrid_search(
+    query: str,
+    k: int,
+    *,
+    rerank: Optional[bool] = None,
+    session_id: Optional[str] = None,
+) -> List[Tuple[str, str]]:
+    """BM25 + dense (+ session dense) → RRF. Returns (key, snippet) pairs.
 
     Fusion strategy is controlled by `RAG_FUSION_MODE`:
         'rrf'   (default) — Reciprocal Rank Fusion over both sources
@@ -81,6 +87,11 @@ def _hybrid_search(query: str, k: int, *, rerank: Optional[bool] = None) -> List
         'bm25'            — bm25-only (skip dense)
     The env var is read per-call so the ablation harness can flip strategies
     without restarting the process.
+
+    When `session_id` is given and the session has uploaded chunks, the
+    session FAISS index is queried alongside the corpus retrievers and its
+    hits are fused into RRF as a third rank list. Session chunks come back
+    with keys prefixed `session::` so they're disambiguated downstream.
 
     `rerank=None` honours the RAG_RERANK_ENABLED env var. Pass `rerank=False`
     explicitly when you want the wider pre-rerank pool (used by
@@ -91,6 +102,8 @@ def _hybrid_search(query: str, k: int, *, rerank: Optional[bool] = None) -> List
 
     bm25_keys: List[str] = []
     dense_keys: List[str] = []
+    session_keys: List[str] = []
+    session_text_by_key: Dict[str, str] = {}
 
     if mode != "dense":
         bm25_hits = sparse.search_bm25(query, k=over_k)
@@ -102,10 +115,15 @@ def _hybrid_search(query: str, k: int, *, rerank: Optional[bool] = None) -> List
             dense_hits = dense.search(query, k=over_k)
             dense_keys = [key for key, _ in dense_hits]
 
-    if not bm25_keys and not dense_keys:
+    if session_id and mode != "bm25" and session_index.has_session(session_id):
+        session_hits = session_index.search(session_id, query, k=over_k)
+        session_keys = [key for key, _ in session_hits]
+        session_text_by_key = {key: snip for key, snip in session_hits}
+
+    if not bm25_keys and not dense_keys and not session_keys:
         return []
 
-    rank_lists = [lst for lst in (bm25_keys, dense_keys) if lst]
+    rank_lists = [lst for lst in (bm25_keys, dense_keys, session_keys) if lst]
     # When a reranker will trim later, fuse over a wider pool so the
     # cross-encoder has more candidates to score.
     # Task 3: rerank on by default + 20-candidate pool — fairer RAGAS recall.
@@ -119,6 +137,11 @@ def _hybrid_search(query: str, k: int, *, rerank: Optional[bool] = None) -> List
 
     out: List[Tuple[str, str]] = []
     for key in fused_keys:
+        if key.startswith("session::"):
+            snip = session_text_by_key.get(key)
+            if snip:
+                out.append((key, snip))
+            continue
         text = sparse.get_doc(key)
         if not text:
             continue
@@ -135,13 +158,21 @@ def _format_hits(hits: List[Tuple[str, str]], max_chars: int) -> str:
     return "".join(f"**Context ({k}):**\n{snip}\n\n" for k, snip in hits)[:max_chars]
 
 
-def get_raw_context(query: str, *, max_chars: int = MAX_SNIP) -> List[Tuple[str, str]]:
+def get_raw_context(
+    query: str,
+    *,
+    max_chars: int = MAX_SNIP,
+    session_id: Optional[str] = None,
+) -> List[Tuple[str, str]]:
     """Return the underlying `(key, snippet)` hits without Markdown formatting.
 
     Stops at the first cascade layer that produces results (hybrid → phrase →
     keyword → upload → remote). Used by the evaluation pipeline which needs
-    the discrete snippets as RAGAS `contexts` rather than a glued blob."""
-    hits = _hybrid_search(query, k=TOPK)
+    the discrete snippets as RAGAS `contexts` rather than a glued blob.
+
+    `session_id` is forwarded to `_hybrid_search` so per-session uploads
+    participate in the primary hybrid path."""
+    hits = _hybrid_search(query, k=TOPK, session_id=session_id)
     if hits:
         sparse._dbg(f"hybrid-hit: {len(hits)} for query='{query[:60]}…'")
         return hits
@@ -169,15 +200,20 @@ def get_raw_context(query: str, *, max_chars: int = MAX_SNIP) -> List[Tuple[str,
     return []
 
 
-def get_context(query: str, *, max_chars: int = MAX_SNIP) -> str:
+def get_context(
+    query: str,
+    *,
+    max_chars: int = MAX_SNIP,
+    session_id: Optional[str] = None,
+) -> str:
     """Return a Markdown context block for the model — the chat-backend
     entry point. Internally delegates to `get_raw_context` then formats.
 
-    Primary path: BM25 + dense → RRF → top-k.
+    Primary path: BM25 + dense (+ session dense) → RRF → top-k.
     Fallback cascade if hybrid returns nothing: phrase → keyword →
     uploaded-document concat → remote legislation.gov.uk.
     """
-    hits = get_raw_context(query, max_chars=max_chars)
+    hits = get_raw_context(query, max_chars=max_chars, session_id=session_id)
     if not hits:
         return ""
     if len(hits) == 1 and hits[0][0] == "legislation.gov.uk":

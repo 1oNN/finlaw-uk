@@ -31,6 +31,7 @@ langchain-community>=0.0.20
 # accelerate>=0.27  # uncomment if using HF judge with device_map='auto'
 
 # Document parsing (chat upload + ingestion)
+PyMuPDF>=1.24
 PyPDF2>=3.0
 pdfminer.six>=20231228
 pdfplumber>=0.10

@@ -119,17 +119,24 @@ export default function Chat({
   async function uploadFile(file) {
     const body = new FormData();
     body.append("file", file);
+    body.append("session_id", chatId);
+    let res;
     try {
-      const res = await fetch(`${API_BASE}/api/upload`, {
+      res = await fetch(`${API_BASE}/api/upload`, {
         method: "POST",
         body,
       });
-      if (!res.ok) throw new Error("Upload failed");
-      const { filename: fn } = await res.json();
-      setFilename(fn);
-      setStatus(`Attached ${fn}`);
-      setTimeout(() => setStatus(""), 1200);
-
+    } catch {
+      setStatus("Upload failed.");
+      return;
+    }
+    if (!res.ok) {
+      let msg = "Upload failed.";
+      try {
+        const j = await res.json();
+        if (j?.error) msg = j.error;
+      } catch {}
+      setStatus(msg);
       setMessages((m) => [
         ...m,
         {
@@ -137,12 +144,36 @@ export default function Chat({
           role: "user",
           type: "attachment",
           content: "",
-          attachment: { name: file.name, type: file.type, size: file.size },
+          attachment: {
+            name: file.name,
+            type: file.type,
+            size: file.size,
+            error: msg,
+          },
         },
       ]);
-    } catch {
-      setStatus("Upload failed.");
+      return;
     }
+    const { filename: fn, chunks } = await res.json();
+    setFilename(fn);
+    setStatus(`Attached ${fn} (${chunks} chunks)`);
+    setTimeout(() => setStatus(""), 1500);
+
+    setMessages((m) => [
+      ...m,
+      {
+        id: uid(),
+        role: "user",
+        type: "attachment",
+        content: "",
+        attachment: {
+          name: file.name,
+          type: file.type,
+          size: file.size,
+          chunks,
+        },
+      },
+    ]);
   }
   const onFileInput = (e) => {
     const f = e.target.files?.[0];
@@ -228,7 +259,7 @@ export default function Chat({
           "Content-Type": "application/json",
           ...(token ? { Authorization: `Bearer ${token}` } : {}),
         },
-        body: JSON.stringify({ prompt, filename, mode, model }),
+        body: JSON.stringify({ prompt, filename, mode, model, session_id: chatId }),
         signal: ctrl.signal,
       });
     } catch {
