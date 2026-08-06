@@ -3,23 +3,23 @@ flask>=3.0
 flask-cors>=4.0
 werkzeug>=3.0
 
-# Retrieval (sparse — Stage 0)
+# Retrieval (sparse)
 neo4j>=5.18
 rank-bm25>=0.2
 requests>=2.31
 
-# Retrieval (dense — Stage 1)
+# Retrieval (dense)
 sentence-transformers>=2.7
 faiss-cpu>=1.7
 
-# Ingestion (Stage 2 — legislation.gov.uk XML + clause-level chunking)
+# Ingestion (legislation.gov.uk XML + clause-level chunking)
 lxml>=5.0
 langchain-text-splitters>=0.0.1
 
-# Evaluation (Stage 5 — real RAGAS via local Mistral judge)
+# Evaluation (RAGAS via local Mistral judge)
 # Pin to 0.2.x: 0.4.x changed JSON-output schemas in ways the Mistral 7B judge
 # can't satisfy reliably (see DIAGNOSIS.md §9). 0.2.15 is the originally-intended
-# version per the Stage 5 spec; it produces parseable output for
+# version pinned for reproducibility; it produces parseable output for
 # context_precision + answer_relevancy on this judge.
 ragas>=0.2,<0.3
 datasets>=2.14

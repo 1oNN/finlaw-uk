@@ -61,11 +61,11 @@ Install **natively** (not in Docker). https://ollama.com.
 | RAM | 16 GB | 32 GB |
 | Disk free | 20 GB | 40 GB |
 | CPU | 4 cores | 8 cores |
-| GPU | not required | optional (CUDA accelerates Stages 1 + 5) |
+| GPU | not required | optional (CUDA accelerates retrieval + evaluation) |
 
 **Why these numbers.** Mistral 7B in Ollama uses ~4-5 GB resident; BGE-small uses ~600 MB; Neo4j 2-4 GB; the dev environment + browser + node take the rest. The 20 GB disk minimum accounts for model downloads — see breakdown below.
 
-If you opt into the HF transformers Mistral judge for RAGAS (Stage 5), add another ~14 GB of disk and another ~14 GB resident during eval runs. Default Ollama judge avoids that cost.
+If you opt into the HF transformers Mistral judge for RAGAS, add another ~14 GB of disk and another ~14 GB resident during eval runs. Default Ollama judge avoids that cost.
 
 ## Cumulative download budget
 
@@ -74,11 +74,11 @@ These appear over the first run of each stage:
 | Source | Size | Triggered by |
 |---|---:|---|
 | `mistral:7b-instruct` via Ollama | ~4.1 GB | first chat |
-| `BAAI/bge-small-en-v1.5` via sentence-transformers | ~134 MB | first dense retrieval (Stage 1) |
-| `legislation.gov.uk` XML cache (5 docs) | ~29 MB | first `scripts/ingest_legislation.py` (Stage 2) |
-| `pdfplumber` lazy font tables | small | first PDF ingestion (Stage 2) |
+| `BAAI/bge-small-en-v1.5` via sentence-transformers | ~134 MB | first dense retrieval |
+| `legislation.gov.uk` XML cache (5 docs) | ~29 MB | first `scripts/ingest_legislation.py` run |
+| `pdfplumber` lazy font tables | small | first PDF ingestion |
 | Python wheels + Node packages | ~1.5 GB | `pip install` + `npm install` |
-| **(Optional, Stage 5)** `mistralai/Mistral-7B-Instruct-v0.2` via HF | ~14 GB | only if `RAGAS_JUDGE=hf` |
+| **(Optional)** `mistralai/Mistral-7B-Instruct-v0.2` via HF | ~14 GB | only if `RAGAS_JUDGE=hf` |
 | **(Optional)** `cross-encoder/ms-marco-MiniLM-L-6-v2`, NLI models, etc. | varies | future stages |
 
 ## Python dependencies

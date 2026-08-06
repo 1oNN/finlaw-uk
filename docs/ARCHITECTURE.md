@@ -84,10 +84,10 @@ that populate Neo4j and the FAISS cache.
 11. If not traffic-light and no Source line: append Source: gboost.source_line
 12. Citation audit:
        find_invalid_citations(full_text) → patch_with_warning(...)          (app.py)
-13. STAGE 4 — graph-grounded verification:                                  (verification/graph_verify)
+13. graph-grounded verification:                                            (verification/graph_verify)
        verify_answer(full_text, context_cites) → {all_grounded, verified, unverified, hallucinated_context}
        if not all_grounded: append a ⚠️ footer warning the user
-14. STAGE 4 — claim trace:                                                  (verification/claim_trace)
+14. claim trace:                                                            (verification/claim_trace)
        trace_all(full_text, verified_cites) → [{claim, best_match}]
 15. Emit consolidated `event:meta` with audit + verification + claim_trace
 16. Emit `event:done`
@@ -170,7 +170,7 @@ question  ──▶  get_graph_boost ──▶ Neo4j fulltext  ──▶ neighbo
 | 11 | **A** Graph-grounded citation lookup | `backend/verification/graph_verify.py` |
 | 12 | **C** Citation-grounded claim trace | `backend/verification/claim_trace.py` |
 | 15 | **B** Real `ragas` + local Mistral judge | `backend/evaluation/ragas_eval.py::_ragas_evaluate` |
-| 16 | **B + C** Re-run + honest interview line | `docs/RAGAS_RESULTS.md`, `docs/INTERVIEW_QA.md` |
+| 16 | **B + C** Evaluation methodology + measured results | `docs/RAGAS_RESULTS.md`, `docs/EVALUATION_COMPARISON.md` |
 | 17 | **A** DSR prep doc | `docs/DSR_MAPPING.md` |
 | 18 | **B** LangChain chunking only | `backend/graph/ingest_xml.py::_maybe_chunk` |
 | 19 | **B** HF Transformers (via sentence-transformers + opt-in hf_client) | `backend/retrieval/dense.py`, `backend/llm/hf_client.py` |
@@ -200,7 +200,7 @@ keyword list.
 | `/api/chat/stream` | POST | `{prompt, filename?, mode?, model?}` | `text/event-stream` with `data:` token frames and `event:meta` / `event:done` events |
 
 The `model` parameter is accepted for backward compatibility but ignored —
-multi-model was dropped during Stage 0; the backend always uses
+multi-model selection is not supported; the backend always uses
 `OLLAMA_MODEL` (default `mistral:7b-instruct`).
 
 SSE event types:

@@ -3,17 +3,17 @@ and constraints used across the seed and traversal modules.
 
 The schema evolves stage-by-stage:
 
-Stage 0 (legacy):
+Base seed:
     Nodes:    Provision, Term
     Edges:    :MENTIONS (Term → Provision)
               :DEFINED_BY (Provision → Provision, one hardcoded link)
     Indexes:  provisionIdx, termIdx
     Constraints: provision_id UNIQUE, term_name UNIQUE
 
-Stage 2 (XML + PDF ingestion):
+Ingestion (XML + PDF):
     Adds many more Provision nodes; no schema change.
 
-Stage 3 (graph enrichment, this stage):
+Graph enrichment:
     Adds nodes:    Regulator, Document
     Adds edges:    :CITES        (Provision → Provision; cross-references)
                    :ISSUED_BY    (Provision → Regulator)
@@ -54,7 +54,7 @@ PROVISION_FULLTEXT_INDEX = "provisionIdx"
 TERM_FULLTEXT_INDEX = "termIdx"
 
 
-# Known UK financial regulators — seeded as Regulator nodes during Stage 3.
+# Known UK financial regulators — seeded as Regulator nodes during enrichment.
 KNOWN_REGULATORS = (
     {"name": "FCA", "full_name": "Financial Conduct Authority"},
     {"name": "PRA", "full_name": "Prudential Regulation Authority"},
@@ -64,7 +64,7 @@ KNOWN_REGULATORS = (
 )
 
 
-# Known UK regulatory documents — seeded as Document nodes during Stage 3.
+# Known UK regulatory documents — seeded as Document nodes during enrichment.
 KNOWN_DOCUMENTS = (
     {"name": "FSMA 2000", "full_name": "Financial Services and Markets Act 2000", "kind": "primary"},
     {"name": "RAO 2001", "full_name": "FSMA 2000 (Regulated Activities) Order 2001", "kind": "secondary"},

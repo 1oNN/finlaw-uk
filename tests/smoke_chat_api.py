@@ -1,6 +1,6 @@
-"""Live smoke test for the post-polish FinLaw-UK backend.
+"""Live smoke test for the FinLaw-UK chat API.
 
-Hits the running Flask server at 127.0.0.1:5000 with eight test prompts and
+Hits a running Flask server at 127.0.0.1:5000 with a set of test prompts and
 prints, for each one, the intent label inferred from the server log AND the
 shape of the assistant's response.
 

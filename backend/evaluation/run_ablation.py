@@ -1,6 +1,6 @@
 """Retrieval ablation harness — runs one eval step and appends to ablation.csv.
 
-Used to attribute the per-step contribution of each Task 4 sub-step
+Used to attribute the per-step contribution of each generation sub-step
 (hybrid fusion variants, embedder swap, reranker, parent-doc, KG expansion)
 to the n=10 curated test set.
 

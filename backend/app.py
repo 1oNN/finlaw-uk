@@ -812,7 +812,7 @@ def chat_stream():
         # grounded and hallucinated phrasings.
         gen_options = {"temperature": 0.0, "top_p": 0.9}
 
-        # Task 4: weak-retrieval refusal — if the top dense cosine similarity
+        # Weak-retrieval refusal — if the top dense cosine similarity
         # is below RAG_REFUSAL_THRESHOLD, skip Mistral and stream the canonical
         # refusal. Only fires on the finance/legal path; chit-chat is unaffected.
         if use_finance:
@@ -917,7 +917,7 @@ def chat_stream():
                         yield f"data:{tail}\n\n"
                     full_text = patched
 
-            # ---- Stage 4: graph-grounded verification + claim trace -----
+            # ---- graph-grounded verification + claim trace ---------------
             verification: Dict = {"smalltalk": True} if smalltalk else {}
             claim_trace_records: List[Dict] = []
             context_cites = [

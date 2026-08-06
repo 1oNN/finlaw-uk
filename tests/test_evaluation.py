@@ -1,4 +1,4 @@
-"""Tests for the Stage 5 evaluation runner.
+"""Tests for the evaluation runner.
 
 Covers the cheap pure-Python pieces — question loading, lexical metrics,
 LexicalScores dataclass. Anything that requires a running Ollama server

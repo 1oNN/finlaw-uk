@@ -18,7 +18,7 @@ CSV in ``data/eval_results/``, check:
 
 Hard stop: if more than 2 of 10 sampled questions are placeholders OR
 have no corpus match, this is a corpus/test-set quality problem rather
-than a retrieval ranking problem, and Task 4 retrieval tuning will not
+than a retrieval ranking problem, and retrieval tuning will not
 move the needle until the test-set is re-curated. The script exits
 with code 2 in that case.
 
@@ -258,7 +258,7 @@ def diagnose(csv_path: Optional[Path] = None) -> int:
             print(f"  Expected recall floor:       {(n_total - n_ph) / n_total:.4f} "
                   f"(only the {n_total - n_ph} real GTs are scorable)")
         print()
-        print("Task 4 retrieval tuning will NOT move recall against this set.")
+        print("Retrieval tuning will NOT move recall against this set.")
         print("Re-curate the placeholders OR drop them and re-eval on n<80")
         print("before running retrieval ablation.")
         print("=" * 72)

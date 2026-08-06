@@ -677,7 +677,7 @@ flowchart LR
 5. **Calls `ragas.evaluate(dataset, metrics=[faithfulness,
    answer_relevancy, context_precision, context_recall], llm=judge,
    embeddings=embed)`.** The judge LLM is Mistral 7B via Ollama by
-   default; the embeddings are BGE-small (re-using the Stage 1
+   default; the embeddings are BGE-small (re-using the retrieval
    encoder).
 6. **Writes results** to
    `data/eval_results/eval_results_<mode>_<timestamp>.csv` per
@@ -697,7 +697,7 @@ flowchart LR
 
 ### Why a local judge
 
-The dissertation principle is "no cloud APIs at any stage." If the
+A core design constraint is "no cloud APIs at any stage." If the
 generator runs locally but the judge runs in the cloud, the system
 is no longer fully local. By using Mistral 7B for both generation
 and judging, the entire evaluation pipeline can run on the user's

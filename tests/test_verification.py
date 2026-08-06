@@ -1,4 +1,4 @@
-"""Tests for the Stage 4 verification layer.
+"""Tests for the verification layer.
 
 Covers:
     - extract_claims skipping rules

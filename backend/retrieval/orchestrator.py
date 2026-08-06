@@ -154,7 +154,7 @@ def _hybrid_search(
     rank_lists = [lst for lst in (bm25_keys, dense_keys, session_keys) if lst]
     # When a reranker will trim later, fuse over a wider pool so the
     # cross-encoder has more candidates to score.
-    # Task 3: rerank on by default + 20-candidate pool — fairer RAGAS recall.
+    # Rerank on by default + 20-candidate pool — fairer RAGAS recall.
     rerank_enabled = bool(int(os.getenv("RAG_RERANK_ENABLED", "1"))) if rerank is None else rerank
     fuse_k = max(int(os.getenv("RAG_RERANK_POOL", "20")), k) if rerank_enabled else k
     if len(rank_lists) == 1:
@@ -292,7 +292,7 @@ def gather_contexts(query: str) -> List[str]:
 
 
 def top_dense_similarity(query: str) -> float:
-    """Task 4: max dense cosine similarity for the top hit, or 0.0 if dense
+    """Max dense cosine similarity for the top hit, or 0.0 if dense
     retrieval is unavailable. Used by the chat route and evaluator to decide
     whether to refuse with the canonical 'no authoritative sources' phrase
     instead of letting Mistral confabulate from low-signal contexts.
@@ -318,7 +318,7 @@ def top_dense_similarity(query: str) -> float:
 def gather_contexts_wide(query: str, pool_size: int = 20) -> List[str]:
     """Like `gather_contexts`, but returns the pre-rerank pool for RAGAS scoring.
 
-    Task 3: RAGAS context_recall benefits from seeing the wider candidate pool
+    RAGAS context_recall benefits from seeing the wider candidate pool
     before the cross-encoder trims it down. The chat route still uses
     `gather_contexts` (post-rerank top-k); only the evaluation pipeline uses this.
     Calls `_hybrid_search` with `rerank=False` so the full `pool_size` candidates

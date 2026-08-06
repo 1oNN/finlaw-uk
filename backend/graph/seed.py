@@ -1,15 +1,15 @@
 """Neo4j seeder.
 
 Three sources:
-    --source xml     : legislation.gov.uk XML (Stage 2 primary)
-    --source pdfs    : on-disk FCA/PRA PDFs under backend/data/ (Stage 2 supplementary)
+    --source xml     : legislation.gov.uk XML (primary corpus)
+    --source pdfs    : on-disk FCA/PRA PDFs under backend/data/ (supplementary)
     --source both    : XML + PDFs (default)
-    --source legacy  : the original 17 hardcoded provisions (Stage 0 baseline,
+    --source legacy  : the original 17 hardcoded provisions (base seed,
                        kept for A/B comparison and for offline use)
 
 The schema is the same in all cases — `Provision` and `Term` nodes with a
 `:MENTIONS` edge from each Term to its Provision, plus the legacy
-`:DEFINED_BY` edge between `FSMA 2000 s.19` and `RAO 2001 art.5`. Stage 3
+`:DEFINED_BY` edge between `FSMA 2000 s.19` and `RAO 2001 art.5`. Enrichment
 extends the graph with `:CITES`, `:RELATES_TO`, `Regulator`, `Document`
 nodes.
 """
@@ -152,7 +152,7 @@ MERGE (a)-[:CITES]->(rep)
 def seed_provisions(provisions: List[Dict], enrich: bool = True) -> None:
     """Seed the base provision graph. If `enrich=True`, also populate
     Regulator + Document nodes, :ISSUED_BY / :PART_OF edges, and :CITES
-    cross-references (Stage 3 enrichment)."""
+    cross-references (graph enrichment)."""
     with get_session() as sess:
         if sess is None:
             raise RuntimeError(
@@ -180,7 +180,7 @@ def seed_provisions(provisions: List[Dict], enrich: bool = True) -> None:
 
 
 def _enrich_graph(sess, provisions: List[Dict]) -> None:
-    """Stage 3: Regulator/Document nodes + :ISSUED_BY/:PART_OF/:CITES edges."""
+    """Enrichment: Regulator/Document nodes + :ISSUED_BY/:PART_OF/:CITES edges."""
     for r in KNOWN_REGULATORS:
         sess.run(MERGE_REGULATOR, **r).consume()
     for d in KNOWN_DOCUMENTS:
@@ -279,7 +279,7 @@ def main() -> None:
     parser.add_argument(
         "--no-enrich",
         action="store_true",
-        help="Skip Stage 3 enrichment (Regulator/Document nodes, :CITES, :ISSUED_BY, :PART_OF).",
+        help="Skip graph enrichment (Regulator/Document nodes, :CITES, :ISSUED_BY, :PART_OF).",
     )
     parser.add_argument(
         "--verbose", "-v", action="store_true", help="Verbose logging."

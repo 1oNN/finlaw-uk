@@ -71,13 +71,13 @@ specific `Provision.cite` in Neo4j (or see it flagged as unverified).
 Two metric families, run on the same 80-question balanced set
 (`questions_80_balanced.csv`, 8 domains × 10 questions each):
 
-**Lexical (the thesis baseline)**
+**Lexical (surface-similarity baseline)**
 - Jaccard token overlap (answer vs ground truth)
 - ROUGE-L F1 (longest common subsequence)
 - Citation match (fraction of expected pipe-separated cites in answer)
 - Keyword F1 (token-level F1 vs expected keywords)
 
-**Model-based (RAGAS, added post-thesis)**
+**Model-based (RAGAS)**
 - Faithfulness — claims supported by retrieved contexts
 - Answer relevancy — answer addresses the question
 - Context precision — retrieved contexts were relevant

@@ -117,7 +117,7 @@ what would be needed for a follow-up study.*
 
 Example:
 > Thematic analysis followed Braun and Clarke (2006). All transcripts
-> were openly coded once by the candidate; codes were grouped into the
+> were openly coded once by a single researcher; codes were grouped into the
 > six themes above via axial coding. No second coder was available
 > (single-developer MSc), which is a limitation; inter-rater agreement
 > would be needed for a paper-quality study. The N=6 sample skews

@@ -5,7 +5,7 @@ Wraps the legacy `GraphClient` pattern around the shared driver in
 
     search_provisions(query, k)   — fulltext search on the `provisionIdx` index
     neighbors(cites)              — 1-hop traversal returning related cites + terms
-    neighbors_2hop(cites)         — 2-hop traversal via :CITES|MENTIONS (Stage 3)
+    neighbors_2hop(cites)         — 2-hop traversal via :CITES|MENTIONS
     build_graph_context(query)    — composes a source line + bullet block
 """
 

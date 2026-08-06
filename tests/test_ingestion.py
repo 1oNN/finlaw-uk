@@ -1,4 +1,4 @@
-"""Tests for the Stage 2 ingestion pipeline.
+"""Tests for the ingestion pipeline.
 
 Covers:
     - Citation/ID builder helpers

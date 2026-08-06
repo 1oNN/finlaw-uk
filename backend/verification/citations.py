@@ -1,6 +1,6 @@
 """Citation normaliser — maps common near-miss UK regulatory citations into
 their strict short-form. Used by the chat post-processing step and (from
-Stage 3 onward) by the graph-grounded verifier to canonicalise citations
+by the graph-grounded verifier to canonicalise citations
 before lookup."""
 
 from __future__ import annotations

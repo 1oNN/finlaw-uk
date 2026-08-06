@@ -1,7 +1,7 @@
 """Neo4j driver singleton.
 
 Provides a process-wide lazily-initialised Neo4j driver, plus a session
-context manager. Centralises connection configuration that used to be
+context manager. Centralises connection configuration that would otherwise be
 duplicated across the seed script, the traversal helper, and the retrieval
 orchestrator's graph boost.
 

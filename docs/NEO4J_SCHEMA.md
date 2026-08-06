@@ -1,18 +1,19 @@
 # Neo4j Schema — FinLaw-UK
 
-This document describes the live graph schema after Stage 3 enrichment. It
-is the source of truth for queries written against the FinLaw-UK Neo4j
-instance.
+This document describes the graph schema produced by the seeding and
+enrichment pipeline. It is the source of truth for queries written
+against the FinLaw-UK Neo4j instance.
 
-The schema evolved across the upgrade in three layers:
+Three pipeline steps contribute to the schema:
 
-| Stage | Adds |
+| Step | Adds |
 |---|---|
-| **0** | `Provision`, `Term` nodes; `:MENTIONS`, `:DEFINED_BY` edges; constraints + fulltext indexes |
-| **2** | More `Provision` nodes (XML + PDF ingestion); no schema change |
-| **3** | `Regulator`, `Document` nodes; `:CITES`, `:ISSUED_BY`, `:PART_OF` edges |
+| **Base seed** | `Provision`, `Term` nodes; `:MENTIONS`, `:DEFINED_BY` edges; constraints + fulltext indexes |
+| **Ingestion** | More `Provision` nodes (XML + PDF); no schema change |
+| **Enrichment** | `Regulator`, `Document` nodes; `:CITES`, `:ISSUED_BY`, `:PART_OF` edges |
 
-Stage 4 (verification) reads from this schema; Stages 5–7 don't modify it.
+The verification layer reads from this schema; the retrieval and
+evaluation layers do not modify it.
 
 ## Node labels
 
@@ -38,7 +39,7 @@ A normalised keyword that appears in one or more provisions. Used for term-based
 | `name` | string | Lowercased term. Constraint: UNIQUE. |
 
 ### `Regulator`
-A UK financial regulator. Five seeded nodes after Stage 3:
+A UK financial regulator. Five seeded nodes:
 
 | Property | Type | Notes |
 |---|---|---|
@@ -46,7 +47,7 @@ A UK financial regulator. Five seeded nodes after Stage 3:
 | `full_name` | string | E.g. "Financial Conduct Authority". |
 
 ### `Document`
-A regulatory document. Five seeded nodes after Stage 3 (one per legislation source):
+A regulatory document. Five seeded nodes (one per legislation source):
 
 | Property | Type | Notes |
 |---|---|---|
@@ -56,13 +57,13 @@ A regulatory document. Five seeded nodes after Stage 3 (one per legislation sour
 
 ## Relationship types
 
-| Type | From → To | Direction | Stage | Meaning |
+| Type | From → To | Direction | Added by | Meaning |
 |---|---|:---:|:---:|---|
-| `:MENTIONS` | `Term → Provision` | directed | 0 | Term appears in this provision. |
-| `:DEFINED_BY` | `Provision → Provision` | directed | 0 | Source defines a concept via target. (Legacy: one hardcoded edge from `FSMA 2000 s.19` to `RAO 2001 art.5`.) |
-| `:CITES` | `Provision → Provision` | directed | 3 | Source provision references target by short-form citation in its text. |
-| `:ISSUED_BY` | `Provision → Regulator` | directed | 3 | Source provision was issued by this regulator. |
-| `:PART_OF` | `Provision → Document` | directed | 3 | Source provision belongs to this document. |
+| `:MENTIONS` | `Term → Provision` | directed | base seed | Term appears in this provision. |
+| `:DEFINED_BY` | `Provision → Provision` | directed | base seed | Source defines a concept via target. (One hardcoded edge from `FSMA 2000 s.19` to `RAO 2001 art.5`.) |
+| `:CITES` | `Provision → Provision` | directed | enrichment | Source provision references target by short-form citation in its text. |
+| `:ISSUED_BY` | `Provision → Regulator` | directed | enrichment | Source provision was issued by this regulator. |
+| `:PART_OF` | `Provision → Document` | directed | enrichment | Source provision belongs to this document. |
 | `:RELATES_TO` | `Provision ↔ Provision` | undirected (reserved) | reserved | Declared in schema for future enrichment; not yet populated. |
 | `:AMENDED_BY` | `Provision → Provision` | directed (reserved) | reserved | Reserved for future amendment-history modelling. |
 
@@ -166,18 +167,18 @@ of mid-2026; small fluctuations are expected as the source XML evolves.
 | Entity | Count |
 |---|---:|
 | `Provision` | ~2,750 (XML 2,634 + PDFs 120+) |
-| `Term` | ~100 (legacy terms only — Stage 3 doesn't add Terms) |
+| `Term` | ~100 (base-seed terms only — enrichment does not add Terms) |
 | `Regulator` | 5 (FCA, PRA, HMT, ESMA, BoE) |
 | `Document` | 5 (FSMA 2000, MLR 2017, PSR 2017, RAO 2001, UK MAR) |
 | `:CITES` | ~2,600 |
 | `:ISSUED_BY` | ~2,634 (one per XML provision; PDF provisions only if regulator matches) |
 | `:PART_OF` | ~2,634 (one per XML provision) |
 
-## Verification flow (Stage 4)
+## Verification flow
 
 After a chat response is generated, the post-processor extracts every
 citation from the model output and looks each up against `Provision.cite`.
 A citation that the graph can match is "grounded"; one that can't is
-flagged as `unverified`. This mechanism is what the dissertation calls
-"symbolic verification" — Stage 4 wires it into the SSE stream so the
+flagged as `unverified`. This mechanism is the system's
+"symbolic verification" layer — it is wired into the SSE stream so the
 frontend receives the audit alongside the answer.

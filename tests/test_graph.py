@@ -1,4 +1,4 @@
-"""Tests for the Stage 3 graph layer.
+"""Tests for the graph layer.
 
 Covers:
     - Cross-reference regex matching (statutory + FCA Handbook patterns)

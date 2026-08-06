@@ -22,30 +22,38 @@ MSc dissertation project, University of Bradford, 2025.
 
 ## Documentation
 
-### Project docs (dissertation deliverables)
+### Getting started
 
 - **[docs/REQUIREMENTS.md](docs/REQUIREMENTS.md)** — hardware + software requirements
 - **[docs/RUN.md](docs/RUN.md)** — setup walkthrough for Windows / macOS / Linux
+
+### Design
+
 - **[docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)** — system diagram, request lifecycle, where every design pick lives
-- **[docs/NEO4J_SCHEMA.md](docs/NEO4J_SCHEMA.md)** — live graph schema + example Cypher
-- **[docs/RAGAS_RESULTS.md](docs/RAGAS_RESULTS.md)** — evaluation methodology and reproduction
-- **[docs/DSR_MAPPING.md](docs/DSR_MAPPING.md)** — Design Science Research mapping
-- **[docs/QUALITATIVE_SUMMARY.md](docs/QUALITATIVE_SUMMARY.md)** — qualitative findings summary
 - **[docs/WORKFLOW.md](docs/WORKFLOW.md)** — plain-English walkthrough of the system
+- **[docs/NEO4J_SCHEMA.md](docs/NEO4J_SCHEMA.md)** — graph schema + example Cypher
+- **[docs/DSR_MAPPING.md](docs/DSR_MAPPING.md)** — Design Science Research mapping
 
-### Post-submission addenda (forward-looking, not dissertation-revising)
+### Evaluation
 
-These were produced after thesis submission to investigate and partially
-remediate the headline numbers in `eval_results_ragas_20260523_025543`.
-They do not change anything reported in the dissertation.
+- **[docs/RAGAS_RESULTS.md](docs/RAGAS_RESULTS.md)** — evaluation methodology and reproduction
+- **[docs/EVALUATION_DIAGNOSTICS.md](docs/EVALUATION_DIAGNOSTICS.md)** — root-cause analysis of the `context_recall = 0.075` result (70 of 80 rows in `questions_80_balanced.csv` are template stubs, not a citation-format bug) and of the judge-LLM parallelism issue that makes faithfulness and recall un-measurable on a single Ollama instance
+- **[docs/EVALUATION_COMPARISON.md](docs/EVALUATION_COMPARISON.md)** — measured effect of the retrieval and prompt changes. `context_precision` valid-count lifts from 8/80 to 77/80 (a coverage win, not a mean win); faithfulness and context_recall carry a documented measurement gap
+- **[docs/QUALITATIVE_SUMMARY.md](docs/QUALITATIVE_SUMMARY.md)** — qualitative findings summary
 
-- **[DIAGNOSIS.md](DIAGNOSIS.md)** — root cause of `context_recall = 0.075` (70 of 80 question rows in `questions_80_balanced.csv` are template stubs, not a citation-format bug). Also documents the judge-LLM parallelism issue surfaced by the AFTER_FIX runs.
-- **[AFTER_FIX_BEFORE_AFTER.md](AFTER_FIX_BEFORE_AFTER.md)** — partial remediation results. `context_precision` valid-count lifts from 8/80 to 77/80 (a coverage win, not a mean win); `faithfulness` and `context_recall` are literally un-measurable in the AFTER_FIX judge configuration. May 23 baseline values for those two metrics remain the only signal.
+## Known limitations
+
+- `ragas_faithfulness` and `ragas_context_recall` are un-measurable under
+  RAGAS's default parallel judge invocation against a single Ollama
+  instance — see `docs/EVALUATION_DIAGNOSTICS.md` §9.
+- 70 of the 80 rows in `questions_80_balanced.csv` are template stubs;
+  `questions_10_curated.csv` is the meaningful evaluation set.
+- The Neo4j graph is missing the `:MENTIONS` relationship type, so 2-hop
+  traversal returns fewer related citations than the schema implies.
 
 ## Acknowledgements
 
-University of Bradford MSc Computing programme; thesis supervisor and
-viva panel.
+University of Bradford MSc Computing programme.
 
 ## License
 

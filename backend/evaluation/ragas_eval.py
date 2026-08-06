@@ -22,7 +22,7 @@ Judge LLM choice (via `RAGAS_JUDGE` env or the `judge` argument):
                          (~14 GB download on first run).
 
 Embeddings (used for some RAGAS metrics): `BAAI/bge-small-en-v1.5` via
-`HuggingFaceEmbeddings` — the same encoder Stage 1's dense retriever uses.
+`HuggingFaceEmbeddings` — the same encoder the dense retriever uses.
 """
 
 from __future__ import annotations
@@ -41,7 +41,7 @@ import pandas as pd
 from backend.llm.ollama_client import generate_stream
 from backend.retrieval.orchestrator import (
     gather_contexts,
-    gather_contexts_wide,  # Task 3: pre-rerank pool for RAGAS scoring
+    gather_contexts_wide,  # pre-rerank pool for RAGAS scoring
     get_graph_boost,
     get_raw_context,
 )
@@ -132,14 +132,14 @@ def run_rag_pipeline(question: str) -> Tuple[str, List[str], float]:
     Returns `(answer, contexts, runtime_s)` where:
         answer   = the joined token stream from Ollama, or the canonical
                    refusal phrase if the top dense similarity is below
-                   RAG_REFUSAL_THRESHOLD (Task 4)
+                   RAG_REFUSAL_THRESHOLD
         contexts = a flat list of retrieval snippets (graph + documents),
-                   widened to the pre-rerank pool for fair RAGAS scoring (Task 3)
+                   widened to the pre-rerank pool for fair RAGAS scoring
         runtime_s = wall-clock seconds for this question
     """
     t0 = time.time()
 
-    # Task 4: mirror the chat route's weak-retrieval gate so eval scores the
+    # Mirror the chat route's weak-retrieval gate so eval scores the
     # same answer shape users would see. Refusal short-circuits Mistral but
     # still returns the wide context pool so RAGAS can score recall against it.
     from backend.retrieval.orchestrator import top_dense_similarity
@@ -172,11 +172,11 @@ def run_rag_pipeline(question: str) -> Tuple[str, List[str], float]:
         parts.append(token)
     answer = "".join(parts).strip()
 
-    # Task 3 (tuned): RAGAS sees an 8-chunk pool for fair recall measurement.
+    # RAGAS sees an 8-chunk pool for fair recall measurement.
     # Earlier we tried 20 chunks but that blew the Mistral 7B judge's context
     # window — RAGAS output parser failed on faithfulness + recall on every
     # row. 8 matches the chat-side post-rerank top-k, keeps judge prompts
-    # parseable, and still widens vs. the May 23 baseline of 3 chunks.
+    # parseable, and still widens vs. the previous default of 3 chunks.
     contexts = gather_contexts_wide(
         question, pool_size=int(os.getenv("EVAL_CONTEXT_POOL", "8"))
     )
@@ -204,7 +204,7 @@ def _build_judge_llm(judge: str):
     # RAGAS judgment JSON reliably. Smaller models that look attractive on
     # paper either (a) emit reasoning traces that blow the timeout
     # (qwen3:4b), or (b) struggle to produce valid JSON (gemma3:1b).
-    # The previous run's 72 timeouts came from RAGAS calling the judge
+    # The 72 timeouts in the baseline run came from RAGAS calling the judge
     # in one big batch with the default 60s per-call ceiling; the new
     # RunConfig pushes that to 180s and the per-record loop limits the
     # blast radius of any single failure.
@@ -222,7 +222,7 @@ def _build_judge_llm(judge: str):
 
 def _build_embeddings():
     """RAGAS needs embeddings for context_precision / context_recall.
-    Reuse BGE-small from Stage 1 so we don't download a second encoder."""
+    Reuse the retriever's BGE-small so we don't download a second encoder."""
     from langchain_community.embeddings import HuggingFaceEmbeddings
     return HuggingFaceEmbeddings(model_name=os.getenv("DENSE_MODEL", "BAAI/bge-small-en-v1.5"))
 
@@ -347,7 +347,7 @@ def evaluate_questions(
     output_dir: Path = EVAL_OUTPUT_DIR,
     questions_path: Path = QUESTIONS_CSV,
 ) -> Path:
-    """End-to-end Stage 5 entry point.
+    """End-to-end evaluation entry point.
 
     1. Load questions (optionally a head sample).
     2. Run the RAG pipeline for each question, capturing answer + contexts.
@@ -466,9 +466,9 @@ def _write_summary(records: List[EvalRecord], path: Path) -> None:
 
 
 def _cli() -> None:
-    """Task 5: CLI shim so `python -m backend.evaluation.ragas_eval` works.
+    """CLI entry point so `python -m backend.evaluation.ragas_eval` works.
 
-    Accepts `--questions` and `--out` per the AFTER_FIX brief. The timestamped
+    Accepts `--questions` and `--out`. The timestamped
     default filename is renamed to whatever `--out` requests once the eval
     completes, with the matching `_summary.csv` carried along.
     """
