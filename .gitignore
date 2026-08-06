@@ -65,3 +65,7 @@ Thumbs.db
 .idea/
 *.swp
 *.swo
+
+# Private notes (never commit)
+_private/
+_qa/
