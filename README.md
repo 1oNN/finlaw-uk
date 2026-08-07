@@ -10,7 +10,7 @@ MSc dissertation project, University of Bradford, 2025.
 *   **Hallucination Reduction:** Graph-grounded citation verification cross-references the Neo4j knowledge graph and flags unsupported references rather than passing them through silently.
 *   **Robust Benchmarking:** Evaluated against a custom 110-item benchmark spanning 80 factual questions, 20 document tasks, and 10 case scenarios across 10 regulatory domains.
 *   **Reproducibility:** Committed evaluation pipelines and result sets — every figure regenerates from data in the repository.
-*   **Measured Performance:** 0.82 source accuracy and 0.81 citation quality across the 110-item benchmark, using RAGAS alongside custom citation-quality and legal-completeness metrics (`backend/results_full/run_20250902_002303/`).
+*   **Measured Performance:** across the 110-item benchmark, semantic similarity 0.67 and legal completeness 0.68 against gold answers, at a median 5.8 s per query (`backend/results_full/run_20250902_002303/`). Graph-verified citation rate on that run was 3/110 — the finding that motivated the citation normaliser, re-ranker and refusal gate now in the pipeline.
 
 ## System Architecture
 
