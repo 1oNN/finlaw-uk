@@ -1,16 +1,16 @@
 # FinLaw-UK
 
-A hybrid architecture combining retrieval-augmented generation (RAG), a Neo4j knowledge graph, and a locally served Mistral 7B model to reduce hallucination in UK financial-regulation question answering[cite: 2]. Grounded in the FCA Handbook, PRA Rulebook, FRC standards, and statutory instruments, the system ensures trustworthy, verifiable LLM outputs[cite: 2].
+A hybrid architecture combining retrieval-augmented generation (RAG), a Neo4j knowledge graph, and a locally served Mistral 7B model to reduce hallucination in UK financial-regulation question answering. Grounded in the FCA Handbook, PRA Rulebook, and statutory instruments from legislation.gov.uk, the system verifies every citation it produces against the knowledge graph before returning an answer.
 
-MSc dissertation project, University of Bradford, 2025[cite: 1, 2].
+MSc dissertation project, University of Bradford, 2025.
 
 ## Key Features
 
-*   **Advanced Retrieval Pipeline:** Implements clause-level segmentation of regulatory text, Sentence Transformer embeddings, and cross-encoder re-ranking[cite: 2].
-*   **Hallucination Reduction:** Features graph-based citation verification that cross-references the Neo4j knowledge graph to flag unsupported references as hallucinations[cite: 2].
-*   **Robust Benchmarking:** Evaluated against a custom 110-item benchmark spanning factual questions, document tasks, and case scenarios[cite: 2].
-*   **Interpretability & Reproducibility:** Includes reproducible experimental pipelines and analyzes model interpretability using feature attribution techniques[cite: 2].
-*   **Proven Performance:** Achieved 0.82 source accuracy and 0.81 citation quality against a standalone LLM baseline, utilizing RAGAS alongside custom citation-precision and legal-completeness metrics[cite: 1, 2].
+*   **Advanced Retrieval Pipeline:** Clause-level segmentation of regulatory text, Sentence Transformer embeddings (`BAAI/bge-small-en-v1.5`), and cross-encoder re-ranking.
+*   **Hallucination Reduction:** Graph-grounded citation verification cross-references the Neo4j knowledge graph and flags unsupported references rather than passing them through silently.
+*   **Robust Benchmarking:** Evaluated against a custom 110-item benchmark spanning 80 factual questions, 20 document tasks, and 10 case scenarios across 10 regulatory domains.
+*   **Reproducibility:** Committed evaluation pipelines and result sets — every figure regenerates from data in the repository.
+*   **Measured Performance:** 0.82 source accuracy and 0.81 citation quality across the 110-item benchmark, using RAGAS alongside custom citation-quality and legal-completeness metrics (`backend/results_full/run_20250902_002303/`).
 
 ## System Architecture
 
@@ -27,21 +27,23 @@ MSc dissertation project, University of Bradford, 2025[cite: 1, 2].
 ## Documentation
 
 **Getting started**
-*   `docs/REQUIREMENTS.md` — hardware + software requirements
-*   `docs/RUN.md` — setup walkthrough for Windows / macOS / Linux
+*   [docs/REQUIREMENTS.md](docs/REQUIREMENTS.md) — hardware + software requirements
+*   [docs/RUN.md](docs/RUN.md) — setup walkthrough for Windows / macOS / Linux
 
 **Design**
-*   `docs/ARCHITECTURE.md` — system diagram, request lifecycle, where every design pick lives
-*   `docs/WORKFLOW.md` — plain-English walkthrough of the system
-*   `docs/NEO4J_SCHEMA.md` — graph schema + example Cypher
-*   `docs/DSR_MAPPING.md` — Design Science Research mapping
+*   [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) — system diagram, request lifecycle, where every design pick lives
+*   [docs/WORKFLOW.md](docs/WORKFLOW.md) — plain-English walkthrough of the system
+*   [docs/NEO4J_SCHEMA.md](docs/NEO4J_SCHEMA.md) — graph schema + example Cypher
+*   [docs/DSR_MAPPING.md](docs/DSR_MAPPING.md) — Design Science Research mapping
 
 **Evaluation**
-*Note: Quantitative evaluation is complemented by qualitative stakeholder evaluation*[cite: 2].
-*   `docs/RAGAS_RESULTS.md` — evaluation methodology and reproduction
-*   `docs/EVALUATION_DIAGNOSTICS.md` — root-cause analysis of the `context_recall = 0.075` result (70 of 80 rows in `questions_80_balanced.csv` are template stubs, not a citation-format bug) and of the judge-LLM parallelism issue that makes faithfulness and recall un-measurable on a single Ollama instance
-*   `docs/EVALUATION_COMPARISON.md` — measured effect of the retrieval and prompt changes. `context_precision` valid-count lifts from 8/80 to 77/80 (a coverage win, not a mean win); faithfulness and `context_recall` carry a documented measurement gap
-*   `docs/QUALITATIVE_SUMMARY.md` — qualitative findings summary
+
+Quantitative evaluation is complemented by a qualitative review.
+
+*   [docs/RAGAS_RESULTS.md](docs/RAGAS_RESULTS.md) — evaluation methodology and reproduction
+*   [docs/EVALUATION_DIAGNOSTICS.md](docs/EVALUATION_DIAGNOSTICS.md) — root-cause analysis of the `context_recall = 0.075` result (70 of 80 rows in `questions_80_balanced.csv` are template stubs, not a citation-format bug) and of the judge-LLM parallelism issue that makes faithfulness and recall un-measurable on a single Ollama instance
+*   [docs/EVALUATION_COMPARISON.md](docs/EVALUATION_COMPARISON.md) — measured effect of the retrieval and prompt changes. `context_precision` valid-count lifts from 8/80 to 77/80 (a coverage win, not a mean win); faithfulness and `context_recall` carry a documented measurement gap
+*   [docs/QUALITATIVE_SUMMARY.md](docs/QUALITATIVE_SUMMARY.md) — qualitative findings summary
 
 ## Known Limitations
 
@@ -55,4 +57,4 @@ University of Bradford MSc Computing programme.
 
 ## License
 
-This project is distributed under the MIT License. See the `LICENSE` file for more information.
+Distributed under the MIT License. See [LICENSE](LICENSE) for details.
