@@ -77,7 +77,8 @@ Demo            streaming GIF; screenshots of sources panel + verification
 Problem         4 sentences — a fabricated statutory cite is a compliance incident
 Architecture    Mermaid flowchart + Mermaid request-lifecycle sequence
 Under the hood  <details> per subsystem: retrieval · graph · verification
-Results         Chart 1 ablation · Chart 2 measurability · Chart 3 refusal
+Results         Chart 1 domain coverage (n=110, hero) · Chart 2 ablation
+                Chart 3 measurability · Chart 4 refusal
                 Measurement integrity — the gap, root cause, candidate fix
 Tech stack      layer / tech / where it lives
 Quickstart      <details> per OS
@@ -99,7 +100,36 @@ Rendering uses `<picture>` with `media="(prefers-color-scheme: dark)"` so figure
 are legible in both GitHub themes. Palette anchors to the app's navy tokens so
 README and product read as one system.
 
-### Chart 1 — Retrieval ablation
+### Chart 1 — Coverage across regulatory domains (hero)
+
+Source: `backend/results_full/run_20250902_002303/eval_results.csv` (n=110).
+
+This run was missed in the first pass of this spec and is the strongest
+quantitative asset in the repository. Composition: 80 factual questions + 20
+document tasks + 10 case scenarios = 110 items, spanning ten regulatory domains
+(PSR, UK MAR, DISP each 12; ICOBS, MLR, RAO, PRIN each 11; FSMA, COMP, COBS each
+10) and three complexity tiers (25 basic, 55 intermediate, 30 advanced).
+
+Headline figures: `source_accuracy` 0.8232, `citation_quality` 0.8064,
+`legal_completeness` 0.6818, `semantic_similarity` 0.6724. Latency median
+5 768 ms, p90 5 977 ms.
+
+Rendering: domain × complexity heatmap on `source_accuracy`, with a marginal bar
+for per-domain n so no reader mistakes a 10-item cell for a large sample.
+
+This leads the Results section because n=110 with a legible breakdown is a
+better first impression than n=10 curated, and because the domain axis shows
+breadth of regulatory coverage that no other figure conveys.
+
+**Open question blocking this chart.** The same run reports `citations_ok` at
+0.0273 — 3 of 110 rows — which sits uncomfortably beside `source_accuracy` of
+0.82 computed over the same rows. `lexical.py:244` defines source accuracy as
+`1.0 if (meta_ok is True and not invalid_local and pen == 0.0) else 0.0`, so the
+two fields are measuring different things, but the discrepancy must be
+understood and explained in prose before either number goes above the fold. If
+it cannot be explained, this chart is demoted and the ablation leads instead.
+
+### Chart 2 — Retrieval ablation
 
 Source: `data/eval_results/ablation.csv` (four arms, n=10 each).
 
@@ -121,7 +151,7 @@ Honest reading to state in prose: no arm dominates. Reranking buys precision
 but collapses on relevancy. The README says this plainly rather than declaring a
 winner.
 
-### Chart 2 — Measurability lift
+### Chart 3 — Measurability lift
 
 Slope chart, `context_precision` valid rows: 8/80 → 77/80 on the balanced set,
 1/10 → 9/10 on the curated set. Annotated so the axis reads as *rows the metric
@@ -131,7 +161,7 @@ The mean is flat (0.9056 → 0.8974). The win is coverage, driven by the
 per-record loop and 180 s `RunConfig` in commit `9ad4225`. Labelling this as a
 coverage win rather than a quality win is the point of including it.
 
-### Chart 3 — Refusal-gate trade-off
+### Chart 4 — Refusal-gate trade-off
 
 Grouped bars, `answer_relevancy` by row group:
 
@@ -212,6 +242,23 @@ palette, so a link in an application or on LinkedIn renders as a designed card.
 **Repo metadata** — About blurb and topics via `gh`. This is an outward-facing
 change to a public repository: exact text is shown and confirmed before it is
 applied.
+
+## Work already completed
+
+A cleanup pass on the existing README shipped ahead of the rebuild, because the
+defects were live on a public repository:
+
+- Removed four stray citation markers left in the prose.
+- Added the MIT `LICENSE` file the README was already pointing at.
+- Restored the clickable documentation links.
+- Dropped two unsupported claims: FRC standards (absent from the corpus, which
+  holds FCA, PRA and legislation.gov.uk material only) and feature-attribution
+  interpretability analysis (no such code exists). Also dropped "against a
+  standalone LLM baseline" — `eval_results.csv` has no baseline arm, so the
+  110-item run is a single-system evaluation, not a comparison.
+- Attributed the 0.82 / 0.81 figures to their source directory.
+
+The rebuild starts from this cleaned state.
 
 ## Constraints
 
