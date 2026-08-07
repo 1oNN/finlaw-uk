@@ -21,6 +21,17 @@ against that graph before the answer reaches the user.
 
 *MSc dissertation project — University of Bradford, 2025.*
 
+<div align="center">
+  <img src="docs/assets/demo.gif" alt="A question streamed and answered, with its citation verified against the knowledge graph" width="100%">
+</div>
+
+Asking *"What is the general prohibition in UK financial services?"* returns an
+answer cited to `FSMA 2000 s.19`, and the footnotes panel reports that citation
+as **verified** — meaning a matching provision node was found in the graph, and
+every load-bearing claim traced back to it.
+
+![Verified citation and claim trace](docs/assets/demo-verified.png)
+
 ---
 
 ## Why this is different
