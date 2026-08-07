@@ -1,59 +1,355 @@
+<div align="center">
+
 # FinLaw-UK
 
-A hybrid architecture combining retrieval-augmented generation (RAG), a Neo4j knowledge graph, and a locally served Mistral 7B model to reduce hallucination in UK financial-regulation question answering. Grounded in the FCA Handbook, PRA Rulebook, and statutory instruments from legislation.gov.uk, the system verifies every citation it produces against the knowledge graph before returning an answer.
+**A retrieval system for UK financial regulation that can prove its citations exist —
+and refuses to answer when it can't.**
 
-MSc dissertation project, University of Bradford, 2025.
+[![CI](https://github.com/1oNN/finlaw-uk/actions/workflows/ci.yml/badge.svg)](https://github.com/1oNN/finlaw-uk/actions/workflows/ci.yml)
+[![Python](https://img.shields.io/badge/Python-3.11-3776AB?logo=python&logoColor=white)](https://www.python.org/)
+[![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=black)](https://react.dev/)
+[![Neo4j](https://img.shields.io/badge/Neo4j-5-4581C3?logo=neo4j&logoColor=white)](https://neo4j.com/)
+[![Mistral 7B](https://img.shields.io/badge/Mistral_7B-local_via_Ollama-0A5A8C)](https://ollama.com/)
+[![License](https://img.shields.io/badge/License-MIT-0A5A8C)](LICENSE)
 
-## Key Features
+</div>
 
-*   **Advanced Retrieval Pipeline:** Clause-level segmentation of regulatory text, Sentence Transformer embeddings (`BAAI/bge-small-en-v1.5`), and cross-encoder re-ranking.
-*   **Hallucination Reduction:** Graph-grounded citation verification cross-references the Neo4j knowledge graph and flags unsupported references rather than passing them through silently.
-*   **Robust Benchmarking:** Evaluated against a custom 110-item benchmark spanning 80 factual questions, 20 document tasks, and 10 case scenarios across 10 regulatory domains.
-*   **Reproducibility:** Committed evaluation pipelines and result sets — every figure regenerates from data in the repository.
-*   **Measured Performance:** across the 110-item benchmark, semantic similarity 0.67 and legal completeness 0.68 against gold answers, at a median 5.8 s per query (`backend/results_full/run_20250902_002303/`). Graph-verified citation rate on that run was 3/110 — the finding that motivated the citation normaliser, re-ranker and refusal gate now in the pipeline.
+Graph-augmented RAG over legislation.gov.uk, the FCA Handbook and the PRA
+Rulebook. Hybrid BM25 + dense retrieval fused by reciprocal rank fusion, 2-hop
+traversal of a Neo4j provision graph, and a verifier that checks every citation
+against that graph before the answer reaches the user.
 
-## System Architecture
+*MSc dissertation project — University of Bradford, 2025.*
+
+---
+
+## Why this is different
+
+Most regulatory chatbots are a vector store and a prompt. Three things here are not.
+
+**1 · Citations are verified, not just generated.**
+When the model writes `FSMA 2000 s.21`, that string is resolved against the
+knowledge graph. If no matching `Provision` node exists, the answer is flagged
+to the user rather than passed through. A fabricated citation in regulated
+finance is a compliance incident, not a typo.
+
+**2 · It refuses rather than guesses.**
+A dense-similarity gate declines to answer when retrieval is genuinely weak.
+This costs measurable points on standard benchmarks — [and the results section
+below shows exactly how many](#what-refusing-costs). That trade is the product.
+
+**3 · Nothing leaves the machine.**
+Mistral 7B-Instruct via Ollama, FAISS on disk, Neo4j in Docker. No query about a
+client's regulatory exposure is sent to a third-party API — which is the actual
+deployment constraint in this domain.
+
+---
+
+## How it works
+
+```mermaid
+flowchart LR
+  subgraph client [Browser]
+    UI[React 18 chat<br/>SSE streaming]
+  end
+
+  subgraph api [Flask backend]
+    APP[app.py<br/>mode routing + SSE]
+    ORCH[orchestrator.py<br/>hybrid + cascade]
+    VERIFY[verification/<br/>citation audit]
+  end
+
+  subgraph retrieval [Retrieval]
+    SPARSE[BM25 + regex]
+    DENSE[BGE-small + FAISS]
+    RRF{{RRF fusion}}
+    TRAV[2-hop traversal]
+  end
+
+  subgraph stores [Stores]
+    NEO[(Neo4j<br/>Provision · Term<br/>Regulator · Document)]
+    FAISS[(FAISS index)]
+  end
+
+  LLM[Ollama<br/>Mistral 7B-Instruct]
+
+  UI -->|POST /api/chat/stream| APP
+  APP --> ORCH
+  ORCH --> SPARSE --> RRF
+  ORCH --> DENSE --> RRF
+  DENSE -.-> FAISS
+  ORCH --> TRAV -.-> NEO
+  RRF --> APP
+  APP -->|context + prompt| LLM
+  LLM -->|token stream| APP
+  APP --> VERIFY -.->|resolve every citation| NEO
+  APP -->|SSE tokens + audit meta| UI
+```
+
+A question is answered in three passes: **retrieve** (sparse and dense in
+parallel, fused by RRF, widened by graph traversal), **generate** (streamed from
+a local Mistral), then **verify** (every citation resolved against Neo4j, with a
+claim trace attached to the response).
+
+<details>
+<summary><b>Request lifecycle in detail</b></summary>
+
+```
+1.  POST {prompt, filename?, mode?}                      frontend → app.py
+2.  get_graph_boost(query)                               → Neo4j fulltext, top-6 seeds
+3.    neighbors_2hop(seeds) via :CITES|:DEFINED_BY       → context bullets + source line
+4.  get_context(query)                                   → orchestrator
+       primary:  BM25 ∪ dense → reciprocal rank fusion
+       cascade:  phrase regex → keyword overlap → uploads → remote
+5.  Mode routing → FINANCE_QA_PROMPT / TRAFFIC_LIGHT_PROMPT / GENERAL_PROMPT
+6.  Stream tokens from Ollama, suppressing <think> blocks
+7.  Post-process: normalise citations → fix currency → bootstrap short answers
+8.  Citation audit: find_invalid_citations() → patch with warning
+9.  Graph verification: verify_answer() → {all_grounded, verified, unverified}
+10. Claim trace: trace_all() → [{claim, best_match}]
+11. Emit consolidated event:meta, then event:done
+```
+
+Full detail in [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
+
+</details>
+
+<details>
+<summary><b>Retrieval — why hybrid, and what fusion buys</b></summary>
+
+Statutory text is unusually hostile to pure dense retrieval: provisions are
+short, heavily numbered, and share near-identical boilerplate, so embeddings
+cluster tightly and rank poorly on exact references like `COBS 4.12R`. BM25
+handles the reference lookup; the bi-encoder handles paraphrased questions.
+Reciprocal rank fusion merges the two ranked lists without needing calibrated
+scores across them.
+
+- `backend/retrieval/sparse.py` — BM25, phrase regex, keyword overlap
+- `backend/retrieval/dense.py` — `BAAI/bge-small-en-v1.5` + FAISS `IndexFlatIP`
+- `backend/retrieval/hybrid.py` — `reciprocal_rank_fusion(rank_lists, k, rrf_k)`
+- `backend/retrieval/orchestrator.py` — hybrid-first with a fallback cascade
+
+The measured effect of each component is in [the ablation below](#retrieval-ablation).
+
+</details>
+
+<details>
+<summary><b>The knowledge graph</b></summary>
+
+Provisions are ingested from legislation.gov.uk XML and supplementary FCA/PRA
+PDFs, then linked by regex-extracted cross-references.
+
+| Node | Meaning |
+|---|---|
+| `Provision` | A section, article or handbook rule |
+| `Term` | A defined term, linked by `:DEFINED_BY` |
+| `Regulator` | FCA, PRA, Bank of England |
+| `Document` | Source instrument or handbook module |
+
+Edges are `:CITES` (provision → provision, regex-extracted) and `:DEFINED_BY`.
+2-hop traversal from the top fulltext seeds pulls in provisions that the
+question doesn't name but that the cited rules depend on.
+
+Schema and example Cypher: [docs/NEO4J_SCHEMA.md](docs/NEO4J_SCHEMA.md).
+
+</details>
+
+---
+
+## Results
+
+Two evaluation tracks: a 110-item benchmark scored against gold answers, and a
+RAGAS suite with a local Mistral judge. Every figure below is regenerated from
+committed data by [`scripts/make_readme_charts.py`](scripts/make_readme_charts.py).
+
+### Retrieval ablation
+
+One retrieval component varied at a time, question set held fixed.
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/ablation_dark.svg">
+  <img alt="Retrieval ablation across four configurations" src="docs/assets/ablation_light.svg">
+</picture>
+
+**No arm dominates, and the honest reading matters more than a winner.** The
+re-ranker buys context precision (0.83 → 0.84) and faithfulness (0.58 → 0.63)
+for a 36% latency cost. Dense-only retrieval wins recall but collapses on answer
+relevancy — exactly the failure mode described above, where embeddings cannot
+separate near-identical statutory boilerplate. BM25 alone is a surprisingly
+strong baseline on precision, which is why the fused configuration ships rather
+than the dense one.
+
+<details>
+<summary>Underlying numbers</summary>
+
+| arm | faithfulness | context precision | context recall | answer relevancy | s/question |
+|---|---|---|---|---|---|
+| BM25 only | 0.5217 | 0.8258 | 0.70 | 0.2818 | 8.28 |
+| Dense only | 0.6500 | 0.7195 | 0.70 | 0.0973 | 8.00 |
+| RRF fusion | 0.5833 | 0.8267 | 0.60 | 0.2774 | 7.50 |
+| **RRF + re-ranker** | **0.6333** | **0.8400** | 0.60 | 0.1919 | 10.21 |
+
+Source: [`data/eval_results/ablation.csv`](data/eval_results/ablation.csv), n=10 per arm.
+
+</details>
+
+### Coverage across the regulatory corpus
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/coverage_dark.svg">
+  <img alt="Legal completeness by regulatory domain" src="docs/assets/coverage_light.svg">
+</picture>
+
+110 items spanning 80 factual questions, 20 document tasks and 10 case
+scenarios, across ten regulatory domains and three complexity tiers. Legal
+completeness — the share of expected keywords present in the answer — sits in a
+tight band around 0.68 with no domain materially weaker than any other, and no
+degradation from basic to advanced questions. Median latency 5.8 s per query.
+
+### Measurement integrity
+
+This section is deliberately above the fold rather than in a linked appendix.
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/measurability_dark.svg">
+  <img alt="Context precision valid-row count before and after" src="docs/assets/measurability_light.svg">
+</picture>
+
+The headline change to context precision is **coverage, not score**. The mean
+barely moved (0.906 → 0.897); what changed is that the metric now returns a
+value for 77 of 80 rows instead of 8, after switching to a per-record scoring
+loop with a 180 s timeout. Reporting that as a quality improvement would be
+wrong.
+
+Three limitations are load-bearing enough to state plainly:
+
+- **`faithfulness` and `context_recall` are currently un-measurable, not
+  degraded.** RAGAS invokes four judge jobs concurrently against a single Ollama
+  instance and the output comes back malformed; the same prompts parse correctly
+  when probed serially. Candidate fix (`RAGAS_MAX_WORKERS=1`) is documented and
+  untested. See [docs/EVALUATION_DIAGNOSTICS.md](docs/EVALUATION_DIAGNOSTICS.md) §9.
+- **70 of the 80 rows in `questions_80_balanced.csv` are template stubs** with
+  semantically empty gold answers. The curated 10 is the meaningful set.
+- **`source_accuracy` and `citation_quality` are not reported here**, despite
+  existing in the results files. `score_citations()` in
+  `scripts/run_eval_and_charts.py` awards a flat `0.85` for any citation-shaped
+  string, verified or not — 103 of 110 rows carry exactly that constant. They
+  measure citation *shape*, not correctness, so they are not results.
+
+The honest citation figure from the 110-item run is that only **3 of 110
+answers passed graph verification**. That finding is what motivated the citation
+normaliser, the re-ranker and the refusal gate that followed it. There is no
+re-run at that scale yet — see [Known limitations](#known-limitations).
+
+### What refusing costs
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/refusal_dark.svg">
+  <img alt="Answer relevancy split by row group" src="docs/assets/refusal_light.svg">
+</picture>
+
+Headline answer relevancy falls 23 points against the baseline, and that is the
+refusal gate working correctly. Thirty of eighty rows are refusals; RAGAS scores
+a refusal at 0 relevancy by construction, because the refusal text does not echo
+the question's wording. Excluding refusals the mean is **0.6575 against the
+baseline's 0.6412** — the baseline scored higher on the headline by
+confabulating answers to nonsense questions instead of declining them.
+
+---
+
+## Tech stack
 
 | Layer | Tech | Where it lives |
-| :--- | :--- | :--- |
-| **Hybrid retrieval** | BM25 + BGE-small + FAISS + RRF | `backend/retrieval/` |
-| **Knowledge graph** | Neo4j 5 with Provision, Term, Regulator, Document nodes | `backend/graph/` |
-| **Ingestion** | legislation.gov.uk XML + PDF corpus + LangChain chunking | `backend/graph/ingest_xml.py`, `extract_pdfs.py` |
-| **Generator** | Mistral 7B-Instruct via Ollama (HF transformers opt-in) | `backend/llm/` |
-| **Verification** | Graph-grounded citation lookup + claim trace | `backend/verification/` |
-| **Evaluation** | ragas + lexical baseline | `backend/evaluation/` |
-| **Frontend** | React 18 + Tailwind 3 with SSE streaming | `frontend/` |
+|---|---|---|
+| Hybrid retrieval | BM25 + BGE-small + FAISS + RRF | `backend/retrieval/` |
+| Knowledge graph | Neo4j 5 — `Provision`, `Term`, `Regulator`, `Document` | `backend/graph/` |
+| Ingestion | legislation.gov.uk XML + PDF corpus + LangChain chunking | `backend/graph/ingest_xml.py`, `extract_pdfs.py` |
+| Generator | Mistral 7B-Instruct via Ollama | `backend/llm/` |
+| Verification | Graph-grounded citation lookup + claim trace | `backend/verification/` |
+| Evaluation | RAGAS + lexical benchmark | `backend/evaluation/` |
+| Frontend | React 18 + Tailwind 3, SSE streaming | `frontend/` |
+
+---
+
+## Quickstart
+
+Requires Python 3.11, Node 18+, Docker, and [Ollama](https://ollama.com/).
+
+```bash
+git clone https://github.com/1oNN/finlaw-uk.git
+cd finlaw-uk
+
+# 1. Neo4j
+docker compose up -d
+
+# 2. Model  (first pull is ~4 GB; pre-warm before timing anything)
+ollama pull mistral:7b-instruct
+ollama run mistral:7b-instruct "warm up" >/dev/null
+
+# 3. Backend
+python -m venv .venv && source .venv/bin/activate   # Windows: .venv\Scripts\activate
+pip install -r requirements.txt
+cp .env.example .env
+python -m scripts.seed_neo4j          # one-off graph ingestion
+python -m backend.app
+
+# 4. Frontend
+cd frontend && npm install && npm start
+```
+
+> **Cold start.** The first request after a restart builds the FAISS cache and
+> loads Mistral into memory. First byte can take several minutes on a cold
+> model — pre-warm Ollama as above before benchmarking or demoing.
+
+Full walkthrough for Windows / macOS / Linux: [docs/RUN.md](docs/RUN.md).
+Hardware and software requirements: [docs/REQUIREMENTS.md](docs/REQUIREMENTS.md).
+
+---
+
+## Testing
+
+```bash
+pytest -q tests/
+```
+
+57 tests covering retrieval fusion and the fallback cascade, graph traversal,
+citation normalisation, graph verification, claim tracing, upload parsing and
+the evaluation scorers. The suite is hermetic — external calls are stubbed and
+the graph and remote paths are disabled in `tests/conftest.py` — so CI runs it
+whole with no Neo4j and no Ollama.
+
+---
+
+## Known limitations
+
+- `ragas_faithfulness` and `ragas_context_recall` are un-measurable under
+  RAGAS's parallel judge invocation against a single Ollama instance
+  ([diagnostics §9](docs/EVALUATION_DIAGNOSTICS.md)).
+- 70 of the 80 rows in `questions_80_balanced.csv` are template stubs;
+  `questions_10_curated.csv` is the meaningful evaluation set.
+- The Neo4j graph is missing the `:MENTIONS` relationship type, so 2-hop
+  traversal returns fewer related citations than the schema implies.
+- The 110-item benchmark predates the citation verifier, re-ranker and refusal
+  gate. Its 3/110 graph-verified citation rate is a *before* measurement; the
+  pipeline has not been re-run at that scale since.
+- `source_accuracy` and `citation_quality` in the committed result files are
+  regex shape-checks, not correctness measures. Do not read them as results.
+
+---
 
 ## Documentation
 
-**Getting started**
-*   [docs/REQUIREMENTS.md](docs/REQUIREMENTS.md) — hardware + software requirements
-*   [docs/RUN.md](docs/RUN.md) — setup walkthrough for Windows / macOS / Linux
+**Design** · [Architecture](docs/ARCHITECTURE.md) · [Workflow](docs/WORKFLOW.md) · [Neo4j schema](docs/NEO4J_SCHEMA.md) · [DSR mapping](docs/DSR_MAPPING.md)
 
-**Design**
-*   [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) — system diagram, request lifecycle, where every design pick lives
-*   [docs/WORKFLOW.md](docs/WORKFLOW.md) — plain-English walkthrough of the system
-*   [docs/NEO4J_SCHEMA.md](docs/NEO4J_SCHEMA.md) — graph schema + example Cypher
-*   [docs/DSR_MAPPING.md](docs/DSR_MAPPING.md) — Design Science Research mapping
+**Evaluation** · [RAGAS methodology](docs/RAGAS_RESULTS.md) · [Diagnostics](docs/EVALUATION_DIAGNOSTICS.md) · [Baseline comparison](docs/EVALUATION_COMPARISON.md) · [Qualitative summary](docs/QUALITATIVE_SUMMARY.md)
 
-**Evaluation**
+**Setup** · [Requirements](docs/REQUIREMENTS.md) · [Run guide](docs/RUN.md)
 
-Quantitative evaluation is complemented by a qualitative review.
-
-*   [docs/RAGAS_RESULTS.md](docs/RAGAS_RESULTS.md) — evaluation methodology and reproduction
-*   [docs/EVALUATION_DIAGNOSTICS.md](docs/EVALUATION_DIAGNOSTICS.md) — root-cause analysis of the `context_recall = 0.075` result (70 of 80 rows in `questions_80_balanced.csv` are template stubs, not a citation-format bug) and of the judge-LLM parallelism issue that makes faithfulness and recall un-measurable on a single Ollama instance
-*   [docs/EVALUATION_COMPARISON.md](docs/EVALUATION_COMPARISON.md) — measured effect of the retrieval and prompt changes. `context_precision` valid-count lifts from 8/80 to 77/80 (a coverage win, not a mean win); faithfulness and `context_recall` carry a documented measurement gap
-*   [docs/QUALITATIVE_SUMMARY.md](docs/QUALITATIVE_SUMMARY.md) — qualitative findings summary
-
-## Known Limitations
-
-*   `ragas_faithfulness` and `ragas_context_recall` are un-measurable under RAGAS's default parallel judge invocation against a single Ollama instance — see `docs/EVALUATION_DIAGNOSTICS.md §9`.
-*   70 of the 80 rows in `questions_80_balanced.csv` are template stubs; `questions_10_curated.csv` is the meaningful evaluation set.
-*   The Neo4j graph is missing the `:MENTIONS` relationship type, so 2-hop traversal returns fewer related citations than the schema implies.
+---
 
 ## Acknowledgements
 
-University of Bradford MSc Computing programme.
+University of Bradford, MSc Computing programme.
 
 ## License
 

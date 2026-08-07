@@ -101,7 +101,7 @@ def test_dense_cache_rejects_model_mismatch(tmp_path):
 def test_orchestrator_falls_back_to_remote(monkeypatch):
     from backend.retrieval import orchestrator, sparse
 
-    monkeypatch.setattr(orchestrator, "_hybrid_search", lambda q, k: [])
+    monkeypatch.setattr(orchestrator, "_hybrid_search", lambda q, k, session_id=None: [])
     monkeypatch.setattr(sparse, "search_phrase", lambda q, k: [])
     monkeypatch.setattr(sparse, "search_keywords", lambda q, k: [])
     monkeypatch.setattr(sparse, "list_upload_keys", lambda: [])
@@ -115,7 +115,9 @@ def test_orchestrator_uses_hybrid_first(monkeypatch):
     from backend.retrieval import orchestrator, sparse
 
     monkeypatch.setattr(
-        orchestrator, "_hybrid_search", lambda q, k: [("doc1", "HYBRID_SNIPPET")]
+        orchestrator,
+        "_hybrid_search",
+        lambda q, k, session_id=None: [("doc1", "HYBRID_SNIPPET")],
     )
 
     def _should_not_be_called(*args, **kwargs):
@@ -130,7 +132,7 @@ def test_orchestrator_uses_hybrid_first(monkeypatch):
 def test_orchestrator_falls_back_to_phrase(monkeypatch):
     from backend.retrieval import orchestrator, sparse
 
-    monkeypatch.setattr(orchestrator, "_hybrid_search", lambda q, k: [])
+    monkeypatch.setattr(orchestrator, "_hybrid_search", lambda q, k, session_id=None: [])
     monkeypatch.setattr(sparse, "search_phrase", lambda q, k: [("doc2", "PHRASE_SNIPPET")])
 
     result = orchestrator.get_context("anything")
