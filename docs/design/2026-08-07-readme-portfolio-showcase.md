@@ -110,24 +110,40 @@ document tasks + 10 case scenarios = 110 items, spanning ten regulatory domains
 (PSR, UK MAR, DISP each 12; ICOBS, MLR, RAO, PRIN each 11; FSMA, COMP, COBS each
 10) and three complexity tiers (25 basic, 55 intermediate, 30 advanced).
 
-Headline figures: `source_accuracy` 0.8232, `citation_quality` 0.8064,
-`legal_completeness` 0.6818, `semantic_similarity` 0.6724. Latency median
-5 768 ms, p90 5 977 ms.
+**`source_accuracy` and `citation_quality` are excluded from this chart and from
+the README.** They are not correctness measures.
+`scripts/run_eval_and_charts.py::score_citations` awards a flat `0.85` whenever
+the answer contains any string matching the citation regex, verified or not:
 
-Rendering: domain × complexity heatmap on `source_accuracy`, with a marginal bar
-for per-domain n so no reader mistakes a 10-item cell for a large sample.
+```python
+acc = 0.85 if any_tok else 0.0
+```
 
-This leads the Results section because n=110 with a legible breakdown is a
-better first impression than n=10 curated, and because the domain axis shows
-breadth of regulatory coverage that no other figure conveys.
+103 of the 110 rows sit at exactly 0.85, 4 at 0.00, 3 at 1.00 — which is the
+whole of the 0.8232 mean. `citation_quality` is built the same way
+(`0.6 + 0.1` per regex hit), putting 67 rows on exactly 0.9. Both collapse under
+a minute of reading, and the generating script is committed, so neither may
+appear as a result.
 
-**Open question blocking this chart.** The same run reports `citations_ok` at
-0.0273 — 3 of 110 rows — which sits uncomfortably beside `source_accuracy` of
-0.82 computed over the same rows. `lexical.py:244` defines source accuracy as
-`1.0 if (meta_ok is True and not invalid_local and pen == 0.0) else 0.0`, so the
-two fields are measuring different things, but the discrepancy must be
-understood and explained in prose before either number goes above the fold. If
-it cannot be explained, this chart is demoted and the ablation leads instead.
+Note also that `backend/evaluation/lexical.py` defines these metrics
+differently (line 244 additionally requires `meta_ok is True`) and did not
+produce this CSV — its `evaluate_qa` emits 10 columns and names one
+`model_answer`, while the CSV carries 25 including `answer` and `latency_ms`.
+Two evaluators, two definitions. Always confirm which one wrote a results file.
+
+Usable figures from this run: `semantic_similarity` 0.6724,
+`legal_completeness` 0.6818, `keyword_f1_score` 0.6806, latency median 5 768 ms
+/ p90 5 977 ms. These are computed against gold answers and are defensible.
+
+Rendering: domain × complexity heatmap on `legal_completeness`, with a marginal
+bar for per-domain n so no reader mistakes a 10-item cell for a large sample.
+The chart carries breadth of regulatory coverage, which no other figure conveys.
+
+The honest headline from this run is the **graph-verified citation rate of
+3/110**. It is stated plainly as the finding that motivated the citation
+normaliser, re-ranker and refusal gate built afterwards. There is no matching
+"after" measurement at this scale — that gap is named as further work rather
+than filled with an estimate.
 
 ### Chart 2 — Retrieval ablation
 
