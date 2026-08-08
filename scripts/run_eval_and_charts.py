@@ -336,9 +336,12 @@ def read_any(path: Path) -> pd.DataFrame:
     log.info(f"Loaded {len(df)} rows from {path.name}")
     return df
 
-def discover_files() -> list[Path]:
+DEFAULT_DATASETS = ["questions_80_balanced", "scenarios_case_like", "documents_tasks"]
+
+
+def discover_files(names: list[str] | None = None) -> list[Path]:
     root = Path("backend")
-    names = ["questions_80_balanced", "scenarios_case_like", "documents_tasks"]
+    names = names or DEFAULT_DATASETS
     found = []
     for base in names:
         for ext in (".csv",".xlsx",".xls"):
@@ -357,7 +360,7 @@ def stream_call(prompt: str, model: str|None, filename: str|None, retries:int=2,
     while True:
         attempt += 1
         t0 = time.time()
-        thought_ms=None; citations_ok=None; invalid=[]; answer=[]
+        thought_ms=None; citations_ok=None; invalid=[]; answer=[]; verification={}
         try:
             with requests.post(BACKEND_URL, json=payload, stream=True, timeout=360) as r:
                 r.raise_for_status()
@@ -367,7 +370,14 @@ def stream_call(prompt: str, model: str|None, filename: str|None, retries:int=2,
                         data = line[5:]
                         if data.startswith("{") and '"citations_ok"' in data:
                             try:
-                                meta=json.loads(data); citations_ok=bool(meta.get("citations_ok")); invalid=meta.get("invalid") or []
+                                meta=json.loads(data)
+                                citations_ok=bool(meta.get("citations_ok"))
+                                invalid=meta.get("invalid") or []
+                                # The graph-verification block is the only
+                                # trustworthy signal: citations_ok is merely
+                                # "no INVALID citations", which is vacuously
+                                # true for an answer that cites nothing.
+                                verification=meta.get("verification") or {}
                             except Exception: pass
                         elif data.startswith("{") and '"thought_ms"' in data:
                             try:
@@ -376,13 +386,13 @@ def stream_call(prompt: str, model: str|None, filename: str|None, retries:int=2,
                         else:
                             answer.append(data)
             latency_ms=int((time.time()-t0)*1000)
-            return "".join(answer).strip(),latency_ms,thought_ms,citations_ok,invalid,""
+            return "".join(answer).strip(),latency_ms,thought_ms,citations_ok,invalid,"",verification
         except Exception as e:
             err=f"{type(e).__name__}: {e}"
             log.warning(f"Call failed (attempt {attempt}): {err}")
             if attempt<=retries:
                 time.sleep(backoff**(attempt-1)); continue
-            return "", int((time.time()-t0)*1000), None, None, [], err
+            return "", int((time.time()-t0)*1000), None, None, [], err, {}
 
 # ------------------------------------------------------------------------------
 # RAGAS (optional)
@@ -430,14 +440,21 @@ def main():
     ap = argparse.ArgumentParser(description="Evaluate CSV/XLSX datasets with relaxed metrics + logs + charts.")
     ap.add_argument("--sample", type=int, default=0, help="sample size per file (0 = all)")
     ap.add_argument("--model", type=str, default="", help="optional backend model id")
+    ap.add_argument(
+        "--datasets", type=str, default="",
+        help="comma-separated dataset basenames to evaluate, e.g. "
+             "'questions_10_curated,documents_tasks,scenarios_case_like'. "
+             "Defaults to " + ",".join(DEFAULT_DATASETS),
+    )
     args = ap.parse_args()
+    wanted = [s.strip() for s in args.datasets.split(",") if s.strip()] or None
 
     start_ts=time.time()
     log.info("=== FinLaw evaluation (relaxed) started ===")
     log.info(f"Backend: {BACKEND_URL}")
     log.info(f"Run folder: {OUTDIR}")
 
-    files = discover_files()
+    files = discover_files(wanted)
     if not files:
         log.error("No input datasets found next to backend/. Expected {questions_80_balanced, scenarios_case_like, documents_tasks} as .csv or .xlsx")
         raise SystemExit(2)
@@ -466,7 +483,22 @@ def main():
         if (idx+1)%10==0 or idx==0:
             log.info(f"[{idx+1}/{len(data)}] Evaluating …")
 
-        ans, latency_ms, thought_ms, citations_ok, invalid, error = stream_call(prompt, args.model or None, None)
+        ans, latency_ms, thought_ms, citations_ok, invalid, error, verification = stream_call(prompt, args.model or None, None)
+
+        # Defensible citation metric.
+        #   citations_ok  = "no invalid citations" -> TRUE for an answer with
+        #                   no citations at all (vacuous; 2 of 8 passes in the
+        #                   20260808_024418 run were empty answers).
+        #   cite_verified = at least one citation actually resolved to a graph
+        #                   node AND nothing in the answer went unmatched.
+        v_verified = verification.get("verified") or []
+        v_unverified = verification.get("unverified") or []
+        v_note = verification.get("note") or ""
+        cite_verified = bool(
+            len(v_verified) >= 1
+            and verification.get("all_grounded", False)
+            and v_note != "no_citations"
+        )
 
         debug = {}
         source_accuracy, citation_quality, source_line = score_citations(ans, citations_ok, debug)
@@ -494,6 +526,11 @@ def main():
             "latency_ms": latency_ms,
             "thought_ms": thought_ms if thought_ms is not None else "",
             "citations_ok": citations_ok,
+            "cite_verified": cite_verified,
+            "n_verified": len(v_verified),
+            "n_unverified": len(v_unverified),
+            "all_grounded": verification.get("all_grounded"),
+            "verify_note": v_note,
             "invalid_citations": " | ".join(invalid) if invalid else "",
             "citation_debug_found": " | ".join(debug.get("citations_valid", [])) if debug.get("citations_valid") else "",
             "citation_debug_all": " | ".join(debug.get("citations_all", [])) if debug.get("citations_all") else "",
@@ -508,6 +545,16 @@ def main():
             "contexts": [],   # placeholder for RAGAS
         }
         rows.append(row)
+
+        # Checkpoint after every item. A 110-item run was killed at item ~76 on
+        # 2026-08-08 and lost everything, because results were only written
+        # after the final row. One interruption should cost one item.
+        try:
+            pd.DataFrame(rows).to_csv(
+                OUTDIR / "eval_results_partial.csv", index=False, encoding="utf-8"
+            )
+        except Exception as ckpt_err:      # never let checkpointing kill the run
+            log.warning(f"checkpoint write failed: {ckpt_err}")
 
     # Optional RAGAS
     extra = compute_ragas_block(rows)
