@@ -2,7 +2,7 @@
 
 # FinLaw-UK
 
-**A retrieval system for UK financial regulation that can prove its citations exist —
+**A retrieval system for UK financial regulation that can prove its citations exist,
 and refuses to answer when it can't.**
 
 [![CI](https://github.com/1oNN/finlaw-uk/actions/workflows/ci.yml/badge.svg)](https://github.com/1oNN/finlaw-uk/actions/workflows/ci.yml)
@@ -19,7 +19,7 @@ Rulebook. Hybrid BM25 + dense retrieval fused by reciprocal rank fusion, 2-hop
 traversal of a Neo4j provision graph, and a verifier that checks every citation
 against that graph before the answer reaches the user.
 
-*MSc dissertation project — MSc Applied Artificial Intelligence and Data
+*MSc dissertation project. MSc Applied Artificial Intelligence and Data
 Analytics, University of Bradford, 2025. Supervised by Dr Tillal Eldabi and
 Dr Irfan Mehmood.*
 
@@ -29,7 +29,7 @@ Dr Irfan Mehmood.*
 
 Asking *"What is the general prohibition in UK financial services?"* returns an
 answer cited to `FSMA 2000 s.19`, and the footnotes panel reports that citation
-as **verified** — meaning a matching provision node was found in the graph, and
+as **verified**, meaning a matching provision node was found in the graph, and
 every load-bearing claim traced back to it.
 
 ![Verified citation and claim trace](docs/assets/demo-verified.png)
@@ -48,12 +48,12 @@ finance is a compliance incident, not a typo.
 
 **2 · It refuses rather than guesses.**
 A dense-similarity gate declines to answer when retrieval is genuinely weak.
-This costs measurable points on standard benchmarks — [and the results section
+This costs measurable points on standard benchmarks, and [the results section
 below shows exactly how many](#what-refusing-costs). That trade is the product.
 
 **3 · Nothing leaves the machine.**
 Mistral 7B-Instruct via Ollama, FAISS on disk, Neo4j in Docker. No query about a
-client's regulatory exposure is sent to a third-party API — which is the actual
+client's regulatory exposure is sent to a third-party API, which is the actual
 deployment constraint in this domain.
 
 ---
@@ -128,7 +128,7 @@ Full detail in [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
 </details>
 
 <details>
-<summary><b>Retrieval — why hybrid, and what fusion buys</b></summary>
+<summary><b>Retrieval: why hybrid, and what fusion buys</b></summary>
 
 Statutory text is unusually hostile to pure dense retrieval: provisions are
 short, heavily numbered, and share near-identical boilerplate, so embeddings
@@ -137,10 +137,10 @@ handles the reference lookup; the bi-encoder handles paraphrased questions.
 Reciprocal rank fusion merges the two ranked lists without needing calibrated
 scores across them.
 
-- `backend/retrieval/sparse.py` — BM25, phrase regex, keyword overlap
-- `backend/retrieval/dense.py` — `BAAI/bge-small-en-v1.5` + FAISS `IndexFlatIP`
-- `backend/retrieval/hybrid.py` — `reciprocal_rank_fusion(rank_lists, k, rrf_k)`
-- `backend/retrieval/orchestrator.py` — hybrid-first with a fallback cascade
+- `backend/retrieval/sparse.py`: BM25, phrase regex, keyword overlap
+- `backend/retrieval/dense.py`: `BAAI/bge-small-en-v1.5` + FAISS `IndexFlatIP`
+- `backend/retrieval/hybrid.py`: `reciprocal_rank_fusion(rank_lists, k, rrf_k)`
+- `backend/retrieval/orchestrator.py`: hybrid-first with a fallback cascade
 
 The measured effect of each component is in [the ablation below](#retrieval-ablation).
 
@@ -175,7 +175,7 @@ Two evaluations exist for this project and **they do not measure the same
 system.** Both are reported below, in order, because the difference between them
 is the most interesting result the project produced.
 
-| | Track 1 — dissertation | Track 2 — re-measurement |
+| | Track 1: dissertation | Track 2: re-measurement |
 |---|---|---|
 | Date | September 2025 (submitted, examined) | Post-submission |
 | Retrieval | Dense + graph boost | + BM25, RRF fusion, cross-encoder re-ranker |
@@ -187,7 +187,7 @@ Neither the re-ranker nor the citation verifier nor the refusal gate existed
 when Track 1 was run. Figures from the two tracks are not comparable and should
 not be quoted side by side as if they were.
 
-### Track 1 — dissertation evaluation (September 2025)
+### Track 1: dissertation evaluation (September 2025)
 
 The submitted evaluation used a design science research methodology, pairing
 RAGAS with five custom lexical metrics over a 110-item benchmark (80 factual
@@ -198,14 +198,14 @@ The dissertation reports these figures in three places, and they do not agree:
 
 | Metric | Abstract | §4.3 Overall | §4.8 Summary |
 |---|---|---|---|
-| Source accuracy | — | 0.823 | 0.756 |
+| Source accuracy | n/a | 0.823 | 0.756 |
 | Citation quality / precision | 0.56 | 0.806 | 0.557 |
 | Legal completeness | 0.69 | 0.682 | 0.689 |
-| Semantic similarity | — | 0.672 | 0.688 |
-| Keyword recognition | — | 0.681 | — |
-| Legal terminology use | — | 0.693 | — |
-| RAGAS faithfulness | 0.76 | — | — |
-| RAGAS answer relevance | 0.74 | — | — |
+| Semantic similarity | n/a | 0.672 | 0.688 |
+| Keyword recognition | n/a | 0.681 | n/a |
+| Legal terminology use | n/a | 0.693 | n/a |
+| RAGAS faithfulness | 0.76 | n/a | n/a |
+| RAGAS answer relevance | 0.74 | n/a | n/a |
 
 §4.3 additionally states that "completeness and citation quality remained below
 0.70 across all complexity levels", two paragraphs after reporting citation
@@ -214,13 +214,13 @@ and citation quality above 0.83); scenario tasks the weakest (completeness
 frequently below 0.65).
 
 **What holds and what doesn't.** Legal completeness, semantic similarity and
-keyword recognition are lexical overlap measures and reproduce on re-run —
+keyword recognition are lexical overlap measures and reproduce on re-run;
 completeness in particular is stable at 0.68 across both tracks. Source accuracy
 and citation quality do not hold, for the reason given in
 [Measurement integrity](#measurement-integrity) below. The 0.56 citation figure
 in the abstract is closer to the truth than the 0.806 in §4.3.
 
-### Track 2 — re-measurement
+### Track 2: re-measurement
 
 Every figure below is regenerated from committed data by
 [`scripts/make_readme_charts.py`](scripts/make_readme_charts.py).
@@ -237,7 +237,7 @@ One retrieval component varied at a time, question set held fixed.
 **No arm dominates, and the honest reading matters more than a winner.** The
 re-ranker buys context precision (0.83 → 0.84) and faithfulness (0.58 → 0.63)
 for a 36% latency cost. Dense-only retrieval wins recall but collapses on answer
-relevancy — exactly the failure mode described above, where embeddings cannot
+relevancy, exactly the failure mode described above, where embeddings cannot
 separate near-identical statutory boilerplate. BM25 alone is a surprisingly
 strong baseline on precision, which is why the fused configuration ships rather
 than the dense one.
@@ -265,7 +265,7 @@ Source: [`data/eval_results/ablation.csv`](data/eval_results/ablation.csv), n=10
 
 110 items spanning 80 factual questions, 20 document tasks and 10 case
 scenarios, across ten regulatory domains and three complexity tiers. Legal
-completeness — the share of expected keywords present in the answer — sits in a
+completeness, the share of expected keywords present in the answer, sits in a
 tight band around 0.68 with no domain materially weaker than any other, and no
 degradation from basic to advanced questions. Median latency 5.8 s per query.
 
@@ -299,7 +299,7 @@ Three limitations are load-bearing enough to state plainly:
 - **`source_accuracy` and `citation_quality` are not reported as results**,
   despite existing in the results files and in the dissertation.
   `score_citations()` in `scripts/run_eval_and_charts.py` awards a flat `0.85`
-  for any citation-shaped string, verified or not — 103 of 110 rows carry
+  for any citation-shaped string, verified or not, and 103 of 110 rows carry
   exactly that constant. They measure citation *shape*, not correctness. The
   0.823 and 0.806 in dissertation §4.3 rest on this function and should be read
   as format-conformance rates, not accuracy.
@@ -307,7 +307,7 @@ Three limitations are load-bearing enough to state plainly:
 The honest citation figure from the 110-item run is that only **3 of 110
 answers passed graph verification**. That finding is what motivated the citation
 normaliser, the re-ranker and the refusal gate that followed it. There is no
-re-run at that scale yet — see [Known limitations](#known-limitations).
+re-run at that scale yet. See [Known limitations](#known-limitations).
 
 #### What refusing costs
 
@@ -320,12 +320,12 @@ Headline answer relevancy falls 23 points against the baseline, and that is the
 refusal gate working correctly. Thirty of eighty rows are refusals; RAGAS scores
 a refusal at 0 relevancy by construction, because the refusal text does not echo
 the question's wording. Excluding refusals the mean is **0.6575 against the
-baseline's 0.6412** — the baseline scored higher on the headline by
+baseline's 0.6412**. The baseline scored higher on the headline by
 confabulating answers to nonsense questions instead of declining them.
 
 ### Which figures to cite
 
-For anyone quoting this project — including its author:
+For anyone quoting this project, including its author:
 
 | Safe to cite | Cite with the caveat | Do not cite |
 |---|---|---|
@@ -340,7 +340,7 @@ For anyone quoting this project — including its author:
 | Layer | Tech | Where it lives |
 |---|---|---|
 | Hybrid retrieval | BM25 + BGE-small + FAISS + RRF | `backend/retrieval/` |
-| Knowledge graph | Neo4j 5 — `Provision`, `Term`, `Regulator`, `Document` | `backend/graph/` |
+| Knowledge graph | Neo4j 5: `Provision`, `Term`, `Regulator`, `Document` | `backend/graph/` |
 | Ingestion | legislation.gov.uk XML + PDF corpus + LangChain chunking | `backend/graph/ingest_xml.py`, `extract_pdfs.py` |
 | Generator | Mistral 7B-Instruct via Ollama | `backend/llm/` |
 | Verification | Graph-grounded citation lookup + claim trace | `backend/verification/` |
@@ -377,7 +377,7 @@ cd frontend && npm install && npm start
 
 > **Cold start.** The first request after a restart builds the FAISS cache and
 > loads Mistral into memory. First byte can take several minutes on a cold
-> model — pre-warm Ollama as above before benchmarking or demoing.
+> model. Pre-warm Ollama as above before benchmarking or demoing.
 
 Full walkthrough for Windows / macOS / Linux: [docs/RUN.md](docs/RUN.md).
 Hardware and software requirements: [docs/REQUIREMENTS.md](docs/REQUIREMENTS.md).
@@ -392,8 +392,8 @@ pytest -q tests/
 
 57 tests covering retrieval fusion and the fallback cascade, graph traversal,
 citation normalisation, graph verification, claim tracing, upload parsing and
-the evaluation scorers. The suite is hermetic — external calls are stubbed and
-the graph and remote paths are disabled in `tests/conftest.py` — so CI runs it
+the evaluation scorers. The suite is hermetic: external calls are stubbed and
+the graph and remote paths are disabled in `tests/conftest.py`, so CI runs it
 whole with no Neo4j and no Ollama.
 
 ---
@@ -410,8 +410,8 @@ whole with no Neo4j and no Ollama.
 - The 110-item benchmark predates the citation verifier, re-ranker and refusal
   gate. Its 3/110 graph-verified citation rate is a *before* measurement; the
   pipeline has not been re-run at that scale since.
-- `source_accuracy` and `citation_quality` in the committed result files — and
-  the corresponding figures in dissertation §4.3 — are regex shape-checks, not
+- `source_accuracy` and `citation_quality` in the committed result files, and
+  the corresponding figures in dissertation §4.3, are regex shape-checks, not
   correctness measures. Do not read them as results.
 - The dissertation reports source accuracy and citation quality inconsistently
   across its abstract, §4.3 and §4.8. Track 2 supersedes all three.
