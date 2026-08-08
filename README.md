@@ -323,6 +323,7 @@ the question's wording. Excluding refusals the mean is **0.6575 against the
 baseline's 0.6412**. The baseline scored higher on the headline by
 confabulating answers to nonsense questions instead of declining them.
 
+---
 
 ## Tech stack
 
