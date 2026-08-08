@@ -19,7 +19,9 @@ Rulebook. Hybrid BM25 + dense retrieval fused by reciprocal rank fusion, 2-hop
 traversal of a Neo4j provision graph, and a verifier that checks every citation
 against that graph before the answer reaches the user.
 
-*MSc dissertation project — University of Bradford, 2025.*
+*MSc dissertation project — MSc Applied Artificial Intelligence and Data
+Analytics, University of Bradford, 2025. Supervised by Dr Tillal Eldabi and
+Dr Irfan Mehmood.*
 
 <div align="center">
   <img src="docs/assets/demo.gif" alt="A question streamed and answered, with its citation verified against the knowledge graph" width="100%">
@@ -169,11 +171,61 @@ Schema and example Cypher: [docs/NEO4J_SCHEMA.md](docs/NEO4J_SCHEMA.md).
 
 ## Results
 
-Two evaluation tracks: a 110-item benchmark scored against gold answers, and a
-RAGAS suite with a local Mistral judge. Every figure below is regenerated from
-committed data by [`scripts/make_readme_charts.py`](scripts/make_readme_charts.py).
+Two evaluations exist for this project and **they do not measure the same
+system.** Both are reported below, in order, because the difference between them
+is the most interesting result the project produced.
 
-### Retrieval ablation
+| | Track 1 — dissertation | Track 2 — re-measurement |
+|---|---|---|
+| Date | September 2025 (submitted, examined) | Post-submission |
+| Retrieval | Dense + graph boost | + BM25, RRF fusion, cross-encoder re-ranker |
+| Citations | Generated, format-checked | Resolved against the graph; refusal gate |
+| Scale | 110 items | 110-item lexical run; RAGAS on 80; ablation n=10/arm |
+| Reported in | [Dissertation](docs/DISSERTATION.pdf) §4 | This README |
+
+Neither the re-ranker nor the citation verifier nor the refusal gate existed
+when Track 1 was run. Figures from the two tracks are not comparable and should
+not be quoted side by side as if they were.
+
+### Track 1 — dissertation evaluation (September 2025)
+
+The submitted evaluation used a design science research methodology, pairing
+RAGAS with five custom lexical metrics over a 110-item benchmark (80 factual
+questions, 20 document tasks, 10 case scenarios; 23% basic, 50% intermediate,
+27% advanced), alongside qualitative stakeholder assessment.
+
+The dissertation reports these figures in three places, and they do not agree:
+
+| Metric | Abstract | §4.3 Overall | §4.8 Summary |
+|---|---|---|---|
+| Source accuracy | — | 0.823 | 0.756 |
+| Citation quality / precision | 0.56 | 0.806 | 0.557 |
+| Legal completeness | 0.69 | 0.682 | 0.689 |
+| Semantic similarity | — | 0.672 | 0.688 |
+| Keyword recognition | — | 0.681 | — |
+| Legal terminology use | — | 0.693 | — |
+| RAGAS faithfulness | 0.76 | — | — |
+| RAGAS answer relevance | 0.74 | — | — |
+
+§4.3 additionally states that "completeness and citation quality remained below
+0.70 across all complexity levels", two paragraphs after reporting citation
+quality at 0.806. Document tasks were the strongest task type (source accuracy
+and citation quality above 0.83); scenario tasks the weakest (completeness
+frequently below 0.65).
+
+**What holds and what doesn't.** Legal completeness, semantic similarity and
+keyword recognition are lexical overlap measures and reproduce on re-run —
+completeness in particular is stable at 0.68 across both tracks. Source accuracy
+and citation quality do not hold, for the reason given in
+[Measurement integrity](#measurement-integrity) below. The 0.56 citation figure
+in the abstract is closer to the truth than the 0.806 in §4.3.
+
+### Track 2 — re-measurement
+
+Every figure below is regenerated from committed data by
+[`scripts/make_readme_charts.py`](scripts/make_readme_charts.py).
+
+#### Retrieval ablation
 
 One retrieval component varied at a time, question set held fixed.
 
@@ -204,7 +256,7 @@ Source: [`data/eval_results/ablation.csv`](data/eval_results/ablation.csv), n=10
 
 </details>
 
-### Coverage across the regulatory corpus
+#### Coverage across the regulatory corpus
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/assets/coverage_dark.svg">
@@ -217,7 +269,10 @@ completeness — the share of expected keywords present in the answer — sits i
 tight band around 0.68 with no domain materially weaker than any other, and no
 degradation from basic to advanced questions. Median latency 5.8 s per query.
 
-### Measurement integrity
+This is the one headline figure that is consistent across both evaluation
+tracks and both scoring implementations.
+
+#### Measurement integrity
 
 This section is deliberately above the fold rather than in a linked appendix.
 
@@ -241,18 +296,20 @@ Three limitations are load-bearing enough to state plainly:
   untested. See [docs/EVALUATION_DIAGNOSTICS.md](docs/EVALUATION_DIAGNOSTICS.md) §9.
 - **70 of the 80 rows in `questions_80_balanced.csv` are template stubs** with
   semantically empty gold answers. The curated 10 is the meaningful set.
-- **`source_accuracy` and `citation_quality` are not reported here**, despite
-  existing in the results files. `score_citations()` in
-  `scripts/run_eval_and_charts.py` awards a flat `0.85` for any citation-shaped
-  string, verified or not — 103 of 110 rows carry exactly that constant. They
-  measure citation *shape*, not correctness, so they are not results.
+- **`source_accuracy` and `citation_quality` are not reported as results**,
+  despite existing in the results files and in the dissertation.
+  `score_citations()` in `scripts/run_eval_and_charts.py` awards a flat `0.85`
+  for any citation-shaped string, verified or not — 103 of 110 rows carry
+  exactly that constant. They measure citation *shape*, not correctness. The
+  0.823 and 0.806 in dissertation §4.3 rest on this function and should be read
+  as format-conformance rates, not accuracy.
 
 The honest citation figure from the 110-item run is that only **3 of 110
 answers passed graph verification**. That finding is what motivated the citation
 normaliser, the re-ranker and the refusal gate that followed it. There is no
 re-run at that scale yet — see [Known limitations](#known-limitations).
 
-### What refusing costs
+#### What refusing costs
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/assets/refusal_dark.svg">
@@ -265,6 +322,16 @@ a refusal at 0 relevancy by construction, because the refusal text does not echo
 the question's wording. Excluding refusals the mean is **0.6575 against the
 baseline's 0.6412** — the baseline scored higher on the headline by
 confabulating answers to nonsense questions instead of declining them.
+
+### Which figures to cite
+
+For anyone quoting this project — including its author:
+
+| Safe to cite | Cite with the caveat | Do not cite |
+|---|---|---|
+| Legal completeness 0.68 | Dissertation RAGAS faithfulness 0.76, answer relevance 0.74 (Track 1 system, not re-measured) | Source accuracy 0.82 |
+| 3/110 graph-verified citations (pre-verifier baseline) | Ablation figures (n=10 per arm) | Citation quality 0.81 |
+| Median latency 5.8 s | Refusal-excluded relevancy 0.6575 vs 0.6412 baseline | Anything from `score_citations()` |
 
 ---
 
@@ -343,8 +410,11 @@ whole with no Neo4j and no Ollama.
 - The 110-item benchmark predates the citation verifier, re-ranker and refusal
   gate. Its 3/110 graph-verified citation rate is a *before* measurement; the
   pipeline has not been re-run at that scale since.
-- `source_accuracy` and `citation_quality` in the committed result files are
-  regex shape-checks, not correctness measures. Do not read them as results.
+- `source_accuracy` and `citation_quality` in the committed result files — and
+  the corresponding figures in dissertation §4.3 — are regex shape-checks, not
+  correctness measures. Do not read them as results.
+- The dissertation reports source accuracy and citation quality inconsistently
+  across its abstract, §4.3 and §4.8. Track 2 supersedes all three.
 
 ---
 
@@ -360,7 +430,8 @@ whole with no Neo4j and no Ollama.
 
 ## Acknowledgements
 
-University of Bradford, MSc Computing programme.
+University of Bradford, MSc Applied Artificial Intelligence and Data Analytics.
+Supervised by Dr Tillal Eldabi and Dr Irfan Mehmood.
 
 ## License
 
