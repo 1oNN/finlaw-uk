@@ -323,17 +323,6 @@ the question's wording. Excluding refusals the mean is **0.6575 against the
 baseline's 0.6412**. The baseline scored higher on the headline by
 confabulating answers to nonsense questions instead of declining them.
 
-### Which figures to cite
-
-For anyone quoting this project, including its author:
-
-| Safe to cite | Cite with the caveat | Do not cite |
-|---|---|---|
-| Legal completeness 0.68 | Dissertation RAGAS faithfulness 0.76, answer relevance 0.74 (Track 1 system, not re-measured) | Source accuracy 0.82 |
-| 3/110 graph-verified citations (pre-verifier baseline) | Ablation figures (n=10 per arm) | Citation quality 0.81 |
-| Median latency 5.8 s | Refusal-excluded relevancy 0.6575 vs 0.6412 baseline | Anything from `score_citations()` |
-
----
 
 ## Tech stack
 
