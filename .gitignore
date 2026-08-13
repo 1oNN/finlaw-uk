@@ -69,3 +69,5 @@ Thumbs.db
 # Private notes (never commit)
 _private/
 _qa/
+preparation/
+.gstack/
